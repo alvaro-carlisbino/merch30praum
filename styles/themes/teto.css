@@ -1,0 +1,14 @@
+/* Teto — Colapso: trap raw, kraft / bege / marrom / grafite, colagem brutalista */
+[data-theme="teto"] {
+  --bg: #14110d;
+  --fg: #ede5d6;
+  --muted: #8a7d65;
+  --accent: #c89858;
+  --accent-2: #6e5a3a;
+  --border: rgba(237, 229, 214, 0.16);
+  --overlay: rgba(20, 17, 13, 0.82);
+  --noise-opacity: 0.18;
+  --grid-gap: 0;
+  --motion-duration: 280ms;
+  --motion-easing: cubic-bezier(0.55, 0, 0.45, 1);
+}

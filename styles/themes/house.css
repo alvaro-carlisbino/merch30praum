@@ -1,0 +1,15 @@
+/* 30praum house theme — institutional shell, used on home/cart/about */
+:root,
+[data-theme="house"] {
+  --bg: #0a0a0a;
+  --fg: #f5f5f5;
+  --muted: #8a8a8a;
+  --accent: #ffffff;
+  --accent-2: #c9c9c9;
+  --border: rgba(255, 255, 255, 0.12);
+  --overlay: rgba(0, 0, 0, 0.7);
+  --noise-opacity: 0.04;
+  --grid-gap: 1rem;
+  --motion-duration: 400ms;
+  --motion-easing: cubic-bezier(0.7, 0, 0.3, 1);
+}

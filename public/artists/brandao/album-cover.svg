@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="b-xerox">
+      <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="4"/>
+      <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.32 0"/>
+    </filter>
+    <pattern id="b-scan" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="3" fill="rgba(0,0,0,0.45)"/>
+    </pattern>
+  </defs>
+
+  <rect width="1000" height="1000" fill="#0c0c0c"/>
+
+  <!-- xerox film -->
+  <rect width="1000" height="1000" filter="url(#b-xerox)" opacity="0.95" style="mix-blend-mode:screen"/>
+
+  <!-- scan lines -->
+  <rect width="1000" height="1000" fill="url(#b-scan)" opacity="0.55"/>
+
+  <!-- giant title -->
+  <g font-family="Anton, Impact, system-ui" fill="#ededed">
+    <text x="60" y="220" font-size="160" letter-spacing="2">ISSO É</text>
+    <text x="60" y="380" font-size="220" letter-spacing="-4" fill="#ff3b1f">TRAP</text>
+    <text x="60" y="500" font-size="72" letter-spacing="6">VOL. 02</text>
+  </g>
+
+  <!-- 85 stamp -->
+  <g transform="translate(800 760) rotate(-3)">
+    <rect x="-90" y="-70" width="180" height="140" fill="#ff3b1f"/>
+    <text x="0" y="38" text-anchor="middle" font-family="Anton, Impact, system-ui" font-size="120" fill="#0c0c0c">85</text>
+  </g>
+
+  <!-- meta info bottom -->
+  <g font-family="ui-monospace, Menlo, monospace" fill="#ededed">
+    <text x="60" y="900" font-size="14" letter-spacing="4">CE · FORTALEZA · 30PRAUM</text>
+    <text x="60" y="930" font-size="12" letter-spacing="3" opacity="0.65">XEROX · STREET · 2026</text>
+  </g>
+
+  <!-- distress cross -->
+  <g stroke="#ededed" stroke-width="2" opacity="0.18">
+    <line x1="40" y1="600" x2="220" y2="700"/>
+    <line x1="40" y1="700" x2="220" y2="600"/>
+  </g>
+
+  <!-- top corner -->
+  <g font-family="ui-monospace, Menlo, monospace" fill="#ff3b1f">
+    <text x="60" y="80" font-size="14" letter-spacing="6">BRANDÃO 85</text>
+    <text x="940" y="80" text-anchor="end" font-size="14" letter-spacing="3">EDIÇÃO XEROX</text>
+  </g>
+
+  <!-- final grain -->
+  <rect width="1000" height="1000" filter="url(#b-xerox)" opacity="0.4" style="mix-blend-mode:multiply"/>
+</svg>

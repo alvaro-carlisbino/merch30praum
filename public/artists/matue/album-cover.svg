@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="m-glow" cx="50%" cy="55%" r="65%">
+      <stop offset="0%" stop-color="#1f6bff" stop-opacity="0.5"/>
+      <stop offset="55%" stop-color="#0a1430" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#03050a" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="m-scan" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1f6bff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#1f6bff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#1f6bff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="m-noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/>
+      <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.18 0"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="1000" fill="#03050a"/>
+  <rect width="1000" height="1000" fill="url(#m-glow)"/>
+
+  <!-- grid -->
+  <g stroke="#1f6bff" stroke-width="0.6" opacity="0.18">
+    <line x1="0" y1="125" x2="1000" y2="125"/>
+    <line x1="0" y1="250" x2="1000" y2="250"/>
+    <line x1="0" y1="375" x2="1000" y2="375"/>
+    <line x1="0" y1="625" x2="1000" y2="625"/>
+    <line x1="0" y1="750" x2="1000" y2="750"/>
+    <line x1="0" y1="875" x2="1000" y2="875"/>
+    <line x1="125" y1="0" x2="125" y2="1000"/>
+    <line x1="250" y1="0" x2="250" y2="1000"/>
+    <line x1="375" y1="0" x2="375" y2="1000"/>
+    <line x1="625" y1="0" x2="625" y2="1000"/>
+    <line x1="750" y1="0" x2="750" y2="1000"/>
+    <line x1="875" y1="0" x2="875" y2="1000"/>
+  </g>
+
+  <!-- alien X (xtranho mark) -->
+  <g transform="translate(500 500)" stroke="#e7f1ff" stroke-width="14" fill="none" opacity="0.96">
+    <path d="M -260 -180 Q -110 -90 0 -100 Q 110 -90 260 -180" stroke-linecap="round"/>
+    <path d="M -260 180 Q -110 90 0 100 Q 110 90 260 180" stroke-linecap="round"/>
+    <path d="M -260 -180 Q -200 -10 -190 0 Q -200 10 -260 180" stroke-linecap="round"/>
+    <path d="M 260 -180 Q 200 -10 190 0 Q 200 10 260 180" stroke-linecap="round"/>
+  </g>
+
+  <!-- top label -->
+  <text x="60" y="80" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#1f6bff" letter-spacing="14">MATUÊ</text>
+  <text x="940" y="80" text-anchor="end" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#1f6bff" letter-spacing="6">333.OS</text>
+
+  <!-- bottom: title -->
+  <text x="60" y="920" font-family="Impact, 'Anton', system-ui" font-size="200" fill="#e7f1ff" letter-spacing="-6">XTRANHO</text>
+  <text x="60" y="970" font-family="ui-monospace, Menlo, monospace" font-size="20" fill="#1f6bff" letter-spacing="8">SINAL ESTÁVEL · ED. 2026</text>
+
+  <!-- scan line -->
+  <rect x="0" y="430" width="1000" height="3" fill="url(#m-scan)" opacity="0.85"/>
+
+  <!-- noise overlay -->
+  <rect width="1000" height="1000" filter="url(#m-noise)" opacity="0.45" style="mix-blend-mode:screen"/>
+</svg>

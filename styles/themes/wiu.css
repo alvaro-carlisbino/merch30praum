@@ -1,0 +1,14 @@
+/* Wiu — Último Romântico: burgundy, rosa empoeirado, off-white, slow + intimismo */
+[data-theme="wiu"] {
+  --bg: #1a0a10;
+  --fg: #f4e8e4;
+  --muted: #a08680;
+  --accent: #c8506a;
+  --accent-2: #e8a3a8;
+  --border: rgba(244, 232, 228, 0.18);
+  --overlay: rgba(26, 10, 16, 0.78);
+  --noise-opacity: 0.12;
+  --grid-gap: 1.5rem;
+  --motion-duration: 700ms;
+  --motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}

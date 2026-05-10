@@ -1,0 +1,14 @@
+/* Matuê — XTRANHO / 333: cyberfuturismo alien, azul elétrico, branco metálico */
+[data-theme="matue"] {
+  --bg: #03050a;
+  --fg: #e7f1ff;
+  --muted: #6a7a92;
+  --accent: #1f6bff;
+  --accent-2: #b8c8e6;
+  --border: rgba(31, 107, 255, 0.25);
+  --overlay: rgba(3, 5, 10, 0.85);
+  --noise-opacity: 0.08;
+  --grid-gap: 0.5rem;
+  --motion-duration: 350ms;
+  --motion-easing: cubic-bezier(0.85, 0, 0.15, 1);
+}
