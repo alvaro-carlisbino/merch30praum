@@ -10,7 +10,7 @@ export const TIMELINE: TimelineEntry[] = [
     year: "2016",
     headline: "Fundação da 30praum",
     detail:
-      "Matuê e Clara Mendes fundam o selo em Fortaleza (Lucas Degas participa como cofundador inicial, sai em 2018) pra descentralizar o trap brasileiro do eixo Rio-SP.",
+      "Matuê e Clara Mendes fundam o selo em Fortaleza pra descentralizar o trap brasileiro do eixo Rio-SP.",
     tag: "Fortaleza · CE",
   },
   {

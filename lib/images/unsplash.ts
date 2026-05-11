@@ -12,11 +12,9 @@ const UCROP = (id: string, w: number, h: number, q = 80) =>
 
 export const IMG = {
   /* ── Founders (URLs oficiais) ────────────────────────────────────────
-   * OFICIAL:
+   * Sócios atuais da 30praum:
    *   Matuê → Wikimedia Commons (The Town 2025, CC license)
-   *   Clara Mendes → Billboard Brasil (foto de divulgação oficial 30praum)
-   * Lucas Degas removido da seção: cofundador inicial 2016 que saiu em 2018,
-   * com processos ativos contra a empresa. Mencionado só historicamente em /about. */
+   *   Clara Mendes → Billboard Brasil (foto de divulgação oficial 30praum) */
   founderMatue: "https://upload.wikimedia.org/wikipedia/commons/d/df/Matu%C3%AA.jpg",
   founderClara: "https://billboard.com.br/wp-content/uploads/2023/11/clara-mendes-1024x677.jpg",
 
