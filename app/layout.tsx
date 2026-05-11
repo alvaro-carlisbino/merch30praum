@@ -5,18 +5,48 @@ import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { ScrollAtmosphere } from "@/components/effects/ScrollAtmosphere";
 import "./globals.css";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://30praum.com";
+const SITE_DESCRIPTION =
+  "Site oficial da holding 30praum — gravadora, Plantão Festival, Sabor Matuê, parcerias e incubadora. Casa de Matuê, Wiu, Teto e Brandão85.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://30praum.store"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "30praum — Merch oficial",
+    default: "30praum — Site oficial",
     template: "%s · 30praum",
   },
-  description:
-    "Merch oficial 30praum. Universos cinematográficos de Matuê, Wiu, Teto e Brandão85 — quem manda é a 30praum.",
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "30praum",
+    "Matuê",
+    "Wiu",
+    "Teto",
+    "Brandão85",
+    "trap brasileiro",
+    "Plantão Festival",
+    "Fortaleza",
+    "gravadora",
+    "hip-hop nordeste",
+  ],
+  authors: [{ name: "30praum" }],
   openGraph: {
     type: "website",
     siteName: "30praum",
+    locale: "pt_BR",
+    title: "30praum — Site oficial",
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "30praum — Site oficial",
+    description: SITE_DESCRIPTION,
+    creator: "@30praum",
+  },
+  alternates: {
+    canonical: SITE_URL,
+  },
+  category: "music",
 };
 
 export default function RootLayout({
