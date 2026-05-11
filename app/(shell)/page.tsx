@@ -8,6 +8,7 @@ import { LabelTimeline } from "@/components/home/LabelTimeline";
 import { FoundersSection } from "@/components/home/FoundersSection";
 import { PressQuotesWall } from "@/components/home/PressQuotesWall";
 import { FeaturedDrops } from "@/components/home/FeaturedDrops";
+import { EleitosDaCasa } from "@/components/home/EleitosDaCasa";
 import { NewsletterCapture } from "@/components/shell/NewsletterCapture";
 
 export const metadata = {
@@ -26,6 +27,8 @@ export default function HomePage() {
       </section>
 
       <FeaturedDrops />
+
+      <EleitosDaCasa />
 
       <StatsHero />
 

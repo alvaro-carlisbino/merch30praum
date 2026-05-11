@@ -3,6 +3,17 @@ import { IMG } from "@/lib/images/unsplash";
 
 export type AlbumSlug = "xtranho" | "colapso-global" | "isso-e-trap-vol-2";
 
+/** Status editorial — inspirado em Stones Throw (New / Pre-Order / Limited) */
+export type AlbumStatus = "em-alta" | "estreia" | "limitada" | "tour-ativa" | "classico";
+
+export const STATUS_LABEL: Record<AlbumStatus, string> = {
+  "em-alta": "EM ALTA",
+  estreia: "ESTREIA",
+  limitada: "EDIÇÃO LIMITADA",
+  "tour-ativa": "TOUR ATIVA",
+  classico: "CLÁSSICO",
+};
+
 export interface AlbumPageInfo {
   slug: AlbumSlug;
   title: string;
@@ -14,6 +25,9 @@ export interface AlbumPageInfo {
   coverImage: string;
   manifesto: string;
   tagline: string;
+  /** Pitch editorial curto e poético — estilo Stones Throw ("Lathered in funk. Rinsed in soul.") */
+  editorialPitch?: string;
+  status?: AlbumStatus;
   accentHex: string;
   bgHex: string;
   tracks: { title: string; duration: string; featured?: string }[];
@@ -40,6 +54,8 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     manifesto:
       "XTRANHO é o terceiro capítulo do Matuê — depois de Máquina do Tempo (2020) e 333 (2024). Aqui o sinal não vem de fora: ele se estabiliza. Trap underground com sonoridade inédita no mainstream brasileiro, gravado entre Fortaleza, São Paulo e Los Angeles.",
     tagline: "Sinal estável da terra de quem nunca foi daqui.",
+    editorialPitch: "Sinal alien em transmissão estável. Trap que veio de fora — e ficou.",
+    status: "em-alta",
     accentHex: "#1f6bff",
     bgHex: "#03050a",
     tracks: [
@@ -75,6 +91,8 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     manifesto:
       "Wiu e Teto se encontram pra um disco a duas mãos que mistura house, jazz, bossa nova, funk carioca e trap no mesmo espaço. Manifesto sonoro de liberdade criativa — o trap saindo da caixinha sem perder o peso.",
     tagline: "Quando o mundo cai, ainda dá pra dançar uma última.",
+    editorialPitch: "Duas vozes, um colapso. Trap se rendendo a tudo o que ele nunca foi.",
+    status: "tour-ativa",
     accentHex: "#c8506a",
     bgHex: "#1a0a10",
     tracks: [
@@ -110,6 +128,8 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     manifesto:
       "Vol. 02 é a confirmação. Mixtape lançada pela 30praum continuando a sequência de Isso É Trap (Hash Produções, 2022). WARZONE e JAPONÊS já tinham viralizado antes do disco sair. Da Caponga pro mundo, sem perder o xerox.",
     tagline: "Cresci copiando. Agora os outros copiam errado.",
+    editorialPitch: "Xerox da quebrada em alta densidade. Estreia oficial no selo.",
+    status: "estreia",
     accentHex: "#ff3b1f",
     bgHex: "#0c0c0c",
     tracks: [
