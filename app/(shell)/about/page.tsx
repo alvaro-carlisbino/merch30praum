@@ -34,10 +34,8 @@ export default function AboutPage() {
             >
               30praum é gravadora cearense fundada em 2016 por Matuê e Clara
               Mendes — uma alemã que veio aprender português em Fortaleza, ficou
-              e virou CEO. Lucas Degas participou como cofundador inicial em
-              2016 e deixou a empresa em 2018. A missão sempre
-              foi a mesma: descentralizar o trap brasileiro do eixo Rio-SP e
-              colocar o Nordeste no centro do mapa.
+              e virou CEO. A missão sempre foi a mesma: descentralizar o trap
+              brasileiro do eixo Rio-SP e colocar o Nordeste no centro do mapa.
             </p>
             <p className="text-base sm:text-lg text-fg/85 leading-relaxed">
               Hoje a casa tem cerca de 50 funcionários divididos entre a sede em
