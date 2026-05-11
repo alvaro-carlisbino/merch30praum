@@ -7,6 +7,7 @@ import { ArtistBio } from "@/components/artists/ArtistBio";
 import { AlbumShowcase } from "@/components/artists/AlbumShowcase";
 import { Lookbook } from "@/components/artists/Lookbook";
 import { ArtistSocials } from "@/components/artists/ArtistSocials";
+import { ArtistShows } from "@/components/artists/ArtistShows";
 import { SpotifyEmbed } from "@/components/artists/SpotifyEmbed";
 import { CrossUniverses } from "@/components/product/CrossUniverses";
 
@@ -71,6 +72,8 @@ export default async function ArtistLanding({
       </section>
 
       <AlbumShowcase artist={cfg} />
+
+      <ArtistShows artist={cfg} />
 
       <Lookbook artist={cfg} />
 
