@@ -1,3 +1,5 @@
+import { IMG } from "@/lib/images/unsplash";
+
 export type SaborFlavor = {
   slug: string;
   name: string;
@@ -29,7 +31,7 @@ export const SABOR_MATUE = {
         "Cremoso. Régio. Inspirado na faixa de abertura do XTRANHO — a base é coco fresco do Ceará e o toque cítrico do siciliano corta o doce na hora certa.",
       color: "#f5e9c8",
       accent: "#1f6bff",
-      image: "https://picsum.photos/seed/sabor-rei-tue/900/1200",
+      image: IMG.saborReiTue,
       inspirationTrack: "REI TUÊ — Matuê (XTRANHO, 2025)",
       status: "coming-soon" as const,
     },
@@ -41,7 +43,7 @@ export const SABOR_MATUE = {
         "Sangue na embalagem. Hibisco com framboesa, mirtilo e morango da serra cearense. Pimenta rosa pra dar o toque sombrio. Pra quem prefere noite.",
       color: "#5a0e1a",
       accent: "#b71c2c",
-      image: "https://picsum.photos/seed/sabor-vampiro/900/1200",
+      image: IMG.saborVampiro,
       inspirationTrack: "Vampiro — Matuê (Máquina do Tempo, 2020)",
       status: "coming-soon" as const,
     },
@@ -53,7 +55,7 @@ export const SABOR_MATUE = {
         "Trilogia matuá em forma de chocolate. Cacau belga 70%, flor de sal e uma camada fina de caramelo salgado. O sabor que bateu 950 milhões em forma de geladinho.",
       color: "#1c0a05",
       accent: "#c9a36b",
-      image: "https://picsum.photos/seed/sabor-333/900/1200",
+      image: IMG.sabor333,
       inspirationTrack: "333 — Matuê (333, 2024)",
       status: "coming-soon" as const,
     },
@@ -65,7 +67,7 @@ export const SABOR_MATUE = {
         "O sabor verde-claro do XTRANHO. Pistache iraniano, manjericão fresco do interior cearense e raspas finas de chocolate branco belga. Decadente sem ser óbvio.",
       color: "#d4e9c3",
       accent: "#7faa49",
-      image: "https://picsum.photos/seed/sabor-icone/900/1200",
+      image: IMG.saborIconeFashion,
       inspirationTrack: "ÍCONE FASHION — Matuê (XTRANHO, 2025)",
       status: "coming-soon" as const,
     },
@@ -77,7 +79,7 @@ export const SABOR_MATUE = {
         "Edição limitada de aniversário — uma releitura do mais nordeste possível. Paçoca artesanal, brigadeiro pra mata o doce e bourbon americano pra fechar a fórmula.",
       color: "#a87246",
       accent: "#3d1f0e",
-      image: "https://picsum.photos/seed/sabor-maquina/900/1200",
+      image: IMG.saborMaquinaDoTempo,
       inspirationTrack: "Máquina do Tempo — Matuê (2020)",
       status: "limited" as const,
     },

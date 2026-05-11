@@ -5,6 +5,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { WordReveal } from "@/components/motion/WordReveal";
 import { BrandStamps } from "@/components/effects/BrandStamps";
+import { IMG } from "@/lib/images/unsplash";
 
 export function HeroBrand() {
   const ref = useRef<HTMLElement>(null);
@@ -30,7 +31,7 @@ export function HeroBrand() {
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "url('/assets/fortaleza/praia_meireles.jpg')",
+          backgroundImage: `url('${IMG.heroFortaleza}')`,
           backgroundSize: "cover",
           backgroundPosition: "center 60%",
           opacity: 0.18,

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { houseBody, houseDisplay } from "@/styles/fonts";
 import { CustomCursor } from "@/components/effects/CustomCursor";
-import { PageTransition } from "@/components/effects/PageTransition";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { ScrollAtmosphere } from "@/components/effects/ScrollAtmosphere";
 import "./globals.css";
@@ -33,7 +32,6 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <CustomCursor />
-        <PageTransition />
         <ScrollProgress />
         <ScrollAtmosphere />
         {children}

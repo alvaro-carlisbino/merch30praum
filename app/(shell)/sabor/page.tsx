@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SABOR_MATUE } from "@/lib/sabor/registry";
+import { IMG } from "@/lib/images/unsplash";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { WordReveal } from "@/components/motion/WordReveal";
 import { ArrowRight, ArrowDown } from "lucide-react";
@@ -27,7 +28,7 @@ export default function SaborPage() {
           aria-hidden
           className="absolute inset-0 -z-30"
           style={{
-            backgroundImage: `url(https://picsum.photos/seed/sabor-hero/2400/1600)`,
+            backgroundImage: `url(${IMG.saborHero})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             filter: "brightness(0.55) contrast(1.1) saturate(0.9)",
