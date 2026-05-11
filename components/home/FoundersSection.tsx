@@ -23,15 +23,6 @@ const FOUNDERS = [
     photo: IMG.founderClara,
     photoPosition: "center 30%",
   },
-  {
-    name: "Lucas Degas",
-    role: "Cofundador · Direção",
-    detail:
-      "Cofundador desde 2016. Comanda parte da operação criativa e o Plantão Festival ao lado de Clara e Matuê.",
-    accent: "#c89858",
-    photo: IMG.founderLucas,
-    photoPosition: "center 28%",
-  },
 ];
 
 export function FoundersSection() {
@@ -53,18 +44,18 @@ export function FoundersSection() {
               letterSpacing: "-0.03em",
             }}
           >
-            Três nomes,
+            Dois nomes,
             <br />
             <span style={{ color: "var(--accent)" }}>uma casa.</span>
           </h2>
           <p className="max-w-md text-sm sm:text-base text-fg/80 leading-relaxed">
-            Em 2016, três pessoas decidiram que o trap brasileiro não precisava
-            morar no eixo Rio-SP pra ser ouvido. Fortaleza virou ponto de
-            partida. Dez anos depois, virou referência.
+            Em 2016, Matuê e Clara Mendes decidiram que o trap brasileiro não
+            precisava morar no eixo Rio-SP pra ser ouvido. Fortaleza virou ponto
+            de partida. Dez anos depois, virou referência.
           </p>
         </header>
 
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="grid gap-4 lg:grid-cols-2">
           {FOUNDERS.map((f, i) => (
             <motion.article
               key={f.name}
