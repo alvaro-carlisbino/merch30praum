@@ -105,14 +105,19 @@ export const IMG = {
   partnerRennerGallery3: U("1583743814966-8936f5b7be1a", 1200),
   partnerRennerGallery4: U("1620799140408-edc6dcb6d633", 1200),
 
-  partnerEdHardy: U("1611501301329-d4677540e84b", 2400), // tattoo aesthetic
-  partnerEdHardyGallery1: U("1542736667-069246bdbc6d", 1200),
-  partnerEdHardyGallery2: U("1556905055-8f358a7a47b2", 1200),
-  partnerEdHardyGallery3: U("1583744946564-b52ac1c389c8", 1200),
+  // Fotos oficiais Ed Hardy × Matuê (CDN 30praum.store)
+  partnerEdHardy:
+    "https://30praum.store/cdn/shop/files/DSC2402.jpg?v=1777298638&width=2400",
+  partnerEdHardyGallery1:
+    "https://30praum.store/cdn/shop/files/ZIPVERMELHO-HOODIE-AGUI_556d7335-548e-44de-9f1b-393b27980a1c.png?v=1777298639&width=1200",
+  partnerEdHardyGallery2:
+    "https://30praum.store/cdn/shop/files/Matue-Edhardy_Calca-3_1_d468efeb-7449-43a7-9bab-8c856fdf0876.png?v=1777298638&width=1200",
+  partnerEdHardyGallery3:
+    "https://30praum.store/cdn/shop/files/ZIPUPTUE-FULLGRAPHIC_feac9cca-3698-4034-8efd-4611e3ecf159.png?v=1777298648&width=1200",
 
   partnerRaw: U("1620916566398-39f1143ab7be", 2400), // lifestyle dark
-  partnerRawGallery1: U("1542736667-069246bdbc6d", 1200),
-  partnerRawGallery2: U("1611501301329-d4677540e84b", 1200),
+  partnerRawGallery1: U("1508739773434-c26b3d09e071", 1200),
+  partnerRawGallery2: U("1485178575877-1a13bf489dfe", 1200),
   partnerRawGallery3: U("1612528443702-f6741f70a049", 1200),
 
   partnerKenner: U("1542291026-7eec264c27ff", 2400), // tênis/calçado

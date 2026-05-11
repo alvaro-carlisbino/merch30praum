@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "cdn.jsdelivr.net", pathname: "/**" },
       { protocol: "https", hostname: "billboard.com.br", pathname: "/**" },
       { protocol: "https", hostname: "billboard-com-br.s3.amazonaws.com", pathname: "/**" },
+      { protocol: "https", hostname: "30praum.store", pathname: "/**" },
+      { protocol: "https", hostname: "cdn.shopify.com", pathname: "/**" },
     ],
   },
 };
