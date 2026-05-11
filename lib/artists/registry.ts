@@ -13,7 +13,7 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
     joinedYear: 2016,
     bioParagraphs: [
       "Nasceu em Fortaleza em 11 de outubro de 1993. Aos 8 anos mudou para Oakland, Califórnia, onde viveu até os 11 — quando voltou pro Brasil já com inglês fluente e ouvido pra um trap que ninguém aqui fazia ainda.",
-      "Em 2016 cofundou a 30praum com Clara Mendes e Lucas Degas — selo cearense montado pra descentralizar o trap brasileiro do eixo Rio-SP. Estreou em álbum em 2020 com Máquina do Tempo. 333 (2024) bateu o recorde de maior estreia do Spotify Brasil e ultrapassou 950 milhões de reproduções. XTRANHO (2025) é o terceiro capítulo.",
+      "Em 2016 cofundou a 30praum com Clara Mendes — selo cearense montado pra descentralizar o trap brasileiro do eixo Rio-SP. Estreou em álbum em 2020 com Máquina do Tempo. 333 (2024) bateu o recorde de maior estreia do Spotify Brasil e ultrapassou 950 milhões de reproduções. XTRANHO (2025) é o terceiro capítulo.",
     ],
     facts: [
       { label: "Nome", value: "Matheus Brasileiro Aguiar" },

@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "upload.wikimedia.org", pathname: "/**" },
       { protocol: "https", hostname: "i.scdn.co", pathname: "/**" },
       { protocol: "https", hostname: "cdn.jsdelivr.net", pathname: "/**" },
+      { protocol: "https", hostname: "billboard.com.br", pathname: "/**" },
+      { protocol: "https", hostname: "billboard-com-br.s3.amazonaws.com", pathname: "/**" },
     ],
   },
 };
