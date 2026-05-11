@@ -11,13 +11,14 @@ const UCROP = (id: string, w: number, h: number, q = 80) =>
   `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&q=${q}&auto=format&fit=crop`;
 
 export const IMG = {
-  /* ── Founders (URLs oficiais quando disponível) ──────────────────────
-   * OFICIAL: Matuê via Wikimedia Commons (foto solo no The Town 2025, CC license).
-   * PLACEHOLDER: Clara Mendes e Lucas Degas — sem foto oficial Wikimedia indexada.
-   *   Substituir quando assessoria fornecer foto autorizada. */
+  /* ── Founders (URLs oficiais) ────────────────────────────────────────
+   * OFICIAL:
+   *   Matuê → Wikimedia Commons (The Town 2025, CC license)
+   *   Clara Mendes → Billboard Brasil (foto de divulgação oficial 30praum)
+   * Lucas Degas removido da seção: cofundador inicial 2016 que saiu em 2018,
+   * com processos ativos contra a empresa. Mencionado só historicamente em /about. */
   founderMatue: "https://upload.wikimedia.org/wikipedia/commons/d/df/Matu%C3%AA.jpg",
-  founderClara: U("1573496359142-b8d87734a5a2", 1200), // TODO: substituir por foto oficial Clara Mendes
-  founderLucas: U("1500648767791-00dcc994a43e", 1200), // TODO: substituir por foto oficial Lucas Degas
+  founderClara: "https://billboard.com.br/wp-content/uploads/2023/11/clara-mendes-1024x677.jpg",
 
   /* ── Hero institucional ─────────────────────────────────────────────── */
   heroFortaleza: U("1581373449483-37449f962b6c", 2400), // Fortaleza skyline noturno
@@ -36,10 +37,10 @@ export const IMG = {
   matueAlt:
     "https://upload.wikimedia.org/wikipedia/commons/3/3d/Doode_Teto_e_Matue_%28cropped%29.jpg",
 
-  // TODO: substituir por foto oficial Wiu
-  wiuPortrait: U("1611042553484-d61f84d22784", 1200),
-  wiuHero: U("1516834474-48c0abc2a902", 2400),
-  wiuAlt: U("1500648767791-00dcc994a43e", 1600),
+  wiuPortrait: "https://billboard.com.br/wp-content/uploads/2023/12/wiu.jpg",
+  wiuHero:
+    "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2026/01/23021331/Wiu-e-Teto-_creditos-_juarez_.webp",
+  wiuAlt: "https://billboard.com.br/wp-content/uploads/2023/12/wiu.jpg",
 
   tetoPortrait:
     "https://upload.wikimedia.org/wikipedia/commons/8/83/-i---i-_%2854360758422%29.jpg",
@@ -48,10 +49,12 @@ export const IMG = {
   tetoAlt:
     "https://upload.wikimedia.org/wikipedia/commons/8/83/-i---i-_%2854360758422%29.jpg",
 
-  // TODO: substituir por foto oficial Brandão85
-  brandaoPortrait: U("1535713875002-d1d0cf377fde", 1200),
-  brandaoHero: U("1493225457124-a3eb161ffa5f", 2400),
-  brandaoAlt: U("1517732306149-e8f829eb588a", 1600),
+  brandaoPortrait:
+    "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2024/09/13170121/WhatsApp-Image-2024-09-13-at-16.51.09.jpg",
+  brandaoHero:
+    "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2024/09/13170121/WhatsApp-Image-2024-09-13-at-16.51.09.jpg",
+  brandaoAlt:
+    "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2024/09/13170121/WhatsApp-Image-2024-09-13-at-16.51.09.jpg",
 
   /* ── Capas de álbum (textura, abstrato cinematográfico) ─────────────── */
   coverXtranho: U("1614624532983-4ce03382d63d", 1400), // azul cyber/glitch
@@ -79,7 +82,8 @@ export const IMG = {
     "https://upload.wikimedia.org/wikipedia/commons/d/df/Matu%C3%AA.jpg",
   lineupTetoWiu:
     "https://upload.wikimedia.org/wikipedia/commons/4/41/-i---i-_%2854361310936%29.jpg",
-  lineupBrandao: UCROP("1535713875002-d1d0cf377fde", 1400, 2100), // TODO: oficial
+  lineupBrandao:
+    "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2024/09/13170121/WhatsApp-Image-2024-09-13-at-16.51.09.jpg",
   lineupBK: UCROP("1521572163474-6864f9cf17ab", 1400, 2100), // streetwear
   lineupRecayd: UCROP("1492562080023-ab3db95bfbce", 1400, 2100),
   lineupTZ: UCROP("1500648767791-00dcc994a43e", 1400, 2100),
@@ -132,10 +136,11 @@ export const IMG = {
   newsWarzone: U("1535713875002-d1d0cf377fde", 2400),
 
   /* ── Incubadora (cases de sucesso) ──────────────────────────────────── */
-  incubBrandao: UCROP("1517732306149-e8f829eb588a", 1200, 1600), // TODO: oficial
+  incubBrandao:
+    "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2024/09/13170121/WhatsApp-Image-2024-09-13-at-16.51.09.jpg",
   incubTeto:
     "https://upload.wikimedia.org/wikipedia/commons/4/41/-i---i-_%2854361310936%29.jpg",
-  incubWiu: UCROP("1611042553484-d61f84d22784", 1200, 1600), // TODO: oficial
+  incubWiu: "https://billboard.com.br/wp-content/uploads/2023/12/wiu.jpg",
 
   /* ── Press kit thumbs ───────────────────────────────────────────────── */
   pressLogo30praum: U("1614680376573-df3480f0c6ff", 600),
@@ -145,8 +150,9 @@ export const IMG = {
     "https://upload.wikimedia.org/wikipedia/commons/d/df/Matu%C3%AA.jpg",
   pressPhotoTeto:
     "https://upload.wikimedia.org/wikipedia/commons/8/83/-i---i-_%2854360758422%29.jpg",
-  pressPhotoWiu: UCROP("1611042553484-d61f84d22784", 600, 750), // TODO: oficial
-  pressPhotoBrandao: UCROP("1535713875002-d1d0cf377fde", 600, 750), // TODO: oficial
+  pressPhotoWiu: "https://billboard.com.br/wp-content/uploads/2023/12/wiu.jpg",
+  pressPhotoBrandao:
+    "https://billboard-com-br.s3.amazonaws.com/wp-content/uploads/2024/09/13170121/WhatsApp-Image-2024-09-13-at-16.51.09.jpg",
   pressMediaKit: UCROP("1611532736597-de2d4265fba3", 600, 750),
   pressPlantaoPack: UCROP("1540575467063-178a50c2df87", 600, 750),
   pressBio: U("1499750310107-5fef28a66643", 600), // máquina escrever
