@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ARTISTS } from "@/lib/artists/registry";
 import { HeroBrand } from "@/components/home/HeroBrand";
 import { UniversePanels } from "@/components/home/UniversePanels";
@@ -58,26 +59,38 @@ export default function HomePage() {
             <Link
               key={a.slug}
               href={`/${a.slug}`}
-              data-cursor={`Entrar · ${a.displayName}`}
+              data-cursor={a.displayName}
               className="group relative block aspect-[4/5] overflow-hidden border border-border"
               style={{ background: a.panelBackground }}
             >
+              <Image
+                src={a.realPhotoUrl ?? a.portraitImage}
+                alt={a.displayName}
+                fill
+                unoptimized
+                sizes="(min-width: 1024px) 25vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                style={{
+                  objectPosition: a.photoObjectPosition,
+                  filter: "brightness(0.7) contrast(1.05) saturate(0.95)",
+                }}
+              />
               <div
                 aria-hidden
-                className="absolute inset-0 opacity-30 transition-opacity group-hover:opacity-70"
+                className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-90"
                 style={{
-                  background: `radial-gradient(circle at 50% 60%, ${a.panelAccent}, transparent 70%)`,
+                  background: `radial-gradient(circle at 30% 70%, ${a.panelAccent}40, transparent 65%), linear-gradient(180deg, transparent 45%, ${a.panelBackground}f5 100%)`,
                 }}
               />
               <div className="relative flex h-full flex-col p-6 text-white justify-end">
                 <p className="text-xs opacity-65">{a.universeName}</p>
                 <h3
-                  className="mt-2 text-2xl"
+                  className="mt-2 text-2xl sm:text-3xl"
                   style={{ letterSpacing: "-0.01em", fontWeight: 700 }}
                 >
                   {a.displayName}
                 </h3>
-                <p className="mt-2 text-xs text-white/70">{a.tagline}</p>
+                <p className="mt-2 text-xs text-white/75 line-clamp-2">{a.tagline}</p>
               </div>
             </Link>
           ))}
