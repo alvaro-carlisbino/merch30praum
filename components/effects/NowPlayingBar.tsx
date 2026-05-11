@@ -106,7 +106,7 @@ function deriveContext(pathname: string): Ctx | null {
     return {
       id: "parcerias",
       kicker: "expansões",
-      title: "Renner · Plantão · Sony",
+      title: "Renner · Plantão · Sabor Matuê",
       href: "/",
       cta: "Voltar ao hub",
     };

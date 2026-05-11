@@ -31,7 +31,7 @@ export const TIMELINE: TimelineEntry[] = [
     year: "2022",
     headline: "Manual de Como Amar Errado · Vampira viraliza",
     detail:
-      "Wiu lança seu álbum solo de estreia. Vampira (com Matuê e Teto) e Felina explodem no streaming. Distribuição passa a ser via Sony.",
+      "Wiu lança seu álbum solo de estreia. Vampira (com Matuê e Teto) e Felina explodem no streaming. A 30praum escala distribuição.",
     tag: "Drops virais",
   },
   {

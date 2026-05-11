@@ -75,20 +75,6 @@ export function UniversePanels() {
               transition={{ duration: 0.6 }}
             />
 
-            <div
-              aria-hidden
-              className="absolute inset-0 pointer-events-none mix-blend-overlay"
-              style={{
-                opacity: isHovered ? 0.45 : 0.18,
-                transition: "opacity 600ms ease",
-                backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(
-                  `<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='${
-                    slug === "brandao" ? "1.1" : slug === "teto" ? "0.7" : "0.85"
-                  }' numOctaves='${slug === "wiu" ? "1" : "3"}'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>`,
-                )}")`,
-              }}
-            />
-
             <motion.div
               aria-hidden
               className="absolute inset-0 pointer-events-none"

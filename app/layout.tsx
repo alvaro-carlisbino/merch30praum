@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import { houseBody, houseDisplay } from "@/styles/fonts";
-import { AtmosOverlay } from "@/components/effects/AtmosOverlay";
-import { IntroLoader } from "@/components/effects/IntroLoader";
 import { CustomCursor } from "@/components/effects/CustomCursor";
 import { PageTransition } from "@/components/effects/PageTransition";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
-import { NowPlayingBar } from "@/components/effects/NowPlayingBar";
-import { BrandWatermark } from "@/components/effects/BrandWatermark";
 import { ScrollAtmosphere } from "@/components/effects/ScrollAtmosphere";
 import "./globals.css";
 
@@ -36,14 +32,10 @@ export default function RootLayout({
       className={`${houseBody.variable} ${houseDisplay.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <IntroLoader />
         <CustomCursor />
         <PageTransition />
         <ScrollProgress />
-        <NowPlayingBar />
-        <BrandWatermark />
         <ScrollAtmosphere />
-        <AtmosOverlay />
         {children}
       </body>
     </html>

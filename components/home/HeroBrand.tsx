@@ -183,7 +183,7 @@ export function HeroBrand() {
         style={{ color: "var(--muted)" }}
       >
         <span>Matuê · Wiu · Teto · Brandão85</span>
-        <span>Sony Music · Plantão Festival · Renner</span>
+        <span>Plantão Festival · Renner · Sabor Matuê</span>
       </div>
     </section>
   );

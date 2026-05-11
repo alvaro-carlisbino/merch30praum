@@ -36,16 +36,6 @@ export function BrandaoHero({ artist }: { artist: ArtistConfig }) {
 
       <div
         aria-hidden
-        className="absolute inset-0 opacity-70 mix-blend-screen pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(
-            `<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='4'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.3 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>`,
-          )}")`,
-        }}
-      />
-
-      <div
-        aria-hidden
         className="absolute inset-0 opacity-40 pointer-events-none"
         style={{
           backgroundImage:

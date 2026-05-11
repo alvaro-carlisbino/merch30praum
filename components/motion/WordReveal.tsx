@@ -23,7 +23,7 @@ export function WordReveal({
   wordClassName,
 }: WordRevealProps) {
   const reduce = useReducedMotion();
-  const words = text.split(/(\s+)/);
+  const words = text.split(/\s+/).filter(Boolean);
   const MotionTag = motion[Component] as typeof motion.h2;
 
   return (
@@ -38,13 +38,16 @@ export function WordReveal({
       }}
       aria-label={text}
     >
-      {words.map((word, i) =>
-        /^\s+$/.test(word) ? (
-          <span key={i}> </span>
-        ) : (
+      {words.map((word, i) => {
+        const isLast = i === words.length - 1;
+        return (
           <motion.span
             key={i}
-            className={cn("inline-block overflow-hidden align-baseline", wordClassName)}
+            className={cn(
+              "inline-block overflow-hidden align-baseline",
+              !isLast && "mr-[0.25em]",
+              wordClassName,
+            )}
             variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           >
             <motion.span
@@ -60,8 +63,8 @@ export function WordReveal({
               {word}
             </motion.span>
           </motion.span>
-        ),
-      )}
+        );
+      })}
     </MotionTag>
   );
 }

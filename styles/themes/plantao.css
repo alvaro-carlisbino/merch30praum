@@ -1,0 +1,25 @@
+/* Plantão Festival — Identidade do festival: noite na Beira-Mar, vermelho sangue, neon
+   - Referência ao "monstro" do palco
+   - Mood: festa noturna densa, perigo, ritual coletivo */
+[data-theme="plantao"] {
+  --bg: #06030a;
+  --fg: #fff5ec;
+  --muted: #8a7080;
+  --accent: #ff2d2d;
+  --accent-2: #ffd34d;
+  --border: rgba(255, 45, 45, 0.22);
+  --overlay: rgba(6, 3, 10, 0.88);
+  --noise-opacity: 0.1;
+  --grid-gap: 0.5rem;
+  --motion-duration: 280ms;
+  --motion-easing: cubic-bezier(0.9, 0, 0.1, 1);
+}
+
+[data-theme="plantao"] .plantao-bloodglow {
+  background: radial-gradient(circle at 20% 20%, rgba(255, 45, 45, 0.18), transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(255, 211, 77, 0.08), transparent 55%);
+}
+
+[data-theme="plantao"] .plantao-neon-text {
+  text-shadow: 0 0 2px var(--accent), 0 0 18px rgba(255, 45, 45, 0.35);
+}

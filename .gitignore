@@ -43,3 +43,12 @@ next-env.d.ts
 
 # claude code tooling (not part of the project)
 .agent/
+
+# Payload CMS local SQLite database
+*.db
+*.db-journal
+/30praum.db*
+
+# Payload CMS generated types
+/payload-types.ts
+

@@ -26,29 +26,64 @@ export function BrandHeader({ currentArtist, cartCount }: BrandHeaderProps) {
         >
           <BrandLogo />
         </Link>
-        <ArtistSwitcher current={currentArtist} className="hidden md:flex" />
-        <nav className="flex items-center gap-1 text-xs uppercase tracking-widest">
+        <ArtistSwitcher current={currentArtist} className="hidden xl:flex" />
+        <nav className="flex items-center gap-1 text-[11px] uppercase tracking-[0.2em]">
           <Link
-            href="/loja"
-            data-cursor="Catálogo completo"
-            className="px-3 py-2 font-semibold transition-colors hover:text-accent"
-            style={{ color: "var(--accent)" }}
+            href="/artistas"
+            data-cursor="Roster"
+            className="hidden md:inline-block px-3 py-2 opacity-80 hover:opacity-100 transition-opacity"
           >
-            Loja
+            Artistas
+          </Link>
+          <Link
+            href="/shows"
+            data-cursor="Shows"
+            className="hidden md:inline-block px-3 py-2 opacity-80 hover:opacity-100 transition-opacity"
+          >
+            Shows
+          </Link>
+          <Link
+            href="/plantao"
+            data-cursor="Plantão"
+            className="hidden md:inline-block px-3 py-2 opacity-80 hover:opacity-100 transition-opacity"
+          >
+            Plantão
+          </Link>
+          <Link
+            href="/releases"
+            data-cursor="Lançamentos"
+            className="hidden lg:inline-block px-3 py-2 opacity-80 hover:opacity-100 transition-opacity"
+          >
+            Releases
+          </Link>
+          <Link
+            href="/news"
+            data-cursor="Notícias"
+            className="hidden lg:inline-block px-3 py-2 opacity-80 hover:opacity-100 transition-opacity"
+          >
+            Notícias
           </Link>
           <Link
             href="/parcerias"
             data-cursor="Parcerias"
-            className="hidden lg:inline-block px-3 py-2 opacity-70 hover:opacity-100 transition-opacity"
+            className="hidden xl:inline-block px-3 py-2 opacity-80 hover:opacity-100 transition-opacity"
           >
             Parcerias
           </Link>
           <Link
-            href="/about"
-            data-cursor="Sobre"
-            className="hidden lg:inline-block px-3 py-2 opacity-70 hover:opacity-100 transition-opacity"
+            href="/incubadora"
+            data-cursor="Incubadora"
+            className="hidden xl:inline-block px-3 py-2 opacity-80 hover:opacity-100 transition-opacity"
           >
-            Sobre
+            Incubadora
+          </Link>
+          <Link
+            href="/loja"
+            data-cursor="Loja"
+            className="px-3 py-2 font-semibold transition-colors hover:text-accent"
+            style={{ color: "var(--accent)" }}
+          >
+            Loja
           </Link>
         </nav>
         <CartButton initialCount={cartCount} />

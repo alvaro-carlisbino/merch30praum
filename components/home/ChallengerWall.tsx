@@ -9,7 +9,7 @@ const CHALLENGES = [
   },
   {
     accusation: "Independente não escala.",
-    rebuttal: "950M+ plays · Sony distribui",
+    rebuttal: "950M+ plays · 100% próprio",
   },
   {
     accusation: "Trap nordestino é nicho.",

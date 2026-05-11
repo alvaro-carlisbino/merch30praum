@@ -69,7 +69,7 @@ export default function AboutPage() {
               ["Fundação", "2016 · Fortaleza, CE"],
               ["Founders", "Matuê · Clara Mendes · Lucas Mendes"],
               ["Time", "~50 funcionários · Fortaleza + SP"],
-              ["Distribuição", "Sony Music (desde 2022)"],
+              ["Distribuição", "Independente · distribuidora própria 2026"],
               ["Festival próprio", "Plantão · 30k pessoas · Marina Park"],
               ["Roster principal", "Matuê · Wiu · Teto · Brandão85"],
             ].map(([label, value]) => (
