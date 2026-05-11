@@ -1,3 +1,5 @@
+import { IMG } from "@/lib/images/unsplash";
+
 export type PressAssetType = "logo" | "photo" | "bio" | "document";
 
 export type PressAsset = {
@@ -28,7 +30,7 @@ export const PRESS_KIT_ASSETS: PressAsset[] = [
     description: "Logo principal em todas as variações: positivo, negativo, monograma e marca-d'água. SVG + PNG.",
     format: "ZIP · 8.4MB",
     downloadUrl: "#",
-    thumbnail: "https://picsum.photos/seed/press-logo-30praum/600/600",
+    thumbnail: IMG.pressLogo30praum,
   },
   {
     slug: "logo-plantao-pack",
@@ -37,7 +39,7 @@ export const PRESS_KIT_ASSETS: PressAsset[] = [
     description: "Identidade do festival em todas as edições — incluindo o 'monstro' icônico do palco.",
     format: "ZIP · 12.1MB",
     downloadUrl: "#",
-    thumbnail: "https://picsum.photos/seed/press-logo-plantao/600/600",
+    thumbnail: IMG.pressLogoPlantao,
   },
   {
     slug: "logo-sabor-pack",
@@ -46,7 +48,7 @@ export const PRESS_KIT_ASSETS: PressAsset[] = [
     description: "Identidade visual da linha FMCG da holding — versões coloridas, monocromáticas e mockup de embalagem.",
     format: "ZIP · 6.2MB",
     downloadUrl: "#",
-    thumbnail: "https://picsum.photos/seed/press-logo-sabor/600/600",
+    thumbnail: IMG.pressLogoSabor,
   },
 
   // Fotos de artistas
@@ -58,7 +60,7 @@ export const PRESS_KIT_ASSETS: PressAsset[] = [
     format: "ZIP · 64MB · TIFF + JPG",
     downloadUrl: "#",
     relatedArtist: "matue",
-    thumbnail: "https://picsum.photos/seed/press-photo-matue/600/750",
+    thumbnail: IMG.pressPhotoMatue,
   },
   {
     slug: "photo-teto-press",
@@ -68,7 +70,7 @@ export const PRESS_KIT_ASSETS: PressAsset[] = [
     format: "ZIP · 48MB",
     downloadUrl: "#",
     relatedArtist: "teto",
-    thumbnail: "https://picsum.photos/seed/press-photo-teto/600/750",
+    thumbnail: IMG.pressPhotoTeto,
   },
   {
     slug: "photo-wiu-press",
@@ -78,7 +80,7 @@ export const PRESS_KIT_ASSETS: PressAsset[] = [
     format: "ZIP · 42MB",
     downloadUrl: "#",
     relatedArtist: "wiu",
-    thumbnail: "https://picsum.photos/seed/press-photo-wiu/600/750",
+    thumbnail: IMG.pressPhotoWiu,
   },
   {
     slug: "photo-brandao-press",
@@ -88,7 +90,7 @@ export const PRESS_KIT_ASSETS: PressAsset[] = [
     format: "ZIP · 44MB",
     downloadUrl: "#",
     relatedArtist: "brandao",
-    thumbnail: "https://picsum.photos/seed/press-photo-brandao/600/750",
+    thumbnail: IMG.pressPhotoBrandao,
   },
 
   // Bios em pt-BR e en-US
@@ -99,7 +101,7 @@ export const PRESS_KIT_ASSETS: PressAsset[] = [
     description: "Biografia oficial da gravadora em português brasileiro. Versões curta (500), média (1500) e longa (3000 caracteres).",
     format: "TXT · 12KB",
     downloadUrl: "#",
-    thumbnail: "https://picsum.photos/seed/press-bio-ptbr/600/600",
+    thumbnail: IMG.pressBio,
   },
   {
     slug: "bio-30praum-en",
@@ -108,7 +110,7 @@ export const PRESS_KIT_ASSETS: PressAsset[] = [
     description: "Official label biography for international press. Short (500), medium (1500), long (3000 chars) versions.",
     format: "TXT · 11KB",
     downloadUrl: "#",
-    thumbnail: "https://picsum.photos/seed/press-bio-en/600/600",
+    thumbnail: IMG.pressBio,
   },
   {
     slug: "bio-artists-pack",
@@ -117,7 +119,7 @@ export const PRESS_KIT_ASSETS: PressAsset[] = [
     description: "Biografias oficiais de Matuê, Teto, Wiu e Brandão85 — pt-BR e en-US, em três extensões cada.",
     format: "ZIP · 48KB · 24 arquivos",
     downloadUrl: "#",
-    thumbnail: "https://picsum.photos/seed/press-bio-artists/600/600",
+    thumbnail: IMG.pressBio,
   },
 
   // Documentos
@@ -129,7 +131,7 @@ export const PRESS_KIT_ASSETS: PressAsset[] = [
       "Documento oficial com números do roster (streams, certificações), audiência por plataforma, geografia de fãs, casos de parceria.",
     format: "PDF · 18 páginas · 4.2MB",
     downloadUrl: "#",
-    thumbnail: "https://picsum.photos/seed/press-media-kit/600/750",
+    thumbnail: IMG.pressMediaKit,
   },
   {
     slug: "plantao-press-pack-2026",
@@ -139,7 +141,7 @@ export const PRESS_KIT_ASSETS: PressAsset[] = [
       "Histórico do festival, lineup oficial, estatísticas, mapa do evento, contatos de produção, autorização de mídia.",
     format: "PDF · 24 páginas · 6.8MB",
     downloadUrl: "#",
-    thumbnail: "https://picsum.photos/seed/press-plantao-pack/600/750",
+    thumbnail: IMG.pressPlantaoPack,
   },
 ];
 

@@ -1,4 +1,37 @@
 import type { ShopifyProduct } from "../types";
+import { IMG } from "@/lib/images/unsplash";
+
+const PRODUCT_POOL_PRIMARY = [
+  IMG.productTshirtBlack,
+  IMG.productHoodie,
+  IMG.productCap,
+  IMG.productJacket,
+  IMG.productSweatpants,
+  IMG.productTshirtWhite,
+  IMG.productHoodieDark,
+  IMG.productCapBlack,
+  IMG.productTote,
+  IMG.productAccessory,
+];
+
+const PRODUCT_POOL_ALT = [
+  IMG.productHoodieDark,
+  IMG.productCapBlack,
+  IMG.productTote,
+  IMG.productAccessory,
+  IMG.productTshirtWhite,
+  IMG.productTshirtBlack,
+  IMG.productHoodie,
+  IMG.productCap,
+  IMG.productJacket,
+  IMG.productSweatpants,
+];
+
+function hashStringToIndex(s: string, mod: number): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h) % mod;
+}
 
 const BRL = "BRL";
 
@@ -24,7 +57,9 @@ function product(args: {
     { name: "Tamanho", values: variants.map((v) => v.title) },
   ];
   const tags = [`artist:${args.artist}`, ...(args.extraTags ?? [])];
-  const placeholder = makePlaceholderImage(args.imageHue, args.title);
+  const idx = hashStringToIndex(args.handle, PRODUCT_POOL_PRIMARY.length);
+  const primary = PRODUCT_POOL_PRIMARY[idx];
+  const alt = PRODUCT_POOL_ALT[idx];
 
   return {
     id: args.id,
@@ -33,20 +68,20 @@ function product(args: {
     description: args.description,
     descriptionHtml: `<p>${args.description}</p>`,
     featuredImage: {
-      url: placeholder,
+      url: primary,
       altText: args.title,
       width: 1200,
       height: 1500,
     },
     images: [
       {
-        url: placeholder,
+        url: primary,
         altText: args.title,
         width: 1200,
         height: 1500,
       },
       {
-        url: makePlaceholderImage(args.imageHue, `${args.title} ·`, true),
+        url: alt,
         altText: `${args.title} alt`,
         width: 1200,
         height: 1500,
@@ -67,21 +102,6 @@ function product(args: {
     })),
     tags,
   };
-}
-
-function makePlaceholderImage(hueHex: string, label: string, alt = false): string {
-  const bg = hueHex;
-  const labelClean = label.replace(/[<>&]/g, "");
-  const pattern = alt ? "rotate(8)" : "rotate(-4)";
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 1500'>
-    <rect width='1200' height='1500' fill='${bg}'/>
-    <g transform='translate(600 750) ${pattern}'>
-      <rect x='-420' y='-520' width='840' height='1040' fill='none' stroke='rgba(255,255,255,0.18)' stroke-width='2'/>
-      <text x='0' y='0' fill='rgba(255,255,255,0.85)' font-family='monospace' font-size='44' text-anchor='middle' dominant-baseline='middle'>${labelClean}</text>
-      <text x='0' y='80' fill='rgba(255,255,255,0.45)' font-family='monospace' font-size='20' text-anchor='middle'>30PRAUM</text>
-    </g>
-  </svg>`;
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 }
 
 export const MOCK_PRODUCTS: ShopifyProduct[] = [

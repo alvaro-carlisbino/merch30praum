@@ -1,3 +1,5 @@
+import { IMG } from "@/lib/images/unsplash";
+
 export const INCUBADORA = {
   programName: "Incubadora 30praum",
   shortTagline: "Uma porta para quem ainda não está dentro.",
@@ -40,7 +42,7 @@ export const INCUBADORA = {
       joinedYear: 2024,
       excerpt:
         "Vinha da Hash Produções. Em setembro/2024 conversou com a casa, em 2025 começou a cocriar faixas do 333. Dois anos depois, dividia palco no Plantão.",
-      image: "https://picsum.photos/seed/incub-brandao/1200/1600",
+      image: IMG.incubBrandao,
     },
     {
       artistSlug: "teto",
@@ -48,7 +50,7 @@ export const INCUBADORA = {
       joinedYear: 2020,
       excerpt:
         "Jacobina-BA. Gravava no quarto. Foi chamado em 2020 depois de Fico Famoso viralizar no YouTube. Em 2022 já dividia Vampira com Matuê e Wiu.",
-      image: "https://picsum.photos/seed/incub-teto/1200/1600",
+      image: IMG.incubTeto,
     },
     {
       artistSlug: "wiu",
@@ -56,7 +58,7 @@ export const INCUBADORA = {
       joinedYear: 2019,
       excerpt:
         "Era beatmaker antes de ser voz. Produziu 6 das 7 faixas de Máquina do Tempo do Matuê. Em 2019 começou a cantar — o resto a gente conhece.",
-      image: "https://picsum.photos/seed/incub-wiu/1200/1600",
+      image: IMG.incubWiu,
     },
   ],
   whatWeLookFor: [

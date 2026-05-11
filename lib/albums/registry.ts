@@ -1,4 +1,5 @@
 import type { ArtistSlug } from "@/lib/artists/types";
+import { IMG } from "@/lib/images/unsplash";
 
 export type AlbumSlug = "xtranho" | "colapso-global" | "isso-e-trap-vol-2";
 
@@ -35,7 +36,7 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     releaseDate: "2025-12-10",
     totalTracks: 13,
     duration: "36 min",
-    coverImage: "/assets/covers/xtranho.jpg",
+    coverImage: IMG.coverXtranho,
     manifesto:
       "XTRANHO é o terceiro capítulo do Matuê — depois de Máquina do Tempo (2020) e 333 (2024). Aqui o sinal não vem de fora: ele se estabiliza. Trap underground com sonoridade inédita no mainstream brasileiro, gravado entre Fortaleza, São Paulo e Los Angeles.",
     tagline: "Sinal estável da terra de quem nunca foi daqui.",
@@ -70,7 +71,7 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     releaseDate: "2026-01-27",
     totalTracks: 11,
     duration: "33 min",
-    coverImage: "/assets/colapso_global.jpeg",
+    coverImage: IMG.coverColapsoGlobal,
     manifesto:
       "Wiu e Teto se encontram pra um disco a duas mãos que mistura house, jazz, bossa nova, funk carioca e trap no mesmo espaço. Manifesto sonoro de liberdade criativa — o trap saindo da caixinha sem perder o peso.",
     tagline: "Quando o mundo cai, ainda dá pra dançar uma última.",
@@ -105,7 +106,7 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     releaseDate: "2026-04-16",
     totalTracks: 14,
     duration: "41 min",
-    coverImage: "/assets/isso_e_trap_vol2.jpeg",
+    coverImage: IMG.coverIssoETrap,
     manifesto:
       "Vol. 02 é a confirmação. Mixtape lançada pela 30praum continuando a sequência de Isso É Trap (Hash Produções, 2022). WARZONE e JAPONÊS já tinham viralizado antes do disco sair. Da Caponga pro mundo, sem perder o xerox.",
     tagline: "Cresci copiando. Agora os outros copiam errado.",

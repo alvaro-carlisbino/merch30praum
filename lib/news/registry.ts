@@ -1,3 +1,5 @@
+import { IMG } from "@/lib/images/unsplash";
+
 export type NewsTag =
   | "lancamento"
   | "plantao"
@@ -26,7 +28,7 @@ export const NEWS_POSTS: NewsPost[] = [
     title: "30praum estreia plataforma oficial — gravadora, festival e holding em um só endereço",
     excerpt:
       "Depois de 10 anos operando com loja de merch isolada, a gravadora cearense estreia hub digital que reúne roster, Plantão Festival, parcerias e incubadora.",
-    heroImage: "https://picsum.photos/seed/news-site-launch/2400/1200",
+    heroImage: IMG.newsSiteLaunch,
     publishedAt: "2026-05-11T09:00:00-03:00",
     author: "Editorial 30praum",
     tags: ["holding", "industria"],
@@ -41,7 +43,7 @@ export const NEWS_POSTS: NewsPost[] = [
     title: "Plantão 2026 anuncia lineup completo — Matuê, Teto, Wiu, Brandão85, BK', Recayd Mob e mais",
     excerpt:
       "A 3ª edição marca os 10 anos da 30praum. Sábado 25 de abril, Marina Park, Fortaleza. Ingressos a partir de R$150.",
-    heroImage: "https://picsum.photos/seed/news-plantao-lineup/2400/1200",
+    heroImage: IMG.newsPlantaoLineup,
     publishedAt: "2026-03-04T10:00:00-03:00",
     author: "Editorial 30praum",
     tags: ["plantao"],
@@ -57,7 +59,7 @@ export const NEWS_POSTS: NewsPost[] = [
     title: "30praum confirma distribuidora própria em 2026 — independência total da cadeia",
     excerpt:
       "Depois de anos de operação independente, a gravadora fundada por Matuê e Clara Mendes verticaliza distribuição e fecha o ciclo de autonomia.",
-    heroImage: "https://picsum.photos/seed/news-distribuidora/2400/1200",
+    heroImage: IMG.newsDistribuidora,
     publishedAt: "2026-02-10T11:00:00-03:00",
     author: "Editorial 30praum",
     tags: ["industria", "holding"],
@@ -72,7 +74,7 @@ export const NEWS_POSTS: NewsPost[] = [
     title: "Sabor Matuê: a aposta da 30praum em food & beverage começa em 2026",
     excerpt:
       "O que começou como referência cultural no EP do Matuê vira a primeira frente FMCG da holding. Linha de geladinhos premium chega ao verão.",
-    heroImage: "https://picsum.photos/seed/news-sabor/2400/1200",
+    heroImage: IMG.newsSabor,
     publishedAt: "2026-01-22T14:30:00-03:00",
     author: "Editorial 30praum",
     tags: ["holding", "parceria"],
@@ -87,7 +89,7 @@ export const NEWS_POSTS: NewsPost[] = [
     title: "Incubadora 30praum abre submissões públicas pela primeira vez",
     excerpt:
       "Programa busca artistas de trap, rap e hip-hop com identidade própria. Submissão é via Spotify/SoundCloud no novo formulário oficial.",
-    heroImage: "https://picsum.photos/seed/news-incubadora/2400/1200",
+    heroImage: IMG.newsIncubadora,
     publishedAt: "2026-05-11T08:00:00-03:00",
     author: "A&R 30praum",
     tags: ["incubadora"],
@@ -102,7 +104,7 @@ export const NEWS_POSTS: NewsPost[] = [
     title: "333 ultrapassa 950 milhões de reproduções — Matuê quebra recorde do rap nacional",
     excerpt:
       "Lançado de forma independente em 2024, o terceiro álbum do Matuê coloca a 30praum entre os selos mais ouvidos do Spotify Brasil.",
-    heroImage: "https://picsum.photos/seed/news-333/2400/1200",
+    heroImage: IMG.news333,
     publishedAt: "2025-11-08T16:00:00-03:00",
     author: "Editorial 30praum",
     tags: ["lancamento", "industria"],
@@ -118,7 +120,7 @@ export const NEWS_POSTS: NewsPost[] = [
     title: "Renner × 30praum: colaboração permanente é confirmada após sucesso da primeira coleção",
     excerpt:
       "Drop com Matuê, Teto e Wiu esgotou em 48h. Varejista assina parceria estendida com a gravadora — peças desenhadas em cocriação com os artistas.",
-    heroImage: "https://picsum.photos/seed/news-renner/2400/1200",
+    heroImage: IMG.newsRenner,
     publishedAt: "2025-08-15T10:00:00-03:00",
     author: "Editorial 30praum",
     tags: ["parceria", "holding"],
@@ -133,7 +135,7 @@ export const NEWS_POSTS: NewsPost[] = [
     title: "Brandão85 solta WARZONE — primeiro single oficial de Isso é Trap Vol.02",
     excerpt:
       "Após cocriar faixas de 333 com Matuê, Brandão85 estreia em formato álbum solo no selo. Single chega antes do disco.",
-    heroImage: "https://picsum.photos/seed/news-warzone/2400/1200",
+    heroImage: IMG.newsWarzone,
     publishedAt: "2025-12-12T19:00:00-03:00",
     author: "Editorial 30praum",
     tags: ["lancamento"],
