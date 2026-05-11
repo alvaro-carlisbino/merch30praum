@@ -18,6 +18,16 @@ export interface BioFact {
   value: string;
 }
 
+export interface ArtistSocials {
+  spotify?: string; // URL completa do artista
+  instagram?: string;
+  tiktok?: string;
+  youtube?: string;
+  appleMusic?: string;
+  soundcloud?: string;
+  twitter?: string;
+}
+
 export interface ArtistConfig {
   slug: ArtistSlug;
   displayName: string;
@@ -55,4 +65,8 @@ export interface ArtistConfig {
     process: [string, string, string];
   };
   signatureLyric: string;
+
+  socials?: ArtistSocials;
+  /** Spotify artist or album ID for embed iframe — formato: "artist/{id}" ou "album/{id}" */
+  spotifyEmbedPath?: string;
 }

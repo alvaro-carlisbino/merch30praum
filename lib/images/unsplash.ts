@@ -11,6 +11,12 @@ const UCROP = (id: string, w: number, h: number, q = 80) =>
   `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&q=${q}&auto=format&fit=crop`;
 
 export const IMG = {
+  /* ── Founders (URLs oficiais quando disponível) ────────────────────── */
+  founderMatue:
+    "https://upload.wikimedia.org/wikipedia/commons/3/3d/Doode_Teto_e_Matue_%28cropped%29.jpg",
+  founderClara: U("1573496359142-b8d87734a5a2", 1200), // retrato profissional feminino
+  founderLucas: U("1500648767791-00dcc994a43e", 1200), // retrato profissional masculino
+
   /* ── Hero institucional ─────────────────────────────────────────────── */
   heroFortaleza: U("1581373449483-37449f962b6c", 2400), // Fortaleza skyline noturno
   heroPraia: U("1517181398085-93cdac9f8385", 2400),

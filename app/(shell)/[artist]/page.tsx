@@ -6,6 +6,8 @@ import { ArtistHero } from "@/components/artists/ArtistHero";
 import { ArtistBio } from "@/components/artists/ArtistBio";
 import { AlbumShowcase } from "@/components/artists/AlbumShowcase";
 import { Lookbook } from "@/components/artists/Lookbook";
+import { ArtistSocials } from "@/components/artists/ArtistSocials";
+import { SpotifyEmbed } from "@/components/artists/SpotifyEmbed";
 import { CrossUniverses } from "@/components/product/CrossUniverses";
 
 interface Params {
@@ -28,6 +30,45 @@ export default async function ArtistLanding({
       <ArtistHero artist={cfg} />
 
       <ArtistBio artist={cfg} />
+
+      {/* Ouvir + redes sociais — fica logo após a bio do artista */}
+      <section
+        className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-16"
+        style={{ borderTop: "1px solid var(--border)" }}
+      >
+        <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:items-start">
+          <div>
+            <h2
+              className="font-display uppercase leading-[0.9]"
+              style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
+            >
+              Ouve agora.
+            </h2>
+            <p className="mt-4 text-sm text-fg/75 max-w-md leading-relaxed">
+              {cfg.album.title} · {cfg.album.year}
+              {cfg.album.collaborator ? ` · ${cfg.album.collaborator}` : ""}
+            </p>
+            <div className="mt-6">
+              <SpotifyEmbed artist={cfg} />
+            </div>
+          </div>
+
+          <div>
+            <h2
+              className="font-display uppercase leading-[0.9]"
+              style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
+            >
+              Acompanhe.
+            </h2>
+            <p className="mt-4 text-sm text-fg/75 max-w-md leading-relaxed">
+              Onde {cfg.displayName} publica — música, bastidores, anúncios de show.
+            </p>
+            <div className="mt-6">
+              <ArtistSocials artist={cfg} />
+            </div>
+          </div>
+        </div>
+      </section>
 
       <AlbumShowcase artist={cfg} />
 
