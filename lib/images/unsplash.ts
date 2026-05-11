@@ -11,31 +11,46 @@ const UCROP = (id: string, w: number, h: number, q = 80) =>
   `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&q=${q}&auto=format&fit=crop`;
 
 export const IMG = {
-  /* ── Founders (URLs oficiais quando disponível) ────────────────────── */
-  founderMatue:
-    "https://upload.wikimedia.org/wikipedia/commons/3/3d/Doode_Teto_e_Matue_%28cropped%29.jpg",
-  founderClara: U("1573496359142-b8d87734a5a2", 1200), // retrato profissional feminino
-  founderLucas: U("1500648767791-00dcc994a43e", 1200), // retrato profissional masculino
+  /* ── Founders (URLs oficiais quando disponível) ──────────────────────
+   * OFICIAL: Matuê via Wikimedia Commons (foto solo no The Town 2025, CC license).
+   * PLACEHOLDER: Clara Mendes e Lucas Degas — sem foto oficial Wikimedia indexada.
+   *   Substituir quando assessoria fornecer foto autorizada. */
+  founderMatue: "https://upload.wikimedia.org/wikipedia/commons/d/df/Matu%C3%AA.jpg",
+  founderClara: U("1573496359142-b8d87734a5a2", 1200), // TODO: substituir por foto oficial Clara Mendes
+  founderLucas: U("1500648767791-00dcc994a43e", 1200), // TODO: substituir por foto oficial Lucas Degas
 
   /* ── Hero institucional ─────────────────────────────────────────────── */
   heroFortaleza: U("1581373449483-37449f962b6c", 2400), // Fortaleza skyline noturno
   heroPraia: U("1517181398085-93cdac9f8385", 2400),
 
-  /* ── Retratos · artistas (homens jovens, urbano dark) ───────────────── */
-  matuePortrait: U("1539571696357-5a69c17a67c6", 1200), // homem street wear noturno
-  matueHero: U("1492562080023-ab3db95bfbce", 2400), // luzes neon urbanas
-  matueAlt: U("1507003211169-0a1dd7228f2d", 1600), // retrato escuro
+  /* ── Retratos · artistas ─────────────────────────────────────────────
+   * OFICIAL:
+   *   Matuê → Wikimedia Commons (The Town 2025, palco)
+   *   Teto → Wikimedia Commons (retrato 2025 + Carnaval Olinda 2025)
+   * PLACEHOLDER (sem foto oficial Wikimedia indexada):
+   *   Wiu, Brandão85 — substituir quando assessoria fornecer foto oficial */
+  matuePortrait:
+    "https://upload.wikimedia.org/wikipedia/commons/d/df/Matu%C3%AA.jpg",
+  matueHero:
+    "https://upload.wikimedia.org/wikipedia/commons/d/df/Matu%C3%AA.jpg",
+  matueAlt:
+    "https://upload.wikimedia.org/wikipedia/commons/3/3d/Doode_Teto_e_Matue_%28cropped%29.jpg",
 
-  wiuPortrait: U("1611042553484-d61f84d22784", 1200), // jovem retrato dramático
-  wiuHero: U("1516834474-48c0abc2a902", 2400), // pôr do sol urbano
+  // TODO: substituir por foto oficial Wiu
+  wiuPortrait: U("1611042553484-d61f84d22784", 1200),
+  wiuHero: U("1516834474-48c0abc2a902", 2400),
   wiuAlt: U("1500648767791-00dcc994a43e", 1600),
 
-  tetoPortrait: U("1492288991661-058aa541ff43", 1200), // jovem black retrato
-  tetoHero: U("1571266028253-6c4f1d4d0e4f", 2400), // estúdio musical
-  tetoAlt: U("1521119989659-a83eee488004", 1600),
+  tetoPortrait:
+    "https://upload.wikimedia.org/wikipedia/commons/8/83/-i---i-_%2854360758422%29.jpg",
+  tetoHero:
+    "https://upload.wikimedia.org/wikipedia/commons/4/41/-i---i-_%2854361310936%29.jpg",
+  tetoAlt:
+    "https://upload.wikimedia.org/wikipedia/commons/8/83/-i---i-_%2854360758422%29.jpg",
 
-  brandaoPortrait: U("1535713875002-d1d0cf377fde", 1200), // urbano dark
-  brandaoHero: U("1493225457124-a3eb161ffa5f", 2400), // concerto luzes vermelhas
+  // TODO: substituir por foto oficial Brandão85
+  brandaoPortrait: U("1535713875002-d1d0cf377fde", 1200),
+  brandaoHero: U("1493225457124-a3eb161ffa5f", 2400),
   brandaoAlt: U("1517732306149-e8f829eb588a", 1600),
 
   /* ── Capas de álbum (textura, abstrato cinematográfico) ─────────────── */
@@ -58,10 +73,13 @@ export const IMG = {
   plantaoGallery5: U("1501281668745-f7f57925c3b4", 1800),
   plantaoGallery6: U("1459749411175-04bf5292ceea", 1800),
 
-  /* ── Lineup (cada artista do Plantão) ───────────────────────────────── */
-  lineupMatue: UCROP("1539571696357-5a69c17a67c6", 1400, 2100),
-  lineupTetoWiu: UCROP("1511671782779-c97d3d27a1d4", 1400, 2100), // dupla street
-  lineupBrandao: UCROP("1535713875002-d1d0cf377fde", 1400, 2100),
+  /* ── Lineup (cada artista do Plantão) ─────────────────────────────────
+   * OFICIAL: Matuê e Teto via Wikimedia. Demais são placeholders. */
+  lineupMatue:
+    "https://upload.wikimedia.org/wikipedia/commons/d/df/Matu%C3%AA.jpg",
+  lineupTetoWiu:
+    "https://upload.wikimedia.org/wikipedia/commons/4/41/-i---i-_%2854361310936%29.jpg",
+  lineupBrandao: UCROP("1535713875002-d1d0cf377fde", 1400, 2100), // TODO: oficial
   lineupBK: UCROP("1521572163474-6864f9cf17ab", 1400, 2100), // streetwear
   lineupRecayd: UCROP("1492562080023-ab3db95bfbce", 1400, 2100),
   lineupTZ: UCROP("1500648767791-00dcc994a43e", 1400, 2100),
@@ -114,18 +132,21 @@ export const IMG = {
   newsWarzone: U("1535713875002-d1d0cf377fde", 2400),
 
   /* ── Incubadora (cases de sucesso) ──────────────────────────────────── */
-  incubBrandao: UCROP("1517732306149-e8f829eb588a", 1200, 1600),
-  incubTeto: UCROP("1492288991661-058aa541ff43", 1200, 1600),
-  incubWiu: UCROP("1611042553484-d61f84d22784", 1200, 1600),
+  incubBrandao: UCROP("1517732306149-e8f829eb588a", 1200, 1600), // TODO: oficial
+  incubTeto:
+    "https://upload.wikimedia.org/wikipedia/commons/4/41/-i---i-_%2854361310936%29.jpg",
+  incubWiu: UCROP("1611042553484-d61f84d22784", 1200, 1600), // TODO: oficial
 
   /* ── Press kit thumbs ───────────────────────────────────────────────── */
   pressLogo30praum: U("1614680376573-df3480f0c6ff", 600),
   pressLogoPlantao: U("1571266028253-6c4f1d4d0e4f", 600),
   pressLogoSabor: U("1488477181946-6428a0291777", 600),
-  pressPhotoMatue: UCROP("1539571696357-5a69c17a67c6", 600, 750),
-  pressPhotoTeto: UCROP("1492288991661-058aa541ff43", 600, 750),
-  pressPhotoWiu: UCROP("1611042553484-d61f84d22784", 600, 750),
-  pressPhotoBrandao: UCROP("1535713875002-d1d0cf377fde", 600, 750),
+  pressPhotoMatue:
+    "https://upload.wikimedia.org/wikipedia/commons/d/df/Matu%C3%AA.jpg",
+  pressPhotoTeto:
+    "https://upload.wikimedia.org/wikipedia/commons/8/83/-i---i-_%2854360758422%29.jpg",
+  pressPhotoWiu: UCROP("1611042553484-d61f84d22784", 600, 750), // TODO: oficial
+  pressPhotoBrandao: UCROP("1535713875002-d1d0cf377fde", 600, 750), // TODO: oficial
   pressMediaKit: UCROP("1611532736597-de2d4265fba3", 600, 750),
   pressPlantaoPack: UCROP("1540575467063-178a50c2df87", 600, 750),
   pressBio: U("1499750310107-5fef28a66643", 600), // máquina escrever
