@@ -1,3 +1,5 @@
+import { IMG } from "@/lib/images/unsplash";
+
 export type PlantaoSlug = "plantao-2024" | "plantao-2025" | "plantao-2026" | "plantao-2027";
 
 export type LineupArtist = {
@@ -52,51 +54,51 @@ const lineup2026: LineupArtist[] = [
     displayName: "Matuê",
     artistSlug: "matue",
     highlightLabel: "Headliner · XTRANHO ao vivo",
-    imageUrl: "https://picsum.photos/seed/plantao-matue/1400/2100",
+    imageUrl: IMG.lineupMatue,
     isHeadliner: true,
   },
   {
     displayName: "Teto & Wiu",
     highlightLabel: "Show especial · Colapso Global",
-    imageUrl: "https://picsum.photos/seed/plantao-teto-wiu/1400/2100",
+    imageUrl: IMG.lineupTetoWiu,
     isSpecial: true,
   },
   {
     displayName: "Brandão85",
     artistSlug: "brandao",
     highlightLabel: "Isso é Trap Vol.02",
-    imageUrl: "https://picsum.photos/seed/plantao-brandao/1400/2100",
+    imageUrl: IMG.lineupBrandao,
   },
   {
     displayName: "BK'",
     highlightLabel: "convidado especial",
-    imageUrl: "https://picsum.photos/seed/plantao-bk/1400/2100",
+    imageUrl: IMG.lineupBK,
   },
   {
     displayName: "Recayd Mob",
     highlightLabel: "convidados",
-    imageUrl: "https://picsum.photos/seed/plantao-recayd/1400/2100",
+    imageUrl: IMG.lineupRecayd,
   },
   {
     displayName: "TZ da Coronel",
-    imageUrl: "https://picsum.photos/seed/plantao-tz/1400/2100",
+    imageUrl: IMG.lineupTZ,
   },
   {
     displayName: "Ajulliacosta",
-    imageUrl: "https://picsum.photos/seed/plantao-aju/1400/2100",
+    imageUrl: IMG.lineupAjullia,
   },
   {
     displayName: "Alee",
-    imageUrl: "https://picsum.photos/seed/plantao-alee/1400/2100",
+    imageUrl: IMG.lineupAlee,
   },
   {
     displayName: "Ryu, The Runner",
-    imageUrl: "https://picsum.photos/seed/plantao-ryu/1400/2100",
+    imageUrl: IMG.lineupRyu,
   },
   {
     displayName: "DJ Thales",
     highlightLabel: "abertura",
-    imageUrl: "https://picsum.photos/seed/plantao-thales/1400/2100",
+    imageUrl: IMG.lineupDJThales,
   },
 ];
 
@@ -114,19 +116,19 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     tagline: "A consolidação do plantão como referência nacional",
     manifesto:
       "A segunda edição confirmou: Fortaleza é capital do trap. 30 mil pessoas na Beira-Mar, R$5 milhões investidos, 17 artistas no palco — o Plantão saiu de projeto independente pra referência do gênero no país.",
-    posterImage: "https://picsum.photos/seed/plantao24-poster/1200/1600",
-    heroImage: "https://picsum.photos/seed/plantao24-hero/2400/1200",
+    posterImage: IMG.plantaoPoster24,
+    heroImage: IMG.plantaoHero24,
     aftermovieUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     lineup: [],
     sectors: [],
     ticketsUrl: "",
     galleryImages: [
-      "https://picsum.photos/seed/plantao24-g1/1600/1200",
-      "https://picsum.photos/seed/plantao24-g2/1600/1200",
-      "https://picsum.photos/seed/plantao24-g3/1600/1200",
-      "https://picsum.photos/seed/plantao24-g4/1600/1200",
-      "https://picsum.photos/seed/plantao24-g5/1600/1200",
-      "https://picsum.photos/seed/plantao24-g6/1600/1200",
+      IMG.plantaoGallery1,
+      IMG.plantaoGallery2,
+      IMG.plantaoGallery3,
+      IMG.plantaoGallery4,
+      IMG.plantaoGallery5,
+      IMG.plantaoGallery6,
     ],
     stats: {
       attendees: 30000,
@@ -149,17 +151,17 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     tagline: "A primeira transmissão massiva — 500 mil online",
     manifesto:
       "A terceira edição abriu o jogo pra quem não estava em Fortaleza. Transmissão oficial no YouTube atraiu quase 500 mil espectadores únicos. O Plantão deixa de ser local pra ser nacional sem perder a quebrada.",
-    posterImage: "https://picsum.photos/seed/plantao25-poster/1200/1600",
-    heroImage: "https://picsum.photos/seed/plantao25-hero/2400/1200",
+    posterImage: IMG.plantaoPoster25,
+    heroImage: IMG.plantaoHero25,
     aftermovieUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     lineup: [],
     sectors: [],
     ticketsUrl: "",
     galleryImages: [
-      "https://picsum.photos/seed/plantao25-g1/1600/1200",
-      "https://picsum.photos/seed/plantao25-g2/1600/1200",
-      "https://picsum.photos/seed/plantao25-g3/1600/1200",
-      "https://picsum.photos/seed/plantao25-g4/1600/1200",
+      IMG.plantaoGallery2,
+      IMG.plantaoGallery4,
+      IMG.plantaoGallery5,
+      IMG.plantaoGallery6,
     ],
     stats: {
       attendees: 22000,
@@ -182,8 +184,8 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     tagline: "10 anos de 30praum · uma noite às margens da Beira-Mar",
     manifesto:
       "A 3ª edição marca os 10 anos da 30praum. Reúne a base, os novos e os convidados — Matuê, Teto, Wiu, Brandão85 e mais 7 nomes — em um dia só, frente ao mar. Quem viu sabe: não é um show, é uma cena se reconhecendo.",
-    posterImage: "https://picsum.photos/seed/plantao26-poster/1200/1600",
-    heroImage: "https://picsum.photos/seed/plantao26-hero/2400/1200",
+    posterImage: IMG.plantaoPoster26,
+    heroImage: IMG.plantaoHero26,
     heroVideoUrl: "/assets/plantao26-loop.mp4",
     aftermovieUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     lineup: lineup2026,
@@ -195,11 +197,7 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     ],
     ticketsUrl: "https://stingressos.com.br/eventos/plantao-2026",
     embedTicketsUrl: "https://stingressos.com.br/eventos/plantao-2026",
-    galleryImages: [
-      "https://picsum.photos/seed/plantao26-g1/1600/1200",
-      "https://picsum.photos/seed/plantao26-g2/1600/1200",
-      "https://picsum.photos/seed/plantao26-g3/1600/1200",
-    ],
+    galleryImages: [IMG.plantaoGallery1, IMG.plantaoGallery3, IMG.plantaoGallery5],
     stats: {
       attendees: 20000,
       onlineViewers: 500000,
@@ -261,8 +259,8 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     tagline: "Em breve · prepare-se",
     manifesto:
       "A quinta edição já está em construção. Mais palco. Mais nomes. Mais Brasil. Cadastre-se na lista de espera pra receber lineup e pré-venda antes de qualquer outro lugar.",
-    posterImage: "https://picsum.photos/seed/plantao27-poster/1200/1600",
-    heroImage: "https://picsum.photos/seed/plantao27-hero/2400/1200",
+    posterImage: IMG.plantaoPoster26,
+    heroImage: IMG.plantaoHero26,
     lineup: [],
     sectors: [],
     ticketsUrl: "",

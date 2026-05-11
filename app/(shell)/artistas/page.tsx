@@ -1,8 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ARTISTS, ARTIST_SLUGS } from "@/lib/artists/registry";
 import { WordReveal } from "@/components/motion/WordReveal";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { RosterImmersive } from "@/components/artists/RosterImmersive";
 
 export const metadata = {
   title: "Artistas · 30praum",
@@ -28,54 +27,12 @@ export default function ArtistasPage() {
         </p>
       </section>
 
-      <div className="mx-auto max-w-screen-2xl px-4 sm:px-8 pb-24">
-        <ScrollReveal stagger={0.1}>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {artists.map((artist, idx) => (
-              <Link
-                key={artist.slug}
-                href={`/${artist.slug}`}
-                className="group relative block aspect-[3/4] overflow-hidden border"
-                style={{ borderColor: "var(--border)", background: artist.panelBackground }}
-                data-cursor={`Entrar · ${artist.displayName}`}
-              >
-                <Image
-                  src={artist.realPhotoUrl ?? artist.portraitImage}
-                  alt={artist.displayName}
-                  fill
-                  unoptimized
-                  sizes="(min-width: 1024px) 25vw, 50vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  style={{
-                    filter: "brightness(0.7) contrast(1.1)",
-                    objectPosition: artist.photoObjectPosition,
-                  }}
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-0"
-                  style={{
-                    background: `radial-gradient(circle at 50% 60%, ${artist.panelAccent}55, transparent 70%), linear-gradient(180deg, transparent 50%, ${artist.panelBackground}f0 100%)`,
-                  }}
-                />
-                <div className="relative flex h-full flex-col justify-end p-5 text-white">
-                  <p className="text-xs opacity-65">{artist.universeName}</p>
-                  <h2
-                    className="mt-2 font-display uppercase text-3xl sm:text-4xl"
-                    style={{ letterSpacing: "-0.02em" }}
-                  >
-                    {artist.displayName}
-                  </h2>
-                  <p className="mt-3 text-xs sm:text-sm text-white/75 line-clamp-2">
-                    {artist.tagline}
-                  </p>
-                  <p className="mt-4 text-[11px] opacity-55">{artist.origin}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </ScrollReveal>
+      <div className="border-y" style={{ borderColor: "var(--border)" }}>
+        <RosterImmersive artists={artists} />
       </div>
+      <p className="mx-auto max-w-screen-2xl px-4 sm:px-8 pt-6 pb-24 text-xs opacity-55">
+        Passe o cursor sobre um artista para entrar no universo dele.
+      </p>
 
       {/* Incubadora CTA */}
       <section className="border-t" style={{ borderColor: "var(--border)" }}>

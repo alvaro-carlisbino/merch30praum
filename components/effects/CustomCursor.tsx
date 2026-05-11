@@ -81,13 +81,13 @@ export function CustomCursor() {
         style={{ x: ringX, y: ringY, translateX: "-50%", translateY: "-50%" }}
       >
         <motion.div
-          className="rounded-full"
+          className="rounded-full flex items-center justify-center font-display tabular-nums select-none"
           animate={{
-            width: isHover ? 72 : 36,
-            height: isHover ? 72 : 36,
+            width: isHover ? 80 : 36,
+            height: isHover ? 80 : 36,
             borderWidth: isHover ? 1 : 1.5,
             scale: isClick ? 0.9 : 1,
-            opacity: isHover ? 0.85 : 0.6,
+            opacity: isHover ? 0.92 : 0.55,
           }}
           transition={{ duration: 0.32, ease: [0.7, 0, 0.3, 1] }}
           style={{
@@ -95,8 +95,18 @@ export function CustomCursor() {
             color: "var(--accent, #ffffff)",
             mixBlendMode: "difference",
             backgroundColor: "transparent",
+            fontSize: 13,
+            letterSpacing: "-0.04em",
           }}
-        />
+        >
+          <motion.span
+            animate={{ opacity: isHover ? 1 : 0 }}
+            transition={{ duration: 0.22 }}
+            style={{ fontWeight: 700 }}
+          >
+            30
+          </motion.span>
+        </motion.div>
       </motion.div>
 
       <motion.div

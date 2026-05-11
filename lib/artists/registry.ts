@@ -1,4 +1,5 @@
 import type { ArtistConfig, ArtistSlug } from "./types";
+import { IMG } from "@/lib/images/unsplash";
 
 export const ARTIST_SLUGS: ArtistSlug[] = ["matue", "wiu", "teto", "brandao"];
 
@@ -12,7 +13,7 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
     joinedYear: 2016,
     bioParagraphs: [
       "Nasceu em Fortaleza em 11 de outubro de 1993. Aos 8 anos mudou para Oakland, Califórnia, onde viveu até os 11 — quando voltou pro Brasil já com inglês fluente e ouvido pra um trap que ninguém aqui fazia ainda.",
-      "Em 2016 cofundou a 30praum com Clara Mendes e Lucas Mendes — selo cearense montado pra descentralizar o trap brasileiro do eixo Rio-SP. Estreou em álbum em 2020 com Máquina do Tempo. 333 (2024) bateu o recorde de maior estreia do Spotify Brasil e ultrapassou 950 milhões de reproduções. XTRANHO (2025) é o terceiro capítulo.",
+      "Em 2016 cofundou a 30praum com Clara Mendes e Lucas Degas — selo cearense montado pra descentralizar o trap brasileiro do eixo Rio-SP. Estreou em álbum em 2020 com Máquina do Tempo. 333 (2024) bateu o recorde de maior estreia do Spotify Brasil e ultrapassou 950 milhões de reproduções. XTRANHO (2025) é o terceiro capítulo.",
     ],
     facts: [
       { label: "Nome", value: "Matheus Brasileiro Aguiar" },
@@ -29,22 +30,18 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
       "Aqui o tempo dobra. O alien não é o outro — é a versão sua que ainda não chegou. Vista o que veio do futuro.",
     shopifyCollectionHandle: "merch-matue",
     motionPreset: "glitch",
-    portraitImage: "/artists/matue/portrait.svg",
-    realPhotoUrl: "/assets/wiki/matue_atlantida_2026.jpg",
+    portraitImage: IMG.matuePortrait,
+    realPhotoUrl: IMG.matuePortrait,
     photoObjectPosition: "center 30%",
     photoFilter: "brightness(0.95) contrast(1.05) saturate(0.9) hue-rotate(-6deg)",
-    heroImage: "/assets/covers/xtranho.jpg",
-    lookbookImages: [
-      "https://picsum.photos/seed/matue-lookbook-1/900/1200",
-      "https://picsum.photos/seed/matue-lookbook-2/900/1200",
-      "https://picsum.photos/seed/matue-lookbook-3/900/1200",
-    ],
+    heroImage: IMG.matueHero,
+    lookbookImages: [IMG.lookbookA1, IMG.lookbookA2, IMG.lookbookA3],
     panelAccent: "#1f6bff",
     panelBackground: "#03050a",
     album: {
       title: "XTRANHO",
       year: "2025",
-      coverImage: "/assets/covers/xtranho.jpg",
+      coverImage: IMG.coverXtranho,
       tagline: "Sinal estável da terra de quem nunca foi daqui.",
       highlightedTracks: [
         "REI TUÊ",
@@ -69,6 +66,14 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
       ],
     },
     signatureLyric: "Eu vim de outro lugar — esse mundo é só um set.",
+    socials: {
+      spotify: "https://open.spotify.com/artist/2T4FxsAGFAaeWiQfHvfn6V",
+      instagram: "https://instagram.com/matue30",
+      tiktok: "https://www.tiktok.com/@matue30",
+      youtube: "https://www.youtube.com/@matue",
+      appleMusic: "https://music.apple.com/br/artist/matu%C3%AA/1297773648",
+    },
+    spotifyEmbedPath: "album/5ORsvI5ThmZw7PS1NTvZaB", // XTRANHO
   },
 
   wiu: {
@@ -97,23 +102,19 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
       "Tem coisa que só a saudade conta direito. Veste a peça que carrega a noite, o piano e o último abraço.",
     shopifyCollectionHandle: "merch-wiu",
     motionPreset: "slow",
-    portraitImage: "/artists/wiu/portrait.svg",
-    realPhotoUrl: "/assets/teto_wiu.jpg",
-    photoObjectPosition: "25% 40%",
+    portraitImage: IMG.wiuPortrait,
+    realPhotoUrl: IMG.wiuPortrait,
+    photoObjectPosition: "center 30%",
     photoFilter: "brightness(0.92) contrast(1.08) saturate(1.1) hue-rotate(340deg)",
-    heroImage: "/assets/colapso_global.jpeg",
-    lookbookImages: [
-      "https://picsum.photos/seed/wiu-lookbook-1/900/1200",
-      "https://picsum.photos/seed/wiu-lookbook-2/900/1200",
-      "https://picsum.photos/seed/wiu-lookbook-3/900/1200",
-    ],
+    heroImage: IMG.wiuHero,
+    lookbookImages: [IMG.lookbookA2, IMG.lookbookA3, IMG.lookbookA4],
     panelAccent: "#c8506a",
     panelBackground: "#1a0a10",
     album: {
       title: "Colapso Global",
       year: "2026",
       collaborator: "com Teto",
-      coverImage: "/assets/colapso_global.jpeg",
+      coverImage: IMG.coverColapsoGlobal,
       tagline: "Quando o mundo cai, ainda dá pra dançar uma última.",
       highlightedTracks: [
         "Isso Aqui É Brasil",
@@ -138,6 +139,14 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
       ],
     },
     signatureLyric: "Se a saudade matasse, eu já tinha morrido bonito.",
+    socials: {
+      spotify: "https://open.spotify.com/artist/4t7taXrnsg5GIptpcg1MO9",
+      instagram: "https://instagram.com/wiu",
+      tiktok: "https://www.tiktok.com/@wiuoficial",
+      youtube: "https://www.youtube.com/@WIU30praum",
+      appleMusic: "https://music.apple.com/br/artist/wiu/1531117683",
+    },
+    spotifyEmbedPath: "album/1uJyVuoq6yedoojWVHfHV4", // Manual de Como Amar Errado
   },
 
   teto: {
@@ -166,23 +175,19 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
       "Recorte da rua, kraft no peito, marca de carimbo. O que você veste é o que aconteceu — sem filtro.",
     shopifyCollectionHandle: "merch-teto",
     motionPreset: "collage",
-    portraitImage: "/artists/teto/portrait.svg",
-    realPhotoUrl: "/assets/wiki/teto.jpg",
+    portraitImage: IMG.tetoPortrait,
+    realPhotoUrl: IMG.tetoPortrait,
     photoObjectPosition: "center 20%",
     photoFilter: "brightness(0.92) contrast(1.08) saturate(0.8) sepia(0.15)",
-    heroImage: "/assets/colapso_global.jpeg",
-    lookbookImages: [
-      "https://picsum.photos/seed/teto-lookbook-1/900/1200",
-      "https://picsum.photos/seed/teto-lookbook-2/900/1200",
-      "https://picsum.photos/seed/teto-lookbook-3/900/1200",
-    ],
+    heroImage: IMG.tetoHero,
+    lookbookImages: [IMG.lookbookA3, IMG.lookbookA4, IMG.lookbookA5],
     panelAccent: "#c89858",
     panelBackground: "#14110d",
     album: {
       title: "Colapso Global",
       year: "2026",
       collaborator: "com Wiu",
-      coverImage: "/assets/colapso_global.jpeg",
+      coverImage: IMG.coverColapsoGlobal,
       tagline: "Roupa de quem aceitou que o mundo já caiu — e segue.",
       highlightedTracks: [
         "Isso Aqui É Brasil",
@@ -207,6 +212,14 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
       ],
     },
     signatureLyric: "Não é fim. É trilha.",
+    socials: {
+      spotify: "https://open.spotify.com/artist/2nhPdg1HKwzKj1FFEdgQ2v",
+      instagram: "https://instagram.com/teto",
+      tiktok: "https://www.tiktok.com/@teto",
+      youtube: "https://www.youtube.com/@TETO",
+      appleMusic: "https://music.apple.com/br/artist/teto/1422229829",
+    },
+    spotifyEmbedPath: "album/3xkuoITxJsAaIOuLLT12vO", // Stack Overflow
   },
 
   brandao: {
@@ -235,22 +248,18 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
       "Xerox da quebrada. O original some, mas a cópia áspera fica. Veste o que ninguém clonou direito.",
     shopifyCollectionHandle: "merch-brandao",
     motionPreset: "xerox",
-    portraitImage: "/artists/brandao/portrait.svg",
-    realPhotoUrl: "/assets/brandao.jpeg",
+    portraitImage: IMG.brandaoPortrait,
+    realPhotoUrl: IMG.brandaoPortrait,
     photoObjectPosition: "center 30%",
-    photoFilter: "brightness(1.1) contrast(1.6) saturate(0.4) grayscale(0.7) blur(0.4px)",
-    heroImage: "/assets/isso_e_trap_vol2.jpeg",
-    lookbookImages: [
-      "https://picsum.photos/seed/brandao-lookbook-1/900/1200",
-      "https://picsum.photos/seed/brandao-lookbook-2/900/1200",
-      "https://picsum.photos/seed/brandao-lookbook-3/900/1200",
-    ],
+    photoFilter: "brightness(1.1) contrast(1.4) saturate(0.6) grayscale(0.4)",
+    heroImage: IMG.brandaoHero,
+    lookbookImages: [IMG.lookbookA4, IMG.lookbookA5, IMG.lookbookA1],
     panelAccent: "#ff3b1f",
     panelBackground: "#0c0c0c",
     album: {
       title: "Isso é Trap Vol. 02",
       year: "2026",
-      coverImage: "/assets/isso_e_trap_vol2.jpeg",
+      coverImage: IMG.coverIssoETrap,
       tagline: "Cresci copiando. Agora os outros copiam errado.",
       highlightedTracks: ["WARZONE", "JAPONÊS", "ROCKSTAR", "85", "QUEBRADA"],
     },
@@ -269,6 +278,14 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
       ],
     },
     signatureLyric: "Da quebrada pro mundo — sem perder o xerox.",
+    socials: {
+      spotify: "https://open.spotify.com/artist/5VTw0YLpHpqz8VRgRVNNRO",
+      instagram: "https://instagram.com/brandao85",
+      tiktok: "https://www.tiktok.com/@brandao85",
+      youtube: "https://www.youtube.com/@brandao85",
+      appleMusic: "https://music.apple.com/br/artist/brand%C3%A3o-85/1640014459",
+    },
+    spotifyEmbedPath: "album/5jiPp1YPjyhcWqU6jYQxlv", // Isso é Trap Vol.2
   },
 };
 

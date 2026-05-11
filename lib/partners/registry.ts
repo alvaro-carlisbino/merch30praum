@@ -1,3 +1,5 @@
+import { IMG } from "@/lib/images/unsplash";
+
 export type PartnerSlug =
   | "renner"
   | "plantao"
@@ -57,12 +59,8 @@ export const PARTNERS: Record<PartnerSlug, PartnerInfo> = {
     },
     externalLink: "https://plantaofestival.com",
     internalLink: "/plantao",
-    heroImage: "https://picsum.photos/seed/partner-plantao/2400/1200",
-    galleryImages: [
-      "https://picsum.photos/seed/partner-plantao-1/1200/900",
-      "https://picsum.photos/seed/partner-plantao-2/1200/900",
-      "https://picsum.photos/seed/partner-plantao-3/1200/900",
-    ],
+    heroImage: IMG.partnerPlantao,
+    galleryImages: [IMG.plantaoGallery1, IMG.plantaoGallery2, IMG.plantaoGallery3],
     artistsInvolved: ["matue", "teto", "wiu", "brandao"],
   },
 
@@ -86,12 +84,8 @@ export const PARTNERS: Record<PartnerSlug, PartnerInfo> = {
     },
     externalLink: "https://instagram.com/sabormatue",
     internalLink: "/sabor",
-    heroImage: "https://picsum.photos/seed/partner-sabor/2400/1200",
-    galleryImages: [
-      "https://picsum.photos/seed/partner-sabor-1/1200/900",
-      "https://picsum.photos/seed/partner-sabor-2/1200/900",
-      "https://picsum.photos/seed/partner-sabor-3/1200/900",
-    ],
+    heroImage: IMG.partnerSabor,
+    galleryImages: [IMG.saborReiTue, IMG.saborVampiro, IMG.sabor333],
     artistsInvolved: ["matue"],
   },
 
@@ -114,12 +108,12 @@ export const PARTNERS: Record<PartnerSlug, PartnerInfo> = {
       year: "2023 — agora",
     },
     externalLink: "https://www.lojasrenner.com.br/marca/30praum/-/N-o54xd7",
-    heroImage: "https://picsum.photos/seed/partner-renner/2400/1200",
+    heroImage: IMG.partnerRenner,
     galleryImages: [
-      "https://picsum.photos/seed/partner-renner-1/1200/900",
-      "https://picsum.photos/seed/partner-renner-2/1200/900",
-      "https://picsum.photos/seed/partner-renner-3/1200/900",
-      "https://picsum.photos/seed/partner-renner-4/1200/900",
+      IMG.partnerRennerGallery1,
+      IMG.partnerRennerGallery2,
+      IMG.partnerRennerGallery3,
+      IMG.partnerRennerGallery4,
     ],
     artistsInvolved: ["matue", "teto", "wiu"],
   },
@@ -143,11 +137,11 @@ export const PARTNERS: Record<PartnerSlug, PartnerInfo> = {
       year: "2024 — agora",
     },
     externalLink: "https://30praum.store/collections/ed-hardy-by-matue",
-    heroImage: "https://picsum.photos/seed/partner-edhardy/2400/1200",
+    heroImage: IMG.partnerEdHardy,
     galleryImages: [
-      "https://picsum.photos/seed/partner-edhardy-1/1200/900",
-      "https://picsum.photos/seed/partner-edhardy-2/1200/900",
-      "https://picsum.photos/seed/partner-edhardy-3/1200/900",
+      IMG.partnerEdHardyGallery1,
+      IMG.partnerEdHardyGallery2,
+      IMG.partnerEdHardyGallery3,
     ],
     artistsInvolved: ["matue"],
   },
@@ -171,12 +165,8 @@ export const PARTNERS: Record<PartnerSlug, PartnerInfo> = {
       year: "2024 — agora",
     },
     externalLink: "https://rawthentic.com",
-    heroImage: "https://picsum.photos/seed/partner-raw/2400/1200",
-    galleryImages: [
-      "https://picsum.photos/seed/partner-raw-1/1200/900",
-      "https://picsum.photos/seed/partner-raw-2/1200/900",
-      "https://picsum.photos/seed/partner-raw-3/1200/900",
-    ],
+    heroImage: IMG.partnerRaw,
+    galleryImages: [IMG.partnerRawGallery1, IMG.partnerRawGallery2, IMG.partnerRawGallery3],
     artistsInvolved: ["matue"],
   },
 
@@ -199,11 +189,11 @@ export const PARTNERS: Record<PartnerSlug, PartnerInfo> = {
       year: "2025 — agora",
     },
     externalLink: "https://kenner.com.br",
-    heroImage: "https://picsum.photos/seed/partner-kenner/2400/1200",
+    heroImage: IMG.partnerKenner,
     galleryImages: [
-      "https://picsum.photos/seed/partner-kenner-1/1200/900",
-      "https://picsum.photos/seed/partner-kenner-2/1200/900",
-      "https://picsum.photos/seed/partner-kenner-3/1200/900",
+      IMG.partnerKennerGallery1,
+      IMG.partnerKennerGallery2,
+      IMG.partnerKennerGallery3,
     ],
     artistsInvolved: ["matue", "teto", "wiu", "brandao"],
   },

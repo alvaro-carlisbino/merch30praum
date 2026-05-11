@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ARTISTS } from "@/lib/artists/registry";
 import { BrandLogo } from "./BrandLogo";
-import { Marquee } from "@/components/motion/Marquee";
 import { WordReveal } from "@/components/motion/WordReveal";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
@@ -12,12 +11,6 @@ export function BrandFooter() {
         aria-labelledby="brand-manifesto"
         className="mx-auto max-w-screen-2xl px-4 sm:px-8 pt-24 pb-20"
       >
-        <ScrollReveal>
-          <p className="text-[10px] uppercase tracking-[0.3em] text-muted mb-6">
-            Manifesto
-          </p>
-        </ScrollReveal>
-
         <WordReveal
           text="Quem manda é a 30praum."
           as="h2"
@@ -28,35 +21,31 @@ export function BrandFooter() {
 
         <ScrollReveal stagger={0.12}>
           <p className="mt-10 max-w-xl text-base sm:text-lg text-fg/85 leading-relaxed">
-            Quatro almas, um endereço. O merch que tá aqui não é mascote — é
-            extensão da música. Cada peça sai lacrada, cada peça responde à
-            voz do artista, cada peça lembra que essa casa é coletiva.
-          </p>
-          <p className="mt-3 text-[10px] uppercase tracking-[0.3em] text-muted">
-            Loja oficial · Security bag lacrada · Origem rastreável
+            Quatro almas, um endereço. A casa é coletiva — gravadora, festival,
+            holding, incubadora. Independência rara, visão sobre sucesso fácil.
           </p>
         </ScrollReveal>
       </section>
 
-      <Marquee
-        items={[
-          "30PRAUM · MERCH OFICIAL",
-          "MATUÊ — XTRANHO",
-          "WIU × TETO — COLAPSO GLOBAL 2026",
-          "BRANDÃO85 — ISSO É TRAP VOL.02",
-          "PARCERIAS · RAW · RENNER · KENNER",
-        ]}
-        speed={50}
-        className="font-display py-6 border-y border-border tracking-[0.18em] text-3xl sm:text-5xl"
-        separatorColor="var(--accent)"
-      />
+      {/* Wordmark gigante — assinatura visual */}
+      <div
+        className="border-y overflow-hidden"
+        style={{ borderColor: "var(--border)" }}
+      >
+        <div
+          className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-12 flex items-center justify-center"
+          style={{ fontSize: "clamp(6rem, 22vw, 20rem)" }}
+        >
+          <BrandLogo variant="stacked" />
+        </div>
+      </div>
 
       <div className="mx-auto max-w-screen-2xl px-4 sm:px-8 grid gap-10 md:grid-cols-[1fr_auto_auto_auto] py-12">
         <div>
           <BrandLogo className="text-2xl" />
           <p className="mt-4 max-w-sm text-xs text-muted leading-relaxed">
-            Loja oficial. Pedido em security bag lacrada. Origem garantida da
-            gravadora — desconfie de qualquer outro endereço.
+            Site oficial da holding 30praum — gravadora · festival · incubadora.
+            Sede em Fortaleza desde 2016.
           </p>
         </div>
 
@@ -76,52 +65,62 @@ export function BrandFooter() {
           ))}
         </nav>
 
-        <nav aria-label="Álbuns" className="text-sm space-y-2">
+        <nav aria-label="Holding" className="text-sm space-y-2">
           <h3 className="text-[10px] uppercase tracking-[0.3em] text-muted mb-3">
-            Álbuns
+            Holding
           </h3>
-          <Link href="/album/xtranho" className="block hover:text-accent transition-colors">
-            XTRANHO <span className="text-muted">2025</span>
+          <Link href="/plantao" className="block hover:text-accent transition-colors">
+            Plantão Festival
           </Link>
-          <Link href="/album/colapso-global" className="block hover:text-accent transition-colors">
-            Colapso Global <span className="text-muted">2026</span>
-          </Link>
-          <Link href="/album/isso-e-trap-vol-2" className="block hover:text-accent transition-colors">
-            Isso é Trap Vol.02 <span className="text-muted">2026</span>
+          <Link href="/sabor" className="block hover:text-accent transition-colors">
+            Sabor Matuê
           </Link>
           <Link href="/parcerias" className="block hover:text-accent transition-colors">
-            Parcerias →
+            Parcerias
+          </Link>
+          <Link href="/incubadora" className="block hover:text-accent transition-colors">
+            Incubadora
+          </Link>
+          <Link href="/loja" className="block hover:text-accent transition-colors">
+            Loja oficial
           </Link>
         </nav>
 
         <nav aria-label="Atendimento" className="text-sm space-y-2">
           <h3 className="text-[10px] uppercase tracking-[0.3em] text-muted mb-3">
-            Atendimento
+            Contato
           </h3>
           <Link href="/about" className="block hover:text-accent transition-colors">
             Sobre a 30praum
+          </Link>
+          <Link href="/imprensa" className="block hover:text-accent transition-colors">
+            Imprensa · Press kit
           </Link>
           <a
             href="mailto:contato@30praum.com"
             className="block hover:text-accent transition-colors"
           >
-            Contato
+            contato@30praum.com
           </a>
-          <span className="block text-muted">Trocas e devoluções</span>
-          <span className="block text-muted">Política de privacidade</span>
+          <a
+            href="mailto:parcerias@30praum.com"
+            className="block hover:text-accent transition-colors"
+          >
+            parcerias@30praum.com
+          </a>
         </nav>
       </div>
 
       <div style={{ borderTop: "1px solid var(--border)" }}>
         <div className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-[0.3em] text-muted">
-          <span>© 30praum {new Date().getFullYear()}</span>
+          <span>© 30praum {new Date().getFullYear()} · Fortaleza, CE</span>
           <span className="flex items-center gap-2">
             <span
               aria-hidden
               className="h-1.5 w-1.5 rounded-full"
               style={{ background: "var(--accent)" }}
             />
-            Site oficial · 30praum.store
+            Site oficial
           </span>
         </div>
       </div>

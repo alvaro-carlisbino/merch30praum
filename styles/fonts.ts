@@ -1,6 +1,7 @@
 import {
   Inter,
   Bebas_Neue,
+  Cinzel,
   Space_Grotesk,
   Cormorant_Garamond,
   Archivo,
@@ -17,6 +18,17 @@ export const houseDisplay = Bebas_Neue({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["400"],
+  display: "swap",
+});
+
+/**
+ * Wordmark oficial 30praum — "30" serifado bold + "PRAUM" letterspacing aberto.
+ * Cinzel é a fonte mais próxima do logo real visto no LinkedIn/YouTube oficial.
+ */
+export const brandSerif = Cinzel({
+  variable: "--font-brand",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 

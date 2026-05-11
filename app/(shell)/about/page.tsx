@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ARTISTS } from "@/lib/artists/registry";
 import { LabelTimeline } from "@/components/home/LabelTimeline";
-import { BrandStamps } from "@/components/effects/BrandStamps";
+import { BrandLogo } from "@/components/shell/BrandLogo";
 
 export const metadata = {
   title: "Sobre",
@@ -13,19 +13,8 @@ export default function AboutPage() {
   return (
     <article>
       <section className="relative mx-auto max-w-screen-2xl px-4 sm:px-8 pt-24 pb-16">
-        <BrandStamps
-          stamps={[
-            { text: "30PRAUM\nCERTIFIED", rotate: -8, top: "8%", right: "4%", delay: 0.3, variant: "ring" },
-            { text: "EST.\n2016", rotate: 6, top: "55%", right: "3%", delay: 0.5, variant: "rect" },
-            { text: "BR · CE", rotate: -4, top: "32%", left: "2%", delay: 0.7, variant: "ribbon" },
-            { text: "MERCH\nOFICIAL", rotate: 12, top: "78%", left: "5%", delay: 0.9, variant: "rect" },
-          ]}
-        />
-        <p className="text-[10px] uppercase tracking-[0.3em] text-muted">
-          Sobre
-        </p>
         <h1
-          className="mt-4 font-display uppercase leading-[0.85]"
+          className="font-display uppercase leading-[0.85]"
           style={{
             fontSize: "clamp(3rem, 11vw, 9rem)",
             letterSpacing: "-0.04em",
@@ -45,7 +34,7 @@ export default function AboutPage() {
             >
               30praum é gravadora cearense fundada em 2016 por Matuê e Clara
               Mendes — uma alemã que veio aprender português em Fortaleza, ficou
-              e virou CEO. Lucas Mendes entrou como cofundador. A missão sempre
+              e virou CEO. Lucas Degas entrou como cofundador. A missão sempre
               foi a mesma: descentralizar o trap brasileiro do eixo Rio-SP e
               colocar o Nordeste no centro do mapa.
             </p>
@@ -67,7 +56,7 @@ export default function AboutPage() {
           <aside className="space-y-4">
             {[
               ["Fundação", "2016 · Fortaleza, CE"],
-              ["Founders", "Matuê · Clara Mendes · Lucas Mendes"],
+              ["Founders", "Matuê · Clara Mendes · Lucas Degas"],
               ["Time", "~50 funcionários · Fortaleza + SP"],
               ["Distribuição", "Independente · distribuidora própria 2026"],
               ["Festival próprio", "Plantão · 30k pessoas · Marina Park"],
@@ -139,6 +128,19 @@ export default function AboutPage() {
               </p>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* Wordmark assinatura */}
+      <section
+        className="border-t overflow-hidden"
+        style={{ borderColor: "var(--border)" }}
+      >
+        <div
+          className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-16 flex items-center justify-center"
+          style={{ fontSize: "clamp(5rem, 18vw, 16rem)" }}
+        >
+          <BrandLogo variant="stacked" />
         </div>
       </section>
     </article>

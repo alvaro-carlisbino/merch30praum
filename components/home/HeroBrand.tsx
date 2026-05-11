@@ -3,8 +3,8 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import Link from "next/link";
-import { WordReveal } from "@/components/motion/WordReveal";
-import { BrandStamps } from "@/components/effects/BrandStamps";
+import { BrandLogo } from "@/components/shell/BrandLogo";
+import { IMG } from "@/lib/images/unsplash";
 
 export function HeroBrand() {
   const ref = useRef<HTMLElement>(null);
@@ -30,7 +30,7 @@ export function HeroBrand() {
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "url('/assets/fortaleza/praia_meireles.jpg')",
+          backgroundImage: `url('${IMG.heroFortaleza}')`,
           backgroundSize: "cover",
           backgroundPosition: "center 60%",
           opacity: 0.18,
@@ -70,48 +70,32 @@ export function HeroBrand() {
 
       <div
         aria-hidden
-        className="absolute top-6 left-0 right-0 z-10 flex items-center justify-between px-6 sm:px-10 text-[10px] uppercase tracking-[0.4em]"
+        className="absolute top-6 left-0 right-0 z-10 hidden sm:flex items-center justify-between px-6 sm:px-10 text-[10px] uppercase tracking-[0.4em]"
         style={{ color: "var(--muted)" }}
       >
-        <span>30 · PRAUM</span>
-        <span className="hidden sm:inline">EST. 2016</span>
+        <span>EST. 2016</span>
         <span>FORTALEZA · CE</span>
       </div>
-
-      <BrandStamps
-        stamps={[
-          { text: "30PRAUM\n10 ANOS", rotate: -10, top: "18%", left: "4%", delay: 1.0, variant: "ring" },
-          { text: "MERCH\nOFICIAL", rotate: 8, top: "70%", right: "5%", delay: 1.2, variant: "rect" },
-        ]}
-      />
 
       <motion.div
         style={{ y: titleY, opacity: titleOpacity }}
         className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center"
       >
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-[10px] uppercase tracking-[0.5em] mb-8"
-          style={{ color: "var(--accent)" }}
+          transition={{ duration: 1.1, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+          className="leading-none"
+          style={{ fontSize: "clamp(8rem, 28vw, 26rem)" }}
         >
-          Loja oficial · Merch
-        </motion.p>
-
-        <WordReveal
-          text="30PRAUM"
-          as="h1"
-          stagger={0.12}
-          className="font-display uppercase leading-[0.78]"
-          wordClassName="text-[clamp(6rem,28vw,28rem)] tracking-[-0.05em]"
-        />
+          <BrandLogo variant="stacked" />
+        </motion.h1>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.9 }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-[10px] uppercase tracking-[0.3em]"
+          className="mt-12 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-[10px] uppercase tracking-[0.3em]"
         >
           <span style={{ color: "var(--muted)" }}>04 universos</span>
           <span aria-hidden style={{ color: "var(--accent)" }}>·</span>
