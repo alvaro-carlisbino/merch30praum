@@ -21,7 +21,7 @@ export function BrandHeader({ currentArtist, cartCount }: BrandHeaderProps) {
         <Link
           href="/"
           data-cursor="Home"
-          className="text-base hover:text-accent transition-colors"
+          className="text-xl hover:opacity-80 transition-opacity"
           aria-label="Home 30praum"
         >
           <BrandLogo />
