@@ -26,15 +26,8 @@ export function BrandHeader({ currentArtist, cartCount }: BrandHeaderProps) {
         >
           <BrandLogo />
         </Link>
-        <ArtistSwitcher current={currentArtist} className="hidden xl:flex" />
         <nav className="flex items-center gap-1 text-[11px] uppercase tracking-[0.2em]">
-          <Link
-            href="/artistas"
-            data-cursor="Roster"
-            className="hidden md:inline-block px-3 py-2 opacity-80 hover:opacity-100 transition-opacity"
-          >
-            Artistas
-          </Link>
+          <ArtistSwitcher current={currentArtist} className="hidden md:block" />
           <Link
             href="/shows"
             data-cursor="Shows"
