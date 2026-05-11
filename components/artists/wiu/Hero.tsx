@@ -37,17 +37,6 @@ export function WiuHero({ artist }: { artist: ArtistConfig }) {
 
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-50 mix-blend-soft-light"
-        style={{
-          backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(
-            `<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.18 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>`,
-          )}")`,
-          backgroundSize: "260px 260px",
-        }}
-      />
-
-      <div
-        aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background:

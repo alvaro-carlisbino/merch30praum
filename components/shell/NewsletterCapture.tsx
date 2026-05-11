@@ -28,21 +28,8 @@ export function NewsletterCapture() {
         borderBottom: "1px solid var(--border)",
       }}
     >
-      <div
-        aria-hidden
-        className="absolute inset-0 mix-blend-overlay opacity-25 pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(
-            `<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>`,
-          )}")`,
-        }}
-      />
-
       <div className="relative mx-auto max-w-screen-2xl px-4 sm:px-8 py-20 grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-end">
         <div>
-          <p className="text-[10px] uppercase tracking-[0.4em] opacity-75">
-            Lista oficial
-          </p>
           <h2
             id="newsletter"
             className="mt-3 font-display uppercase leading-[0.85]"

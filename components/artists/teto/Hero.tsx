@@ -35,16 +35,6 @@ export function TetoHero({ artist }: { artist: ArtistConfig }) {
         </div>
       </div>
 
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-50 pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(
-            `<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3'/><feColorMatrix values='0 0 0 0 0.78 0 0 0 0 0.6 0 0 0 0 0.35 0 0 0 0.5 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>`,
-          )}")`,
-        }}
-      />
-
       <motion.div
         aria-hidden
         initial={{ rotate: -3, x: -120, opacity: 0 }}
