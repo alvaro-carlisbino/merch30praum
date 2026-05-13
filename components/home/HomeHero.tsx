@@ -105,7 +105,7 @@ export function HomeHero() {
     <section
       className="relative w-full overflow-hidden"
       style={{
-        height: "min(86svh, 880px)",
+        height: "100svh",
         minHeight: "640px",
         background: "var(--bg)",
       }}

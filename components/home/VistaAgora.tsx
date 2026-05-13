@@ -2,10 +2,10 @@ import { VistaAgoraCarousel, type VistaProduct } from "./VistaAgoraCarousel";
 
 const PRODUCTS: VistaProduct[] = [
   {
-    id: "sabotage",
+    id: "respeito",
     href: "/loja",
-    image: "/figma-home/produto-sabotage.png",
-    title: "Camiseta Sabotage",
+    image: "/figma-home/produto-respeito.png",
+    title: "Camiseta Respeito",
     price: "R$ 189,00",
   },
   {
@@ -30,10 +30,10 @@ const PRODUCTS: VistaProduct[] = [
     price: "R$ 489,00",
   },
   {
-    id: "respeito",
+    id: "sabotage",
     href: "/loja",
-    image: "/figma-home/produto-respeito.png",
-    title: "Camiseta Respeito",
+    image: "/figma-home/produto-sabotage.png",
+    title: "Camiseta Sabotage",
     price: "R$ 189,00",
   },
 ];

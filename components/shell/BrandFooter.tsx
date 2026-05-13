@@ -37,11 +37,11 @@ export function BrandFooter() {
           <Link href="/plantao" className="block transition-colors hover:text-accent">
             Plantão Festival
           </Link>
-          <Link href="/sabor" className="block transition-colors hover:text-accent">
-            Sabor Matuê
-          </Link>
           <Link href="/parcerias" className="block transition-colors hover:text-accent">
             Parcerias
+          </Link>
+          <Link href="/incubadora" className="block transition-colors hover:text-accent">
+            Incubadora
           </Link>
           <Link href="/loja" className="block transition-colors hover:text-accent">
             Loja oficial

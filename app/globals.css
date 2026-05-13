@@ -28,6 +28,10 @@
   --ease-universe: cubic-bezier(0.7, 0, 0.3, 1);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   background: var(--bg);
