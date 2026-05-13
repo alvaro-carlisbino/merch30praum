@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { IMG } from "@/lib/images/unsplash";
 
 export function HomeHero() {
   return (
@@ -13,17 +12,15 @@ export function HomeHero() {
       aria-labelledby="home-hero-title"
     >
       <Image
-        src={IMG.matuePortrait}
+        src="/figma-home/hero-matue.jpg"
         alt=""
         aria-hidden
         fill
         priority
-        unoptimized
         sizes="100vw"
         className="object-cover"
         style={{
-          objectPosition: "center 25%",
-          filter: "brightness(0.78) contrast(1.04) saturate(0.92)",
+          objectPosition: "center 30%",
         }}
       />
 

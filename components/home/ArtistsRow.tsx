@@ -39,13 +39,15 @@ type TagStyle = {
   size: string;
 };
 
-const TAG: Record<ArtistSlug, TagStyle> = {
+const TAG: Record<ArtistSlug, TagStyle & { photo: string; objectPosition: string }> = {
   matue: {
     label: "Matuê",
     font: "var(--font-tag-matue, cursive)",
     color: "#ffffff",
     rotate: "-3deg",
     size: "clamp(1.4rem, 2.2vw, 2.2rem)",
+    photo: "/figma-home/artist-matue.png",
+    objectPosition: "center 30%",
   },
   wiu: {
     label: "Wiu",
@@ -53,6 +55,8 @@ const TAG: Record<ArtistSlug, TagStyle> = {
     color: "#ff2d1f",
     rotate: "0deg",
     size: "clamp(1.8rem, 2.8vw, 2.8rem)",
+    photo: "/figma-home/artist-wiu.png",
+    objectPosition: "center 30%",
   },
   teto: {
     label: "Teto",
@@ -60,6 +64,8 @@ const TAG: Record<ArtistSlug, TagStyle> = {
     color: "#ffffff",
     rotate: "-3deg",
     size: "clamp(1.4rem, 2.2vw, 2.2rem)",
+    photo: "/figma-home/artist-teto.png",
+    objectPosition: "center 25%",
   },
   brandao: {
     label: "Brandão",
@@ -67,6 +73,8 @@ const TAG: Record<ArtistSlug, TagStyle> = {
     color: "#ffffff",
     rotate: "-2deg",
     size: "clamp(1.9rem, 3vw, 3rem)",
+    photo: "/figma-home/artist-brandao.png",
+    objectPosition: "center 30%",
   },
 };
 
@@ -83,15 +91,13 @@ function ArtistCard({ slug }: { slug: ArtistSlug }) {
       }}
     >
       <Image
-        src={artist.realPhotoUrl ?? artist.portraitImage}
+        src={TAG[slug].photo}
         alt={artist.displayName}
         fill
-        unoptimized
         sizes="(min-width: 640px) 20vw, 50vw"
         className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
         style={{
-          objectPosition: artist.photoObjectPosition,
-          filter: "brightness(0.92) contrast(1.05)",
+          objectPosition: TAG[slug].objectPosition,
         }}
       />
       <div

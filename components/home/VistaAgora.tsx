@@ -1,29 +1,44 @@
-import { ARTIST_SLUGS, ARTISTS } from "@/lib/artists/registry";
-import { getCollectionByHandle } from "@/lib/shopify/client";
 import { VistaAgoraCarousel, type VistaProduct } from "./VistaAgoraCarousel";
 
-export async function VistaAgora() {
-  const collections = await Promise.all(
-    ARTIST_SLUGS.map((slug) =>
-      getCollectionByHandle(ARTISTS[slug].shopifyCollectionHandle),
-    ),
-  );
+const PRODUCTS: VistaProduct[] = [
+  {
+    id: "sabotage",
+    href: "/loja",
+    image: "/figma-home/produto-sabotage.png",
+    title: "Camiseta Sabotage",
+    price: "R$ 189,00",
+  },
+  {
+    id: "face",
+    href: "/loja",
+    image: "/figma-home/produto-face.png",
+    title: "Camiseta Game Face",
+    price: "R$ 189,00",
+  },
+  {
+    id: "azul-eletrico",
+    href: "/loja",
+    image: "/figma-home/produto-green-puffer.png",
+    title: "Camiseta 333 Azul Elétrico",
+    price: "R$ 189,00",
+  },
+  {
+    id: "black-puffer",
+    href: "/loja",
+    image: "/figma-home/produto-black-puffer.png",
+    title: "Puffer Black 333",
+    price: "R$ 489,00",
+  },
+  {
+    id: "respeito",
+    href: "/loja",
+    image: "/figma-home/produto-respeito.png",
+    title: "Camiseta Respeito",
+    price: "R$ 189,00",
+  },
+];
 
-  const products: VistaProduct[] = ARTIST_SLUGS.flatMap((slug, i) => {
-    const items = collections[i]?.products ?? [];
-    return items.slice(0, 2).map((p) => ({
-      id: p.id,
-      handle: p.handle,
-      title: p.title,
-      priceMin: p.priceMin,
-      image: p.featuredImage?.url ?? null,
-      artistSlug: slug,
-      artistDisplay: ARTISTS[slug].displayName,
-    }));
-  }).slice(0, 8);
-
-  if (products.length === 0) return null;
-
+export function VistaAgora() {
   return (
     <section
       aria-labelledby="vista-agora"
@@ -47,7 +62,7 @@ export async function VistaAgora() {
           </h2>
         </header>
 
-        <VistaAgoraCarousel products={products} />
+        <VistaAgoraCarousel products={PRODUCTS} />
       </div>
     </section>
   );

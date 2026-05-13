@@ -1,14 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ALBUMS, STATUS_LABEL, type AlbumSlug, type AlbumStatus } from "@/lib/albums/registry";
-import { IMG } from "@/lib/images/unsplash";
 
 type Pick = {
   slug: AlbumSlug;
   status: AlbumStatus;
   pitch: string;
-  cover?: string;
-  secondaryImage?: string;
+  cover: string;
 };
 
 const PICKS: { big: Pick; topRight: Pick; botRight: Pick } = {
@@ -16,20 +14,19 @@ const PICKS: { big: Pick; topRight: Pick; botRight: Pick } = {
     slug: "xtranho",
     status: "em-alta",
     pitch: "Sinal alien em transmissão estável.",
-    cover: IMG.matuePortrait,
-    secondaryImage: IMG.coverXtranho,
+    cover: "/figma-home/eleitos-xtranho.png",
   },
   topRight: {
     slug: "colapso-global",
     status: "tour-ativa",
     pitch: "Duas vozes, um colapso bonito.",
-    cover: IMG.coverColapsoGlobal,
+    cover: "/figma-home/eleitos-colapso.png",
   },
   botRight: {
     slug: "isso-e-trap-vol-2",
     status: "estreia",
     pitch: "Xerox da quebrada em alta densidade.",
-    cover: IMG.coverIssoETrap,
+    cover: "/figma-home/eleitos-brandao.png",
   },
 };
 
@@ -87,31 +84,14 @@ function BigPickCard({ pick }: { pick: Pick }) {
       className="group relative col-start-1 row-span-2 overflow-hidden rounded-2xl"
       style={{ background: album.bgHex, aspectRatio: "1 / 1" }}
     >
-      <div className="absolute inset-0 grid grid-cols-2">
-        <div className="relative">
-          <Image
-            src={pick.cover ?? album.coverImage}
-            alt=""
-            aria-hidden
-            fill
-            unoptimized
-            sizes="(min-width: 640px) 25vw, 50vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-            style={{ objectPosition: "center 30%" }}
-          />
-        </div>
-        <div
-          className="relative"
-          style={{
-            background:
-              pick.secondaryImage
-                ? `url(${pick.secondaryImage}) center/cover no-repeat`
-                : album.bgHex,
-            filter: "saturate(0.6) contrast(1.15)",
-          }}
-        />
-      </div>
-
+      <Image
+        src={pick.cover}
+        alt=""
+        aria-hidden
+        fill
+        sizes="(min-width: 640px) 50vw, 100vw"
+        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+      />
       <PickOverlay album={album} status={pick.status} pitch={pick.pitch} large />
     </Link>
   );
@@ -127,11 +107,10 @@ function SmallPickCard({ pick }: { pick: Pick }) {
       style={{ background: album.bgHex }}
     >
       <Image
-        src={pick.cover ?? album.coverImage}
+        src={pick.cover}
         alt=""
         aria-hidden
         fill
-        unoptimized
         sizes="(min-width: 640px) 50vw, 100vw"
         className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
       />
