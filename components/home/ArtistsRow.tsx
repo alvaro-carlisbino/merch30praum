@@ -83,7 +83,7 @@ function ArtistCard({ slug }: { slug: ArtistSlug }) {
       data-cursor={artist.displayName}
       className="group relative block overflow-hidden rounded-2xl"
       style={{
-        aspectRatio: "3 / 4",
+        aspectRatio: "5 / 8",
         background: artist.panelBackground,
         boxShadow: active
           ? `0 0 0 3px ${cfg.borderColor}, 0 12px 40px rgba(0,0,0,0.45)`
@@ -130,7 +130,7 @@ function CenterLogoCard() {
   return (
     <div
       className="relative col-span-2 overflow-hidden rounded-2xl sm:col-span-1"
-      style={{ aspectRatio: "3 / 4", background: "#000" }}
+      style={{ aspectRatio: "5 / 8", background: "#000" }}
     >
       <Image
         src="/figma-home/card-30praum.png"

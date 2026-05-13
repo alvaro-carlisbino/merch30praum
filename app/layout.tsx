@@ -9,8 +9,6 @@ import {
   tagBrandao,
 } from "@/styles/fonts";
 import { CustomCursor } from "@/components/effects/CustomCursor";
-import { ScrollProgress } from "@/components/effects/ScrollProgress";
-import { ScrollAtmosphere } from "@/components/effects/ScrollAtmosphere";
 import "./globals.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://30praum.com";
@@ -70,8 +68,6 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <CustomCursor />
-        <ScrollProgress />
-        <ScrollAtmosphere />
         {children}
       </body>
     </html>
