@@ -2,50 +2,78 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { BrandLogo } from "@/components/shell/BrandLogo";
 import type { ArtistSlug } from "@/lib/artists/types";
 import { useActiveArtist } from "@/lib/home/active-artist";
 
-type HeroSlide = {
-  slug: ArtistSlug;
+type SlideKey = ArtistSlug | "praum";
+
+type ArtistSlide = {
+  key: ArtistSlug;
+  kind: "artist";
   photo: string;
   name: string;
   nameWidth: number;
   nameHeight: number;
   objectPosition: string;
+  quote: string;
 };
+
+type PraumSlide = {
+  key: "praum";
+  kind: "praum";
+  photo: string;
+  objectPosition: string;
+};
+
+type HeroSlide = ArtistSlide | PraumSlide;
 
 const SLIDES: HeroSlide[] = [
   {
-    slug: "matue",
+    key: "praum",
+    kind: "praum",
+    photo: "/figma-home/hero-30praum.png",
+    objectPosition: "center 35%",
+  },
+  {
+    key: "matue",
+    kind: "artist",
     photo: "/figma-home/hero-matue.jpg",
     name: "/figma-home/name-matue-big.png",
-    nameWidth: 461,
-    nameHeight: 461,
+    nameWidth: 280,
+    nameHeight: 280,
     objectPosition: "center 30%",
+    quote: "“Todo mundo quer ser estrela, mas não tem lugar no Sol.” — Matuê",
   },
   {
-    slug: "wiu",
+    key: "wiu",
+    kind: "artist",
     photo: "/figma-home/hero-wiu.png",
     name: "/figma-home/name-wiu-medium.png",
-    nameWidth: 362,
-    nameHeight: 260,
+    nameWidth: 280,
+    nameHeight: 200,
     objectPosition: "center 25%",
+    quote: "“Se a saudade matasse, eu já tinha morrido bonito.” — Wiu",
   },
   {
-    slug: "teto",
+    key: "teto",
+    kind: "artist",
     photo: "/figma-home/hero-teto.png",
     name: "/figma-home/name-teto-big.png",
-    nameWidth: 362,
-    nameHeight: 116,
+    nameWidth: 460,
+    nameHeight: 150,
     objectPosition: "center 30%",
+    quote: "“Não é fim. É trilha.” — Teto",
   },
   {
-    slug: "brandao",
+    key: "brandao",
+    kind: "artist",
     photo: "/figma-home/hero-brandao.png",
     name: "/figma-home/name-brandao-big.png",
-    nameWidth: 362,
-    nameHeight: 122,
+    nameWidth: 460,
+    nameHeight: 150,
     objectPosition: "center 30%",
+    quote: "“Cresci copiando. Agora os outros copiam errado.” — Brandão85",
   },
 ];
 
@@ -56,7 +84,13 @@ export function HomeHero() {
   const setActive = useActiveArtist((s) => s.setActive);
 
   useEffect(() => {
-    setActive(SLIDES[index].slug);
+    const slide = SLIDES[index];
+    if (slide.kind === "artist") {
+      setActive(slide.key);
+    } else {
+      // 30praum slide — clear active
+      setActive(null);
+    }
   }, [index, setActive]);
 
   useEffect(() => {
@@ -65,6 +99,8 @@ export function HomeHero() {
     }, ROTATE_MS);
     return () => clearInterval(id);
   }, []);
+
+  const current = SLIDES[index];
 
   return (
     <section
@@ -78,7 +114,7 @@ export function HomeHero() {
     >
       {SLIDES.map((slide, i) => (
         <div
-          key={slide.slug}
+          key={slide.key}
           aria-hidden={i !== index}
           className="absolute inset-0 transition-opacity duration-1000"
           style={{ opacity: i === index ? 1 : 0 }}
@@ -101,33 +137,59 @@ export function HomeHero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.15) 35%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.92) 100%)",
+            "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.18) 35%, rgba(0,0,0,0.18) 55%, rgba(0,0,0,0.95) 100%)",
         }}
       />
 
-      <div className="relative z-10 flex h-full flex-col items-center justify-end px-4 pb-16 text-center sm:pb-24">
-        <div
-          className="relative"
-          style={{
-            width: "min(60vw, 540px)",
-            height: "min(28vw, 240px)",
-          }}
-        >
-          {SLIDES.map((slide, i) => (
-            <Image
-              key={slide.slug}
-              src={slide.name}
-              alt={slide.slug}
-              fill
-              aria-hidden={i !== index}
-              sizes="(min-width: 640px) 540px, 60vw"
-              className="object-contain transition-opacity duration-700"
-              style={{ opacity: i === index ? 1 : 0 }}
-            />
-          ))}
+      <div className="relative z-10 flex h-full flex-col items-center justify-end px-4 pb-14 text-center sm:pb-20">
+        <div className="relative flex items-center justify-center" style={{ minHeight: 230 }}>
+          {SLIDES.map((slide, i) => {
+            const isActive = i === index;
+            if (slide.kind === "praum") {
+              return (
+                <div
+                  key={slide.key}
+                  aria-hidden={!isActive}
+                  className="absolute inset-0 flex items-center justify-center transition-opacity duration-700"
+                  style={{ opacity: isActive ? 1 : 0 }}
+                >
+                  <span
+                    className="text-white"
+                    style={{
+                      fontSize: "clamp(5rem, 10vw, 8.5rem)",
+                      filter: "drop-shadow(0 4px 32px rgba(0,0,0,0.6))",
+                    }}
+                  >
+                    <BrandLogo variant="stacked" />
+                  </span>
+                </div>
+              );
+            }
+            return (
+              <div
+                key={slide.key}
+                aria-hidden={!isActive}
+                className="absolute transition-opacity duration-700"
+                style={{
+                  width: slide.nameWidth,
+                  height: slide.nameHeight,
+                  opacity: isActive ? 1 : 0,
+                }}
+              >
+                <Image
+                  src={slide.name}
+                  alt={slide.key}
+                  fill
+                  sizes="500px"
+                  className="object-contain"
+                  style={{ filter: "drop-shadow(0 4px 28px rgba(0,0,0,0.6))" }}
+                />
+              </div>
+            );
+          })}
         </div>
 
-        <p className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] uppercase tracking-[0.3em] text-white/70 sm:text-[11px]">
+        <p className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] uppercase tracking-[0.3em] text-white/75 sm:text-[11px]">
           <span>04 universos</span>
           <span aria-hidden className="text-white/40">·</span>
           <span>03 álbuns vivos</span>
@@ -135,18 +197,28 @@ export function HomeHero() {
           <span>10 anos de casa</span>
         </p>
 
-        <p className="mt-6 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
-          Casa de Matuê, Wiu, Teto e Brandão85. Fundada em 2016 em Fortaleza
-          pra colocar o trap nordestino no centro do mapa.
-        </p>
+        <div className="relative mt-5 w-full min-h-[4.5rem]">
+          {SLIDES.map((slide, i) => (
+            <p
+              key={slide.key}
+              aria-hidden={i !== index}
+              className="absolute left-1/2 top-0 w-[min(640px,92vw)] -translate-x-1/2 transition-opacity duration-700 text-sm leading-relaxed text-white/85 sm:text-base"
+              style={{ opacity: i === index ? 1 : 0 }}
+            >
+              {slide.kind === "praum"
+                ? "Casa de Matuê, Wiu, Teto e Brandão85. Fundada em 2016 em Fortaleza pra colocar o trap nordestino no centro do mapa."
+                : slide.quote}
+            </p>
+          ))}
+        </div>
 
-        <div className="mt-8 flex items-center gap-2">
+        <div className="mt-10 flex items-center gap-2">
           {SLIDES.map((slide, i) => (
             <button
-              key={slide.slug}
+              key={slide.key}
               type="button"
               onClick={() => setIndex(i)}
-              aria-label={`Mostrar ${slide.slug}`}
+              aria-label={`Mostrar ${slide.key}`}
               className="h-1 w-8 rounded-full transition-colors"
               style={{
                 background: i === index ? "#ffffff" : "rgba(255,255,255,0.3)",
@@ -155,6 +227,9 @@ export function HomeHero() {
           ))}
         </div>
       </div>
+
+      {/* exporta o slide ativo via data attribute pra outros componentes se precisar */}
+      <span hidden data-active-slide={current.key} />
     </section>
   );
 }

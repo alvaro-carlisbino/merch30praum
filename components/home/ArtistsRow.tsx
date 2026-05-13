@@ -85,10 +85,14 @@ function ArtistCard({ slug }: { slug: ArtistSlug }) {
       style={{
         aspectRatio: "5 / 8",
         background: artist.panelBackground,
+        transform: active ? "scale(1.12)" : "scale(1)",
+        transformOrigin: "center",
+        zIndex: active ? 10 : 1,
         boxShadow: active
-          ? `0 0 0 3px ${cfg.borderColor}, 0 12px 40px rgba(0,0,0,0.45)`
+          ? `0 0 0 3px ${cfg.borderColor}, 0 24px 60px rgba(0,0,0,0.55)`
           : "none",
-        transition: "box-shadow 500ms cubic-bezier(0.7,0,0.3,1)",
+        transition:
+          "transform 600ms cubic-bezier(0.7,0,0.3,1), box-shadow 500ms cubic-bezier(0.7,0,0.3,1)",
       }}
     >
       <Image

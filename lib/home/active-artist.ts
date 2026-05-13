@@ -3,7 +3,7 @@ import type { ArtistSlug } from "@/lib/artists/types";
 
 interface ActiveArtistState {
   active: ArtistSlug | null;
-  setActive: (slug: ArtistSlug) => void;
+  setActive: (slug: ArtistSlug | null) => void;
 }
 
 export const useActiveArtist = create<ActiveArtistState>((set) => ({
