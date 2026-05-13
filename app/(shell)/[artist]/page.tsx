@@ -50,6 +50,52 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
       ouvintes: "125M",
     },
   },
+  teto: {
+    heroBg: "/figma-artista/teto-hero.png",
+    nameBig: "/figma-artista/teto-name-big.png",
+    nameBigAspect: "362 / 116",
+    nameMedium: "/figma-artista/teto-name-medium.png",
+    nameMediumAspect: "165 / 53",
+    stagePhoto: "/figma-artista/teto-stage.png",
+    albumCover: "/figma-artista/colapso-global-cover.png",
+    quote: {
+      text: "Não é fim. É trilha.",
+      attribution: "Teto · Colapso Global · 2026",
+    },
+    motto: "Somos os melhores",
+    description:
+      "Nasceu em Jacobina, Bahia. Começou compondo aos doze e até hoje grava no quarto. Fez fama no YouTube e no TikTok antes de qualquer selo bater na porta. Estreou em 2018 com Fico Famoso e Say Yes, dividiu Vampira com Matuê e Wiu em 2022, e desde então virou pilar do trap brasileiro. Colapso Global (2026) com Wiu mistura house, jazz, bossa e funk carioca no mesmo disco.",
+    estreia: "2020",
+    marcos: "Vampira (c/ Matuê, Wiu) · Colapso Global · Carnaval Olinda 2025",
+    albumStats: {
+      lancamento: "27/01/2026",
+      duracao: "33min",
+      ouvintes: "92M",
+    },
+  },
+  wiu: {
+    heroBg: "/figma-artista/wiu-hero.png",
+    nameBig: "/figma-artista/wiu-name-big.png",
+    nameBigAspect: "362 / 260",
+    nameMedium: "/figma-artista/wiu-name-medium.png",
+    nameMediumAspect: "185 / 185",
+    stagePhoto: "/figma-artista/wiu-stage.png",
+    albumCover: "/figma-artista/colapso-global-cover.png",
+    quote: {
+      text: "Se a saudade matasse, eu já tinha morrido bonito.",
+      attribution: "Wiu · Manual de Como Amar Errado · 2022",
+    },
+    motto: "Somos os melhores",
+    description:
+      "Cearense, contemporâneo de Matuê. Antes de ser artista da 30praum era beatmaker — produziu seis das sete faixas de Máquina do Tempo (2020) e ajudou a desenhar o som do selo. Estreou cantando em 2019 com Sucrilhos. Viralizou Felina e Vampira em 2022, fechou o ano com Manual de Como Amar Errado e se autodeclarou 'último romântico' do trap. Em 2026, dividiu o palco e a tracklist com Teto em Colapso Global.",
+    estreia: "2019",
+    marcos: "Manual de Como Amar Errado · Colapso Global · Felina · Vampira",
+    albumStats: {
+      lancamento: "27/01/2026",
+      duracao: "33min",
+      ouvintes: "78M",
+    },
+  },
   brandao: {
     heroBg: "/figma-artista/brandao-hero.png",
     nameBig: "/figma-artista/brandao-name-big.png",
