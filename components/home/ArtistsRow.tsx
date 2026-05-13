@@ -5,6 +5,40 @@ import type { ArtistSlug } from "@/lib/artists/types";
 
 const ORDER: ArtistSlug[] = ["teto", "wiu", "matue", "brandao"];
 
+type CardConfig = {
+  photo: string;
+  name: string;
+  nameAspect: string;
+  nameWidth: string;
+};
+
+const CARDS: Record<ArtistSlug, CardConfig> = {
+  matue: {
+    photo: "/figma-home/card-matue.png",
+    name: "/figma-home/name-matue-small.png",
+    nameAspect: "215 / 215",
+    nameWidth: "min(48%, 110px)",
+  },
+  wiu: {
+    photo: "/figma-home/card-wiu.png",
+    name: "/figma-home/name-wiu-small.png",
+    nameAspect: "185 / 185",
+    nameWidth: "min(38%, 90px)",
+  },
+  teto: {
+    photo: "/figma-home/card-teto.png",
+    name: "/figma-home/name-teto-small.png",
+    nameAspect: "165 / 53",
+    nameWidth: "min(50%, 120px)",
+  },
+  brandao: {
+    photo: "/figma-home/card-brandao.png",
+    name: "/figma-home/name-brandao-small.png",
+    nameAspect: "190 / 64",
+    nameWidth: "min(60%, 150px)",
+  },
+};
+
 export function ArtistsRow() {
   // ordem visual: TETO · WIU · [logo card] · MATUÊ · BRANDÃO
   const left = ORDER.slice(0, 2);
@@ -30,55 +64,9 @@ export function ArtistsRow() {
   );
 }
 
-type TagStyle = {
-  label: string;
-  font: string;
-  color: string;
-  rotate: string;
-  size: string;
-};
-
-const TAG: Record<ArtistSlug, TagStyle & { photo: string; objectPosition: string }> = {
-  matue: {
-    label: "Matuê",
-    font: "var(--font-tag-matue, cursive)",
-    color: "#ffffff",
-    rotate: "-3deg",
-    size: "clamp(1.4rem, 2.2vw, 2.2rem)",
-    photo: "/figma-home/card-matue.png",
-    objectPosition: "center center",
-  },
-  wiu: {
-    label: "Wiu",
-    font: "var(--font-tag-wiu, serif)",
-    color: "#ff2d1f",
-    rotate: "0deg",
-    size: "clamp(1.8rem, 2.8vw, 2.8rem)",
-    photo: "/figma-home/card-wiu.png",
-    objectPosition: "center center",
-  },
-  teto: {
-    label: "Teto",
-    font: "var(--font-tag-teto, cursive)",
-    color: "#ffffff",
-    rotate: "-3deg",
-    size: "clamp(1.4rem, 2.2vw, 2.2rem)",
-    photo: "/figma-home/card-teto.png",
-    objectPosition: "center center",
-  },
-  brandao: {
-    label: "Brandão",
-    font: "var(--font-tag-brandao, cursive)",
-    color: "#ffffff",
-    rotate: "-2deg",
-    size: "clamp(1.9rem, 3vw, 3rem)",
-    photo: "/figma-home/card-brandao.png",
-    objectPosition: "center center",
-  },
-};
-
 function ArtistCard({ slug }: { slug: ArtistSlug }) {
   const artist = ARTISTS[slug];
+  const cfg = CARDS[slug];
   return (
     <Link
       href={`/${slug}`}
@@ -90,68 +78,66 @@ function ArtistCard({ slug }: { slug: ArtistSlug }) {
       }}
     >
       <Image
-        src={TAG[slug].photo}
+        src={cfg.photo}
         alt={artist.displayName}
         fill
         sizes="(min-width: 640px) 20vw, 50vw"
         className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-        style={{
-          objectPosition: TAG[slug].objectPosition,
-        }}
       />
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.72) 100%)",
+            "linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.55) 100%)",
         }}
       />
-      <span
-        className="absolute bottom-4 left-4 right-4 leading-[0.85]"
+      <div
+        className="absolute bottom-4 left-4"
         style={{
-          fontFamily: TAG[slug].font,
-          color: TAG[slug].color,
-          fontSize: TAG[slug].size,
-          letterSpacing: "-0.01em",
-          transform: `rotate(${TAG[slug].rotate})`,
-          transformOrigin: "left bottom",
-          textShadow: "0 2px 14px rgba(0,0,0,0.6)",
+          width: cfg.nameWidth,
+          aspectRatio: cfg.nameAspect,
         }}
       >
-        {TAG[slug].label}
-      </span>
+        <Image
+          src={cfg.name}
+          alt={artist.displayName}
+          fill
+          sizes="150px"
+          className="object-contain object-left-bottom"
+          style={{ filter: "drop-shadow(0 2px 14px rgba(0,0,0,0.6))" }}
+        />
+      </div>
     </Link>
   );
 }
 
 function CenterLogoCard() {
   return (
-    <div className="relative col-span-2 flex flex-col items-center sm:col-span-1">
-      <div
-        className="relative w-full overflow-hidden rounded-2xl"
-        style={{ aspectRatio: "3 / 4", background: "#000" }}
-      >
-        <Image
-          src="/figma-home/card-30praum.png"
-          alt="30 PRAUM"
-          fill
-          sizes="(min-width: 640px) 20vw, 100vw"
-          className="object-cover"
-        />
+    <div
+      className="relative col-span-2 overflow-hidden rounded-2xl sm:col-span-1"
+      style={{ aspectRatio: "3 / 4", background: "#000" }}
+    >
+      <Image
+        src="/figma-home/card-30praum.png"
+        alt="30 PRAUM"
+        fill
+        sizes="(min-width: 640px) 20vw, 100vw"
+        className="object-cover"
+      />
+      <div className="absolute inset-x-0 bottom-5 flex justify-center">
+        <Link
+          href="/about"
+          data-cursor="Descubra mais"
+          className="inline-flex items-center rounded-full border bg-black/40 px-5 py-2 text-[11px] uppercase tracking-[0.22em] backdrop-blur-sm transition-colors hover:bg-white hover:text-black"
+          style={{
+            borderColor: "rgba(255,255,255,0.6)",
+            color: "#ffffff",
+          }}
+        >
+          Descubra mais
+        </Link>
       </div>
-
-      <Link
-        href="/about"
-        data-cursor="Descubra mais"
-        className="mt-4 inline-flex items-center rounded-full border px-5 py-2 text-[11px] uppercase tracking-[0.22em] transition-colors hover:bg-white hover:text-black"
-        style={{
-          borderColor: "var(--accent)",
-          color: "var(--accent)",
-        }}
-      >
-        Descubra mais
-      </Link>
     </div>
   );
 }
