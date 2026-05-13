@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ARTISTS } from "@/lib/artists/registry";
-import { BrandLogo } from "@/components/shell/BrandLogo";
 import type { ArtistSlug } from "@/lib/artists/types";
 
 const ORDER: ArtistSlug[] = ["teto", "wiu", "matue", "brandao"];
@@ -46,8 +45,8 @@ const TAG: Record<ArtistSlug, TagStyle & { photo: string; objectPosition: string
     color: "#ffffff",
     rotate: "-3deg",
     size: "clamp(1.4rem, 2.2vw, 2.2rem)",
-    photo: "/figma-home/artist-matue.png",
-    objectPosition: "center 30%",
+    photo: "/figma-home/card-matue.png",
+    objectPosition: "center center",
   },
   wiu: {
     label: "Wiu",
@@ -55,8 +54,8 @@ const TAG: Record<ArtistSlug, TagStyle & { photo: string; objectPosition: string
     color: "#ff2d1f",
     rotate: "0deg",
     size: "clamp(1.8rem, 2.8vw, 2.8rem)",
-    photo: "/figma-home/artist-wiu.png",
-    objectPosition: "center 30%",
+    photo: "/figma-home/card-wiu.png",
+    objectPosition: "center center",
   },
   teto: {
     label: "Teto",
@@ -64,8 +63,8 @@ const TAG: Record<ArtistSlug, TagStyle & { photo: string; objectPosition: string
     color: "#ffffff",
     rotate: "-3deg",
     size: "clamp(1.4rem, 2.2vw, 2.2rem)",
-    photo: "/figma-home/artist-teto.png",
-    objectPosition: "center 25%",
+    photo: "/figma-home/card-teto.png",
+    objectPosition: "center center",
   },
   brandao: {
     label: "Brandão",
@@ -73,8 +72,8 @@ const TAG: Record<ArtistSlug, TagStyle & { photo: string; objectPosition: string
     color: "#ffffff",
     rotate: "-2deg",
     size: "clamp(1.9rem, 3vw, 3rem)",
-    photo: "/figma-home/artist-brandao.png",
-    objectPosition: "center 30%",
+    photo: "/figma-home/card-brandao.png",
+    objectPosition: "center center",
   },
 };
 
@@ -131,30 +130,15 @@ function CenterLogoCard() {
     <div className="relative col-span-2 flex flex-col items-center sm:col-span-1">
       <div
         className="relative w-full overflow-hidden rounded-2xl"
-        style={{
-          aspectRatio: "3 / 4",
-          background:
-            "radial-gradient(circle at 50% 55%, #1b2540 0%, #0b1020 60%, #050810 100%)",
-        }}
+        style={{ aspectRatio: "3 / 4", background: "#000" }}
       >
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
-            backgroundSize: "44px 44px",
-            maskImage:
-              "radial-gradient(circle at center, black 30%, transparent 78%)",
-            WebkitMaskImage:
-              "radial-gradient(circle at center, black 30%, transparent 78%)",
-          }}
+        <Image
+          src="/figma-home/card-30praum.png"
+          alt="30 PRAUM"
+          fill
+          sizes="(min-width: 640px) 20vw, 100vw"
+          className="object-cover"
         />
-        <div className="relative flex h-full items-center justify-center text-white">
-          <span style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}>
-            <BrandLogo variant="stacked" />
-          </span>
-        </div>
       </div>
 
       <Link
