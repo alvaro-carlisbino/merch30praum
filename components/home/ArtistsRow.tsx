@@ -31,11 +31,43 @@ export function ArtistsRow() {
   );
 }
 
-const TAG_LABEL: Record<ArtistSlug, string> = {
-  matue: "Matuê",
-  wiu: "Wiu",
-  teto: "Teto",
-  brandao: "Brandão",
+type TagStyle = {
+  label: string;
+  font: string;
+  color: string;
+  rotate: string;
+  size: string;
+};
+
+const TAG: Record<ArtistSlug, TagStyle> = {
+  matue: {
+    label: "Matuê",
+    font: "var(--font-tag-matue, cursive)",
+    color: "#ffffff",
+    rotate: "-3deg",
+    size: "clamp(1.4rem, 2.2vw, 2.2rem)",
+  },
+  wiu: {
+    label: "Wiu",
+    font: "var(--font-tag-wiu, serif)",
+    color: "#ff2d1f",
+    rotate: "0deg",
+    size: "clamp(1.8rem, 2.8vw, 2.8rem)",
+  },
+  teto: {
+    label: "Teto",
+    font: "var(--font-tag-teto, cursive)",
+    color: "#ffffff",
+    rotate: "-3deg",
+    size: "clamp(1.4rem, 2.2vw, 2.2rem)",
+  },
+  brandao: {
+    label: "Brandão",
+    font: "var(--font-tag-brandao, cursive)",
+    color: "#ffffff",
+    rotate: "-2deg",
+    size: "clamp(1.9rem, 3vw, 3rem)",
+  },
 };
 
 function ArtistCard({ slug }: { slug: ArtistSlug }) {
@@ -71,17 +103,18 @@ function ArtistCard({ slug }: { slug: ArtistSlug }) {
         }}
       />
       <span
-        className="absolute bottom-4 left-4 right-4 text-white leading-[0.85]"
+        className="absolute bottom-4 left-4 right-4 leading-[0.85]"
         style={{
-          fontFamily: "var(--font-graffiti, cursive)",
-          fontSize: "clamp(1.5rem, 2.4vw, 2.4rem)",
+          fontFamily: TAG[slug].font,
+          color: TAG[slug].color,
+          fontSize: TAG[slug].size,
           letterSpacing: "-0.01em",
-          transform: "rotate(-3deg)",
+          transform: `rotate(${TAG[slug].rotate})`,
           transformOrigin: "left bottom",
-          textShadow: "0 2px 14px rgba(0,0,0,0.55)",
+          textShadow: "0 2px 14px rgba(0,0,0,0.6)",
         }}
       >
-        {TAG_LABEL[slug]}
+        {TAG[slug].label}
       </span>
     </Link>
   );

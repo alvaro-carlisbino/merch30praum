@@ -41,7 +41,7 @@ export function HomeHero() {
           id="home-hero-title"
           className="text-white leading-[0.85]"
           style={{
-            fontFamily: "var(--font-graffiti, cursive)",
+            fontFamily: "var(--font-tag-matue, cursive)",
             fontSize: "clamp(5rem, 14vw, 12rem)",
             letterSpacing: "-0.01em",
             transform: "rotate(-3deg)",
