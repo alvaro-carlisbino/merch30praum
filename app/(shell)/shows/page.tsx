@@ -105,16 +105,19 @@ export default function ShowsPage() {
 
   return (
     <article>
-      <section className="mx-auto max-w-screen-2xl px-4 sm:px-8 pt-24 pb-12">
+      <section className="mx-auto max-w-screen-2xl px-4 pt-16 pb-10 sm:px-8 sm:pt-20">
         <h1
-          className="font-display uppercase leading-[0.85]"
-          style={{ fontSize: "clamp(2.5rem, 10vw, 9rem)", letterSpacing: "-0.04em" }}
+          className="font-display uppercase leading-[0.92]"
+          style={{
+            fontSize: "clamp(2.4rem, 5.8vw, 4.8rem)",
+            letterSpacing: "-0.02em",
+          }}
         >
-          Onde a 30praum <br /> está tocando.
+          Shows
         </h1>
-        <p className="mt-8 max-w-2xl text-base sm:text-lg text-fg/80 leading-relaxed">
-          Agenda oficial do roster. Plantão Festival, tours por capital, festivais convidados.
-          Tudo o que antes existia só nos destaques do Instagram agora vive aqui.
+        <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/80 sm:text-base">
+          Agenda oficial do roster — Plantão Festival, tours por capital,
+          festivais convidados.
         </p>
       </section>
 
@@ -184,11 +187,14 @@ export default function ShowsPage() {
           </div>
           <Link
             href="/plantao"
-            className="inline-flex items-center gap-3 px-7 py-4 text-xs uppercase tracking-[0.2em] font-medium transition-transform hover:-translate-y-0.5"
-            style={{ background: "var(--accent)", color: "var(--bg)" }}
+            data-cursor="Plantão"
+            className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm transition-colors hover:bg-white hover:text-black"
+            style={{
+              borderColor: "var(--accent)",
+              color: "var(--accent)",
+            }}
           >
-            Plantão Festival
-            <ArrowRight size={16} strokeWidth={1.5} />
+            Plantão Festival →
           </Link>
         </div>
       </section>

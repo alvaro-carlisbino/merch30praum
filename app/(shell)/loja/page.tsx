@@ -1,66 +1,91 @@
-import { ARTIST_SLUGS, ARTISTS } from "@/lib/artists/registry";
-import { getCollectionByHandle } from "@/lib/shopify/client";
-import { ShopGrid } from "@/components/shop/ShopGrid";
-import { Marquee } from "@/components/motion/Marquee";
+import { PromoBanner } from "@/components/loja/PromoBanner";
+import { CollectionCard } from "@/components/loja/CollectionCard";
+import { ProductCarousel, type CarouselProduct } from "@/components/loja/ProductCarousel";
 
 export const metadata = {
   title: "Loja oficial",
   description:
-    "Catálogo completo do merch oficial 30praum. Matuê, Wiu, Teto e Brandão85 — pedido em security bag, envio direto da gravadora.",
+    "Catálogo completo do merch oficial 30praum. Coleções OVERSIZED e FIVE PANEL, mais vendidos e promoções.",
 };
 
-export default async function LojaPage() {
-  const collections = await Promise.all(
-    ARTIST_SLUGS.map((slug) =>
-      getCollectionByHandle(ARTISTS[slug].shopifyCollectionHandle),
-    ),
-  );
-  const products = collections.flatMap((c) => c?.products ?? []);
+const MAIS_VENDIDOS: CarouselProduct[] = [
+  { id: "mv1", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/mv-1.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "mv2", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/mv-2.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "mv3", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/mv-3.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "mv4", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/mv-4.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+];
 
+const EM_PROMOCOES: CarouselProduct[] = [
+  { id: "ep1", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/ep-1.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "ep2", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/ep-2.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "ep3", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/ep-3.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "ep4", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/ep-4.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+];
+
+export default function LojaPage() {
   return (
-    <article>
-      <section className="mx-auto max-w-screen-2xl px-4 sm:px-8 pt-20 pb-10">
-        <p
-          className="text-[10px] uppercase tracking-[0.4em]"
-          style={{ color: "var(--accent)" }}
+    <>
+      <PromoBanner />
+
+      <section
+        aria-labelledby="colecoes-title"
+        className="mx-auto max-w-screen-2xl px-4 pt-10 pb-6 sm:px-8"
+      >
+        <h2
+          id="colecoes-title"
+          className="mb-6 font-display uppercase leading-none"
+          style={{
+            fontSize: "clamp(1.6rem, 3.4vw, 2.6rem)",
+            letterSpacing: "0.02em",
+          }}
         >
-          Catálogo oficial · 30praum.store
-        </p>
-        <div className="mt-4 grid gap-6 lg:grid-cols-[1.4fr_auto] lg:items-end">
-          <h1
-            className="font-display uppercase leading-[0.85]"
-            style={{
-              fontSize: "clamp(3rem, 11vw, 9rem)",
-              letterSpacing: "-0.04em",
-            }}
-          >
-            A loja
-            <br />
-            <span style={{ color: "var(--accent)" }}>inteira.</span>
-          </h1>
-          <p className="max-w-md text-sm sm:text-base text-fg/80 leading-relaxed">
-            {products.length} peças oficiais — todos os universos juntos.
-            Filtra por artista, por categoria, ordena por preço. Toda peça sai
-            lacrada em security bag direto da casa.
-          </p>
+          Coleções
+        </h2>
+        <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
+          <CollectionCard
+            href="/loja"
+            image="/figma-loja/colecao-oversized-1.png"
+            title="Oversized"
+          />
+          <CollectionCard
+            href="/loja"
+            image="/figma-loja/colecao-five-panel-1.png"
+            title="Five Panel"
+          />
         </div>
       </section>
 
-      <Marquee
-        items={[
-          "ENVIO EM ATÉ 5 DIAS",
-          "TROCAS GRÁTIS · 30 DIAS",
-          "PIX · 5% OFF",
-          "PARCELAMENTO ATÉ 4×",
-          "SECURITY BAG LACRADA",
-          "LOJA OFICIAL 30PRAUM",
-        ]}
-        speed={55}
-        separatorColor="var(--accent)"
-        className="font-display tracking-[0.18em] text-base sm:text-xl py-3 border-y border-border"
-      />
+      <ProductCarousel title="Mais Vendidos" products={MAIS_VENDIDOS} />
 
-      <ShopGrid products={products} />
-    </article>
+      <section
+        aria-labelledby="exclusivos-title"
+        className="mx-auto max-w-screen-2xl px-4 pt-6 pb-6 sm:px-8"
+      >
+        <h2
+          id="exclusivos-title"
+          className="mb-6 font-display uppercase leading-none"
+          style={{
+            fontSize: "clamp(1.6rem, 3.4vw, 2.6rem)",
+            letterSpacing: "0.02em",
+          }}
+        >
+          Exclusivos
+        </h2>
+        <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
+          <CollectionCard
+            href="/loja"
+            image="/figma-loja/exclusivo-oversized.png"
+            title="Oversized"
+          />
+          <CollectionCard
+            href="/loja"
+            image="/figma-loja/exclusivo-five-panel.png"
+            title="Five Panel"
+          />
+        </div>
+      </section>
+
+      <ProductCarousel title="Em Promoções" products={EM_PROMOCOES} />
+    </>
   );
 }

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { SubmissionForm } from "@/components/incubadora/SubmissionForm";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { INCUBADORA } from "@/lib/incubadora/registry";
 
 export const metadata = {
@@ -21,8 +20,7 @@ export default function SubmeterPage() {
         Incubadora
       </Link>
 
-      <ScrollReveal>
-        <h1
+      <h1
           className="mt-8 font-display uppercase leading-[0.85]"
           style={{ fontSize: "clamp(2.5rem, 9vw, 7rem)", letterSpacing: "-0.04em" }}
         >
@@ -32,9 +30,7 @@ export default function SubmeterPage() {
           Sem currículo, sem prova, sem deadline. Manda Spotify, conta a história em até 500
           caracteres, deixa um canal de contato e a gente escuta. Se interessar, te procuramos.
         </p>
-      </ScrollReveal>
-
-      <div className="mt-12">
+<div className="mt-12">
         <SubmissionForm />
       </div>
 

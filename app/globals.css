@@ -20,6 +20,10 @@
 
   --font-display: var(--font-display);
   --font-body: var(--font-body);
+  --font-tag-matue: var(--font-tag-matue);
+  --font-tag-teto: var(--font-tag-teto);
+  --font-tag-wiu: var(--font-tag-wiu);
+  --font-tag-brandao: var(--font-tag-brandao);
 
   --ease-universe: cubic-bezier(0.7, 0, 0.3, 1);
 }
@@ -29,6 +33,13 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body, system-ui, sans-serif);
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 body {

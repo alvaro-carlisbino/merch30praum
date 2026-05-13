@@ -2,6 +2,9 @@ import {
   Inter,
   Bebas_Neue,
   Cinzel,
+  Permanent_Marker,
+  UnifrakturCook,
+  Caveat,
   Space_Grotesk,
   Cormorant_Garamond,
   Archivo,
@@ -29,6 +32,38 @@ export const brandSerif = Cinzel({
   variable: "--font-brand",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+/**
+ * Lettering tag por artista — cada universo do Figma usa uma fonte distinta.
+ * matue/teto: marker brush · wiu: blackletter gothic · brandao: cursive flow.
+ */
+export const tagMatue = Permanent_Marker({
+  variable: "--font-tag-matue",
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+});
+
+export const tagTeto = Permanent_Marker({
+  variable: "--font-tag-teto",
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+});
+
+export const tagWiu = UnifrakturCook({
+  variable: "--font-tag-wiu",
+  subsets: ["latin"],
+  weight: ["700"],
+  display: "swap",
+});
+
+export const tagBrandao = Caveat({
+  variable: "--font-tag-brandao",
+  subsets: ["latin"],
+  weight: ["700"],
   display: "swap",
 });
 

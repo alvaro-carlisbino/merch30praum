@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { NEWS_POSTS, type NewsTag } from "@/lib/news/registry";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { WordReveal } from "@/components/motion/WordReveal";
 
 export const metadata = {
   title: "Notícias · 30praum",
@@ -30,33 +28,37 @@ function formatDate(iso: string) {
 
 export default function NewsPage() {
   const sorted = [...NEWS_POSTS].sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
   const [hero, ...rest] = sorted;
 
   return (
-    <article>
-      <section className="mx-auto max-w-screen-2xl px-4 sm:px-8 pt-24 pb-12">
-        <WordReveal
-          text="A 30praum por dentro."
-          as="h1"
-          className="font-display uppercase leading-[0.85]"
-          stagger={0.08}
-          wordClassName="text-[clamp(2.5rem,10vw,9rem)] tracking-[-0.04em]"
-        />
-        <p className="mt-8 max-w-2xl text-base sm:text-lg text-fg/80 leading-relaxed">
-          Lançamentos, agenda do festival, parcerias, indústria. O que a gravadora publica como
-          verdade oficial — sem reblog, sem ruído.
+    <>
+      <section className="mx-auto max-w-screen-2xl px-4 pt-16 pb-10 sm:px-8 sm:pt-20">
+        <h1
+          className="font-display uppercase leading-[0.92]"
+          style={{
+            fontSize: "clamp(2.4rem, 5.8vw, 4.8rem)",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          Notícias
+        </h1>
+        <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/80 sm:text-base">
+          Lançamentos, agenda do festival, parcerias, indústria. O que a
+          gravadora publica como verdade oficial.
         </p>
       </section>
 
-      {/* Hero post */}
       {hero && (
-        <section className="mx-auto max-w-screen-2xl px-4 sm:px-8 pb-16">
+        <section className="mx-auto max-w-screen-2xl px-4 pb-12 sm:px-8">
           <Link
             href={`/news/${hero.slug}`}
-            className="group grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12 items-stretch border"
-            style={{ borderColor: "var(--border)" }}
+            className="group grid items-stretch gap-0 overflow-hidden rounded-3xl lg:grid-cols-[1.4fr_1fr]"
+            style={{
+              background: "color-mix(in srgb, var(--fg) 4%, var(--bg))",
+            }}
             data-cursor="Abrir matéria"
           >
             <div className="relative aspect-[16/10] overflow-hidden">
@@ -66,19 +68,23 @@ export default function NewsPage() {
                 fill
                 unoptimized
                 sizes="(min-width: 1024px) 60vw, 100vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                style={{ filter: "brightness(0.78) contrast(1.05)" }}
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               />
             </div>
             <div className="flex flex-col justify-end p-6 sm:p-10">
-              <p className="text-sm opacity-60">{formatDate(hero.publishedAt)}</p>
+              <p className="text-xs uppercase tracking-[0.22em] text-muted">
+                {TAG_LABEL[hero.tags[0]]} · {formatDate(hero.publishedAt)}
+              </p>
               <h2
-                className="mt-4 font-display uppercase leading-[0.9]"
-                style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", letterSpacing: "-0.02em" }}
+                className="mt-4 font-display uppercase leading-[0.95]"
+                style={{
+                  fontSize: "clamp(1.6rem, 3.2vw, 2.6rem)",
+                  letterSpacing: "0.01em",
+                }}
               >
                 {hero.title}
               </h2>
-              <p className="mt-5 text-base sm:text-lg text-fg/80 leading-relaxed">
+              <p className="mt-4 text-sm leading-relaxed text-fg/80 sm:text-base">
                 {hero.excerpt}
               </p>
             </div>
@@ -86,15 +92,13 @@ export default function NewsPage() {
         </section>
       )}
 
-      {/* Grid */}
-      <section className="mx-auto max-w-screen-2xl px-4 sm:px-8 pb-24">
-        <ScrollReveal stagger={0.08}>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {rest.map((post) => (
+      <section className="mx-auto max-w-screen-2xl px-4 pb-20 sm:px-8 sm:pb-24">
+        <ul className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+          {rest.map((post) => (
+            <li key={post.slug}>
               <Link
-                key={post.slug}
                 href={`/news/${post.slug}`}
-                className="group flex flex-col border overflow-hidden"
+                className="group flex flex-col overflow-hidden rounded-2xl border"
                 style={{ borderColor: "var(--border)" }}
                 data-cursor="Abrir"
               >
@@ -105,25 +109,31 @@ export default function NewsPage() {
                     fill
                     unoptimized
                     sizes="(min-width: 1024px) 33vw, 100vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    style={{ filter: "brightness(0.82) contrast(1.05)" }}
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   />
                 </div>
-                <div className="flex flex-col gap-3 p-6 flex-1">
-                  <p className="text-xs opacity-55">{formatDate(post.publishedAt)}</p>
+                <div className="flex flex-1 flex-col gap-3 p-5">
+                  <p className="text-xs uppercase tracking-[0.22em] text-muted">
+                    {formatDate(post.publishedAt)}
+                  </p>
                   <h3
-                    className="font-display text-xl sm:text-2xl leading-tight"
-                    style={{ letterSpacing: "-0.01em" }}
+                    className="font-display uppercase leading-tight"
+                    style={{
+                      fontSize: "clamp(1.05rem, 1.5vw, 1.3rem)",
+                      letterSpacing: "0.01em",
+                    }}
                   >
                     {post.title}
                   </h3>
-                  <p className="text-sm text-fg/70 leading-relaxed">{post.excerpt}</p>
+                  <p className="text-sm leading-relaxed text-fg/70">
+                    {post.excerpt}
+                  </p>
                 </div>
               </Link>
-            ))}
-          </div>
-        </ScrollReveal>
+            </li>
+          ))}
+        </ul>
       </section>
-    </article>
+    </>
   );
 }

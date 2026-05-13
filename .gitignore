@@ -52,3 +52,6 @@ next-env.d.ts
 # Payload CMS generated types
 /payload-types.ts
 
+
+# local agent config
+/.claude/

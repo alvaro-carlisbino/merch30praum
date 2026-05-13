@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { getPastPlantao, getCurrentPlantao } from "@/lib/plantao/registry";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
 export const metadata = {
   title: "Edições anteriores · Plantão Festival",
@@ -29,8 +28,7 @@ export default function PlantaoEdicoesPage() {
 
       <div className="space-y-24 sm:space-y-32 pb-24">
         {all.map((ed, idx) => (
-          <ScrollReveal key={ed.slug}>
-            <section className="mx-auto max-w-screen-2xl px-4 sm:px-8">
+          <section className="mx-auto max-w-screen-2xl px-4 sm:px-8">
               <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end mb-8">
                 <div>
                   <h2
@@ -127,8 +125,7 @@ export default function PlantaoEdicoesPage() {
                 </div>
               )}
             </section>
-          </ScrollReveal>
-        ))}
+))}
       </div>
     </article>
   );
