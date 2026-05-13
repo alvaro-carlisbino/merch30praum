@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ARTISTS } from "@/lib/artists/registry";
+import { BrandLogo } from "@/components/shell/BrandLogo";
+import { useActiveArtist } from "@/lib/home/active-artist";
 import type { ArtistSlug } from "@/lib/artists/types";
 
 const ORDER: ArtistSlug[] = ["teto", "wiu", "matue", "brandao"];
@@ -10,6 +14,7 @@ type CardConfig = {
   name: string;
   nameAspect: string;
   nameWidth: string;
+  borderColor: string;
 };
 
 const CARDS: Record<ArtistSlug, CardConfig> = {
@@ -18,29 +23,32 @@ const CARDS: Record<ArtistSlug, CardConfig> = {
     name: "/figma-home/name-matue-small.png",
     nameAspect: "215 / 215",
     nameWidth: "min(48%, 110px)",
+    borderColor: "#ffffff",
   },
   wiu: {
     photo: "/figma-home/card-wiu.png",
     name: "/figma-home/name-wiu-small.png",
     nameAspect: "185 / 185",
     nameWidth: "min(38%, 90px)",
+    borderColor: "#ffffff",
   },
   teto: {
     photo: "/figma-home/card-teto.png",
     name: "/figma-home/name-teto-small.png",
     nameAspect: "165 / 53",
     nameWidth: "min(50%, 120px)",
+    borderColor: "#ffffff",
   },
   brandao: {
     photo: "/figma-home/card-brandao.png",
     name: "/figma-home/name-brandao-small.png",
     nameAspect: "190 / 64",
     nameWidth: "min(60%, 150px)",
+    borderColor: "#ffffff",
   },
 };
 
 export function ArtistsRow() {
-  // ordem visual: TETO · WIU · [logo card] · MATUÊ · BRANDÃO
   const left = ORDER.slice(0, 2);
   const right = ORDER.slice(2);
 
@@ -67,6 +75,8 @@ export function ArtistsRow() {
 function ArtistCard({ slug }: { slug: ArtistSlug }) {
   const artist = ARTISTS[slug];
   const cfg = CARDS[slug];
+  const active = useActiveArtist((s) => s.active === slug);
+
   return (
     <Link
       href={`/${slug}`}
@@ -75,6 +85,10 @@ function ArtistCard({ slug }: { slug: ArtistSlug }) {
       style={{
         aspectRatio: "3 / 4",
         background: artist.panelBackground,
+        boxShadow: active
+          ? `0 0 0 3px ${cfg.borderColor}, 0 12px 40px rgba(0,0,0,0.45)`
+          : "none",
+        transition: "box-shadow 500ms cubic-bezier(0.7,0,0.3,1)",
       }}
     >
       <Image
@@ -120,11 +134,27 @@ function CenterLogoCard() {
     >
       <Image
         src="/figma-home/card-30praum.png"
-        alt="30 PRAUM"
+        alt=""
+        aria-hidden
         fill
         sizes="(min-width: 640px) 20vw, 100vw"
-        className="object-cover"
+        className="object-cover opacity-55"
       />
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.7) 100%)",
+        }}
+      />
+
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-3 text-white">
+        <span style={{ fontSize: "clamp(2.5rem, 5vw, 4.2rem)" }}>
+          <BrandLogo variant="stacked" />
+        </span>
+      </div>
+
       <div className="absolute inset-x-0 bottom-5 flex justify-center">
         <Link
           href="/about"

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import type { ArtistSlug } from "@/lib/artists/types";
+import { useActiveArtist } from "@/lib/home/active-artist";
 
 type HeroSlide = {
   slug: ArtistSlug;
@@ -52,6 +53,11 @@ const ROTATE_MS = 4500;
 
 export function HomeHero() {
   const [index, setIndex] = useState(0);
+  const setActive = useActiveArtist((s) => s.setActive);
+
+  useEffect(() => {
+    setActive(SLIDES[index].slug);
+  }, [index, setActive]);
 
   useEffect(() => {
     const id = setInterval(() => {
