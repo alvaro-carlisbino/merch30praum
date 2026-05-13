@@ -36,14 +36,14 @@ const CARDS: Record<ArtistSlug, CardConfig> = {
     photo: "/figma-home/card-teto.png",
     name: "/figma-home/name-teto-big.png",
     nameAspect: "362 / 116",
-    nameWidth: "72%",
+    nameWidth: "90%",
     borderColor: "#ffffff",
   },
   brandao: {
     photo: "/figma-home/card-brandao.png",
     name: "/figma-home/name-brandao-big.png",
     nameAspect: "362 / 122",
-    nameWidth: "82%",
+    nameWidth: "95%",
     borderColor: "#ffffff",
   },
 };
@@ -155,13 +155,13 @@ function CenterLogoCard() {
         </span>
       </div>
 
-      <div className="absolute inset-x-0 bottom-5 flex justify-center">
+      <div className="absolute inset-x-3 bottom-5 flex justify-center sm:inset-x-4 sm:bottom-7">
         <Link
           href="/about"
           data-cursor="Descubra mais"
-          className="inline-flex items-center rounded-full border bg-black/40 px-5 py-2 text-[11px] uppercase tracking-[0.22em] backdrop-blur-sm transition-colors hover:bg-white hover:text-black"
+          className="inline-flex w-full items-center justify-center rounded-full border bg-black/35 px-4 py-3 text-[13px] backdrop-blur-sm transition-colors hover:bg-white hover:text-black sm:py-3.5 sm:text-[14px]"
           style={{
-            borderColor: "rgba(255,255,255,0.6)",
+            borderColor: "rgba(255,255,255,0.85)",
             color: "#ffffff",
           }}
         >
