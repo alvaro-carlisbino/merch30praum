@@ -50,6 +50,29 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
       ouvintes: "125M",
     },
   },
+  brandao: {
+    heroBg: "/figma-artista/brandao-hero.png",
+    nameBig: "/figma-artista/brandao-name-big.png",
+    nameBigAspect: "362 / 122",
+    nameMedium: "/figma-artista/brandao-name-medium.png",
+    nameMediumAspect: "190 / 64",
+    stagePhoto: "/figma-artista/brandao-stage.png",
+    albumCover: "/figma-artista/brandao-album-anjo.png",
+    quote: {
+      text: "Cresci copiando. Agora os outros copiam errado.",
+      attribution: "Brandão85 · 85 · 2026",
+    },
+    motto: "Da quebrada pro mundo — sem perder o xerox.",
+    description:
+      "Cearense da Caponga, Brandão85 entrou oficialmente na 30PRAUM em setembro de 2024 depois de saída amigável da Hash Produções. Cocriou faixas do 333 do Matuê (Crack com Mussilon, Isso é Sério) e estreou solo no selo com CEO (2024). Isso é Trap Vol.2 é a confirmação — WARZONE e JAPONÊS chegaram virais antes do disco sair.",
+    estreia: "Setembro 2024",
+    marcos: "Hash 2018–2024 · Isso é Trap Vol. 02",
+    albumStats: {
+      lancamento: "15/04/2026",
+      duracao: "37min 46s",
+      ouvintes: "125M",
+    },
+  },
 };
 
 export default async function ArtistLanding({
