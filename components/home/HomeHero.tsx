@@ -194,15 +194,19 @@ export function HomeHero() {
                 </div>
               );
             }
+            const ratio = slide.nameWidth / slide.nameHeight;
             return (
               <div
                 key={slide.key}
                 aria-hidden={!isActive}
                 className="absolute transition-opacity duration-700"
                 style={{
-                  width: slide.nameWidth,
-                  height: slide.nameHeight,
+                  width: `min(${slide.nameWidth}px, 84vw)`,
+                  aspectRatio: `${slide.nameWidth} / ${slide.nameHeight}`,
+                  maxHeight: slide.nameHeight,
                   opacity: isActive ? 1 : 0,
+                  // ratio referenced to keep TS happy
+                  ["--ratio" as string]: ratio,
                 }}
               >
                 <Image
