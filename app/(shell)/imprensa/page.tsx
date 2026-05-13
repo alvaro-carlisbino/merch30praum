@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { Download } from "lucide-react";
 import { PRESS_KIT_ASSETS, PRESS_CONTACTS, type PressAssetType } from "@/lib/press/registry";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { WordReveal } from "@/components/motion/WordReveal";
 
 export const metadata = {
   title: "Imprensa · 30praum",
@@ -28,17 +26,19 @@ export default function ImprensaPage() {
 
   return (
     <article>
-      <section className="mx-auto max-w-screen-2xl px-4 sm:px-8 pt-24 pb-16">
-        <WordReveal
-          text="Tudo o que a redação precisa."
-          as="h1"
-          className="font-display uppercase leading-[0.85]"
-          stagger={0.08}
-          wordClassName="text-[clamp(2.5rem,9vw,8rem)] tracking-[-0.04em]"
-        />
-        <p className="mt-8 max-w-2xl text-base sm:text-lg text-fg/80 leading-relaxed">
-          Logos em alta resolução, fotos autorizadas, biografias em português e inglês, e o media
-          kit oficial. Tudo aberto, sem intermediário.
+      <section className="mx-auto max-w-screen-2xl px-4 pt-16 pb-10 sm:px-8 sm:pt-20">
+        <h1
+          className="font-display uppercase leading-[0.92]"
+          style={{
+            fontSize: "clamp(2.4rem, 5.8vw, 4.8rem)",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          Imprensa
+        </h1>
+        <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/80 sm:text-base">
+          Logos em alta, fotos autorizadas, biografias e media kit. Tudo aberto,
+          sem intermediário.
         </p>
       </section>
 
@@ -50,7 +50,7 @@ export default function ImprensaPage() {
               <a
                 key={key}
                 href={`mailto:${c.email}`}
-                className="border p-5 transition-colors hover:bg-fg/5"
+                className="rounded-2xl border p-5 transition-colors hover:bg-fg/5"
                 style={{ borderColor: "var(--border)" }}
               >
                 <p className="text-sm opacity-65">{c.label}</p>
@@ -69,27 +69,30 @@ export default function ImprensaPage() {
       {/* Press kit grouped */}
       <div className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-16 space-y-16">
         {grouped.map((group) => (
-          <ScrollReveal key={group.type}>
-            <section>
-              <div className="mb-6 flex items-baseline gap-4">
-                <h2
-                  className="font-display uppercase leading-tight"
-                  style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", letterSpacing: "-0.02em" }}
-                >
-                  {group.label}
-                </h2>
-                <span className="text-xs opacity-55">
-                  {group.items.length} {group.items.length === 1 ? "item" : "itens"}
-                </span>
-              </div>
+          <section key={group.type}>
+            <div className="mb-6 flex items-baseline gap-4">
+              <h2
+                className="font-display uppercase leading-tight"
+                style={{
+                  fontSize: "clamp(1.4rem, 2.8vw, 2.2rem)",
+                  letterSpacing: "0.01em",
+                }}
+              >
+                {group.label}
+              </h2>
+              <span className="text-xs text-muted">
+                {group.items.length}{" "}
+                {group.items.length === 1 ? "item" : "itens"}
+              </span>
+            </div>
 
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {group.items.map((asset) => (
-                  <article
-                    key={asset.slug}
-                    className="group flex flex-col overflow-hidden border"
-                    style={{ borderColor: "var(--border)" }}
-                  >
+            <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+              {group.items.map((asset) => (
+                <article
+                  key={asset.slug}
+                  className="group flex flex-col overflow-hidden rounded-2xl border"
+                  style={{ borderColor: "var(--border)" }}
+                >
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={asset.thumbnail}
@@ -123,11 +126,10 @@ export default function ImprensaPage() {
                         </a>
                       </div>
                     </div>
-                  </article>
-                ))}
-              </div>
-            </section>
-          </ScrollReveal>
+                </article>
+              ))}
+            </div>
+          </section>
         ))}
       </div>
 

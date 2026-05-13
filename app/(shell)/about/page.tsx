@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { ARTISTS } from "@/lib/artists/registry";
-import { LabelTimeline } from "@/components/home/LabelTimeline";
-import { BrandLogo } from "@/components/shell/BrandLogo";
 
 export const metadata = {
   title: "Sobre",
@@ -12,15 +10,15 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <article>
-      <section className="relative mx-auto max-w-screen-2xl px-4 sm:px-8 pt-24 pb-16">
+      <section className="relative mx-auto max-w-screen-2xl px-4 pt-16 pb-12 sm:px-8 sm:pt-20">
         <h1
-          className="font-display uppercase leading-[0.85]"
+          className="font-display uppercase leading-[0.92]"
           style={{
-            fontSize: "clamp(3rem, 11vw, 9rem)",
-            letterSpacing: "-0.04em",
+            fontSize: "clamp(2.4rem, 5.8vw, 4.8rem)",
+            letterSpacing: "-0.02em",
           }}
         >
-          Quem manda é a <span style={{ color: "var(--accent)" }}>30praum</span>.
+          Sobre a 30praum
         </h1>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
@@ -76,8 +74,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <LabelTimeline />
-
       <section
         className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-20"
         style={{ borderTop: "1px solid var(--border)" }}
@@ -94,15 +90,14 @@ export default function AboutPage() {
         >
           As quatro almas da casa.
         </h2>
-        <div className="mt-12 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {Object.values(ARTISTS).map((a) => (
             <Link
               key={a.slug}
               href={`/${a.slug}`}
               data-cursor={`Ver · ${a.displayName}`}
-              className="group block p-6 transition-colors"
+              className="group block rounded-2xl p-6 transition-transform hover:scale-[1.02]"
               style={{
-                border: "1px solid var(--border)",
                 background: a.panelBackground,
                 color: "#fff",
               }}
@@ -115,7 +110,7 @@ export default function AboutPage() {
               </p>
               <p
                 className="mt-3 font-display"
-                style={{ fontSize: "2rem", letterSpacing: "-0.01em" }}
+                style={{ fontSize: "1.75rem", letterSpacing: "0.01em" }}
               >
                 {a.displayName}
               </p>
@@ -127,19 +122,6 @@ export default function AboutPage() {
               </p>
             </Link>
           ))}
-        </div>
-      </section>
-
-      {/* Wordmark assinatura */}
-      <section
-        className="border-t overflow-hidden"
-        style={{ borderColor: "var(--border)" }}
-      >
-        <div
-          className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-16 flex items-center justify-center"
-          style={{ fontSize: "clamp(5rem, 18vw, 16rem)" }}
-        >
-          <BrandLogo variant="stacked" />
         </div>
       </section>
     </article>
