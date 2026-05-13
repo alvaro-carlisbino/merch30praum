@@ -3,8 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ALBUM_SLUGS, ALBUMS, isAlbumSlug } from "@/lib/albums/registry";
 import { ARTISTS } from "@/lib/artists/registry";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { WordReveal } from "@/components/motion/WordReveal";
 import { Marquee } from "@/components/motion/Marquee";
 import { PhysicalMedia } from "@/components/ui/PhysicalMedia";
 
@@ -55,8 +53,7 @@ export default async function AlbumPage({
         />
 
         <div className="relative mx-auto max-w-screen-2xl px-4 sm:px-8 pt-20 pb-24 grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-16 lg:items-center">
-          <ScrollReveal stagger={0.1}>
-            <p
+          <p
               className="text-[10px] uppercase tracking-[0.4em]"
               style={{ color: album.accentHex }}
             >
@@ -65,20 +62,12 @@ export default async function AlbumPage({
             <p className="mt-3 text-xs uppercase tracking-[0.3em] text-white/55">
               {album.artists.map((a) => a.name).join(" × ")}
             </p>
-          </ScrollReveal>
-
-          <div />
+<div />
 
           <div>
-            <WordReveal
-              text={album.title}
-              as="h1"
-              className="font-display uppercase leading-[0.85]"
-              wordClassName="text-[clamp(3.5rem,12vw,12rem)] tracking-[-0.04em]"
-            />
+            <h1 className="font-display uppercase leading-[0.85] text-[clamp(3.5rem,12vw,12rem)] tracking-[-0.04em]"></h1>
 
-            <ScrollReveal stagger={0.12}>
-              <p
+            <p
                 className="mt-8 max-w-xl font-display italic"
                 style={{
                   fontSize: "clamp(1.2rem, 1.8vw, 1.6rem)",
@@ -123,8 +112,7 @@ export default async function AlbumPage({
                   </a>
                 ))}
               </div>
-            </ScrollReveal>
-          </div>
+</div>
 
           <div className="lg:order-first lg:col-start-1 lg:row-start-2 lg:row-span-2">
             <div className="relative aspect-square w-full max-w-[640px] mx-auto">
@@ -145,8 +133,7 @@ export default async function AlbumPage({
       />
 
       <section className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-20 grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-16">
-        <ScrollReveal>
-          <p className="text-[10px] uppercase tracking-[0.3em] text-white/55">
+        <p className="text-[10px] uppercase tracking-[0.3em] text-white/55">
             Manifesto
           </p>
           <h2
@@ -159,17 +146,13 @@ export default async function AlbumPage({
           >
             {album.year}
           </h2>
-        </ScrollReveal>
-
-        <ScrollReveal stagger={0.15}>
-          <p
+<p
             className="font-display leading-snug"
             style={{ fontSize: "clamp(1.3rem, 2vw, 1.9rem)" }}
           >
             {album.manifesto}
           </p>
-        </ScrollReveal>
-      </section>
+</section>
 
       <section
         className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-16"
@@ -226,8 +209,7 @@ export default async function AlbumPage({
         className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-20"
         style={{ borderTop: "1px solid rgba(255,255,255,0.12)" }}
       >
-        <ScrollReveal stagger={0.12}>
-          <p className="text-[10px] uppercase tracking-[0.3em] text-white/55">
+        <p className="text-[10px] uppercase tracking-[0.3em] text-white/55">
             Drop relacionado
           </p>
           <h2
@@ -242,9 +224,7 @@ export default async function AlbumPage({
           <p className="mt-4 max-w-xl text-white/75">
             {dropArtist.drop.chapterName} · {dropArtist.drop.availabilityNote}
           </p>
-        </ScrollReveal>
-
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
+<div className="mt-10 grid gap-4 sm:grid-cols-3">
           <Link
             href={`/${dropArtist.slug}`}
             className="group relative block aspect-[4/5] overflow-hidden"

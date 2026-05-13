@@ -1,6 +1,5 @@
 import { getCurrentPlantao } from "@/lib/plantao/registry";
 import { IngressosTable } from "@/components/plantao/IngressosTable";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
 export const metadata = {
   title: "Ingressos · Plantão 2026",
@@ -27,15 +26,13 @@ export default function PlantaoIngressosPage() {
 
       {/* Sectors */}
       <section className="mx-auto max-w-screen-2xl px-4 sm:px-8 pb-24">
-        <ScrollReveal>
-          <h2
+        <h2
             className="font-display uppercase leading-[0.9]"
             style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
           >
             Escolhe o seu lugar.
           </h2>
-        </ScrollReveal>
-        <div className="mt-10">
+<div className="mt-10">
           <IngressosTable sectors={current.sectors} ticketsUrl={current.ticketsUrl} />
         </div>
 

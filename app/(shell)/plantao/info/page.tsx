@@ -1,5 +1,4 @@
 import { getCurrentPlantao } from "@/lib/plantao/registry";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
 export const metadata = {
   title: "Info · Plantão 2026",
@@ -62,16 +61,13 @@ export default function PlantaoInfoPage() {
 
       {/* FAQ */}
       <section className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-20">
-        <ScrollReveal>
-          <h2
+        <h2
             className="font-display uppercase leading-[0.9]"
             style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}
           >
             Tira-dúvidas.
           </h2>
-        </ScrollReveal>
-
-        <div className="mt-12 grid gap-3">
+<div className="mt-12 grid gap-3">
           {current.infoFAQ.map((q, idx) => (
             <details
               key={q.question}

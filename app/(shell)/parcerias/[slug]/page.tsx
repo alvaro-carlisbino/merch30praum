@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { getPartner, PARTNERS, PARTNER_SLUGS } from "@/lib/partners/registry";
 import { getArtist } from "@/lib/artists/registry";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
 export function generateStaticParams() {
   return PARTNER_SLUGS.map((slug) => ({ slug }));
@@ -110,8 +109,7 @@ export default async function PartnerCasePage({
         style={{ borderColor: "rgba(255,255,255,0.1)" }}
       >
         <div className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-24 grid gap-12 lg:grid-cols-[1.3fr_1fr]">
-          <ScrollReveal>
-            <h2
+          <h2
               className="font-display uppercase leading-[0.9]"
               style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.03em" }}
             >
@@ -126,9 +124,7 @@ export default async function PartnerCasePage({
             >
               "{partner.quote}"
             </blockquote>
-          </ScrollReveal>
-
-          <div className="grid gap-3 content-start">
+<div className="grid gap-3 content-start">
             {artists.length > 0 && (
               <div
                 className="border p-6"
