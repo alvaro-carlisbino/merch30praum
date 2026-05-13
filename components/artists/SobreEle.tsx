@@ -56,7 +56,7 @@ export function SobreEle({ facts, description, sidePhoto, sidePhotoAlt }: Props)
 
         <div
           className="relative overflow-hidden rounded-3xl"
-          style={{ minHeight: 380, background: "var(--bg)" }}
+          style={{ aspectRatio: "4 / 5", background: "var(--bg)" }}
         >
           <Image
             src={sidePhoto}
@@ -64,7 +64,7 @@ export function SobreEle({ facts, description, sidePhoto, sidePhotoAlt }: Props)
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
-            style={{ objectPosition: "center 30%" }}
+            style={{ objectPosition: "center 20%" }}
           />
         </div>
       </div>
