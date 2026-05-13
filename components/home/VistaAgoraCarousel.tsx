@@ -122,7 +122,7 @@ export function VistaAgoraCarousel({ products }: Props) {
       )}
 
       <Link
-        href="/loja"
+        href="/catalogo"
         data-cursor="Catálogo completo"
         className="mt-8 inline-flex items-center rounded-full border px-6 py-2.5 text-[11px] uppercase tracking-[0.22em] transition-colors hover:bg-white hover:text-black"
         style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
