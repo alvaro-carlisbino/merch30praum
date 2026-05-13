@@ -9,17 +9,17 @@ export const metadata = {
 };
 
 const MAIS_VENDIDOS: CarouselProduct[] = [
-  { id: "mv1", href: "/loja", image: "/figma-loja/mv-1.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "mv2", href: "/loja", image: "/figma-loja/mv-2.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "mv3", href: "/loja", image: "/figma-loja/mv-3.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "mv4", href: "/loja", image: "/figma-loja/mv-4.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "mv1", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/mv-1.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "mv2", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/mv-2.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "mv3", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/mv-3.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "mv4", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/mv-4.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
 ];
 
 const EM_PROMOCOES: CarouselProduct[] = [
-  { id: "ep1", href: "/loja", image: "/figma-loja/ep-1.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "ep2", href: "/loja", image: "/figma-loja/ep-2.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "ep3", href: "/loja", image: "/figma-loja/ep-3.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "ep4", href: "/loja", image: "/figma-loja/ep-4.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "ep1", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/ep-1.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "ep2", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/ep-2.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "ep3", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/ep-3.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
+  { id: "ep4", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/ep-4.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
 ];
 
 export default function LojaPage() {
