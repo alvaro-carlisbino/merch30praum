@@ -1,63 +1,28 @@
 import Link from "next/link";
 import { ARTISTS } from "@/lib/artists/registry";
 import { BrandLogo } from "./BrandLogo";
-import { WordReveal } from "@/components/motion/WordReveal";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
 export function BrandFooter() {
   return (
     <footer style={{ borderTop: "1px solid var(--border)" }}>
-      <section
-        aria-labelledby="brand-manifesto"
-        className="mx-auto max-w-screen-2xl px-4 sm:px-8 pt-24 pb-20"
-      >
-        <WordReveal
-          text="Quem manda é a 30praum."
-          as="h2"
-          className="font-display uppercase leading-[1.0]"
-          stagger={0.09}
-          wordClassName="text-[clamp(3rem,11vw,9rem)] tracking-[-0.02em]"
-        />
-
-        <ScrollReveal stagger={0.12}>
-          <p className="mt-10 max-w-xl text-base sm:text-lg text-fg/85 leading-relaxed">
-            Quatro almas, um endereço. A casa é coletiva — gravadora, festival,
-            holding, incubadora. Independência rara, visão sobre sucesso fácil.
-          </p>
-        </ScrollReveal>
-      </section>
-
-      {/* Wordmark gigante — assinatura visual */}
-      <div
-        className="border-y overflow-hidden"
-        style={{ borderColor: "var(--border)" }}
-      >
-        <div
-          className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-12 flex items-center justify-center"
-          style={{ fontSize: "clamp(6rem, 22vw, 20rem)" }}
-        >
-          <BrandLogo variant="stacked" />
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-screen-2xl px-4 sm:px-8 grid gap-10 md:grid-cols-[1fr_auto_auto_auto] py-12">
+      <div className="mx-auto grid max-w-screen-2xl gap-10 px-4 py-14 sm:px-8 sm:py-16 md:grid-cols-[1.4fr_auto_auto_auto]">
         <div>
           <BrandLogo className="text-2xl" />
-          <p className="mt-4 max-w-sm text-xs text-muted leading-relaxed">
+          <p className="mt-5 max-w-sm text-xs leading-relaxed text-muted">
             Site oficial da holding 30praum — gravadora · festival · incubadora.
             Sede em Fortaleza desde 2016.
           </p>
         </div>
 
-        <nav aria-label="Universos" className="text-sm space-y-2">
-          <h3 className="text-[10px] uppercase tracking-[0.3em] text-muted mb-3">
+        <nav aria-label="Universos" className="space-y-2 text-sm">
+          <h3 className="mb-3 text-[10px] uppercase tracking-[0.3em] text-muted">
             Universos
           </h3>
           {Object.values(ARTISTS).map((a) => (
             <Link
               key={a.slug}
               href={`/${a.slug}`}
-              className="block hover:text-accent transition-colors"
+              className="block transition-colors hover:text-accent"
             >
               {a.displayName}{" "}
               <span className="text-muted">— {a.universeName}</span>
@@ -65,46 +30,43 @@ export function BrandFooter() {
           ))}
         </nav>
 
-        <nav aria-label="Holding" className="text-sm space-y-2">
-          <h3 className="text-[10px] uppercase tracking-[0.3em] text-muted mb-3">
+        <nav aria-label="Holding" className="space-y-2 text-sm">
+          <h3 className="mb-3 text-[10px] uppercase tracking-[0.3em] text-muted">
             Holding
           </h3>
-          <Link href="/plantao" className="block hover:text-accent transition-colors">
+          <Link href="/plantao" className="block transition-colors hover:text-accent">
             Plantão Festival
           </Link>
-          <Link href="/sabor" className="block hover:text-accent transition-colors">
+          <Link href="/sabor" className="block transition-colors hover:text-accent">
             Sabor Matuê
           </Link>
-          <Link href="/parcerias" className="block hover:text-accent transition-colors">
+          <Link href="/parcerias" className="block transition-colors hover:text-accent">
             Parcerias
           </Link>
-          <Link href="/incubadora" className="block hover:text-accent transition-colors">
-            Incubadora
-          </Link>
-          <Link href="/loja" className="block hover:text-accent transition-colors">
+          <Link href="/loja" className="block transition-colors hover:text-accent">
             Loja oficial
           </Link>
         </nav>
 
-        <nav aria-label="Atendimento" className="text-sm space-y-2">
-          <h3 className="text-[10px] uppercase tracking-[0.3em] text-muted mb-3">
+        <nav aria-label="Contato" className="space-y-2 text-sm">
+          <h3 className="mb-3 text-[10px] uppercase tracking-[0.3em] text-muted">
             Contato
           </h3>
-          <Link href="/about" className="block hover:text-accent transition-colors">
+          <Link href="/about" className="block transition-colors hover:text-accent">
             Sobre a 30praum
           </Link>
-          <Link href="/imprensa" className="block hover:text-accent transition-colors">
+          <Link href="/imprensa" className="block transition-colors hover:text-accent">
             Imprensa · Press kit
           </Link>
           <a
             href="mailto:contato@30praum.com"
-            className="block hover:text-accent transition-colors"
+            className="block transition-colors hover:text-accent"
           >
             contato@30praum.com
           </a>
           <a
             href="mailto:parcerias@30praum.com"
-            className="block hover:text-accent transition-colors"
+            className="block transition-colors hover:text-accent"
           >
             parcerias@30praum.com
           </a>
@@ -112,16 +74,9 @@ export function BrandFooter() {
       </div>
 
       <div style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-[0.3em] text-muted">
+        <div className="mx-auto flex max-w-screen-2xl flex-wrap items-center justify-between gap-4 px-4 py-5 text-[10px] uppercase tracking-[0.3em] text-muted sm:px-8">
           <span>© 30praum {new Date().getFullYear()} · Fortaleza, CE</span>
-          <span className="flex items-center gap-2">
-            <span
-              aria-hidden
-              className="h-1.5 w-1.5 rounded-full"
-              style={{ background: "var(--accent)" }}
-            />
-            Site oficial
-          </span>
+          <span>Site Oficial</span>
         </div>
       </div>
     </footer>

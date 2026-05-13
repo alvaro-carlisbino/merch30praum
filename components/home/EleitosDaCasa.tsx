@@ -1,126 +1,199 @@
-import Link from "next/link";
 import Image from "next/image";
-import { ALBUMS, STATUS_LABEL, type AlbumSlug } from "@/lib/albums/registry";
+import Link from "next/link";
+import { ALBUMS, STATUS_LABEL, type AlbumSlug, type AlbumStatus } from "@/lib/albums/registry";
+import { IMG } from "@/lib/images/unsplash";
 
-/**
- * Seção curatorial — picks editoriais escolhidos a dedo, não algorítmicos.
- * Inspirada em "Dungeon Favorites" da Stones Throw: capa dominante, copy
- * poética curta, status badge editorial. Apresenta o catálogo como gosto,
- * não como inventário.
- */
+type Pick = {
+  slug: AlbumSlug;
+  status: AlbumStatus;
+  pitch: string;
+  cover?: string;
+  secondaryImage?: string;
+};
 
-// 4 picks selecionados editorialmente
-const PICKS: { slug: AlbumSlug; pitch: string }[] = [
-  {
+const PICKS: { big: Pick; topRight: Pick; botRight: Pick } = {
+  big: {
     slug: "xtranho",
+    status: "em-alta",
     pitch: "Sinal alien em transmissão estável.",
+    cover: IMG.matuePortrait,
+    secondaryImage: IMG.coverXtranho,
   },
-  {
+  topRight: {
     slug: "colapso-global",
+    status: "tour-ativa",
     pitch: "Duas vozes, um colapso bonito.",
+    cover: IMG.coverColapsoGlobal,
   },
-  {
+  botRight: {
     slug: "isso-e-trap-vol-2",
+    status: "estreia",
     pitch: "Xerox da quebrada em alta densidade.",
+    cover: IMG.coverIssoETrap,
   },
-  {
-    // pick especial — referência a Máquina do Tempo (Matuê 2020) como clássico
-    slug: "xtranho", // re-aponta enquanto não existe Máquina do Tempo no registry
-    pitch: "O começo de tudo, ainda tocando.",
-  },
-];
+};
 
 export function EleitosDaCasa() {
-  const picks = PICKS.slice(0, 3); // 3 picks definitivos (sem repetir xtranho)
-
   return (
     <section
+      aria-labelledby="eleitos-da-casa"
       className="border-t"
       style={{ borderColor: "var(--border)" }}
-      aria-labelledby="eleitos-da-casa"
     >
-      <div className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-24">
-        <header className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end mb-12">
+      <div className="mx-auto max-w-screen-2xl px-4 py-20 sm:px-8 sm:py-24">
+        <header className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <h2
             id="eleitos-da-casa"
-            className="font-display leading-[0.92]"
+            className="font-display uppercase leading-[0.92]"
             style={{
-              fontSize: "clamp(2.5rem, 6vw, 5rem)",
+              fontSize: "clamp(2.2rem, 5.4vw, 4.5rem)",
               letterSpacing: "-0.02em",
             }}
           >
             Eleitos da casa.
           </h2>
-          <p className="text-sm sm:text-base text-muted leading-relaxed max-w-sm italic">
+          <p className="max-w-xs text-sm text-muted leading-snug sm:text-base">
             Não é o que tocou mais. É o que importa mais.
           </p>
         </header>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {picks.map(({ slug, pitch }, idx) => {
-            const album = ALBUMS[slug];
-            if (!album) return null;
-            return (
-              <Link
-                key={`${slug}-${idx}`}
-                href={`/album/${slug}`}
-                data-cursor={album.title}
-                className="group block"
-              >
-                <div
-                  className="relative aspect-square overflow-hidden"
-                  style={{ background: album.bgHex }}
-                >
-                  <Image
-                    src={album.coverImage}
-                    alt={album.title}
-                    fill
-                    unoptimized
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                  />
+        <div
+          className="grid gap-3 sm:gap-4"
+          style={{
+            gridTemplateColumns: "repeat(2, minmax(0,1fr))",
+            gridTemplateRows: "minmax(0,1fr) minmax(0,1fr)",
+          }}
+        >
+          {/* Card grande — esquerda, 2 rows */}
+          <BigPickCard pick={PICKS.big} />
 
-                  {album.status && (
-                    <span
-                      className="absolute top-3 left-3 px-2 py-1 text-[9px] uppercase tracking-[0.25em]"
-                      style={{
-                        background: "rgba(0,0,0,0.75)",
-                        color: album.accentHex,
-                        backdropFilter: "blur(8px)",
-                      }}
-                    >
-                      {STATUS_LABEL[album.status]}
-                    </span>
-                  )}
-                </div>
+          {/* Top-right */}
+          <SmallPickCard pick={PICKS.topRight} />
 
-                <div className="mt-4 px-1">
-                  <p
-                    className="text-base sm:text-lg italic leading-snug"
-                    style={{ color: "var(--fg)" }}
-                  >
-                    "{pitch}"
-                  </p>
-                  <p className="mt-3 text-xs opacity-65 tabular-nums">
-                    {album.title} · {album.artists.map((a) => a.name).join(" · ")} · {album.year}
-                  </p>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-
-        <div className="mt-12">
-          <Link
-            href="/releases"
-            data-cursor="Catálogo"
-            className="inline-flex items-center gap-2 text-sm hover:opacity-80"
-            style={{ color: "var(--accent)" }}
-          >
-            Ver catálogo completo →
-          </Link>
+          {/* Bot-right */}
+          <SmallPickCard pick={PICKS.botRight} />
         </div>
       </div>
     </section>
+  );
+}
+
+function BigPickCard({ pick }: { pick: Pick }) {
+  const album = ALBUMS[pick.slug];
+  return (
+    <Link
+      href={`/album/${pick.slug}`}
+      data-cursor={album.title}
+      className="group relative col-start-1 row-span-2 overflow-hidden rounded-2xl"
+      style={{ background: album.bgHex, aspectRatio: "1 / 1" }}
+    >
+      <div className="absolute inset-0 grid grid-cols-2">
+        <div className="relative">
+          <Image
+            src={pick.cover ?? album.coverImage}
+            alt=""
+            aria-hidden
+            fill
+            unoptimized
+            sizes="(min-width: 640px) 25vw, 50vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+            style={{ objectPosition: "center 30%" }}
+          />
+        </div>
+        <div
+          className="relative"
+          style={{
+            background:
+              pick.secondaryImage
+                ? `url(${pick.secondaryImage}) center/cover no-repeat`
+                : album.bgHex,
+            filter: "saturate(0.6) contrast(1.15)",
+          }}
+        />
+      </div>
+
+      <PickOverlay album={album} status={pick.status} pitch={pick.pitch} large />
+    </Link>
+  );
+}
+
+function SmallPickCard({ pick }: { pick: Pick }) {
+  const album = ALBUMS[pick.slug];
+  return (
+    <Link
+      href={`/album/${pick.slug}`}
+      data-cursor={album.title}
+      className="group relative overflow-hidden rounded-2xl"
+      style={{ background: album.bgHex }}
+    >
+      <Image
+        src={pick.cover ?? album.coverImage}
+        alt=""
+        aria-hidden
+        fill
+        unoptimized
+        sizes="(min-width: 640px) 50vw, 100vw"
+        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+      />
+      <PickOverlay album={album} status={pick.status} pitch={pick.pitch} />
+    </Link>
+  );
+}
+
+function PickOverlay({
+  album,
+  status,
+  pitch,
+  large = false,
+}: {
+  album: (typeof ALBUMS)[AlbumSlug];
+  status: AlbumStatus;
+  pitch: string;
+  large?: boolean;
+}) {
+  return (
+    <>
+      <span
+        className="absolute left-4 top-4 inline-flex items-center rounded-full px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.28em]"
+        style={{
+          background: "rgba(0,0,0,0.72)",
+          color: album.accentHex,
+          backdropFilter: "blur(10px)",
+        }}
+      >
+        {STATUS_LABEL[status]}
+      </span>
+
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.78) 100%)",
+        }}
+      />
+
+      <div
+        className="absolute inset-x-4 bottom-4 sm:inset-x-6 sm:bottom-6"
+        style={{ color: "white" }}
+      >
+        <p
+          className="leading-snug"
+          style={{
+            fontSize: large
+              ? "clamp(1.05rem, 1.8vw, 1.55rem)"
+              : "clamp(0.95rem, 1.4vw, 1.25rem)",
+            fontStyle: "italic",
+            letterSpacing: "-0.005em",
+          }}
+        >
+          &ldquo;{pitch}&rdquo;
+        </p>
+        <p className="mt-2 text-[10px] uppercase tracking-[0.28em] text-white/75">
+          {album.title} · {album.artists.map((a) => a.name).join(" · ")} ·{" "}
+          {album.year}
+        </p>
+      </div>
+    </>
   );
 }

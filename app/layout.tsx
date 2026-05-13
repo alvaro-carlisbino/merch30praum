@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { houseBody, houseDisplay, brandSerif } from "@/styles/fonts";
+import { houseBody, houseDisplay, brandSerif, graffitiTag } from "@/styles/fonts";
 import { CustomCursor } from "@/components/effects/CustomCursor";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { ScrollAtmosphere } from "@/components/effects/ScrollAtmosphere";
@@ -58,7 +58,7 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       data-theme="house"
-      className={`${houseBody.variable} ${houseDisplay.variable} ${brandSerif.variable} h-full antialiased`}
+      className={`${houseBody.variable} ${houseDisplay.variable} ${brandSerif.variable} ${graffitiTag.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <CustomCursor />

@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { motion, AnimatePresence } from "motion/react";
+
+const CREAM = "#ede4d6";
+const INK = "#0f0f0e";
 
 export function NewsletterCapture() {
   const [email, setEmail] = useState("");
@@ -20,97 +22,61 @@ export function NewsletterCapture() {
   return (
     <section
       aria-labelledby="newsletter"
-      className="relative overflow-hidden"
-      style={{
-        background: "var(--accent)",
-        color: "var(--bg)",
-        borderTop: "1px solid var(--border)",
-        borderBottom: "1px solid var(--border)",
-      }}
+      style={{ background: CREAM, color: INK }}
     >
-      <div className="relative mx-auto max-w-screen-2xl px-4 sm:px-8 py-20 grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-end">
+      <div className="mx-auto grid max-w-screen-2xl gap-10 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1.1fr_1fr] lg:items-end lg:gap-16">
         <div>
           <h2
             id="newsletter"
-            className="mt-3 font-display uppercase leading-[0.85]"
+            className="font-display uppercase leading-[0.88]"
             style={{
-              fontSize: "clamp(2.5rem, 7vw, 6rem)",
-              letterSpacing: "-0.04em",
+              fontSize: "clamp(2.2rem, 5.4vw, 4.6rem)",
+              letterSpacing: "-0.02em",
             }}
           >
             Drops antes
             <br />
             de virem.
           </h2>
-          <p className="mt-6 max-w-md text-sm sm:text-base leading-relaxed opacity-85">
-            Anúncio antecipado de lançamento, prévias, peças numeradas e pré-venda
-            só pra quem tá na lista. Sem spam — só drop.
+          <p
+            className="mt-6 max-w-md text-sm leading-relaxed sm:text-base"
+            style={{ color: "rgba(15,15,14,0.78)" }}
+          >
+            Anúncio antecipado de lançamento, prévias, peças numeradas e
+            pré-venda só pra quem tá na lista. Sem spam — só drop.
           </p>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-3"
-          aria-describedby="newsletter-helper"
+          className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-3"
         >
-          <label
-            htmlFor="newsletter-email"
-            className="text-[10px] uppercase tracking-[0.3em] opacity-75"
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            data-cursor="Email"
+            aria-label="Seu email"
+            className="flex-1 rounded-full border px-6 py-3 text-sm outline-none transition-colors focus:border-black"
+            style={{
+              borderColor: "rgba(15,15,14,0.25)",
+              background: "transparent",
+              color: INK,
+            }}
+          />
+          <button
+            type="submit"
+            data-cursor="Entrar na lista"
+            className="rounded-full px-6 py-3 text-sm font-medium transition-opacity hover:opacity-90"
+            style={{
+              background: INK,
+              color: CREAM,
+            }}
           >
-            Seu email
-          </label>
-          <div
-            className="flex flex-col sm:flex-row gap-2"
-            style={{ borderTop: "1.5px solid currentColor" }}
-          >
-            <input
-              id="newsletter-email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="seu@email.com"
-              data-cursor="Email"
-              className="flex-1 bg-transparent border-0 px-0 py-4 outline-none text-2xl font-display"
-              style={{
-                color: "var(--bg)",
-                letterSpacing: "-0.01em",
-              }}
-            />
-            <button
-              type="submit"
-              data-cursor="Entrar na lista"
-              className="px-6 py-4 text-[10px] uppercase tracking-[0.3em] transition-opacity hover:opacity-80"
-              style={{
-                background: "var(--bg)",
-                color: "var(--accent)",
-                fontWeight: 700,
-              }}
-            >
-              Quero entrar →
-            </button>
-          </div>
-
-          <AnimatePresence>
-            {status === "ok" && (
-              <motion.p
-                key="ok"
-                initial={{ opacity: 0, y: 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                className="text-[10px] uppercase tracking-[0.3em] opacity-90"
-              >
-                ✓ entrou na lista · primeiro a saber
-              </motion.p>
-            )}
-          </AnimatePresence>
-
-          <p
-            id="newsletter-helper"
-            className="text-[10px] uppercase tracking-[0.3em] opacity-65"
-          >
-            Cancela quando quiser · zero spam
-          </p>
+            {status === "ok" ? "✓ Entrou na lista" : "Quero entrar"}
+          </button>
         </form>
       </div>
     </section>

@@ -2,6 +2,7 @@ import {
   Inter,
   Bebas_Neue,
   Cinzel,
+  Permanent_Marker,
   Space_Grotesk,
   Cormorant_Garamond,
   Archivo,
@@ -29,6 +30,17 @@ export const brandSerif = Cinzel({
   variable: "--font-brand",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+/**
+ * Tag/lettering manual usado em nomes de artistas no Figma do redesign —
+ * Matuê / Wiu / Brandão escritos como spray/marker.
+ */
+export const graffitiTag = Permanent_Marker({
+  variable: "--font-graffiti",
+  subsets: ["latin"],
+  weight: ["400"],
   display: "swap",
 });
 

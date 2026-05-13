@@ -20,6 +20,7 @@
 
   --font-display: var(--font-display);
   --font-body: var(--font-body);
+  --font-graffiti: var(--font-graffiti);
 
   --ease-universe: cubic-bezier(0.7, 0, 0.3, 1);
 }
