@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { BrandLogo } from "@/components/shell/BrandLogo";
 import type { ArtistSlug } from "@/lib/artists/types";
 import { useActiveArtist } from "@/lib/home/active-artist";
 
@@ -150,18 +149,47 @@ export function HomeHero() {
                 <div
                   key={slide.key}
                   aria-hidden={!isActive}
-                  className="absolute inset-0 flex items-center justify-center transition-opacity duration-700"
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-2 transition-opacity duration-700"
                   style={{ opacity: isActive ? 1 : 0 }}
                 >
-                  <span
-                    className="text-white"
+                  <div
+                    className="flex items-center justify-center gap-1 sm:gap-2"
                     style={{
-                      fontSize: "clamp(5rem, 10vw, 8.5rem)",
-                      filter: "drop-shadow(0 4px 32px rgba(0,0,0,0.6))",
+                      height: "clamp(140px, 18vw, 220px)",
+                      filter: "drop-shadow(0 6px 32px rgba(0,0,0,0.55))",
                     }}
                   >
-                    <BrandLogo variant="stacked" />
-                  </span>
+                    <div className="relative h-full" style={{ aspectRatio: "186 / 244" }}>
+                      <Image
+                        src="/figma-home/chrome-3.png"
+                        alt="3"
+                        fill
+                        sizes="200px"
+                        className="object-contain"
+                        priority
+                      />
+                    </div>
+                    <div className="relative h-full" style={{ aspectRatio: "186 / 244" }}>
+                      <Image
+                        src="/figma-home/chrome-0.png"
+                        alt="0"
+                        fill
+                        sizes="200px"
+                        className="object-contain"
+                        priority
+                      />
+                    </div>
+                  </div>
+                  <p
+                    className="text-white tracking-[0.5em]"
+                    style={{
+                      fontFamily: "var(--font-brand)",
+                      fontSize: "clamp(1rem, 1.6vw, 1.4rem)",
+                      marginLeft: "0.5em",
+                    }}
+                  >
+                    PRAUM
+                  </p>
                 </div>
               );
             }

@@ -55,7 +55,8 @@ export function ArtistsRow() {
   return (
     <section
       aria-label="Artistas da 30praum"
-      className="relative px-4 py-12 sm:px-8 sm:py-16"
+      className="relative z-10 px-4 pb-12 sm:px-8 sm:pb-16"
+      style={{ marginTop: "clamp(-120px, -10vw, -60px)" }}
     >
       <div className="mx-auto grid max-w-screen-2xl grid-cols-2 gap-3 sm:grid-cols-5 sm:gap-4">
         {left.map((slug) => (
