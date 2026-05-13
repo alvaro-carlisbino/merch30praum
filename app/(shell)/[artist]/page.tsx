@@ -1,19 +1,56 @@
 import { notFound } from "next/navigation";
 import { ARTISTS, isArtistSlug } from "@/lib/artists/registry";
-import { getCollectionByHandle } from "@/lib/shopify/client";
-import { ProductCardBase } from "@/components/product/ProductCardBase";
-import { ArtistHero } from "@/components/artists/ArtistHero";
-import { ArtistBio } from "@/components/artists/ArtistBio";
-import { AlbumShowcase } from "@/components/artists/AlbumShowcase";
-import { Lookbook } from "@/components/artists/Lookbook";
-import { ArtistSocials } from "@/components/artists/ArtistSocials";
-import { ArtistShows } from "@/components/artists/ArtistShows";
-import { SpotifyEmbed } from "@/components/artists/SpotifyEmbed";
-import { CrossUniverses } from "@/components/product/CrossUniverses";
+import type { ArtistSlug } from "@/lib/artists/types";
+import { ArtistPageHero } from "@/components/artists/ArtistPageHero";
+import { SobreEle } from "@/components/artists/SobreEle";
+import { AlbumPanel } from "@/components/artists/AlbumPanel";
+import { Tracklist } from "@/components/artists/Tracklist";
 
 interface Params {
   artist: string;
 }
+
+type ArtistPageAssets = {
+  heroBg: string;
+  nameBig: string;
+  nameBigAspect: string;
+  nameMedium: string;
+  nameMediumAspect: string;
+  stagePhoto: string;
+  albumCover: string;
+  quote: { text: string; attribution: string };
+  motto: string;
+  description: string;
+  estreia: string;
+  marcos: string;
+  albumStats: { lancamento: string; duracao: string; ouvintes: string };
+};
+
+const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
+  matue: {
+    heroBg: "/figma-artista/matue-hero.jpg",
+    nameBig: "/figma-artista/matue-name-big.png",
+    nameBigAspect: "461 / 461",
+    nameMedium: "/figma-artista/matue-name-medium.png",
+    nameMediumAspect: "362 / 182",
+    stagePhoto: "/figma-artista/matue-stage.png",
+    albumCover: "/figma-artista/matue-album-xtranho.png",
+    quote: {
+      text: "Todo mundo quer ser estrela, mas não tem lugar no Sol.",
+      attribution: "Matuê · Kenny G · 2020",
+    },
+    motto: "Somos os melhores",
+    description:
+      "Co-fundador da 30PRAUM e um dos principais responsáveis pela popularização do trap no Brasil. Com forte influência da cultura urbana vivida entre o Brasil e a Califórnia, consolidou sua identidade através de estética inovadora, visão criativa e grandes sucessos como Kenny G.",
+    estreia: "2016 (cofundador)",
+    marcos: "Recorde Spotify BR · Rock in Rio 2024",
+    albumStats: {
+      lancamento: "10/12/2025",
+      duracao: "34min 26s",
+      ouvintes: "125M",
+    },
+  },
+};
 
 export default async function ArtistLanding({
   params,
@@ -23,106 +60,95 @@ export default async function ArtistLanding({
   const { artist } = await params;
   if (!isArtistSlug(artist)) notFound();
   const cfg = ARTISTS[artist];
-  const collection = await getCollectionByHandle(cfg.shopifyCollectionHandle);
-  const products = collection?.products ?? [];
+  const a = ASSETS[artist];
+
+  if (!a) {
+    // Pra outros artistas, ainda sem o Figma — fallback simples
+    return (
+      <section className="mx-auto max-w-screen-2xl px-4 py-24 sm:px-8">
+        <h1 className="font-display text-4xl uppercase">{cfg.displayName}</h1>
+        <p className="mt-6 max-w-prose text-fg/80">{cfg.bioParagraphs[0]}</p>
+        <p className="mt-8 text-sm text-muted">
+          Página em redesign — assets do Figma chegam em breve.
+        </p>
+      </section>
+    );
+  }
+
+  const tracks = cfg.album.highlightedTracks.slice(0, 5).map((t) => ({ title: t }));
 
   return (
-    <div>
-      <ArtistHero artist={cfg} />
+    <>
+      <ArtistPageHero
+        bgImage={a.heroBg}
+        nameImage={a.nameBig}
+        nameAspect={a.nameBigAspect}
+        quote={a.quote.text}
+        quoteAttribution={a.quote.attribution}
+      />
 
-      <ArtistBio artist={cfg} />
+      <SobreEle
+        description={a.description}
+        sidePhoto={a.stagePhoto}
+        sidePhotoAlt={`${cfg.displayName} em performance`}
+        facts={[
+          { label: "Nome", value: cfg.realName },
+          { label: "Origem", value: cfg.origin },
+          { label: "Estreia 30 Praum", value: a.estreia },
+          {
+            label: "Discografia",
+            value: cfg.facts.find((f) => f.label === "Discografia")?.value ?? "",
+          },
+          { label: "Marcos", value: a.marcos },
+        ]}
+      />
 
-      {/* Ouvir + redes sociais — fica logo após a bio do artista */}
-      <section
-        className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-16"
-        style={{ borderTop: "1px solid var(--border)" }}
-      >
-        <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:items-start">
-          <div>
-            <h2
-              className="font-display uppercase leading-[0.9]"
-              style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
-            >
-              Ouve agora.
-            </h2>
-            <p className="mt-4 text-sm text-fg/75 max-w-md leading-relaxed">
-              {cfg.album.title} · {cfg.album.year}
-              {cfg.album.collaborator ? ` · ${cfg.album.collaborator}` : ""}
-            </p>
-            <div className="mt-6">
-              <SpotifyEmbed artist={cfg} />
-            </div>
-          </div>
+      <AlbumPanel
+        cover={a.albumCover}
+        albumTitle={cfg.album.title}
+        albumTagline={cfg.album.tagline}
+        stats={[
+          { label: "Lançamento", value: a.albumStats.lancamento },
+          { label: "Faixas", value: String(cfg.album.highlightedTracks.length || 13) },
+          { label: "Duração", value: a.albumStats.duracao },
+          { label: "Ouvintes", value: a.albumStats.ouvintes },
+        ]}
+        streamingLinks={[
+          { label: "Spotify", href: cfg.socials?.spotify ?? "#", icon: "spotify" },
+          { label: "YouTube Music", href: cfg.socials?.youtube ?? "#", icon: "youtube" },
+          { label: "Apple Music", href: cfg.socials?.appleMusic ?? "#", icon: "apple" },
+          { label: "Deezer", href: "#", icon: "deezer" },
+        ]}
+        artistNameImage={a.nameMedium}
+        artistNameAspect={a.nameMediumAspect}
+        artistMotto={a.motto}
+        socials={[
+          { label: "Spotify", href: cfg.socials?.spotify ?? "#", icon: "spotify" },
+          { label: "YouTube", href: cfg.socials?.youtube ?? "#", icon: "youtube" },
+          { label: "Instagram", href: cfg.socials?.instagram ?? "#", icon: "instagram" },
+          { label: "TikTok", href: cfg.socials?.tiktok ?? "#", icon: "tiktok" },
+        ]}
+      />
 
-          <div>
-            <h2
-              className="font-display uppercase leading-[0.9]"
-              style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
-            >
-              Acompanhe.
-            </h2>
-            <p className="mt-4 text-sm text-fg/75 max-w-md leading-relaxed">
-              Onde {cfg.displayName} publica — música, bastidores, anúncios de show.
-            </p>
-            <div className="mt-6">
-              <ArtistSocials artist={cfg} />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <AlbumShowcase artist={cfg} />
-
-      <ArtistShows artist={cfg} />
-
-      <Lookbook artist={cfg} />
-
-      <section
-        id="drop"
-        className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-20"
-        style={{ borderTop: "1px solid var(--border)" }}
-      >
-        <header className="mb-10 flex items-end justify-between gap-6 flex-wrap">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.3em] text-muted">
-              Drop · {cfg.drop.chapterName}
-            </p>
-            <h2
-              className="mt-3 font-display leading-[0.92]"
-              style={{
-                fontSize: "clamp(2.5rem, 6vw, 5rem)",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              Vista o universo {cfg.displayName}.
-            </h2>
-          </div>
-          <span className="text-xs text-muted tabular-nums">
-            {products.length} peças
-          </span>
-        </header>
-
-        {products.length === 0 ? (
-          <p className="text-sm text-muted">Sem peças disponíveis no momento.</p>
-        ) : (
-          <ul
-            className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-            style={{ gap: "var(--grid-gap)" }}
-          >
-            {products.map((p, i) => (
-              <li key={p.id}>
-                <ProductCardBase
-                  product={p}
-                  artistSlug={cfg.slug}
-                  priority={i < 4}
-                />
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      <CrossUniverses current={cfg.slug} />
-    </div>
+      <Tracklist tracks={tracks} />
+    </>
   );
+}
+
+export function generateStaticParams() {
+  return Object.keys(ARTISTS).map((slug) => ({ artist: slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { artist } = await params;
+  if (!isArtistSlug(artist)) return {};
+  const cfg = ARTISTS[artist];
+  return {
+    title: cfg.displayName,
+    description: cfg.tagline,
+  };
 }
