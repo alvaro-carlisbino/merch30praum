@@ -124,6 +124,7 @@ export function HomeHero() {
             aria-hidden
             fill
             priority={i === 0}
+            quality={95}
             sizes="100vw"
             className="object-cover"
             style={{ objectPosition: slide.objectPosition }}
