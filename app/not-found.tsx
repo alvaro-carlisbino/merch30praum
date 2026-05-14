@@ -4,10 +4,10 @@ import { BrandLogo } from "@/components/shell/BrandLogo";
 import { houseBody, houseDisplay, brandSerif } from "@/styles/fonts";
 
 const ROUTES = [
-  { label: "Artistas", href: "/artistas" },
+  { label: "Artistas", href: "/#roster" },
   { label: "Shows", href: "/shows" },
   { label: "Plantão", href: "/plantao" },
-  { label: "Sabor Matuê", href: "/sabor" },
+  { label: "Loja", href: "/loja" },
   { label: "Lançamentos", href: "/releases" },
   { label: "Notícias", href: "/news" },
   { label: "Incubadora", href: "/incubadora" },

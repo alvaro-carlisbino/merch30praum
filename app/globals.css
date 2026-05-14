@@ -6,7 +6,6 @@
 @import "../styles/themes/teto.css";
 @import "../styles/themes/brandao.css";
 @import "../styles/themes/plantao.css";
-@import "../styles/themes/sabor.css";
 @import "../styles/themes/incubadora.css";
 
 @theme inline {
@@ -26,6 +25,10 @@
   --font-tag-brandao: var(--font-tag-brandao);
 
   --ease-universe: cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,

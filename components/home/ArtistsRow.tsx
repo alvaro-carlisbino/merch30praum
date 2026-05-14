@@ -20,29 +20,29 @@ type CardConfig = {
 const CARDS: Record<ArtistSlug, CardConfig> = {
   matue: {
     photo: "/figma-home/card-matue.png",
-    name: "/figma-home/name-matue-medium.png",
-    nameAspect: "362 / 182",
+    name: "/figma-home/name-matue.svg",
+    nameAspect: "1000 / 500",
     nameWidth: "62%",
     borderColor: "#ffffff",
   },
   wiu: {
     photo: "/figma-home/card-wiu.png",
-    name: "/figma-home/name-wiu-medium.png",
-    nameAspect: "362 / 260",
+    name: "/figma-home/name-wiu.svg",
+    nameAspect: "1000 / 700",
     nameWidth: "38%",
     borderColor: "#ffffff",
   },
   teto: {
     photo: "/figma-home/card-teto.png",
-    name: "/figma-home/name-teto-big.png",
-    nameAspect: "362 / 116",
+    name: "/figma-home/name-teto.svg",
+    nameAspect: "1000 / 320",
     nameWidth: "90%",
     borderColor: "#ffffff",
   },
   brandao: {
     photo: "/figma-home/card-brandao.png",
-    name: "/figma-home/name-brandao-big.png",
-    nameAspect: "362 / 122",
+    name: "/figma-home/name-brandao.svg",
+    nameAspect: "1000 / 340",
     nameWidth: "95%",
     borderColor: "#ffffff",
   },
@@ -54,9 +54,9 @@ export function ArtistsRow() {
 
   return (
     <section
+      id="roster"
       aria-label="Artistas da 30praum"
-      className="relative z-10 px-4 pb-12 sm:px-8 sm:pb-16"
-      style={{ marginTop: "clamp(-120px, -10vw, -60px)" }}
+      className="relative scroll-mt-20 px-4 py-12 sm:px-8 sm:py-16"
     >
       <div className="mx-auto grid max-w-screen-2xl grid-cols-2 gap-3 sm:grid-cols-5 sm:gap-4">
         {left.map((slug) => (
