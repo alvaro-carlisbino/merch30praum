@@ -2,76 +2,56 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { BrandLogo } from "@/components/shell/BrandLogo";
 import type { ArtistSlug } from "@/lib/artists/types";
 import { useActiveArtist } from "@/lib/home/active-artist";
 
-type SlideKey = ArtistSlug | "praum";
-
-type ArtistSlide = {
+type HeroSlide = {
   key: ArtistSlug;
-  kind: "artist";
   photo: string;
   name: string;
+  /** width visual do container do lettering (px) — todos próximos pra ficar uniforme */
   nameWidth: number;
-  nameHeight: number;
+  nameAspect: string;
   objectPosition: string;
   quote: string;
 };
 
-type PraumSlide = {
-  key: "praum";
-  kind: "praum";
-  photo: string;
-  objectPosition: string;
-};
-
-type HeroSlide = ArtistSlide | PraumSlide;
-
 const SLIDES: HeroSlide[] = [
   {
-    key: "praum",
-    kind: "praum",
-    photo: "/figma-home/hero-30praum.png",
-    objectPosition: "center 35%",
-  },
-  {
     key: "matue",
-    kind: "artist",
     photo: "/figma-home/hero-matue.jpg",
     name: "/figma-home/name-matue.svg",
-    nameWidth: 360,
-    nameHeight: 360,
+    // SVG 1:1; lettering brush ocupa ~60% horizontal e ~30% vertical da viewBox
+    nameWidth: 320,
+    nameAspect: "1000 / 1000",
     objectPosition: "center 25%",
     quote: "“Todo mundo quer ser estrela, mas não tem lugar no Sol.” — Matuê",
   },
   {
     key: "wiu",
-    kind: "artist",
     photo: "/figma-home/hero-wiu.jpg",
     name: "/figma-home/name-wiu.svg",
-    nameWidth: 600,
-    nameHeight: 200,
+    nameWidth: 320,
+    nameAspect: "1000 / 1000",
     objectPosition: "center 25%",
     quote: "“Se a saudade matasse, eu já tinha morrido bonito.” — Wiu",
   },
   {
     key: "teto",
-    kind: "artist",
     photo: "/figma-home/hero-teto.png",
     name: "/figma-home/name-teto.svg",
-    nameWidth: 480,
-    nameHeight: 364,
+    nameWidth: 320,
+    nameAspect: "1000 / 1000",
     objectPosition: "center 30%",
     quote: "“Não é fim. É trilha.” — Teto",
   },
   {
     key: "brandao",
-    kind: "artist",
     photo: "/figma-home/hero-brandao.jpg",
     name: "/figma-home/name-brandao.svg",
-    nameWidth: 480,
-    nameHeight: 364,
+    // Brandão é wide 3:1, então usa largura maior pra manter altura visual similar
+    nameWidth: 460,
+    nameAspect: "1292 / 430",
     objectPosition: "center 25%",
     quote: "“Cresci copiando. Agora os outros copiam errado.” — Brandão85",
   },
@@ -84,13 +64,7 @@ export function HomeHero() {
   const setActive = useActiveArtist((s) => s.setActive);
 
   useEffect(() => {
-    const slide = SLIDES[index];
-    if (slide.kind === "artist") {
-      setActive(slide.key);
-    } else {
-      // 30praum slide — clear active
-      setActive(null);
-    }
+    setActive(SLIDES[index].key);
   }, [index, setActive]);
 
   // auto-rotate; reseta sempre que index muda (incluindo cliques manuais)
@@ -147,27 +121,6 @@ export function HomeHero() {
         <div className="relative flex items-center justify-center" style={{ minHeight: 230 }}>
           {SLIDES.map((slide, i) => {
             const isActive = i === index;
-            if (slide.kind === "praum") {
-              return (
-                <div
-                  key={slide.key}
-                  aria-hidden={!isActive}
-                  className="absolute inset-0 flex items-center justify-center transition-opacity duration-700"
-                  style={{ opacity: isActive ? 1 : 0 }}
-                >
-                  <span
-                    className="text-white"
-                    style={{
-                      fontSize: "clamp(5rem, 11vw, 9rem)",
-                      filter: "drop-shadow(0 6px 32px rgba(0,0,0,0.55))",
-                    }}
-                  >
-                    <BrandLogo variant="stacked" />
-                  </span>
-                </div>
-              );
-            }
-            const ratio = slide.nameWidth / slide.nameHeight;
             return (
               <div
                 key={slide.key}
@@ -175,11 +128,8 @@ export function HomeHero() {
                 className="absolute transition-opacity duration-700"
                 style={{
                   width: `min(${slide.nameWidth}px, 84vw)`,
-                  aspectRatio: `${slide.nameWidth} / ${slide.nameHeight}`,
-                  maxHeight: slide.nameHeight,
+                  aspectRatio: slide.nameAspect,
                   opacity: isActive ? 1 : 0,
-                  // ratio referenced to keep TS happy
-                  ["--ratio" as string]: ratio,
                 }}
               >
                 <Image
@@ -211,9 +161,7 @@ export function HomeHero() {
               className="absolute left-1/2 top-0 w-[min(640px,92vw)] -translate-x-1/2 transition-opacity duration-700 text-sm leading-relaxed text-white/85 sm:text-base"
               style={{ opacity: i === index ? 1 : 0 }}
             >
-              {slide.kind === "praum"
-                ? "Casa de Matuê, Wiu, Teto e Brandão85. Fundada em 2016 em Fortaleza pra colocar o trap nordestino no centro do mapa."
-                : slide.quote}
+              {slide.quote}
             </p>
           ))}
         </div>
