@@ -1,28 +1,28 @@
+import Image from "next/image";
+
 /**
- * Wordmark oficial 30praum — "30" serifado bold + "PRAUM" letterspacing aberto.
- * Duas variantes: `inline` (uma linha, header/nav) e `stacked` (vertical,
- * "30" gigante sobre "PRAUM", hero/footer).
+ * Wordmark oficial 30PRAUM. Usa o PNG vetorizado do Figma (figma-home/logo-30praum.png)
+ * com '30' + 'PRAUM' nas proporções corretas. Duas variantes:
+ *  - `inline` (default): 30 + PRAUM lado a lado (header)
+ *  - `stacked`: '30' grande em cima, 'PRAUM' como wordmark abaixo (hero/footer)
  */
 interface BrandLogoProps {
   className?: string;
   variant?: "inline" | "stacked";
-  /** Sobrescreve cor — default usa currentColor */
-  color?: string;
 }
 
-export function BrandLogo({ className, variant = "inline", color }: BrandLogoProps) {
+export function BrandLogo({ className, variant = "inline" }: BrandLogoProps) {
   if (variant === "stacked") {
     return (
       <span
         className={className}
         aria-label="30praum"
         style={{
-          fontFamily: "var(--font-brand)",
-          color: color ?? "currentColor",
           display: "inline-flex",
           flexDirection: "column",
           alignItems: "center",
           lineHeight: 0.85,
+          fontFamily: "var(--font-brand)",
         }}
       >
         <span
@@ -54,17 +54,21 @@ export function BrandLogo({ className, variant = "inline", color }: BrandLogoPro
       className={className}
       aria-label="30praum"
       style={{
-        fontFamily: "var(--font-brand)",
-        color: color ?? "currentColor",
         display: "inline-flex",
-        alignItems: "baseline",
-        gap: "0.32em",
+        alignItems: "center",
       }}
     >
-      <span style={{ fontWeight: 700, letterSpacing: "-0.02em" }}>30</span>
-      <span style={{ fontWeight: 500, letterSpacing: "0.3em", fontSize: "0.78em" }}>
-        PRAUM
-      </span>
+      <Image
+        src="/figma-home/logo-30praum.png"
+        alt="30 PRAUM"
+        width={221}
+        height={44}
+        priority
+        style={{
+          height: "clamp(20px, 2.2vw, 32px)",
+          width: "auto",
+        }}
+      />
     </span>
   );
 }

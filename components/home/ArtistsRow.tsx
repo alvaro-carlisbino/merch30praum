@@ -122,8 +122,8 @@ function ArtistCard({ slug }: { slug: ArtistSlug }) {
 function CenterLogoCard() {
   return (
     <div
-      className="relative col-span-2 overflow-hidden rounded-2xl sm:col-span-1"
-      style={{ aspectRatio: "5 / 8", background: "#000" }}
+      className="relative col-span-2 overflow-hidden rounded-2xl aspect-[16/9] sm:col-span-1 sm:aspect-[5/8]"
+      style={{ background: "#000" }}
     >
       <Image
         src="/figma-home/card-30praum.png"
