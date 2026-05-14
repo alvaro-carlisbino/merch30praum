@@ -28,11 +28,11 @@ type ArtistPageAssets = {
 
 const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
   matue: {
-    heroBg: "/figma-artista/matue-hero.jpg",
-    nameBig: "/figma-artista/matue-name-big.png",
-    nameBigAspect: "461 / 461",
-    nameMedium: "/figma-artista/matue-name-medium.png",
-    nameMediumAspect: "362 / 182",
+    heroBg: "/figma-home/hero-matue.jpg",
+    nameBig: "/figma-home/name-matue.svg",
+    nameBigAspect: "1000 / 1000",
+    nameMedium: "/figma-home/name-matue.svg",
+    nameMediumAspect: "1000 / 700",
     stagePhoto: "/figma-artista/matue-stage.png",
     albumCover: "/figma-artista/matue-album-xtranho.png",
     quote: {
@@ -51,11 +51,11 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
     },
   },
   teto: {
-    heroBg: "/figma-artista/teto-hero.png",
-    nameBig: "/figma-artista/teto-name-big.png",
-    nameBigAspect: "362 / 116",
-    nameMedium: "/figma-artista/teto-name-medium.png",
-    nameMediumAspect: "165 / 53",
+    heroBg: "/figma-home/hero-teto.png",
+    nameBig: "/figma-home/name-teto.svg",
+    nameBigAspect: "1000 / 320",
+    nameMedium: "/figma-home/name-teto.svg",
+    nameMediumAspect: "1000 / 320",
     stagePhoto: "/figma-artista/teto-stage.png",
     albumCover: "/figma-artista/colapso-global-cover.png",
     quote: {
@@ -74,11 +74,11 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
     },
   },
   wiu: {
-    heroBg: "/figma-artista/wiu-hero.png",
-    nameBig: "/figma-artista/wiu-name-big.png",
-    nameBigAspect: "362 / 260",
-    nameMedium: "/figma-artista/wiu-name-medium.png",
-    nameMediumAspect: "185 / 185",
+    heroBg: "/figma-home/hero-wiu.jpg",
+    nameBig: "/figma-home/name-wiu.svg",
+    nameBigAspect: "1292 / 430",
+    nameMedium: "/figma-home/name-wiu.svg",
+    nameMediumAspect: "1292 / 430",
     stagePhoto: "/figma-artista/wiu-stage.png",
     albumCover: "/figma-artista/colapso-global-cover.png",
     quote: {
@@ -97,11 +97,11 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
     },
   },
   brandao: {
-    heroBg: "/figma-artista/brandao-hero.png",
-    nameBig: "/figma-artista/brandao-name-big.png",
-    nameBigAspect: "362 / 122",
-    nameMedium: "/figma-artista/brandao-name-medium.png",
-    nameMediumAspect: "190 / 64",
+    heroBg: "/figma-home/hero-brandao.jpg",
+    nameBig: "/figma-home/name-brandao.svg",
+    nameBigAspect: "1000 / 340",
+    nameMedium: "/figma-home/name-brandao.svg",
+    nameMediumAspect: "1000 / 340",
     stagePhoto: "/figma-artista/brandao-stage.png",
     albumCover: "/figma-artista/brandao-album-anjo.png",
     quote: {
