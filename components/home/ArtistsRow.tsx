@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ARTISTS } from "@/lib/artists/registry";
 import { BrandLogo } from "@/components/shell/BrandLogo";
-import { useActiveArtist } from "@/lib/home/active-artist";
 import type { ArtistSlug } from "@/lib/artists/types";
 
 const ORDER: ArtistSlug[] = ["teto", "wiu", "matue", "brandao"];
@@ -14,7 +13,6 @@ type CardConfig = {
   name: string;
   nameAspect: string;
   nameWidth: string;
-  borderColor: string;
 };
 
 const CARDS: Record<ArtistSlug, CardConfig> = {
@@ -23,28 +21,24 @@ const CARDS: Record<ArtistSlug, CardConfig> = {
     name: "/figma-home/name-matue.svg",
     nameAspect: "1000 / 500",
     nameWidth: "62%",
-    borderColor: "#ffffff",
   },
   wiu: {
     photo: "/figma-home/card-wiu.png",
     name: "/figma-home/name-wiu.svg",
     nameAspect: "1000 / 700",
     nameWidth: "38%",
-    borderColor: "#ffffff",
   },
   teto: {
     photo: "/figma-home/card-teto.png",
     name: "/figma-home/name-teto.svg",
     nameAspect: "1000 / 320",
     nameWidth: "90%",
-    borderColor: "#ffffff",
   },
   brandao: {
     photo: "/figma-home/card-brandao.png",
     name: "/figma-home/name-brandao.svg",
     nameAspect: "1000 / 340",
     nameWidth: "95%",
-    borderColor: "#ffffff",
   },
 };
 
@@ -76,7 +70,6 @@ export function ArtistsRow() {
 function ArtistCard({ slug }: { slug: ArtistSlug }) {
   const artist = ARTISTS[slug];
   const cfg = CARDS[slug];
-  const active = useActiveArtist((s) => s.active === slug);
 
   return (
     <Link
@@ -86,14 +79,6 @@ function ArtistCard({ slug }: { slug: ArtistSlug }) {
       style={{
         aspectRatio: "5 / 8",
         background: artist.panelBackground,
-        transform: active ? "scale(1.12)" : "scale(1)",
-        transformOrigin: "center",
-        zIndex: active ? 10 : 1,
-        boxShadow: active
-          ? `0 0 0 3px ${cfg.borderColor}, 0 24px 60px rgba(0,0,0,0.55)`
-          : "none",
-        transition:
-          "transform 600ms cubic-bezier(0.7,0,0.3,1), box-shadow 500ms cubic-bezier(0.7,0,0.3,1)",
       }}
     >
       <Image
