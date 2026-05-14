@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { BrandLogo } from "@/components/shell/BrandLogo";
 import type { ArtistSlug } from "@/lib/artists/types";
 import { useActiveArtist } from "@/lib/home/active-artist";
 
@@ -92,12 +93,13 @@ export function HomeHero() {
     }
   }, [index, setActive]);
 
+  // auto-rotate; reseta sempre que index muda (incluindo cliques manuais)
   useEffect(() => {
-    const id = setInterval(() => {
+    const id = setTimeout(() => {
       setIndex((i) => (i + 1) % SLIDES.length);
     }, ROTATE_MS);
-    return () => clearInterval(id);
-  }, []);
+    return () => clearTimeout(id);
+  }, [index]);
 
   const current = SLIDES[index];
 
@@ -150,47 +152,18 @@ export function HomeHero() {
                 <div
                   key={slide.key}
                   aria-hidden={!isActive}
-                  className="absolute inset-0 flex flex-col items-center justify-center gap-2 transition-opacity duration-700"
+                  className="absolute inset-0 flex items-center justify-center transition-opacity duration-700"
                   style={{ opacity: isActive ? 1 : 0 }}
                 >
-                  <div
-                    className="flex items-center justify-center gap-1 sm:gap-2"
+                  <span
+                    className="text-white"
                     style={{
-                      height: "clamp(140px, 18vw, 220px)",
+                      fontSize: "clamp(5rem, 11vw, 9rem)",
                       filter: "drop-shadow(0 6px 32px rgba(0,0,0,0.55))",
                     }}
                   >
-                    <div className="relative h-full" style={{ aspectRatio: "186 / 244" }}>
-                      <Image
-                        src="/figma-home/chrome-3.png"
-                        alt="3"
-                        fill
-                        sizes="200px"
-                        className="object-contain"
-                        priority
-                      />
-                    </div>
-                    <div className="relative h-full" style={{ aspectRatio: "186 / 244" }}>
-                      <Image
-                        src="/figma-home/chrome-0.png"
-                        alt="0"
-                        fill
-                        sizes="200px"
-                        className="object-contain"
-                        priority
-                      />
-                    </div>
-                  </div>
-                  <p
-                    className="text-white tracking-[0.5em]"
-                    style={{
-                      fontFamily: "var(--font-brand)",
-                      fontSize: "clamp(1rem, 1.6vw, 1.4rem)",
-                      marginLeft: "0.5em",
-                    }}
-                  >
-                    PRAUM
-                  </p>
+                    <BrandLogo variant="stacked" />
+                  </span>
                 </div>
               );
             }
