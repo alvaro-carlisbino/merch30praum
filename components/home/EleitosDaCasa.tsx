@@ -54,14 +54,14 @@ export function EleitosDaCasa() {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 sm:[grid-template-rows:minmax(0,1fr)_minmax(0,1fr)]">
-          {/* Card grande — esquerda, 2 rows */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 sm:[grid-template-rows:1fr_1fr]">
+          {/* Card grande — esquerda, 2 rows: define a altura total */}
           <BigPickCard pick={PICKS.big} />
 
-          {/* Top-right */}
+          {/* Top-right: ocupa row 1 da coluna direita */}
           <SmallPickCard pick={PICKS.topRight} />
 
-          {/* Bot-right */}
+          {/* Bot-right: ocupa row 2 da coluna direita */}
           <SmallPickCard pick={PICKS.botRight} />
         </div>
       </div>
@@ -75,8 +75,12 @@ function BigPickCard({ pick }: { pick: Pick }) {
     <Link
       href={`/album/${pick.slug}`}
       data-cursor={album.title}
-      className="group relative overflow-hidden rounded-2xl sm:col-start-1 sm:row-span-2"
-      style={{ background: album.bgHex, aspectRatio: "1 / 1" }}
+      className="group relative h-full overflow-hidden rounded-2xl sm:col-start-1 sm:row-span-2"
+      style={{
+        background: album.bgHex,
+        // Em mobile sem grid, mantém 1:1; em sm+ a altura é definida pelo grid
+        aspectRatio: "1 / 1",
+      }}
     >
       <Image
         src={pick.cover}
@@ -97,8 +101,8 @@ function SmallPickCard({ pick }: { pick: Pick }) {
     <Link
       href={`/album/${pick.slug}`}
       data-cursor={album.title}
-      className="group relative overflow-hidden rounded-2xl"
-      style={{ background: album.bgHex, aspectRatio: "16 / 9" }}
+      className="group relative overflow-hidden rounded-2xl aspect-[16/9] sm:aspect-[2/1]"
+      style={{ background: album.bgHex }}
     >
       <Image
         src={pick.cover}
