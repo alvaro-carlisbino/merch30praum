@@ -13,7 +13,7 @@ interface BrandHeaderProps {
 const LEFT_NAV = [
   { href: "/#roster", label: "Roster" },
   { href: "/shows", label: "Shows" },
-  { href: "/releases", label: "Lançamentos" },
+  { href: "/about", label: "Sobre" },
 ];
 
 const MENU_LINKS: Array<{
@@ -77,9 +77,9 @@ export function BrandHeader({ cartCount }: BrandHeaderProps) {
               aria-haspopup="dialog"
               aria-expanded={menuOpen}
               aria-controls="brand-menu-overlay"
-              className="opacity-85 transition-opacity hover:opacity-100"
+              className="uppercase opacity-85 transition-opacity hover:opacity-100"
             >
-              Menu
+              MENU
             </button>
           </nav>
 

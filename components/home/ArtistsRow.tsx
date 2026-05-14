@@ -52,7 +52,7 @@ export function ArtistsRow() {
       aria-label="Artistas da 30praum"
       className="relative scroll-mt-20 px-4 py-12 sm:px-8 sm:py-16"
     >
-      <div className="mx-auto grid max-w-screen-2xl grid-cols-2 gap-3 sm:gap-4 sm:[grid-template-columns:1.18fr_0.9fr_1fr_0.9fr_1.18fr]">
+      <div className="mx-auto grid max-w-screen-2xl grid-cols-2 items-end gap-3 sm:gap-4 sm:[grid-template-columns:1.18fr_0.9fr_1fr_0.9fr_1.18fr]">
         {left.map((slug) => (
           <ArtistCard key={slug} slug={slug} />
         ))}
