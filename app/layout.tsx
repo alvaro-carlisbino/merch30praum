@@ -13,7 +13,7 @@ import "./globals.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://30praum.com";
 const SITE_DESCRIPTION =
-  "Site oficial da holding 30praum — gravadora, Plantão Festival, Sabor Matuê, parcerias e incubadora. Casa de Matuê, Wiu, Teto e Brandão85.";
+  "Site oficial da holding 30praum — gravadora, Plantão Festival, parcerias e incubadora. Casa de Matuê, Wiu, Teto e Brandão85.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
