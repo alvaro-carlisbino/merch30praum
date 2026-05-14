@@ -2,6 +2,7 @@ import Image from "next/image";
 
 interface Props {
   bgImage: string;
+  bgPosition?: string;
   nameImage: string;
   nameAspect: string;
   quote: string;
@@ -10,6 +11,7 @@ interface Props {
 
 export function ArtistPageHero({
   bgImage,
+  bgPosition,
   nameImage,
   nameAspect,
   quote,
@@ -34,7 +36,7 @@ export function ArtistPageHero({
         quality={95}
         sizes="100vw"
         className="object-cover"
-        style={{ objectPosition: "center 25%" }}
+        style={{ objectPosition: bgPosition ?? "center 25%" }}
       />
       <div
         aria-hidden

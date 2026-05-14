@@ -54,13 +54,7 @@ export function EleitosDaCasa() {
           </p>
         </header>
 
-        <div
-          className="grid gap-3 sm:gap-4"
-          style={{
-            gridTemplateColumns: "repeat(2, minmax(0,1fr))",
-            gridTemplateRows: "minmax(0,1fr) minmax(0,1fr)",
-          }}
-        >
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 sm:[grid-template-rows:minmax(0,1fr)_minmax(0,1fr)]">
           {/* Card grande — esquerda, 2 rows */}
           <BigPickCard pick={PICKS.big} />
 
@@ -81,7 +75,7 @@ function BigPickCard({ pick }: { pick: Pick }) {
     <Link
       href={`/album/${pick.slug}`}
       data-cursor={album.title}
-      className="group relative col-start-1 row-span-2 overflow-hidden rounded-2xl"
+      className="group relative overflow-hidden rounded-2xl sm:col-start-1 sm:row-span-2"
       style={{ background: album.bgHex, aspectRatio: "1 / 1" }}
     >
       <Image
@@ -104,7 +98,7 @@ function SmallPickCard({ pick }: { pick: Pick }) {
       href={`/album/${pick.slug}`}
       data-cursor={album.title}
       className="group relative overflow-hidden rounded-2xl"
-      style={{ background: album.bgHex }}
+      style={{ background: album.bgHex, aspectRatio: "16 / 9" }}
     >
       <Image
         src={pick.cover}

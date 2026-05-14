@@ -15,30 +15,38 @@ type CardConfig = {
   nameWidth: string;
 };
 
+// Tamanhos calibrados pra letterform visual uniforme. Cada SVG tem quantidade
+// de whitespace interno diferente — compensamos no width pra letterforms
+// renderizadas terem tamanho parecido entre os 4.
+//
+// SVG aspect ratios: matuê/wiu/teto são quadradas (1:1, whitespace varia);
+// brandão é wide (3:1 graffiti). Brandão recebe width MENOR (60%) porque
+// já é wide naturalmente — antes 75% deixava enorme. Wiu recebe MAIOR (65%)
+// porque o letterform gothic preenche pouco da viewBox quadrada.
 const CARDS: Record<ArtistSlug, CardConfig> = {
   matue: {
     photo: "/figma-home/card-matue.png",
     name: "/figma-home/name-matue.svg",
-    nameAspect: "1000 / 500",
-    nameWidth: "62%",
+    nameAspect: "1000 / 1000",
+    nameWidth: "55%",
   },
   wiu: {
     photo: "/figma-home/card-wiu.png",
     name: "/figma-home/name-wiu.svg",
-    nameAspect: "1000 / 700",
-    nameWidth: "38%",
+    nameAspect: "1000 / 1000",
+    nameWidth: "65%",
   },
   teto: {
     photo: "/figma-home/card-teto.png",
     name: "/figma-home/name-teto.svg",
-    nameAspect: "1000 / 320",
-    nameWidth: "90%",
+    nameAspect: "1000 / 1000",
+    nameWidth: "55%",
   },
   brandao: {
     photo: "/figma-home/card-brandao.png",
     name: "/figma-home/name-brandao.svg",
-    nameAspect: "1000 / 340",
-    nameWidth: "95%",
+    nameAspect: "1292 / 430",
+    nameWidth: "60%",
   },
 };
 
@@ -119,8 +127,8 @@ function ArtistCard({ slug }: { slug: ArtistSlug }) {
 function CenterLogoCard() {
   return (
     <div
-      className="relative col-span-2 overflow-hidden rounded-2xl sm:col-span-1"
-      style={{ aspectRatio: "5 / 8", background: "#000" }}
+      className="relative col-span-2 overflow-hidden rounded-2xl aspect-[16/9] sm:col-span-1 sm:aspect-[5/8]"
+      style={{ background: "#000" }}
     >
       <Image
         src="/figma-home/card-30praum.png"
