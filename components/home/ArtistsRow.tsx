@@ -15,38 +15,38 @@ type CardConfig = {
   nameWidth: string;
 };
 
-// Tamanhos calibrados pra letterform visual uniforme. Cada SVG tem quantidade
-// de whitespace interno diferente — compensamos no width pra letterforms
-// renderizadas terem tamanho parecido entre os 4.
-//
-// SVG aspect ratios: matuê/wiu/teto são quadradas (1:1, whitespace varia);
-// brandão é wide (3:1 graffiti). Brandão recebe width MENOR (60%) porque
-// já é wide naturalmente — antes 75% deixava enorme. Wiu recebe MAIOR (65%)
-// porque o letterform gothic preenche pouco da viewBox quadrada.
+// PNGs tight: bounds dos letterforms apertados (sem whitespace da viewBox SVG).
+// Todos renderizados com HEIGHT uniforme + width auto via aspect-ratio natural.
+// Resultado: letterforms aparentam tamanho proporcional, independente do aspect
+// ratio nativo (Brandão/Teto wide, Matuê/Wiu mais quadrados).
 const CARDS: Record<ArtistSlug, CardConfig> = {
   matue: {
     photo: "/figma-home/card-matue.png",
-    name: "/figma-home/name-matue.svg",
-    nameAspect: "1000 / 1000",
-    nameWidth: "55%",
+    name: "/figma-home/name-matue-tight.png",
+    // 1571 x 780 → 2.01:1
+    nameAspect: "1571 / 780",
+    nameWidth: "auto",
   },
   wiu: {
     photo: "/figma-home/card-wiu.png",
-    name: "/figma-home/name-wiu.svg",
-    nameAspect: "1000 / 1000",
-    nameWidth: "65%",
+    name: "/figma-home/name-wiu-tight.png",
+    // 1105 x 792 → 1.40:1
+    nameAspect: "1105 / 792",
+    nameWidth: "auto",
   },
   teto: {
     photo: "/figma-home/card-teto.png",
-    name: "/figma-home/name-teto.svg",
-    nameAspect: "1000 / 1000",
-    nameWidth: "55%",
+    name: "/figma-home/name-teto-tight.png",
+    // 1588 x 508 → 3.13:1
+    nameAspect: "1588 / 508",
+    nameWidth: "auto",
   },
   brandao: {
     photo: "/figma-home/card-brandao.png",
-    name: "/figma-home/name-brandao.svg",
-    nameAspect: "1292 / 430",
-    nameWidth: "60%",
+    name: "/figma-home/name-brandao-tight.png",
+    // 1857 x 634 → 2.93:1
+    nameAspect: "1857 / 634",
+    nameWidth: "auto",
   },
 };
 
@@ -105,20 +105,29 @@ function ArtistCard({ slug }: { slug: ArtistSlug }) {
         }}
       />
       <div
-        className="absolute bottom-4 left-4"
+        className="absolute bottom-4 left-4 right-4"
         style={{
-          width: cfg.nameWidth,
-          aspectRatio: cfg.nameAspect,
+          // altura visual uniforme em todos os cards (clamp pra responsivo)
+          height: "clamp(28px, 6.5vw, 56px)",
         }}
       >
-        <Image
-          src={cfg.name}
-          alt={artist.displayName}
-          fill
-          sizes="150px"
-          className="object-contain object-left-bottom"
-          style={{ filter: "drop-shadow(0 2px 14px rgba(0,0,0,0.6))" }}
-        />
+        <div
+          className="relative h-full"
+          style={{
+            aspectRatio: cfg.nameAspect,
+            width: cfg.nameWidth,
+            maxWidth: "100%",
+          }}
+        >
+          <Image
+            src={cfg.name}
+            alt={artist.displayName}
+            fill
+            sizes="200px"
+            className="object-contain object-left-bottom"
+            style={{ filter: "drop-shadow(0 2px 14px rgba(0,0,0,0.6))" }}
+          />
+        </div>
       </div>
     </Link>
   );
