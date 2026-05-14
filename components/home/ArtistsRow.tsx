@@ -15,9 +15,14 @@ type CardConfig = {
   nameWidth: string;
 };
 
-// Tamanhos calibrados pra altura visual semelhante. SVGs com aspect mais wide
-// (Teto/Brandão) recebem mais width pra ficar visualmente proporcional aos
-// quadrados (Matuê/Wiu).
+// Tamanhos calibrados pra letterform visual uniforme. Cada SVG tem quantidade
+// de whitespace interno diferente — compensamos no width pra letterforms
+// renderizadas terem tamanho parecido entre os 4.
+//
+// SVG aspect ratios: matuê/wiu/teto são quadradas (1:1, whitespace varia);
+// brandão é wide (3:1 graffiti). Brandão recebe width MENOR (60%) porque
+// já é wide naturalmente — antes 75% deixava enorme. Wiu recebe MAIOR (65%)
+// porque o letterform gothic preenche pouco da viewBox quadrada.
 const CARDS: Record<ArtistSlug, CardConfig> = {
   matue: {
     photo: "/figma-home/card-matue.png",
@@ -29,7 +34,7 @@ const CARDS: Record<ArtistSlug, CardConfig> = {
     photo: "/figma-home/card-wiu.png",
     name: "/figma-home/name-wiu.svg",
     nameAspect: "1000 / 1000",
-    nameWidth: "42%",
+    nameWidth: "65%",
   },
   teto: {
     photo: "/figma-home/card-teto.png",
@@ -41,7 +46,7 @@ const CARDS: Record<ArtistSlug, CardConfig> = {
     photo: "/figma-home/card-brandao.png",
     name: "/figma-home/name-brandao.svg",
     nameAspect: "1292 / 430",
-    nameWidth: "75%",
+    nameWidth: "60%",
   },
 };
 
