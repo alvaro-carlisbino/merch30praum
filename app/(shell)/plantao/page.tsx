@@ -28,73 +28,105 @@ export default function PlantaoHubPage() {
       <section
         className="relative w-full overflow-hidden"
         style={{
-          aspectRatio: "16 / 9",
-          maxHeight: "min(78svh, 800px)",
-          background: "#1a0410",
+          minHeight: "min(86svh, 880px)",
+          background: "#0a0204",
         }}
         aria-label="Plantão 2026"
       >
-        <Image
-          src="/figma-plantao/hero.png"
-          alt="Plantão Festival 2026"
-          fill
-          priority
-          quality={95}
-          sizes="100vw"
-          className="object-cover"
-          style={{ objectPosition: "center center" }}
-        />
+        {/* gradient bg suave (vermelho-bordô) */}
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "linear-gradient(180deg, transparent 85%, rgba(0,0,0,0.5) 100%)",
+              "radial-gradient(circle at 70% 40%, rgba(255,45,90,0.18) 0%, rgba(20,2,8,0) 60%), linear-gradient(180deg, #1a0410 0%, #0a0204 100%)",
           }}
         />
-        <div className="absolute inset-x-0 bottom-6 flex justify-center sm:bottom-10">
-          <Link
-            href="/plantao/ingressos"
-            data-cursor="Ingressos"
-            className="inline-flex items-center rounded-full border-2 px-7 py-3 text-sm font-semibold tracking-[0.04em] backdrop-blur-sm transition-colors hover:bg-white hover:text-black"
-            style={{
-              borderColor: "#ffffff",
-              color: "#ffffff",
-              background: "rgba(0,0,0,0.35)",
-            }}
-          >
-            Garanta seu ingresso →
-          </Link>
+
+        <div className="relative z-10 mx-auto grid h-full max-w-screen-2xl items-center gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1.2fr_1fr] lg:gap-12">
+          {/* coluna esquerda: títulos + CTA */}
+          <div className="flex flex-col items-start gap-8">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-white/70">
+              25 de Abril · Marina Park · Fortaleza/CE
+            </p>
+
+            <div className="relative w-full max-w-xl" style={{ aspectRatio: "399 / 143" }}>
+              <Image
+                src="/figma-plantao/title-plantao.png"
+                alt="Plantão 2026"
+                fill
+                priority
+                quality={95}
+                sizes="(min-width: 1024px) 600px, 92vw"
+                className="object-contain object-left"
+              />
+            </div>
+
+            <p className="max-w-lg text-sm leading-relaxed text-white/85 sm:text-base">
+              {current.manifesto}
+            </p>
+
+            <Link
+              href="/plantao/ingressos"
+              data-cursor="Garanta seu ingresso"
+              className="relative block w-full max-w-md transition-transform hover:-translate-y-0.5"
+            >
+              <div className="relative w-full" style={{ aspectRatio: "404 / 126" }}>
+                <Image
+                  src="/figma-plantao/cta-ingresso.png"
+                  alt="Garanta o teu ingresso — 25 de Abril | Marina Park"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 480px, 92vw"
+                  className="object-contain object-left"
+                />
+              </div>
+            </Link>
+          </div>
+
+          {/* coluna direita: poster vertical do show */}
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div
+              className="relative overflow-hidden rounded-3xl"
+              style={{
+                aspectRatio: "541 / 835",
+                background: "#1a0410",
+                boxShadow:
+                  "0 24px 80px rgba(255,45,90,0.25), 0 8px 24px rgba(0,0,0,0.4)",
+              }}
+            >
+              <Image
+                src="/figma-plantao/hero.png"
+                alt="Plantão Festival — palco"
+                fill
+                priority
+                quality={95}
+                sizes="(min-width: 1024px) 540px, 92vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-screen-2xl px-4 py-12 sm:px-8 sm:py-16">
-        <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:items-end">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.4em] text-muted">
-              25 de Abril · Marina Park · Fortaleza/CE
-            </p>
-            <h1
-              className="mt-3 font-display uppercase leading-[0.92]"
-              style={{
-                fontSize: "clamp(2.4rem, 6vw, 5rem)",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              Uma noite, frente ao mar, toda a cena.
-            </h1>
-            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/85 sm:text-base">
-              {current.manifesto}
-            </p>
-          </div>
-
-          <div className="relative aspect-square w-48 self-center justify-self-center sm:w-64 lg:w-full lg:max-w-xs">
+        <div className="grid gap-8 lg:grid-cols-[1.6fr_auto] lg:items-end">
+          <h1
+            className="font-display uppercase leading-[0.92]"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 4rem)",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Uma noite, frente ao mar, toda a cena.
+          </h1>
+          <div className="relative aspect-square w-36 self-center justify-self-center sm:w-48">
             <Image
               src="/figma-plantao/mascote.png"
               alt=""
               aria-hidden
               fill
-              sizes="280px"
+              sizes="240px"
               className="object-contain"
             />
           </div>
