@@ -15,30 +15,33 @@ type CardConfig = {
   nameWidth: string;
 };
 
+// Tamanhos calibrados pra altura visual semelhante. SVGs com aspect mais wide
+// (Teto/Brandão) recebem mais width pra ficar visualmente proporcional aos
+// quadrados (Matuê/Wiu).
 const CARDS: Record<ArtistSlug, CardConfig> = {
   matue: {
     photo: "/figma-home/card-matue.png",
     name: "/figma-home/name-matue.svg",
-    nameAspect: "1000 / 500",
-    nameWidth: "62%",
+    nameAspect: "1000 / 1000",
+    nameWidth: "55%",
   },
   wiu: {
     photo: "/figma-home/card-wiu.png",
     name: "/figma-home/name-wiu.svg",
-    nameAspect: "1000 / 700",
-    nameWidth: "38%",
+    nameAspect: "1000 / 1000",
+    nameWidth: "42%",
   },
   teto: {
     photo: "/figma-home/card-teto.png",
     name: "/figma-home/name-teto.svg",
-    nameAspect: "1000 / 320",
-    nameWidth: "90%",
+    nameAspect: "1000 / 1000",
+    nameWidth: "55%",
   },
   brandao: {
     photo: "/figma-home/card-brandao.png",
     name: "/figma-home/name-brandao.svg",
-    nameAspect: "1000 / 340",
-    nameWidth: "95%",
+    nameAspect: "1292 / 430",
+    nameWidth: "75%",
   },
 };
 

@@ -12,6 +12,7 @@ interface Params {
 
 type ArtistPageAssets = {
   heroBg: string;
+  heroBgPosition?: string;
   nameBig: string;
   nameBigAspect: string;
   nameMedium: string;
@@ -75,6 +76,7 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
   },
   wiu: {
     heroBg: "/figma-home/hero-wiu.jpg",
+    heroBgPosition: "70% 30%",
     nameBig: "/figma-home/name-wiu.svg",
     nameBigAspect: "1292 / 430",
     nameMedium: "/figma-home/name-wiu.svg",
@@ -150,6 +152,7 @@ export default async function ArtistLanding({
     <>
       <ArtistPageHero
         bgImage={a.heroBg}
+        bgPosition={a.heroBgPosition}
         nameImage={a.nameBig}
         nameAspect={a.nameBigAspect}
         quote={a.quote.text}
