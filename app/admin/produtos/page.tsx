@@ -60,8 +60,56 @@ export default function AdminProdutosPage() {
           </div>
         </header>
 
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[760px] border-collapse text-sm">
+        {/* Mobile: card list */}
+        <ul className="space-y-3 px-4 py-4 md:hidden">
+          {ADMIN_PRODUCTS.map((p) => (
+            <li
+              key={p.id}
+              className="flex gap-3 rounded-xl border p-3"
+              style={{ borderColor: "var(--border)" }}
+            >
+              <div
+                className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg"
+                style={{
+                  background: "color-mix(in srgb, var(--fg) 6%, var(--bg))",
+                }}
+              >
+                <Image src={p.image} alt={p.title} fill sizes="64px" className="object-cover" />
+              </div>
+              <div className="flex min-w-0 flex-1 flex-col gap-1">
+                <div className="flex items-start justify-between gap-2">
+                  <p className="truncate text-sm font-medium">{p.title}</p>
+                  <ProductStatusPill status={p.status} />
+                </div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
+                  SKU 30P-{p.id.toUpperCase()} · {p.artist}
+                </p>
+                <div className="mt-1 flex items-center justify-between gap-3 text-xs">
+                  <span className="tabular-nums" style={{ color: "var(--accent)" }}>
+                    {fmtBRL(p.price)}
+                  </span>
+                  <span
+                    className="tabular-nums"
+                    style={{
+                      color:
+                        p.stock === 0
+                          ? "#ff5577"
+                          : p.stock < 20
+                            ? "#f5a523"
+                            : "var(--fg)",
+                    }}
+                  >
+                    {p.stock} em estoque
+                  </span>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop: table */}
+        <div className="hidden overflow-x-auto md:block">
+          <table className="w-full border-collapse text-sm">
             <thead>
               <tr
                 className="text-left text-[9px] uppercase tracking-[0.28em] text-muted"

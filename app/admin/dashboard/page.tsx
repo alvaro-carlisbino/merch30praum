@@ -165,8 +165,40 @@ export default function AdminDashboardPage() {
             Ver todos →
           </a>
         </header>
-        <div className="overflow-x-auto px-5 pb-5 sm:px-6 sm:pb-6">
-          <table className="w-full min-w-[640px] border-collapse text-sm">
+        {/* Mobile: card list */}
+        <ul className="space-y-3 px-5 pb-5 md:hidden">
+          {ADMIN_ORDERS.slice(0, 5).map((o) => (
+            <li
+              key={o.id}
+              className="flex flex-col gap-2 rounded-xl border p-3.5"
+              style={{ borderColor: "var(--border)" }}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="font-mono text-[11px] tabular-nums text-muted">{o.id}</p>
+                  <p className="mt-1 truncate text-sm font-medium">{o.customer}</p>
+                  <p className="mt-0.5 truncate text-xs text-fg/65">{o.product}</p>
+                </div>
+                <StatusPill status={o.status} />
+              </div>
+              <div className="flex items-center justify-between text-xs">
+                <span className="tabular-nums" style={{ color: "var(--accent)" }}>
+                  {fmtBRL(o.total)}
+                </span>
+                <span className="uppercase tracking-[0.22em] text-muted">
+                  {new Date(o.date).toLocaleDateString("pt-BR", {
+                    day: "2-digit",
+                    month: "short",
+                  })}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop: table */}
+        <div className="hidden overflow-x-auto px-5 pb-5 sm:px-6 sm:pb-6 md:block">
+          <table className="w-full border-collapse text-sm">
             <thead>
               <tr
                 className="text-left text-[9px] uppercase tracking-[0.28em] text-muted"

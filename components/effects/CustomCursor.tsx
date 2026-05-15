@@ -70,7 +70,7 @@ export function CustomCursor() {
   return (
     <>
       <style>{`
-        @media (pointer: fine) {
+        @media (pointer: fine) and (hover: hover) and (min-width: 768px) {
           html, body, * { cursor: none !important; }
         }
       `}</style>

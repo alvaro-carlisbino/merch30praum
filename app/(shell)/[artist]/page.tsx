@@ -13,6 +13,7 @@ interface Params {
 type ArtistPageAssets = {
   heroBg: string;
   heroBgPosition?: string;
+  heroBgPositionMobile?: string;
   nameBig: string;
   nameBigAspect: string;
   nameMedium: string;
@@ -30,6 +31,7 @@ type ArtistPageAssets = {
 const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
   matue: {
     heroBg: "/figma-home/hero-matue.jpg",
+    heroBgPositionMobile: "75% 30%",
     nameBig: "/figma-home/name-matue.svg",
     nameBigAspect: "1000 / 1000",
     nameMedium: "/figma-home/name-matue.svg",
@@ -53,6 +55,7 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
   },
   teto: {
     heroBg: "/figma-home/hero-teto.png",
+    heroBgPositionMobile: "center 20%",
     nameBig: "/figma-home/name-teto.svg",
     nameBigAspect: "1000 / 320",
     nameMedium: "/figma-home/name-teto.svg",
@@ -77,6 +80,7 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
   wiu: {
     heroBg: "/figma-home/hero-wiu.jpg",
     heroBgPosition: "70% 30%",
+    heroBgPositionMobile: "30% 25%",
     nameBig: "/figma-home/name-wiu.svg",
     nameBigAspect: "1292 / 430",
     nameMedium: "/figma-home/name-wiu.svg",
@@ -100,6 +104,7 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
   },
   brandao: {
     heroBg: "/figma-home/hero-brandao.jpg",
+    heroBgPositionMobile: "center 20%",
     nameBig: "/figma-home/name-brandao.svg",
     nameBigAspect: "1000 / 340",
     nameMedium: "/figma-home/name-brandao.svg",
@@ -153,6 +158,7 @@ export default async function ArtistLanding({
       <ArtistPageHero
         bgImage={a.heroBg}
         bgPosition={a.heroBgPosition}
+        bgPositionMobile={a.heroBgPositionMobile}
         nameImage={a.nameBig}
         nameAspect={a.nameBigAspect}
         quote={a.quote.text}

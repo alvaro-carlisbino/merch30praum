@@ -29,8 +29,8 @@ export default function PlantaoIngressosPage() {
           Ingressos
         </h1>
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/85 sm:text-base">
-          Marina Park · Fortaleza/CE · portões abrem 16h. Toda venda passa pela
-          ST Ingressos — não compre em revendedor não autorizado.
+          Marina Park · Fortaleza/CE · portões abrem 16h. Venda oficial só pela
+          30praum — não compre em revendedor não autorizado.
         </p>
       </section>
 

@@ -69,8 +69,40 @@ export default function AdminPedidosPage() {
             ))}
           </div>
         </header>
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[820px] border-collapse text-sm">
+        {/* Mobile: card list */}
+        <ul className="space-y-3 px-4 py-4 md:hidden">
+          {ADMIN_ORDERS.map((o) => (
+            <li
+              key={o.id}
+              className="flex flex-col gap-2 rounded-xl border p-3.5"
+              style={{ borderColor: "var(--border)" }}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="font-mono text-[11px] tabular-nums text-muted">{o.id}</p>
+                  <p className="mt-1 truncate text-sm font-medium">{o.customer}</p>
+                  <p className="mt-0.5 truncate text-[10px] tabular-nums text-muted">{o.email}</p>
+                </div>
+                <OrderStatusPill status={o.status} />
+              </div>
+              <p className="truncate text-xs text-fg/75">{o.product} · {o.qty}x</p>
+              <div className="flex items-center justify-between gap-3 text-xs">
+                <span className="uppercase tracking-[0.18em] text-muted">
+                  {o.payment === "pix" && "PIX"}
+                  {o.payment === "credito" && "Crédito"}
+                  {o.payment === "boleto" && "Boleto"}
+                </span>
+                <span className="tabular-nums" style={{ color: "var(--accent)" }}>
+                  {fmtBRL(o.total)}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop: table */}
+        <div className="hidden overflow-x-auto md:block">
+          <table className="w-full border-collapse text-sm">
             <thead>
               <tr
                 className="text-left text-[9px] uppercase tracking-[0.28em] text-muted"
