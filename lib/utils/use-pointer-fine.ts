@@ -2,7 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 
-const QUERY = "(pointer: fine)";
+const QUERY = "(pointer: fine) and (hover: hover) and (min-width: 768px)";
 
 function subscribe(callback: () => void): () => void {
   if (typeof window === "undefined") return () => {};

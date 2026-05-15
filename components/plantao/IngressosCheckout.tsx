@@ -458,7 +458,7 @@ export function IngressosCheckout() {
         </div>
 
         <p className="mt-6 text-[10px] uppercase tracking-[0.22em] text-muted">
-          Ingresso emitido pela ST Ingressos · Não compre em revendedor não autorizado
+          Venda oficial 30praum · Ingresso digital com QR · Não compre em revendedor não autorizado
         </p>
       </aside>
     </div>
