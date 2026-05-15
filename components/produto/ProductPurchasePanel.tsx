@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export type ProductColor = { id: string; label: string; hex: string };
@@ -15,10 +16,20 @@ interface Props {
 export function ProductPurchasePanel({ title, price, colors, sizes }: Props) {
   const [colorId, setColorId] = useState(colors[0]?.id);
   const [size, setSize] = useState<string | null>(null);
+  const [qty, setQty] = useState(1);
+  const [added, setAdded] = useState(false);
+
+  function handleAddToCart() {
+    if (!size) return;
+    setAdded(true);
+    setTimeout(() => setAdded(false), 4000);
+  }
+
+  const colorLabel = colors.find((c) => c.id === colorId)?.label;
 
   return (
     <div
-      className="rounded-3xl border p-8 sm:p-10"
+      className="rounded-3xl border p-6 sm:p-8"
       style={{
         background: "color-mix(in srgb, var(--fg) 4%, var(--bg))",
         borderColor: "var(--border)",
@@ -34,18 +45,27 @@ export function ProductPurchasePanel({ title, price, colors, sizes }: Props) {
         {title}
       </h1>
 
-      <p
-        className="mt-8 font-display"
-        style={{
-          fontSize: "clamp(1.25rem, 1.6vw, 1.6rem)",
-          letterSpacing: "0.01em",
-        }}
-      >
-        {price}
-      </p>
+      <div className="mt-6 flex items-baseline gap-3">
+        <p
+          className="font-display tabular-nums"
+          style={{
+            fontSize: "clamp(1.5rem, 2vw, 2rem)",
+          }}
+        >
+          {price}
+        </p>
+        <p className="text-xs text-muted">
+          ou 4× sem juros · 5% off no PIX
+        </p>
+      </div>
 
       <fieldset className="mt-8">
-        <legend className="mb-3 text-sm">Cores</legend>
+        <legend className="mb-3 flex items-center justify-between gap-3 text-sm">
+          <span>Cores</span>
+          <span className="text-xs text-muted">
+            {colorLabel}
+          </span>
+        </legend>
         <div className="flex flex-wrap items-center gap-3">
           {colors.map((c) => (
             <button
@@ -68,8 +88,13 @@ export function ProductPurchasePanel({ title, price, colors, sizes }: Props) {
         </div>
       </fieldset>
 
-      <fieldset className="mt-8">
-        <legend className="mb-3 text-sm">Tamanhos</legend>
+      <fieldset className="mt-7">
+        <legend className="mb-3 flex items-center justify-between gap-3 text-sm">
+          <span>Tamanhos</span>
+          <button type="button" className="text-xs underline text-muted">
+            Guia de medidas
+          </button>
+        </legend>
         <div className="flex flex-wrap items-center gap-2">
           {sizes.map((s) => (
             <button
@@ -91,14 +116,61 @@ export function ProductPurchasePanel({ title, price, colors, sizes }: Props) {
         </div>
       </fieldset>
 
+      <fieldset className="mt-7">
+        <legend className="mb-3 text-sm">Quantidade</legend>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setQty((q) => Math.max(1, q - 1))}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border transition-colors hover:bg-white hover:text-black"
+            style={{ borderColor: "var(--border)" }}
+            aria-label="Diminuir"
+          >
+            −
+          </button>
+          <span className="font-display tabular-nums text-lg w-8 text-center">{qty}</span>
+          <button
+            type="button"
+            onClick={() => setQty((q) => Math.min(5, q + 1))}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border transition-colors hover:bg-white hover:text-black"
+            style={{ borderColor: "var(--border)" }}
+            aria-label="Aumentar"
+          >
+            +
+          </button>
+        </div>
+      </fieldset>
+
       <button
         type="button"
+        onClick={handleAddToCart}
+        disabled={!size}
         data-cursor="Adicionar"
-        className="mt-10 inline-flex w-full items-center justify-center rounded-full px-6 py-4 text-sm font-medium transition-opacity hover:opacity-90"
-        style={{ background: "#ffffff", color: "#0a0a0a" }}
+        className="mt-8 inline-flex w-full items-center justify-center rounded-full px-6 py-4 text-sm font-medium transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+        style={{
+          background: added ? "#37d18a" : "#ffffff",
+          color: added ? "#0a0a0a" : "#0a0a0a",
+        }}
       >
-        Adicionar na sacola
+        {added ? "✓ Adicionado · ver sacola" : !size ? "Selecione o tamanho" : "Adicionar na sacola"}
       </button>
+
+      {added && (
+        <Link
+          href="/cart"
+          className="mt-3 inline-flex w-full items-center justify-center rounded-full border px-6 py-3 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-white hover:text-black"
+          style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+        >
+          Finalizar compra →
+        </Link>
+      )}
+
+      <ul className="mt-6 space-y-2 text-[10px] uppercase tracking-[0.22em] text-muted">
+        <li>· Envio em até 5 dias úteis</li>
+        <li>· Trocas grátis em 30 dias</li>
+        <li>· Security bag lacrada direto da casa</li>
+        <li>· Parcelamento até 4× sem juros</li>
+      </ul>
     </div>
   );
 }
