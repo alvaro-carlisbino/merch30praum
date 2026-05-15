@@ -1,5 +1,6 @@
 import { PageHeader } from "@/components/admin/PageHeader";
 import { StatCard } from "@/components/admin/StatCard";
+import { StatusPill } from "@/components/admin/StatusPill";
 import { TICKET_TIERS, fmtBRL, fmtPct } from "@/lib/admin/mock";
 
 export default function AdminPlantaoPage() {
@@ -107,7 +108,7 @@ export default function AdminPlantaoPage() {
                   />
                 </div>
 
-                <TicketStatusPill status={t.status} />
+                <StatusPill kind="ticket" status={t.status} />
               </li>
             );
           })}
@@ -192,19 +193,3 @@ export default function AdminPlantaoPage() {
   );
 }
 
-function TicketStatusPill({ status }: { status: string }) {
-  const map: Record<string, { bg: string; color: string; label: string }> = {
-    ativo: { bg: "#37d18a22", color: "#37d18a", label: "Ativo" },
-    esgotado: { bg: "#ff557722", color: "#ff5577", label: "Esgotado" },
-    encerrado: { bg: "#88888822", color: "#888", label: "Encerrado" },
-  };
-  const cfg = map[status] ?? map.ativo;
-  return (
-    <span
-      className="inline-flex shrink-0 items-center justify-self-end rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]"
-      style={{ background: cfg.bg, color: cfg.color }}
-    >
-      {cfg.label}
-    </span>
-  );
-}

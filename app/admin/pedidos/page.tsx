@@ -1,5 +1,6 @@
 import { PageHeader } from "@/components/admin/PageHeader";
 import { StatCard } from "@/components/admin/StatCard";
+import { StatusPill } from "@/components/admin/StatusPill";
 import { ADMIN_ORDERS, TOP_CUSTOMERS, fmtBRL } from "@/lib/admin/mock";
 
 const FILTERS = ["Todos", "Pago", "Enviado", "Entregue", "Pendente", "Cancelado"];
@@ -83,7 +84,7 @@ export default function AdminPedidosPage() {
                   <p className="mt-1 truncate text-sm font-medium">{o.customer}</p>
                   <p className="mt-0.5 truncate text-[10px] tabular-nums text-muted">{o.email}</p>
                 </div>
-                <OrderStatusPill status={o.status} />
+                <StatusPill kind="order" status={o.status} />
               </div>
               <p className="truncate text-xs text-fg/75">{o.product} · {o.qty}x</p>
               <div className="flex items-center justify-between gap-3 text-xs">
@@ -140,7 +141,7 @@ export default function AdminPedidosPage() {
                   </td>
                   <td className="py-3.5 pr-4 tabular-nums">{fmtBRL(o.total)}</td>
                   <td className="py-3.5 pr-6">
-                    <OrderStatusPill status={o.status} />
+                    <StatusPill kind="order" status={o.status} />
                   </td>
                 </tr>
               ))}
@@ -188,21 +189,3 @@ export default function AdminPedidosPage() {
   );
 }
 
-function OrderStatusPill({ status }: { status: string }) {
-  const map: Record<string, { bg: string; color: string; label: string }> = {
-    pago: { bg: "#37d18a22", color: "#37d18a", label: "Pago" },
-    enviado: { bg: "#1f6bff22", color: "#5b9bff", label: "Enviado" },
-    entregue: { bg: "#37d18a22", color: "#37d18a", label: "Entregue" },
-    pendente: { bg: "#f5a52322", color: "#f5a523", label: "Pendente" },
-    cancelado: { bg: "#ff557722", color: "#ff5577", label: "Cancelado" },
-  };
-  const cfg = map[status] ?? map.pendente;
-  return (
-    <span
-      className="inline-flex items-center rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]"
-      style={{ background: cfg.bg, color: cfg.color }}
-    >
-      {cfg.label}
-    </span>
-  );
-}

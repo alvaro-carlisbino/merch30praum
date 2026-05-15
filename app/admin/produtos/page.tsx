@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { PageHeader } from "@/components/admin/PageHeader";
 import { StatCard } from "@/components/admin/StatCard";
+import { StatusPill } from "@/components/admin/StatusPill";
 import { ADMIN_PRODUCTS, fmtBRL } from "@/lib/admin/mock";
 
 export default function AdminProdutosPage() {
@@ -79,7 +80,7 @@ export default function AdminProdutosPage() {
               <div className="flex min-w-0 flex-1 flex-col gap-1">
                 <div className="flex items-start justify-between gap-2">
                   <p className="truncate text-sm font-medium">{p.title}</p>
-                  <ProductStatusPill status={p.status} />
+                  <StatusPill kind="product" status={p.status} />
                 </div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
                   SKU 30P-{p.id.toUpperCase()} · {p.artist}
@@ -173,7 +174,7 @@ export default function AdminProdutosPage() {
                     </span>
                   </td>
                   <td className="py-4 pr-6">
-                    <ProductStatusPill status={p.status} />
+                    <StatusPill kind="product" status={p.status} />
                   </td>
                 </tr>
               ))}
@@ -185,19 +186,3 @@ export default function AdminProdutosPage() {
   );
 }
 
-function ProductStatusPill({ status }: { status: string }) {
-  const map: Record<string, { bg: string; color: string; label: string }> = {
-    ativo: { bg: "#37d18a22", color: "#37d18a", label: "Ativo" },
-    rascunho: { bg: "#f5a52322", color: "#f5a523", label: "Rascunho" },
-    esgotado: { bg: "#ff557722", color: "#ff5577", label: "Esgotado" },
-  };
-  const cfg = map[status] ?? map.ativo;
-  return (
-    <span
-      className="inline-flex items-center rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]"
-      style={{ background: cfg.bg, color: cfg.color }}
-    >
-      {cfg.label}
-    </span>
-  );
-}

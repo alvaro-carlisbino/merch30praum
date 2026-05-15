@@ -1,5 +1,6 @@
 import { StatCard } from "@/components/admin/StatCard";
 import { PageHeader } from "@/components/admin/PageHeader";
+import { StatusPill } from "@/components/admin/StatusPill";
 import {
   ADMIN_ORDERS,
   REVENUE_BY_DAY,
@@ -7,6 +8,7 @@ import {
   TOP_PRODUCTS_30D,
   fmtBRL,
 } from "@/lib/admin/mock";
+import { fmtTodayLong, fmtDayMonth } from "@/lib/admin/format";
 
 export default function AdminDashboardPage() {
   const maxRevenue = Math.max(...REVENUE_BY_DAY.map((d) => d.value));
@@ -17,7 +19,7 @@ export default function AdminDashboardPage() {
   return (
     <>
       <PageHeader
-        eyebrow="14 de Maio · 2026"
+        eyebrow={fmtTodayLong()}
         title="Bom dia, Clara."
         subtitle="Resumo dos últimos 7 dias da loja e ingressos do Plantão Festival."
       />
@@ -179,17 +181,14 @@ export default function AdminDashboardPage() {
                   <p className="mt-1 truncate text-sm font-medium">{o.customer}</p>
                   <p className="mt-0.5 truncate text-xs text-fg/65">{o.product}</p>
                 </div>
-                <StatusPill status={o.status} />
+                <StatusPill kind="order" status={o.status} />
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="tabular-nums" style={{ color: "var(--accent)" }}>
                   {fmtBRL(o.total)}
                 </span>
                 <span className="uppercase tracking-[0.22em] text-muted">
-                  {new Date(o.date).toLocaleDateString("pt-BR", {
-                    day: "2-digit",
-                    month: "short",
-                  })}
+                  {fmtDayMonth(o.date)}
                 </span>
               </div>
             </li>
@@ -226,7 +225,7 @@ export default function AdminDashboardPage() {
                   <td className="py-3 pr-3 text-fg/65">{o.product}</td>
                   <td className="py-3 pr-3 tabular-nums">{fmtBRL(o.total)}</td>
                   <td className="py-3 pr-3">
-                    <StatusPill status={o.status} />
+                    <StatusPill kind="order" status={o.status} />
                   </td>
                   <td className="py-3 text-xs uppercase tracking-[0.22em] text-muted">
                     {new Date(o.date).toLocaleDateString("pt-BR", {
@@ -244,21 +243,3 @@ export default function AdminDashboardPage() {
   );
 }
 
-function StatusPill({ status }: { status: string }) {
-  const map: Record<string, { bg: string; color: string; label: string }> = {
-    pago: { bg: "#37d18a22", color: "#37d18a", label: "Pago" },
-    enviado: { bg: "#1f6bff22", color: "#5b9bff", label: "Enviado" },
-    entregue: { bg: "#37d18a22", color: "#37d18a", label: "Entregue" },
-    pendente: { bg: "#f5a52322", color: "#f5a523", label: "Pendente" },
-    cancelado: { bg: "#ff557722", color: "#ff5577", label: "Cancelado" },
-  };
-  const cfg = map[status] ?? map.pendente;
-  return (
-    <span
-      className="inline-flex items-center rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]"
-      style={{ background: cfg.bg, color: cfg.color }}
-    >
-      {cfg.label}
-    </span>
-  );
-}

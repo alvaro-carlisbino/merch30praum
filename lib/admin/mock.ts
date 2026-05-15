@@ -1,7 +1,4 @@
-/**
- * Dados MOCK para o painel admin.
- * Ainda não conectamos com Shopify / banco real — pra demo.
- */
+import { daysAgo } from "./format";
 
 export type AdminProduct = {
   id: string;
@@ -40,16 +37,16 @@ export type AdminOrder = {
 };
 
 export const ADMIN_ORDERS: AdminOrder[] = [
-  { id: "#30P-2026-1842", customer: "João Vitor Silva", email: "joao@gmail.com", product: "Camiseta 333 Azul Elétrico", qty: 1, total: 189, status: "pago", date: "2026-05-14", payment: "pix" },
-  { id: "#30P-2026-1841", customer: "Maria Eduarda", email: "duda@hotmail.com", product: "Puffer Black 333", qty: 1, total: 489, status: "enviado", date: "2026-05-14", payment: "credito" },
-  { id: "#30P-2026-1840", customer: "Pedro Almeida", email: "pedro@outlook.com", product: "Camiseta Sabotage Off-White", qty: 2, total: 378, status: "pago", date: "2026-05-13", payment: "pix" },
-  { id: "#30P-2026-1839", customer: "Lucas Fernandes", email: "lf@gmail.com", product: "Camiseta TUPAC Brown", qty: 1, total: 189, status: "entregue", date: "2026-05-13", payment: "pix" },
-  { id: "#30P-2026-1838", customer: "Beatriz Costa", email: "bia@yahoo.com", product: "Jaqueta Azul Elétrico", qty: 1, total: 599, status: "pago", date: "2026-05-12", payment: "credito" },
-  { id: "#30P-2026-1837", customer: "Gabriel Souza", email: "gabi@gmail.com", product: "Camiseta Game Face", qty: 1, total: 189, status: "pendente", date: "2026-05-12", payment: "boleto" },
-  { id: "#30P-2026-1836", customer: "Larissa Mendes", email: "lari@gmail.com", product: "Camiseta 2PAC Black", qty: 3, total: 567, status: "entregue", date: "2026-05-11", payment: "pix" },
-  { id: "#30P-2026-1835", customer: "Rafael Lima", email: "rafael@protonmail.com", product: "Camiseta Respeito é Pra Quem Tem", qty: 1, total: 189, status: "cancelado", date: "2026-05-11", payment: "credito" },
-  { id: "#30P-2026-1834", customer: "Camila Rocha", email: "camilarocha@gmail.com", product: "Camiseta 333 Azul Elétrico", qty: 2, total: 378, status: "entregue", date: "2026-05-10", payment: "pix" },
-  { id: "#30P-2026-1833", customer: "Diego Santos", email: "diego@gmail.com", product: "Puffer Black 333", qty: 1, total: 489, status: "entregue", date: "2026-05-10", payment: "credito" },
+  { id: "#30P-1842", customer: "Lucas Tavares",        email: "lukinhaaa+30p@gmail.com",       product: "Camiseta 333 Azul Elétrico",      qty: 1, total: 189, status: "pago",      date: daysAgo(0), payment: "pix" },
+  { id: "#30P-1841", customer: "Duda Albuquerque",     email: "duda.alb@icloud.com",            product: "Puffer Black 333",                qty: 1, total: 489, status: "enviado",   date: daysAgo(0), payment: "credito" },
+  { id: "#30P-1840", customer: "Thiago Marçal",        email: "thmarcal@outlook.com.br",        product: "Camiseta Sabotage Off-White",     qty: 2, total: 378, status: "pago",      date: daysAgo(1), payment: "pix" },
+  { id: "#30P-1839", customer: "Aninha Bezerra",       email: "aninha.bz@uol.com.br",           product: "Camiseta TUPAC Brown",            qty: 1, total: 189, status: "entregue",  date: daysAgo(1), payment: "pix" },
+  { id: "#30P-1838", customer: "Beatriz Costa",        email: "biacostarj@gmail.com",           product: "Jaqueta Azul Elétrico",           qty: 1, total: 599, status: "pago",      date: daysAgo(2), payment: "credito" },
+  { id: "#30P-1837", customer: "Gabi de Holanda",      email: "gabi.holanda@proton.me",         product: "Camiseta Game Face",              qty: 1, total: 189, status: "pendente",  date: daysAgo(2), payment: "boleto" },
+  { id: "#30P-1836", customer: "Larissa Mendes",       email: "lari.m@hotmail.com",             product: "Camiseta 2PAC Black",             qty: 3, total: 567, status: "entregue",  date: daysAgo(3), payment: "pix" },
+  { id: "#30P-1835", customer: "Rafa Lima",            email: "rafalima@protonmail.com",        product: "Camiseta Respeito é Pra Quem Tem", qty: 1, total: 189, status: "cancelado", date: daysAgo(3), payment: "credito" },
+  { id: "#30P-1834", customer: "Camila Rocha",         email: "camih.rocha@gmail.com",          product: "Camiseta 333 Azul Elétrico",      qty: 2, total: 378, status: "entregue",  date: daysAgo(4), payment: "pix" },
+  { id: "#30P-1833", customer: "Diego Sanches",        email: "diegosanches.13@gmail.com",      product: "Puffer Black 333",                qty: 1, total: 489, status: "entregue",  date: daysAgo(4), payment: "credito" },
 ];
 
 export type TicketTier = {
@@ -62,14 +59,14 @@ export type TicketTier = {
 };
 
 export const TICKET_TIERS: TicketTier[] = [
-  { id: "t1", name: "Front · Lote 1", price: 90, sold: 2000, capacity: 2000, status: "esgotado" },
+  { id: "t1", name: "Front · Lote 1", price: 90,  sold: 2000, capacity: 2000, status: "esgotado" },
   { id: "t2", name: "Front · Lote 2", price: 110, sold: 2000, capacity: 2000, status: "esgotado" },
   { id: "t3", name: "Front · Lote 3", price: 130, sold: 2000, capacity: 2000, status: "esgotado" },
   { id: "t4", name: "Front · Lote 4", price: 140, sold: 1800, capacity: 1800, status: "esgotado" },
   { id: "t5", name: "Front · Lote 5", price: 145, sold: 1700, capacity: 1700, status: "esgotado" },
   { id: "t6", name: "Front · Lote 6", price: 150, sold: 1245, capacity: 2000, status: "ativo" },
   { id: "t7", name: "Front Boladão · Lote 6", price: 295, sold: 1500, capacity: 1500, status: "esgotado" },
-  { id: "t8", name: "VIP · Lote 6", price: 655, sold: 412, capacity: 800, status: "ativo" },
+  { id: "t8", name: "VIP · Lote 6", price: 655, sold: 412,  capacity: 800,  status: "ativo" },
 ];
 
 export type Customer = {
@@ -82,11 +79,11 @@ export type Customer = {
 };
 
 export const TOP_CUSTOMERS: Customer[] = [
-  { id: "c1", name: "Camila Rocha", email: "camilarocha@gmail.com", city: "Fortaleza · CE", orders: 8, ltv: 2840 },
-  { id: "c2", name: "Pedro Almeida", email: "pedro@outlook.com", city: "São Paulo · SP", orders: 6, ltv: 2120 },
-  { id: "c3", name: "Diego Santos", email: "diego@gmail.com", city: "Rio de Janeiro · RJ", orders: 5, ltv: 1830 },
-  { id: "c4", name: "Beatriz Costa", email: "bia@yahoo.com", city: "Recife · PE", orders: 4, ltv: 1620 },
-  { id: "c5", name: "Larissa Mendes", email: "lari@gmail.com", city: "Belo Horizonte · MG", orders: 4, ltv: 1340 },
+  { id: "c1", name: "Camila Rocha",     email: "camih.rocha@gmail.com",   city: "Fortaleza · CE",      orders: 8, ltv: 2840 },
+  { id: "c2", name: "Thiago Marçal",    email: "thmarcal@outlook.com.br", city: "São Paulo · SP",      orders: 6, ltv: 2120 },
+  { id: "c3", name: "Diego Sanches",    email: "diegosanches.13@gmail.com", city: "Rio de Janeiro · RJ", orders: 5, ltv: 1830 },
+  { id: "c4", name: "Beatriz Costa",    email: "biacostarj@gmail.com",    city: "Recife · PE",         orders: 4, ltv: 1620 },
+  { id: "c5", name: "Larissa Mendes",   email: "lari.m@hotmail.com",      city: "Belo Horizonte · MG", orders: 4, ltv: 1340 },
 ];
 
 export function fmtBRL(value: number) {
