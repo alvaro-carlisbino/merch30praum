@@ -250,7 +250,7 @@ pres.author = "Alvaro Carlisbino";
   s.background = { color: C.bg };
   addChrome(s, 2, 10);
 
-  s.addText("02 · A DOR", {
+  s.addText("02 · O PROBLEMA", {
     x: MARGIN,
     y: 0.7,
     w: 8,
@@ -262,20 +262,20 @@ pres.author = "Alvaro Carlisbino";
     charSpacing: 2.5,
   });
 
-  // Stat gigante esquerda — fontSize ajustado pra caber em 1 linha
-  s.addText("300 MIL", {
+  // Stat gigante esquerda
+  s.addText("4", {
     x: MARGIN,
     y: 1.4,
     w: 4.7,
     h: 1.6,
     fontFace: F.display,
-    fontSize: 72,
+    fontSize: 120,
     bold: true,
     color: C.accent,
     valign: "middle",
     charSpacing: -2,
   });
-  s.addText("acessos em 3 minutos", {
+  s.addText("ferramentas desconectadas", {
     x: MARGIN,
     y: 3.1,
     w: 4.7,
@@ -284,7 +284,7 @@ pres.author = "Alvaro Carlisbino";
     fontSize: 18,
     color: C.ink,
   });
-  s.addText("no último drop. O site caiu.", {
+  s.addText("pra rodar uma holding inteira.", {
     x: MARGIN,
     y: 3.55,
     w: 4.7,
@@ -312,7 +312,7 @@ pres.author = "Alvaro Carlisbino";
     fill: { color: C.accent },
     line: { color: C.accent, width: 0 },
   });
-  s.addText("O que aconteceu", {
+  s.addText("Operação espalhada", {
     x: 5.55,
     y: 1.55,
     w: 3.85,
@@ -325,11 +325,12 @@ pres.author = "Alvaro Carlisbino";
   });
   s.addText(
     [
-      { text: "Shopify Plus não aguenta drop", options: { bold: true, color: C.ink, fontSize: 13, breakLine: true } },
-      { text: "ST Ingressos cobra ~8% por ingresso", options: { bold: true, color: C.ink, fontSize: 13, breakLine: true } },
-      { text: "Instagram é o único canal de fã", options: { bold: true, color: C.ink, fontSize: 13, breakLine: true } },
+      { text: "Shopify pra loja", options: { bold: true, color: C.ink, fontSize: 13, breakLine: true } },
+      { text: "ST Ingressos pro Plantão (~8% taxa)", options: { bold: true, color: C.ink, fontSize: 13, breakLine: true } },
+      { text: "Instagram DM pra SAC", options: { bold: true, color: C.ink, fontSize: 13, breakLine: true } },
+      { text: "Planilha pra tudo o resto", options: { bold: true, color: C.ink, fontSize: 13, breakLine: true } },
       { text: " ", options: { fontSize: 8, breakLine: true } },
-      { text: "É stack de selo. Não de holding.", options: { italic: true, color: C.accent, fontSize: 13 } },
+      { text: "Nenhuma conversa entre si.", options: { italic: true, color: C.accent, fontSize: 13 } },
     ],
     {
       x: 5.55,
@@ -337,7 +338,7 @@ pres.author = "Alvaro Carlisbino";
       w: 3.85,
       h: 2.3,
       fontFace: F.body,
-      paraSpaceAfter: 8,
+      paraSpaceAfter: 6,
     }
   );
 }
@@ -461,7 +462,7 @@ pres.author = "Alvaro Carlisbino";
     {
       n: "01",
       titulo: "Site 30praum.com",
-      desc: "Vitrine, drops, álbuns, news — arquitetado pra aguentar pico de drop sem cair.",
+      desc: "Vitrine, drops, álbuns, news — uma única superfície editorial sob domínio da casa.",
     },
     {
       n: "02",

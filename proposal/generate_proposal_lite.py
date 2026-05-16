@@ -285,15 +285,16 @@ def cover_page():
 
 
 def pagina_diagnostico():
-    flow = section_header("01 · O VERDADEIRO PROBLEMA", "Não é tráfego. É operação.")
+    flow = section_header("01 · O PROBLEMA", "A operação está espalhada.")
 
     flow.append(
         Paragraph(
-            "Site caindo no drop é um problema — mas ele volta. Drop dura horas. "
-            "O <b>problema permanente</b> da 30praum é diferente: <b>todo dia</b>, "
-            "o time precisa cadastrar produto, marcar pedido como enviado, aprovar "
-            "post, configurar lote do Plantão, responder reclamação. Hoje isso vive "
-            "espalhado entre Shopify, ST Ingressos, WhatsApp e planilhas.",
+            "<b>Todo dia</b> o time da 30praum precisa cadastrar produto, marcar "
+            "pedido como enviado, aprovar post, configurar lote do Plantão, "
+            "responder reclamação que chega pelo Instagram. Hoje cada uma dessas "
+            "tarefas vive em uma ferramenta diferente — Shopify, ST Ingressos, "
+            "Instagram DM e planilhas — sem conversa entre elas, sem histórico "
+            "consolidado, sem aprovação estruturada.",
             styles["body"],
         )
     )
@@ -304,7 +305,7 @@ def pagina_diagnostico():
             [
                 ("TELAS DE ADMIN", "32+", "uma pra cada fluxo crítico"),
                 ("FLUXOS COBERTOS", "8", "Pedido · drop · ingresso · SAC"),
-                ("STACK ATUAL", "4", "Shopify · ST · IG · WhatsApp"),
+                ("FERRAMENTAS HOJE", "4", "Shopify · ST · Instagram · planilha"),
                 ("DEMO VIVA", "v1", "site no ar pra clicar agora"),
             ]
         )
@@ -581,7 +582,7 @@ def pagina_propostas():
         bullets(
             [
                 "<b>Money-back 30 dias</b> após Fase 1: insatisfação formal = devolução de 70% do pago até então.",
-                "<b>Uptime 99,95% no 1º Plantão pós-launch</b>: se cair em drop programado, 1 mês de SLA grátis + R$ 5.000 de crédito.",
+                "<b>SLA de uptime 99,95% em janela mensal</b>: descumprimento gera 1 mês de SLA grátis + R$ 5.000 de crédito.",
                 "<b>Sem multa de saída a partir do 6º mês</b>: aviso de 60 dias e sai sem fricção.",
             ],
             "li_tight",
