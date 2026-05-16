@@ -646,7 +646,7 @@ pres.author = "Alvaro Carlisbino";
     charSpacing: 2,
     valign: "middle",
   });
-  s.addText("R$ 148.000  ·  4 a 5 meses  ·  SLA R$ 9.500/mês desde mês 2", {
+  s.addText("R$ 148.000  ·  4 a 5 meses  ·  SLA R$ 28.000/mês (time fixo)", {
     x: MARGIN + 4,
     y: 5.05,
     w: W - 2 * MARGIN - 4.3,
@@ -661,27 +661,26 @@ pres.author = "Alvaro Carlisbino";
 }
 
 // ═══════════════════════════════════════════════════════
-// SLIDE 6 · OS 4 CENÁRIOS
+// SLIDE 6 · TRÊS CAMINHOS DE PARCERIA
 // ═══════════════════════════════════════════════════════
 {
   const s = pres.addSlide();
   s.background = { color: C.bg };
   addChrome(s, 6, 10);
-  addSectionTitle(s, "06", "QUATRO CAMINHOS", "Vocês escolhem o ritmo da entrada.");
+  addSectionTitle(s, "06", "TRÊS CAMINHOS", "Vocês escolhem o ritmo.");
 
   const cenarios = [
-    ["A · Mínimo viável", "Site + Shopify headless. Mantém ST.", "R$ 95k", "R$ 6.5k"],
-    ["B · Híbrido — recomendado", "+ Plantão checkout próprio + workflow.", "R$ 148k", "R$ 9.5k"],
-    ["C · Acelerado", "+ E-commerce próprio (sai Shopify).", "R$ 208k", "R$ 13k"],
-    ["D · Time fixo + PLR", "Parceria contínua. Fixo + variável.", "—", "R$ 18k+"],
+    ["P · Piloto pago", "90 dias · entrada pequena · perdem pouco", "R$ 48k", "R$ 7.5k"],
+    ["G · Garantia — recomendado", "5 meses · money-back · time fixo no SLA", "R$ 148k", "R$ 28k"],
+    ["E · Time embedded", "Sem entrega · Alvaro + Cauã fixos · escala", "—", "R$ 22-42k"],
   ];
 
   // Tabela
-  const headers = ["CENÁRIO", "DESCRIÇÃO", "ENTREGA", "MENSAL"];
-  const colWidths = [2.6, 4.2, 1.3, 1.4];
+  const headers = ["PROPOSTA", "O QUE É", "ENTREGA", "MENSAL"];
+  const colWidths = [2.8, 4.2, 1.2, 1.3];
   const startX = MARGIN;
   const startY = 2.3;
-  const rowH = 0.55;
+  const rowH = 0.7;
 
   // Header row
   let cx = startX;
@@ -739,7 +738,7 @@ pres.author = "Alvaro Carlisbino";
   });
 
   s.addText(
-    "Começar pelo B. Evoluir pra C ou D quando bater confiança. Sem lock-in: troca de cenário com aviso de 60 dias.",
+    "SLA da Proposta G inclui salário fixo do time (Alvaro + Cauã) · não é hora de dev · é folha terceirizada.",
     {
       x: MARGIN,
       y: 4.85,
@@ -761,11 +760,11 @@ pres.author = "Alvaro Carlisbino";
   const s = pres.addSlide();
   s.background = { color: C.bg };
   addChrome(s, 7, 10);
-  addSectionTitle(s, "07", "O DINHEIRO", "Paga sozinho em 1 edição.");
+  addSectionTitle(s, "07", "O DINHEIRO", "Mais barato que contratar 2 internos.");
 
   // 2 colunas: stat grande esquerda + tabela direita
   // Esquerda · stat big
-  s.addText("PAYBACK", {
+  s.addText("ECONOMIA VS CLT", {
     x: MARGIN,
     y: 2.4,
     w: 4,
@@ -776,7 +775,7 @@ pres.author = "Alvaro Carlisbino";
     color: C.muted,
     charSpacing: 2,
   });
-  s.addText("1 edição", {
+  s.addText("R$ 432k", {
     x: MARGIN,
     y: 2.7,
     w: 4.7,
@@ -788,7 +787,7 @@ pres.author = "Alvaro Carlisbino";
     valign: "middle",
     charSpacing: -2,
   });
-  s.addText("do Plantão sem ST", {
+  s.addText("por ano vs 2 devs CLT", {
     x: MARGIN,
     y: 4.05,
     w: 4.7,
@@ -797,7 +796,7 @@ pres.author = "Alvaro Carlisbino";
     fontSize: 18,
     color: C.ink,
   });
-  s.addText("≈ R$ 300.000 de economia direta", {
+  s.addText("sem encargos, sem férias, sem rescisão", {
     x: MARGIN,
     y: 4.5,
     w: 4.7,
@@ -811,7 +810,7 @@ pres.author = "Alvaro Carlisbino";
   // Direita · mini tabela
   const tx = 5.4;
   const tw = W - MARGIN - tx;
-  s.addText("ANO 1 vs HOJE", {
+  s.addText("CONTRATAR CLT vs SLA", {
     x: tx,
     y: 2.4,
     w: tw,
@@ -824,10 +823,10 @@ pres.author = "Alvaro Carlisbino";
   });
 
   const rows = [
-    ["Shopify Plus → Basic", "–R$ 139.800"],
-    ["Taxa ST (1 edição)", "–R$ 300.000"],
-    ["Entrega plataforma", "+R$ 148.000"],
-    ["SLA × 12 meses", "+R$ 114.000"],
+    ["2 devs sêniores CLT/mês*", "R$ 64.000"],
+    ["SLA Proposta G/mês", "R$ 28.000"],
+    ["Diferença mensal", "–R$ 36.000"],
+    ["Economia anual", "–R$ 432.000"],
   ];
   rows.forEach((r, i) => {
     const ry = 2.85 + i * 0.4;
@@ -871,7 +870,7 @@ pres.author = "Alvaro Carlisbino";
     fill: { color: C.green },
     line: { color: C.green, width: 0 },
   });
-  s.addText("ECONOMIA LÍQUIDA · ANO 1", {
+  s.addText("ECONOMIA ANUAL EM EQUIPE", {
     x: tx + 0.15,
     y: 4.5,
     w: tw - 1.7,
@@ -883,7 +882,7 @@ pres.author = "Alvaro Carlisbino";
     charSpacing: 1.2,
     valign: "middle",
   });
-  s.addText("R$ 177.800", {
+  s.addText("R$ 432.000", {
     x: tx + tw - 1.7,
     y: 4.5,
     w: 1.6,
@@ -894,6 +893,18 @@ pres.author = "Alvaro Carlisbino";
     color: C.white,
     valign: "middle",
     align: "right",
+  });
+
+  // Footnote
+  s.addText("* 2 devs sêniores em SP: R$ 18k salário + 80% encargos sociais = ~R$ 32k/mês cada. Soma R$ 64k/mês.", {
+    x: MARGIN,
+    y: H - 0.75,
+    w: W - 2 * MARGIN,
+    h: 0.25,
+    fontFace: F.body,
+    fontSize: 8,
+    italic: true,
+    color: C.muted,
   });
 }
 
