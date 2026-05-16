@@ -554,8 +554,8 @@ def sumario_executivo():
         [
             Paragraph("<b>D · Time Embedded + PLR</b>", styles["body_tight"]),
             Paragraph(
-                "Alvaro + Cauã fixos no projeto eternamente, sem entrega upfront. "
-                "Modelo de partnership: fixo mensal + PLR sobre economia gerada.",
+                "Alvaro + Cauã fixos no projeto em parceria de longa duração, "
+                "sem entrega upfront. Modelo de partnership: fixo mensal + PLR.",
                 styles["body_tight"],
             ),
             Paragraph("—", styles["body_tight"]),
@@ -2209,9 +2209,10 @@ def cenarios_completos():
     flow.append(Paragraph("CENÁRIO D · TIME EMBEDDED + PLR", styles["h2"]))
     flow.append(
         Paragraph(
-            "<b>O modelo de partnership.</b> Alvaro + Cauã fixos no projeto eternamente, "
-            "sem prazo de entrega — trabalho contínuo, sem fim, alinhado por PLR. "
-            "Vocês têm time dedicado real, com nome e cara, sem rotatividade.",
+            "<b>O modelo de partnership.</b> Alvaro + Cauã fixos no projeto em "
+            "parceria de longa duração — trabalho contínuo, alinhado por PLR, "
+            "com saída amigável a qualquer momento. Vocês têm time dedicado "
+            "real, com nome e cara, sem rotatividade.",
             styles["body_tight"],
         )
     )
