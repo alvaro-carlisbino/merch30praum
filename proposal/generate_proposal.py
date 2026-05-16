@@ -775,8 +775,441 @@ def visao_plataforma():
     return flow
 
 
+def operacao_30praum():
+    flow = section_header(
+        "04 · OPERAÇÃO 30PRAUM · HOJE E AMANHÃ",
+        "Quem vai operar a plataforma · papéis, processos e capacitação interna.",
+    )
+
+    flow.append(
+        Paragraph(
+            "A camada técnica resolve metade do problema. A outra metade é "
+            "<b>operacional</b>: quem cadastra produto, quem atende reclamação, quem "
+            "dispara newsletter, quem analisa drop. Esta seção mapeia honestamente a "
+            "operação atual da 30praum e desenha o time interno mínimo necessário pra "
+            "operar a nova plataforma sem sobrecarregar Clara nem o time existente.",
+            styles["body"],
+        )
+    )
+
+    # ─── BLOCO A · Diagnóstico operacional ────────────────────────
+    flow.append(Spacer(1, 12))
+    flow.append(Paragraph("Stack operacional atual", styles["h2"]))
+    flow.append(
+        Paragraph(
+            "A operação digital da 30praum hoje gira em torno de <b>dois pilares "
+            "frágeis</b>:",
+            styles["body_tight"],
+        )
+    )
+
+    stack_hoje = [
+        [
+            "Shopify",
+            "Loja de merch oficial",
+            "Operação enxuta sem time dedicado de e-commerce. Catálogo limitado, "
+            "checkout padrão do Shopify, sem programa fidelidade, sem segmentação "
+            "de cliente, sem retargeting próprio.",
+        ],
+        [
+            "Instagram (@30praum)",
+            "Canal principal de comunicação com o fã",
+            "Único ponto de contato direto com a base. Não há email marketing "
+            "estruturado, push notification, SMS ou app — tudo depende do algoritmo "
+            "do Instagram pra entregar mensagem.",
+        ],
+        [
+            "ST Ingressos",
+            "Venda de ingresso do Plantão Festival",
+            "Plataforma terceirizada cobrando 8 a 10% por ingresso. Dados do "
+            "comprador ficam na ST, não com a 30praum.",
+        ],
+        [
+            "WhatsApp + planilhas",
+            "Coordenação operacional interna",
+            "Aprovação de post, decisão de drop, agenda de show, planilha de "
+            "fornecedor — tudo em chat e Sheets. Sem trilha de auditoria, sem "
+            "SLA, sem versionamento.",
+        ],
+    ]
+    rows_w = wrap_cells(
+        [["FERRAMENTA", "FUNÇÃO", "LIMITAÇÃO"]] + stack_hoje
+    )
+    t = Table(rows_w, colWidths=[3.4 * cm, 4.6 * cm, 10.5 * cm], repeatRows=1)
+    t.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, 0), INK),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                ("FONTNAME", (0, 0), (-1, 0), FONT_B),
+                ("FONTSIZE", (0, 0), (-1, -1), 8.5),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LINEBELOW", (0, 0), (-1, -2), 0.3, RULE),
+                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, BG_SOFT]),
+                ("LEFTPADDING", (0, 0), (-1, -1), 8),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+                ("TOPPADDING", (0, 0), (-1, -1), 8),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+            ]
+        )
+    )
+    flow.append(t)
+
+    flow.append(Spacer(1, 12))
+    flow.append(
+        callout(
+            "Risco operacional concentrado",
+            "A 30praum hoje depende de <b>algoritmo de plataforma terceira</b> "
+            "(Instagram) pra alcançar o fã, e de <b>checkout terceirizado</b> "
+            "(Shopify + ST) pra monetizar. Se Instagram derruba alcance orgânico "
+            "amanhã — como já aconteceu em outros mercados — vocês perdem o canal "
+            "principal sem ter substituto. A plataforma que estamos propondo "
+            "<b>devolve esse controle</b>, mas exige time interno mínimo pra operar.",
+            accent=AMBER,
+        )
+    )
+
+    flow.append(PageBreak())
+
+    # ─── BLOCO B · O que a equipe atual faz e o que falta ────────
+    flow.append(Paragraph("Quem hoje faz o quê (mapa atual)", styles["h2"]))
+    flow.append(
+        Paragraph(
+            "Pelo que entendemos da operação atual, esses são os papéis presentes "
+            "no time da 30praum (~50 pessoas). Marcamos em <b>vermelho</b> os "
+            "papéis que vão precisar de evolução pra suportar a plataforma nova.",
+            styles["body_tight"],
+        )
+    )
+    flow.append(Spacer(1, 8))
+
+    papeis_hoje = [
+        ["PAPEL", "QUEM PROVAVELMENTE FAZ HOJE", "STATUS NA TRANSIÇÃO"],
+        ["CEO / decisão final", "Clara Mendes", "Sem mudança · ponto único de aprovação"],
+        ["Social media", "Time de marketing (3-5 pessoas)", "Sem mudança · continua produzindo conteúdo"],
+        ["Booking / shows", "Time de booking", "Sem mudança · usa workflow engine"],
+        ["A&R / produção musical", "Matuê + produção", "Sem mudança"],
+        ["Comercial / parcerias", "Time comercial", "Usa workflow engine pra aprovação"],
+        ["E-commerce / loja", "Disperso · sem dono claro", "EVOLUIR · vira papel dedicado"],
+        ["Atendimento ao cliente / SAC", "Disperso · DM do Instagram", "EVOLUIR · canal estruturado"],
+        ["Email marketing", "Não existe estruturado", "CRIAR · nova capacidade"],
+        ["Analytics / BI", "Não existe estruturado", "CRIAR · nova capacidade"],
+        ["Operação de drop", "Disperso · sem playbook", "ESTRUTURAR · runbook + responsável"],
+    ]
+    rows_w = wrap_cells(papeis_hoje)
+    t = Table(rows_w, colWidths=[4.6 * cm, 6.4 * cm, 7.5 * cm], repeatRows=1)
+    style = [
+        ("BACKGROUND", (0, 0), (-1, 0), INK),
+        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+        ("FONTNAME", (0, 0), (-1, 0), FONT_B),
+        ("FONTSIZE", (0, 0), (-1, -1), 8.5),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("LINEBELOW", (0, 0), (-1, -2), 0.3, RULE),
+        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, BG_SOFT]),
+        ("LEFTPADDING", (0, 0), (-1, -1), 8),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+        ("TOPPADDING", (0, 0), (-1, -1), 8),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+    ]
+    # Highlight as 5 últimas linhas (evoluir/criar/estruturar)
+    for i in range(6, 11):
+        style.append(("TEXTCOLOR", (2, i), (2, i), RED))
+        style.append(("FONTNAME", (2, i), (2, i), FONT_B))
+    t.setStyle(TableStyle(style))
+    flow.append(t)
+
+    flow.append(Spacer(1, 14))
+    # ─── BLOCO C · Time mínimo necessário ────────────────────────
+    flow.append(Paragraph("Time interno necessário · duas opções", styles["h2"]))
+    flow.append(
+        Paragraph(
+            "Para operar a plataforma nova vocês têm duas opções de estrutura. "
+            "Recomendamos a <b>LEAN</b> pelo equilíbrio entre custo e capacidade.",
+            styles["body_tight"],
+        )
+    )
+
+    flow.append(Spacer(1, 8))
+    flow.append(Paragraph("Opção LEAN (recomendada)", styles["h3"]))
+    lean_rows = [
+        ["FUNÇÃO", "MODELO", "ESCOPO", "CUSTO MENSAL"],
+        ["E-commerce Manager", "1 CLT interno (júnior/pleno)", "Cadastro de produto, gestão de estoque, coordena drops, monitora pedido", "R$ 7.000 + encargos = ~R$ 12.000"],
+        ["SAC + Pedidos", "Terceirizado (Yampi/Nubox/agência)", "Atende ticket, processa troca, suporte pré e pós-venda", "R$ 2.500 a R$ 4.000"],
+        ["Marketing Digital", "Time interno atual + ferramenta", "Email marketing, push, programa fidelidade (já têm o time, falta a ferramenta)", "Custo da ferramenta · R$ 700"],
+        ["Total LEAN", "", "", "~R$ 15.500/mês"],
+    ]
+    rows_w = wrap_cells(lean_rows)
+    t = Table(rows_w, colWidths=[3.5 * cm, 4.0 * cm, 7.5 * cm, 3.5 * cm], repeatRows=1)
+    t.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, 0), INK),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                ("FONTNAME", (0, 0), (-1, 0), FONT_B),
+                ("FONTSIZE", (0, 0), (-1, -1), 8.5),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LINEBELOW", (0, 0), (-1, -2), 0.3, RULE),
+                ("ROWBACKGROUNDS", (0, 1), (-1, -2), [colors.white, BG_SOFT]),
+                ("BACKGROUND", (0, -1), (-1, -1), GREEN),
+                ("TEXTCOLOR", (0, -1), (-1, -1), colors.white),
+                ("FONTNAME", (0, -1), (-1, -1), FONT_B),
+                ("LEFTPADDING", (0, 0), (-1, -1), 8),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+                ("TOPPADDING", (0, 0), (-1, -1), 8),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+            ]
+        )
+    )
+    flow.append(t)
+
+    flow.append(Spacer(1, 12))
+    flow.append(Paragraph("Opção ROBUSTA (estrutura completa)", styles["h3"]))
+    robust_rows = [
+        ["FUNÇÃO", "MODELO", "ESCOPO", "CUSTO MENSAL"],
+        ["E-commerce Manager", "1 CLT pleno", "Idem LEAN + gestão de coleção e roadmap de produto", "R$ 9.000 + enc. = ~R$ 15.500"],
+        ["SAC + Pedidos", "1 CLT júnior interno", "Atendimento dedicado, controle de qualidade, métricas NPS", "R$ 3.500 + enc. = ~R$ 6.000"],
+        ["Analista de Marketing Digital", "1 CLT pleno", "Email marketing, ads, programa fidelidade, BI, dashboards", "R$ 6.500 + enc. = ~R$ 11.000"],
+        ["Operador de drop", "Compartilhado entre time atual", "Coordenação D-7 a D+1, monitoramento em tempo real, pós-mortem", "—"],
+        ["Total ROBUSTA", "", "", "~R$ 32.500/mês"],
+    ]
+    rows_w = wrap_cells(robust_rows)
+    t = Table(rows_w, colWidths=[3.8 * cm, 3.5 * cm, 7.7 * cm, 3.5 * cm], repeatRows=1)
+    t.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, 0), INK),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                ("FONTNAME", (0, 0), (-1, 0), FONT_B),
+                ("FONTSIZE", (0, 0), (-1, -1), 8.5),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LINEBELOW", (0, 0), (-1, -2), 0.3, RULE),
+                ("ROWBACKGROUNDS", (0, 1), (-1, -2), [colors.white, BG_SOFT]),
+                ("BACKGROUND", (0, -1), (-1, -1), AMBER),
+                ("TEXTCOLOR", (0, -1), (-1, -1), colors.white),
+                ("FONTNAME", (0, -1), (-1, -1), FONT_B),
+                ("LEFTPADDING", (0, 0), (-1, -1), 8),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+                ("TOPPADDING", (0, 0), (-1, -1), 8),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+            ]
+        )
+    )
+    flow.append(t)
+
+    flow.append(Spacer(1, 12))
+    flow.append(
+        callout(
+            "Por que recomendamos LEAN no início",
+            "Contratar 1 pessoa dedicada (E-commerce Manager) + terceirizar SAC já "
+            "cobre 80% do que vocês precisam. <b>Marketing digital pode usar o time "
+            "atual</b>, apenas adicionando ferramenta de email marketing "
+            "(ActiveCampaign). Conforme o e-commerce próprio escalar, vocês evoluem "
+            "pra ROBUSTA — internalizando SAC e contratando analista de marketing "
+            "dedicado. Subir é fácil, descer é doloroso.",
+        )
+    )
+
+    flow.append(PageBreak())
+
+    # ─── BLOCO D · Cronograma de capacitação ──────────────────────
+    flow.append(Paragraph("Cronograma de capacitação interna", styles["h2"]))
+    flow.append(
+        Paragraph(
+            "A plataforma só funciona se o time de vocês souber operar. Por isso, "
+            "embutimos sessões de treinamento ao longo da entrega — sem custo adicional.",
+            styles["body_tight"],
+        )
+    )
+
+    flow.append(Spacer(1, 8))
+    cap_rows = [
+        ["MOMENTO", "QUEM TREINA", "QUEM É TREINADO", "DURAÇÃO"],
+        [
+            "Mês 1 (durante Fase 1)",
+            "Tech Lead + PM",
+            "Clara + chefe de cada área (social, comercial, financeiro)",
+            "2h · sessão de overview",
+        ],
+        [
+            "Mês 2 (final da Fase 1)",
+            "Tech Lead",
+            "E-commerce Manager + editor de conteúdo",
+            "4h · admin Payload CMS",
+        ],
+        [
+            "Mês 3 (durante Fase 2)",
+            "Tech Lead + PM",
+            "E-commerce Manager + SAC terceirizado",
+            "6h · workflow de pedido + Plantão",
+        ],
+        [
+            "Mês 4 (final Fase 2)",
+            "Tech Lead",
+            "Marketing digital + analista de dados (se houver)",
+            "3h · analytics + segmentação",
+        ],
+        [
+            "Mês 5 (durante Fase 3)",
+            "Tech Lead",
+            "Time inteiro",
+            "2h · segurança + LGPD + 2FA",
+        ],
+        [
+            "Semanal (após launch)",
+            "PM",
+            "Operadores diários",
+            "30min · standup operacional",
+        ],
+    ]
+    rows_w = wrap_cells(cap_rows)
+    t = Table(rows_w, colWidths=[3.5 * cm, 3.0 * cm, 7.5 * cm, 4.5 * cm], repeatRows=1)
+    t.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, 0), INK),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                ("FONTNAME", (0, 0), (-1, 0), FONT_B),
+                ("FONTSIZE", (0, 0), (-1, -1), 8.5),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LINEBELOW", (0, 0), (-1, -2), 0.3, RULE),
+                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, BG_SOFT]),
+                ("LEFTPADDING", (0, 0), (-1, -1), 8),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+                ("TOPPADDING", (0, 0), (-1, -1), 8),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+            ]
+        )
+    )
+    flow.append(t)
+
+    flow.append(Spacer(1, 12))
+    flow.append(Paragraph("Material de apoio entregue", styles["h2"]))
+    flow.extend(
+        bullets(
+            [
+                "<b>Manual do operador</b> (PDF + vídeo) — passo a passo de cadastrar produto, processar pedido, criar drop, disparar newsletter.",
+                "<b>Runbook de drop</b> (D-7 a D+1) — checklist imprimível que o operador acompanha em cada lançamento.",
+                "<b>Playbook de SAC</b> — scripts de resposta pra reclamações comuns, escalonamento, política de troca.",
+                "<b>Glossário técnico</b> — vocabulário da plataforma traduzido pra time não-técnico (ex: o que é webhook, fila, edge cache).",
+                "<b>Vídeos curtos</b> (~3-5 min cada) — tutoriais de tarefas frequentes, hospedados privadamente no Loom ou similar.",
+                "<b>Canal de suporte dedicado</b> — Slack com nosso time + número de WhatsApp do Tech Lead pra emergência.",
+            ],
+            "li_tight",
+        )
+    )
+
+    flow.append(PageBreak())
+
+    # ─── BLOCO E · Estratégia multi-canal ────────────────────────
+    flow.append(Paragraph("Sair da dependência exclusiva de Instagram", styles["h2"]))
+    flow.append(
+        Paragraph(
+            "Hoje, se o Instagram derrubar o alcance orgânico de vocês em 50% — como "
+            "aconteceu com grandes marcas em 2023 — vocês perdem metade do canal de "
+            "vendas sem ter pra onde correr. A plataforma habilita <b>quatro canais "
+            "próprios</b> que não dependem de algoritmo de terceiro:",
+            styles["body_tight"],
+        )
+    )
+
+    canais_rows = [
+        ["CANAL", "COMO FUNCIONA", "ALCANCE ESPERADO", "QUANDO ATIVA"],
+        [
+            "Email marketing",
+            "ActiveCampaign + segmentação por comportamento de compra. Cliente recebe drop antes do Insta.",
+            "30-50% open rate em base 30praum (estimativa)",
+            "Fase 1",
+        ],
+        [
+            "Push notification",
+            "Browser push (web) e push do app (mobile). Notifica drop, ingresso, news.",
+            "60-80% delivery garantido",
+            "Fase 1 (web) + Fase 5 (app)",
+        ],
+        [
+            "SMS transacional",
+            "Confirmação de pedido, lembrete de Plantão, recuperação de carrinho.",
+            "Quase 100% open rate",
+            "Fase 2",
+        ],
+        [
+            "Programa de fidelidade",
+            "Pontos por compra/engajamento, drops prioritários, conteúdo exclusivo.",
+            "Aumenta LTV em 25-40% (média mercado)",
+            "Fase 2",
+        ],
+        [
+            "SEO orgânico",
+            "Páginas de artista, álbum, drop bem indexadas no Google.",
+            "Tráfego de descoberta sem custo de ads",
+            "Fase 1",
+        ],
+        [
+            "App próprio",
+            "Notificação direta, sem algoritmo de plataforma intermediária.",
+            "Engagement 4-6× maior que web",
+            "Fase 5 (cenário C/D)",
+        ],
+    ]
+    rows_w = wrap_cells(canais_rows)
+    t = Table(rows_w, colWidths=[3.4 * cm, 7.0 * cm, 5.5 * cm, 2.6 * cm], repeatRows=1)
+    t.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, 0), INK),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                ("FONTNAME", (0, 0), (-1, 0), FONT_B),
+                ("FONTSIZE", (0, 0), (-1, -1), 8.5),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LINEBELOW", (0, 0), (-1, -2), 0.3, RULE),
+                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, BG_SOFT]),
+                ("LEFTPADDING", (0, 0), (-1, -1), 8),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+                ("TOPPADDING", (0, 0), (-1, -1), 8),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+            ]
+        )
+    )
+    flow.append(t)
+
+    flow.append(Spacer(1, 14))
+    flow.append(Paragraph("Como esses canais conectam com Instagram", styles["h2"]))
+    flow.extend(
+        bullets(
+            [
+                "<b>Instagram continua sendo o canal de TOPO de funil</b> — descoberta, brand awareness, alcance massivo. Não é substituído.",
+                "<b>A plataforma vira o canal de FUNDO de funil</b> — conversão, retenção, recompra. Onde o fã vira cliente recorrente.",
+                "Bio do Instagram passa a apontar pra <b>link inteligente próprio</b> (não Linktree), que captura email/CPF antes do redirect.",
+                "Stories de Plantão / drop direcionam pra checkout próprio (não Shopify direto), trackeando atribuição de origem.",
+                "Cada follower do Instagram vira um <b>email coletado + telefone</b> ao longo do tempo via incentivos (cupom de boas-vindas, conteúdo exclusivo).",
+                "<b>Em 12 meses, projetamos:</b> 40-60% da base de fãs com email/telefone próprio coletado — independência real do Instagram.",
+            ],
+            "li_tight",
+        )
+    )
+
+    flow.append(Spacer(1, 10))
+    flow.append(
+        callout(
+            "O Instagram é poderoso, mas é alugado",
+            "<b>Vocês não são donos da audiência do @30praum</b> — é a Meta. Se "
+            "Instagram der shadow ban, mudar algoritmo, ou simplesmente perder "
+            "relevância (como aconteceu com Twitter e está acontecendo com Facebook), "
+            "vocês perdem o ativo principal de vendas. A plataforma transforma "
+            "audiência alugada em <b>audiência própria</b> — você capta email, "
+            "telefone, comportamento de compra, e nunca mais depende de algoritmo "
+            "terceiro pra alcançar o fã. Esse é o <b>seguro de longo prazo</b> mais "
+            "valioso desta proposta.",
+            accent=ACCENT,
+        )
+    )
+
+    flow.append(PageBreak())
+    return flow
+
+
 def arquitetura():
-    flow = section_header("04 · ARQUITETURA TÉCNICA", "Como o sistema é construído, camada por camada.")
+    flow = section_header("05 · ARQUITETURA TÉCNICA", "Como o sistema é construído, camada por camada.")
 
     flow.append(Paragraph("Diagrama macro · camadas da plataforma", styles["h2"]))
     flow.append(
@@ -1020,7 +1453,7 @@ def arquitetura():
 
 
 def infraestrutura_drop():
-    flow = section_header("05 · INFRAESTRUTURA DE DROP", "Como aguentamos 300 mil acessos em 3 minutos.")
+    flow = section_header("06 · INFRAESTRUTURA DE DROP", "Como aguentamos 300 mil acessos em 3 minutos.")
 
     flow.append(
         Paragraph(
@@ -1098,7 +1531,7 @@ def infraestrutura_drop():
 
 
 def workflow_engine():
-    flow = section_header("06 · WORKFLOW ENGINE", "Como tiramos a operação do WhatsApp e botamos em sistema.")
+    flow = section_header("07 · WORKFLOW ENGINE", "Como tiramos a operação do WhatsApp e botamos em sistema.")
 
     flow.append(
         Paragraph(
@@ -1161,7 +1594,7 @@ def workflow_engine():
 
 
 def seguranca_compliance():
-    flow = section_header("07 · SEGURANÇA E COMPLIANCE", "Camada por camada, sem economia.")
+    flow = section_header("08 · SEGURANÇA E COMPLIANCE", "Camada por camada, sem economia.")
 
     flow.append(
         Paragraph(
@@ -1255,7 +1688,7 @@ def seguranca_compliance():
 
 
 def estrutura_equipe():
-    flow = section_header("08 · ESTRUTURA DE EQUIPE", "Quem entrega e quem sustenta — todos os papéis declarados.")
+    flow = section_header("09 · ESTRUTURA DE EQUIPE", "Quem entrega e quem sustenta — todos os papéis declarados.")
 
     flow.append(
         Paragraph(
@@ -1380,7 +1813,7 @@ def estrutura_equipe():
             "Vocês têm <b>um único Slack compartilhado</b> com nossa equipe, um "
             "<b>WhatsApp do Tech Lead</b> pra emergência, e uma <b>call semanal</b> "
             "de 60 minutos pra alinhar prioridades. Não há limite de chamados — "
-            "apenas SLA de resposta por severidade (ver seção 10).",
+            "apenas SLA de resposta por severidade (ver seção 11).",
         )
     )
 
@@ -1389,7 +1822,7 @@ def estrutura_equipe():
 
 
 def fases():
-    flow = section_header("09 · FASES DE ENTREGA", "Três fases principais sequenciais + duas opcionais.")
+    flow = section_header("10 · FASES DE ENTREGA", "Três fases principais sequenciais + duas opcionais.")
 
     flow.append(
         Paragraph(
@@ -1397,7 +1830,7 @@ def fases():
             "de pagamento em milestones, sem comprometer capital com tudo de uma vez. "
             "Os preços abaixo são do <b>Cenário B (híbrido, recomendado)</b>. As "
             "Fases 4 e 5 são opcionais — entram conforme demanda. Para preços dos "
-            "cenários A, C e D (embedded), ver seção 11.",
+            "cenários A, C e D (embedded), ver seção 12.",
             styles["body"],
         )
     )
@@ -1453,7 +1886,7 @@ def fases():
                 "Lotes configuráveis com data de virada, anti-cambismo nativo, meia-entrada validada.",
                 "QR único por ingresso, assinado com HMAC-SHA256, válido offline.",
                 "PWA de validação na portaria: scanner de QR, marca ingresso como usado, funciona sem internet.",
-                "Workflow engine completo (todos os processos da seção 06).",
+                "Workflow engine completo (todos os processos da seção 07).",
                 "Notificação multi-canal: Slack, email, push, WhatsApp via API oficial.",
                 "Calendário editorial visual integrado: arrasta e solta posts, drops, news.",
                 "Admin de ingresso: dashboard em tempo real durante venda, exportações, relatórios.",
@@ -1548,7 +1981,7 @@ def fases():
 
 
 def sla_section():
-    flow = section_header("10 · SLA E SUSTENTAÇÃO CONTÍNUA", "O que vocês têm depois (e durante) da entrega.")
+    flow = section_header("11 · SLA E SUSTENTAÇÃO CONTÍNUA", "O que vocês têm depois (e durante) da entrega.")
 
     flow.append(
         Paragraph(
@@ -1650,7 +2083,7 @@ def sla_section():
 
 
 def cenarios_completos():
-    flow = section_header("11 · CENÁRIOS COMPLETOS", "A, B, C e D — quatro modelos de engajamento, do mais leve ao parceiro fixo.")
+    flow = section_header("12 · CENÁRIOS COMPLETOS", "A, B, C e D — quatro modelos de engajamento, do mais leve ao parceiro fixo.")
 
     flow.append(
         Paragraph(
@@ -1923,7 +2356,7 @@ def _pricing_table(rows, highlight=False):
 
 def fidelizacao():
     flow = section_header(
-        "12 · MODELO DE FIDELIZAÇÃO",
+        "13 · MODELO DE FIDELIZAÇÃO",
         "Como o relacionamento evolui — e o que vocês ganham por ficar.",
     )
 
@@ -2048,7 +2481,7 @@ def fidelizacao():
 
 
 def cronograma():
-    flow = section_header("13 · CRONOGRAMA AGREGADO", "Como as fases se distribuem no tempo (Cenário B).")
+    flow = section_header("14 · CRONOGRAMA AGREGADO", "Como as fases se distribuem no tempo (Cenário B).")
 
     flow.append(
         Paragraph(
@@ -2111,7 +2544,7 @@ def cronograma():
 
 
 def custos_infra():
-    flow = section_header("14 · CUSTOS DE INFRAESTRUTURA", "O que vocês pagam direto pra fornecedores, fora do nosso contrato.")
+    flow = section_header("15 · CUSTOS DE INFRAESTRUTURA", "O que vocês pagam direto pra fornecedores, fora do nosso contrato.")
 
     flow.append(
         Paragraph(
@@ -2177,7 +2610,7 @@ def custos_infra():
 
 
 def roi_projecao():
-    flow = section_header("15 · ROI E PROJEÇÃO FINANCEIRA", "O número que paga a conta.")
+    flow = section_header("16 · ROI E PROJEÇÃO FINANCEIRA", "O número que paga a conta.")
 
     flow.append(
         Paragraph(
@@ -2284,7 +2717,7 @@ def roi_projecao():
 
 
 def clausulas_contratuais():
-    flow = section_header("16 · CLÁUSULAS CONTRATUAIS ESSENCIAIS", "Vamos contratar como adultos.")
+    flow = section_header("17 · CLÁUSULAS CONTRATUAIS ESSENCIAIS", "Vamos contratar como adultos.")
 
     flow.append(
         Paragraph(
@@ -2305,7 +2738,7 @@ def clausulas_contratuais():
         ),
         (
             "Pagamento e atraso",
-            "Cada fase tem pagamento dividido em milestones (ver seção 09). O atraso "
+            "Cada fase tem pagamento dividido em milestones (ver seção 10). O atraso "
             "no pagamento de qualquer milestone superior a 5 dias úteis suspende o "
             "trabalho automaticamente, sem rescisão, e o prazo da fase é estendido "
             "proporcionalmente. Atraso superior a 30 dias confere à CONTRATADA o "
@@ -2391,7 +2824,7 @@ def clausulas_contratuais():
             "Cláusula de drop catastrófico",
             "Em caso de drop com queda do site causada por falha da CONTRATADA "
             "(arquitetura, código, deploy errado), a penalidade é a definida no "
-            "SLA da seção 10. Para drops com queda por causa externa (gateway "
+            "SLA da seção 11. Para drops com queda por causa externa (gateway "
             "fora do ar, AWS outage global, ataque DDoS além da capacidade "
             "contratada), aplica-se cláusula de força maior — sem penalidade, mas "
             "com obrigação de pós-mortem e medidas preventivas pra próximo evento.",
@@ -2408,7 +2841,7 @@ def clausulas_contratuais():
 
 
 def proximos_passos():
-    flow = section_header("17 · PRÓXIMOS PASSOS", "Como saímos do PDF e entramos em execução.")
+    flow = section_header("18 · PRÓXIMOS PASSOS", "Como saímos do PDF e entramos em execução.")
 
     flow.append(
         Paragraph(
@@ -2540,7 +2973,7 @@ def anexos_capa():
         Paragraph(
             "Anexos detalhados são entregues em documento separado após decisão "
             "preliminar de cenário, na fase de elaboração contratual (Passo 2 da "
-            "seção 16).",
+            "seção 18).",
             styles["body_tight"],
         )
     )
@@ -2550,7 +2983,7 @@ def anexos_capa():
 
 
 def encerramento():
-    flow = section_header("18 · ENCERRAMENTO", "Por que dar esse passo agora.")
+    flow = section_header("19 · ENCERRAMENTO", "Por que dar esse passo agora.")
 
     flow.append(
         Paragraph(
@@ -2616,7 +3049,7 @@ def encerramento():
         Paragraph(
             "Ao confirmar por escrito a aceitação desta proposta (e a escolha de "
             "cenário) dentro do prazo de validade, a CONTRATANTE inicia o Passo 2 "
-            "da seção 16. Esta confirmação não substitui o contrato, mas serve como "
+            "da seção 18. Esta confirmação não substitui o contrato, mas serve como "
             "<i>letter of intent</i> e congela preços e prazos.",
             styles["body_tight"],
         )
@@ -2703,6 +3136,7 @@ def build():
     story.extend(sumario_executivo())
     story.extend(diagnostico())
     story.extend(visao_plataforma())
+    story.extend(operacao_30praum())
     story.extend(arquitetura())
     story.extend(infraestrutura_drop())
     story.extend(workflow_engine())
