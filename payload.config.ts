@@ -29,7 +29,7 @@ const isProd = process.env.NODE_ENV === "production";
 export default buildConfig({
   serverURL,
   routes: {
-    admin: "/cms",
+    admin: "/admin",
     api: "/api/payload",
     graphQL: "/api/payload/graphql",
     graphQLPlayground: "/api/payload/graphql-playground",
