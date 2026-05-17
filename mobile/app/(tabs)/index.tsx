@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
-import { FlatList, RefreshControl, View } from "react-native";
+import { RefreshControl, ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { FeedHeader } from "@/components/home/FeedHeader";
 import { StoriesRow } from "@/components/home/StoriesRow";
-import { FeedCard } from "@/components/home/FeedCard";
-import { useFeedItems } from "@/lib/feed/feed-items";
+import { FeaturedHero } from "@/components/home/FeaturedHero";
+import { EditorialFeed } from "@/components/home/EditorialFeed";
+
 import { MOCK_PUSHES, useNotificationQueue } from "@/lib/notifications/mock-queue";
 import { useTheme } from "@/lib/theme";
+import { useArtists, useCurrentPlantao } from "@/lib/cms/queries";
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const showPayload = useNotificationQueue((s) => s.show);
   const setActive = useTheme((s) => s.setActive);
   const tokens = useTheme((s) => s.tokens);
+
+  const { data: artists } = useArtists();
+  const { data: plantao } = useCurrentPlantao();
+
   const [refreshing, setRefreshing] = useState(false);
-  const feedItems = useFeedItems();
 
   useEffect(() => {
     setActive("house");
@@ -31,21 +36,12 @@ export default function HomeScreen() {
     }, 700);
   };
 
+  const featured = (artists ?? []).find((a) => a.drop.status === "live") ?? artists?.[0] ?? null;
+
   return (
-    <View style={{ flex: 1, backgroundColor: "#0a0a0a", paddingTop: insets.top }}>
-      <FlatList
-        data={feedItems}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <FeedCard item={item} />}
-        ItemSeparatorComponent={() => <View style={{ height: 18 }} />}
-        ListHeaderComponent={
-          <View>
-            <FeedHeader />
-            <StoriesRow />
-            <View style={{ height: 18 }} />
-          </View>
-        }
-        ListFooterComponent={<View style={{ height: 32 }} />}
+    <View style={{ flex: 1, backgroundColor: "#0a0a0a" }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -53,8 +49,13 @@ export default function HomeScreen() {
             tintColor={tokens.accent}
           />
         }
-        showsVerticalScrollIndicator={false}
-      />
+        contentContainerStyle={{ paddingTop: insets.top, paddingBottom: 40 }}
+      >
+        <FeedHeader />
+        {featured ? <FeaturedHero artist={featured} /> : null}
+        <StoriesRow />
+        {artists && plantao ? <EditorialFeed artists={artists} plantao={plantao} /> : null}
+      </ScrollView>
     </View>
   );
 }

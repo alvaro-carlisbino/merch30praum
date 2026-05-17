@@ -1,70 +1,119 @@
-import { FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, Pressable, Text, View, Dimensions } from "react-native";
 import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
+
 import { useStories } from "@/lib/feed/stories";
+import { useArtists } from "@/lib/cms/queries";
+import { Lettering } from "@/components/editorial/Lettering";
 import { ARTIST_THEMES, useTheme } from "@/lib/theme";
+
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const CARD_WIDTH = (SCREEN_WIDTH - 24 * 2 - 12) / 2;
+const CARD_HEIGHT = CARD_WIDTH * 1.35;
 
 export function StoriesRow() {
   const setActive = useTheme((s) => s.setActive);
   const stories = useStories();
+  const { data: artists } = useArtists();
+  const artistMap = new Map((artists ?? []).map((a) => [a.slug, a]));
 
   return (
-    <FlatList
-      data={stories}
-      keyExtractor={(s) => s.slug}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: 16, gap: 14, paddingVertical: 4 }}
-      renderItem={({ item }) => {
-        const accent = ARTIST_THEMES[item.slug].accent;
-        return (
-          <Pressable
-            onPress={() => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-              setActive(item.slug);
-              router.push(`/eleitos/${item.slug}` as never);
-            }}
-            style={{ alignItems: "center", width: 76 }}
-          >
-            <View
+    <View style={{ paddingHorizontal: 24, paddingTop: 6, paddingBottom: 16 }}>
+      <Text
+        style={{
+          color: "rgba(245,240,232,0.55)",
+          fontFamily: "Cinzel-700",
+          fontSize: 10,
+          letterSpacing: 4,
+          marginBottom: 16,
+        }}
+      >
+        ELEITOS DA CASA
+      </Text>
+      <FlatList
+        data={stories}
+        keyExtractor={(s) => s.slug}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ gap: 12 }}
+        renderItem={({ item }) => {
+          const tokens = ARTIST_THEMES[item.slug];
+          const config = artistMap.get(item.slug);
+          return (
+            <Pressable
+              onPress={() => {
+                Haptics.selectionAsync().catch(() => {});
+                setActive(item.slug);
+                router.push(`/eleitos/${item.slug}` as never);
+              }}
               style={{
-                width: 72,
-                height: 72,
-                borderRadius: 36,
-                padding: item.isActiveDrop ? 2.5 : 1,
-                borderWidth: item.isActiveDrop ? 2 : 1,
-                borderColor: item.isActiveDrop ? accent : "rgba(245,240,232,0.18)",
-                alignItems: "center",
-                justifyContent: "center",
+                width: CARD_WIDTH,
+                height: CARD_HEIGHT,
+                backgroundColor: tokens.bg,
+                overflow: "hidden",
+                position: "relative",
               }}
             >
               <Image
                 source={{ uri: item.avatar }}
-                style={{
-                  width: 62,
-                  height: 62,
-                  borderRadius: 31,
-                  backgroundColor: "#1a1a1a",
-                }}
+                style={{ flex: 1 }}
                 contentFit="cover"
               />
-            </View>
-            <Text
-              numberOfLines={1}
-              style={{
-                color: "#f5f0e8",
-                fontFamily: "Cinzel-500",
-                fontSize: 10,
-                letterSpacing: 1.2,
-                marginTop: 6,
-              }}
-            >
-              {item.label.toUpperCase()}
-            </Text>
-          </Pressable>
-        );
-      }}
-    />
+              <LinearGradient
+                colors={["rgba(0,0,0,0.1)", "rgba(0,0,0,0.95)"]}
+                locations={[0.3, 1]}
+                style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+              />
+              <View style={{ position: "absolute", top: 14, left: 14 }}>
+                {item.isActiveDrop ? (
+                  <View
+                    style={{
+                      paddingHorizontal: 6,
+                      paddingVertical: 3,
+                      backgroundColor: tokens.accent,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: "#0a0a0a",
+                        fontFamily: "Cinzel-700",
+                        fontSize: 8,
+                        letterSpacing: 2,
+                      }}
+                    >
+                      DROP ATIVO
+                    </Text>
+                  </View>
+                ) : null}
+              </View>
+              <View
+                style={{
+                  position: "absolute",
+                  bottom: 14,
+                  left: 14,
+                  right: 14,
+                }}
+              >
+                <View style={{ marginBottom: 8 }}>
+                  <Lettering artist={item.slug} width={CARD_WIDTH - 28} tint="#F5F0E8" />
+                </View>
+                <Text
+                  style={{
+                    color: "rgba(245,240,232,0.65)",
+                    fontFamily: "Inter-400",
+                    fontSize: 10,
+                    letterSpacing: 2,
+                  }}
+                >
+                  {(config?.universeName ?? "").toUpperCase()}
+                </Text>
+              </View>
+            </Pressable>
+          );
+        }}
+      />
+    </View>
   );
 }
