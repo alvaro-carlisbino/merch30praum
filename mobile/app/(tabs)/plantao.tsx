@@ -1,22 +1,24 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollView, Text, View, FlatList } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Calendar, MapPin } from "lucide-react-native";
 
-import { getCurrentPlantao } from "@/lib/plantao/registry";
 import { useTheme } from "@/lib/theme";
+import { useCurrentPlantao } from "@/lib/cms/queries";
 
 export default function PlantaoScreen() {
   const insets = useSafeAreaInsets();
   const setActive = useTheme((s) => s.setActive);
   const tokens = useTheme((s) => s.tokens);
-  const edition = useMemo(() => getCurrentPlantao(), []);
+  const { data: edition } = useCurrentPlantao();
 
   useEffect(() => {
     setActive("house");
   }, [setActive]);
+
+  if (!edition) return null;
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#0a0a0a" }} showsVerticalScrollIndicator={false}>
