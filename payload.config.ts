@@ -12,6 +12,7 @@ import { News } from "./collections/News";
 import { Partners } from "./collections/Partners";
 import { Shows } from "./collections/Shows";
 import { Albums } from "./collections/Albums";
+import { Products } from "./collections/Products";
 import { Incubadora } from "./globals/Incubadora";
 import { Press } from "./globals/Press";
 
@@ -39,7 +40,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { titleSuffix: " · 30praum CMS" },
   },
-  collections: [Users, Artists, Plantao, News, Partners, Shows, Albums],
+  collections: [Users, Artists, Plantao, News, Partners, Shows, Albums, Products],
   globals: [Incubadora, Press],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

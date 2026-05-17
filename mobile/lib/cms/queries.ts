@@ -8,6 +8,8 @@ import {
   type PlantaoEdition,
 } from "@/lib/plantao/registry";
 import { INCUBADORA as STATIC_INCUBADORA } from "@/lib/incubadora/registry";
+import { PRODUCTS as STATIC_PRODUCTS, type MobileProduct } from "@/lib/shop/products";
+import type { CategorySlug } from "@/lib/shop/categories";
 import type { ArtistConfig, ArtistSlug } from "@/lib/artists/types";
 
 const STALE_FIFTEEN_MIN = 1000 * 60 * 15;
@@ -232,6 +234,56 @@ export function useIncubadora() {
         throw new Error("empty");
       } catch {
         return STATIC_INCUBADORA;
+      }
+    },
+  });
+}
+
+interface ProductDoc {
+  id?: string;
+  handle: string;
+  title: string;
+  shortDescription?: string | null;
+  priceBRL: number;
+  compareAtPriceBRL?: number | null;
+  image: string;
+  galleryImages?: { url: string }[] | null;
+  artistSlug: ArtistSlug | "house";
+  category: CategorySlug;
+  tags?: { value: string }[] | null;
+  isDropLive?: boolean;
+  isSoldOut?: boolean;
+  isPreOrder?: boolean;
+  sizes?: { label: string; available: boolean }[] | null;
+  stockNote?: string | null;
+}
+
+function adaptProduct(doc: ProductDoc): MobileProduct {
+  return {
+    id: doc.id ?? doc.handle,
+    handle: doc.handle,
+    title: doc.title,
+    priceBRL: doc.priceBRL,
+    image: doc.image,
+    artistSlug: doc.artistSlug === "house" ? "matue" : doc.artistSlug,
+    category: doc.category,
+    isDropLive: Boolean(doc.isDropLive),
+  };
+}
+
+export function useProducts() {
+  return useQuery({
+    queryKey: ["cms", "products"],
+    staleTime: STALE_FIFTEEN_MIN,
+    queryFn: async () => {
+      try {
+        const res = await payloadFetch<PayloadFindResponse<ProductDoc>>(
+          "/products?limit=200&depth=1&sort=-isDropLive"
+        );
+        if (!res.docs.length) throw new Error("empty");
+        return res.docs.map(adaptProduct);
+      } catch {
+        return STATIC_PRODUCTS;
       }
     },
   });

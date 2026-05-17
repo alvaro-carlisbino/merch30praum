@@ -1,29 +1,24 @@
 import { PromoBanner } from "@/components/loja/PromoBanner";
 import { CatalogSidebar } from "@/components/loja/CatalogSidebar";
 import { CatalogGrid, type CatalogItem } from "@/components/loja/CatalogGrid";
+import { getAllProducts } from "@/lib/cms/products";
+import { formatBRL } from "@/lib/shop/static-products";
 
 export const metadata = {
   title: "Catálogo · Loja 30praum",
   description: "Catálogo completo da loja 30praum — filtra por categoria, tamanho, cor e artista.",
 };
 
-const ITEMS: CatalogItem[] = [
-  { id: "1", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/ep-1.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "2", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/ep-4.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "3", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/ep-3.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "4", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/ep-2.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "5", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-home/produto-face.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "6", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/mv-3.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "7", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-home/produto-sabotage.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "8", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/mv-4.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "9", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-home/produto-black-puffer.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "10", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-home/produto-respeito.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "11", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/mv-1.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "12", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-loja/mv-2.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-  { id: "13", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-home/produto-green-puffer.png", title: "Camiseta 333 Azul Elétrico", price: "R$ 189,00" },
-];
+export default async function CatalogoPage() {
+  const products = await getAllProducts();
+  const items: CatalogItem[] = products.map((p, i) => ({
+    id: p.id ?? p.handle ?? String(i),
+    href: `/produto/${p.handle}`,
+    image: p.image,
+    title: p.title,
+    price: formatBRL(p.priceBRL),
+  }));
 
-export default function CatalogoPage() {
   return (
     <>
       <PromoBanner />
@@ -35,9 +30,9 @@ export default function CatalogoPage() {
           </div>
 
           <div className="flex flex-col gap-10">
-            <CatalogGrid items={ITEMS} />
+            <CatalogGrid items={items} />
 
-            <Pagination current={2} total={20} />
+            <Pagination current={1} total={Math.max(1, Math.ceil(items.length / 12))} />
           </div>
         </div>
       </section>
