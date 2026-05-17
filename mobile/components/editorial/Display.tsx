@@ -7,23 +7,85 @@ export function scaleType(base: number, opts?: { minScale?: number }): number {
   return SHORT ? base * minScale : base;
 }
 
+type DisplayFont = "default" | "matue" | "wiu" | "teto" | "brandao" | "cinzel";
+
+const FONT_MAP: Record<DisplayFont, string> = {
+  default: "Cinzel-700",
+  matue: "SpaceGrotesk-500",
+  wiu: "CormorantGaramond-500-Italic",
+  teto: "Archivo-700",
+  brandao: "Anton-400",
+  cinzel: "Cinzel-700",
+};
+
+function negativeTracking(size: number): number {
+  if (size >= 100) return -size * 0.04;
+  if (size >= 60) return -size * 0.03;
+  if (size >= 36) return -size * 0.02;
+  if (size >= 20) return -size * 0.012;
+  return 0;
+}
+
 interface DisplayProps {
   children: React.ReactNode;
   size?: number;
   color?: string;
+  font?: DisplayFont;
+  lineHeight?: number;
+  align?: "left" | "center" | "right";
+  italic?: boolean;
   style?: StyleProp<TextStyle>;
 }
 
-export function Display({ children, size = 64, color = "#F5F0E8", style }: DisplayProps) {
+export function Display({
+  children,
+  size = 56,
+  color = "#F5F0E8",
+  font = "default",
+  lineHeight = 0.9,
+  align = "left",
+  italic = false,
+  style,
+}: DisplayProps) {
+  const scaled = scaleType(size);
   return (
     <Text
       style={[
         {
           color,
-          fontFamily: "BebasNeue-400",
+          fontFamily: FONT_MAP[font],
+          fontSize: scaled,
+          lineHeight: scaled * lineHeight,
+          letterSpacing: negativeTracking(scaled),
+          textTransform: font === "wiu" ? "none" : "uppercase",
+          textAlign: align,
+          fontStyle: italic ? "italic" : "normal",
+        },
+        style,
+      ]}
+    >
+      {children}
+    </Text>
+  );
+}
+
+interface WordmarkProps {
+  children: React.ReactNode;
+  size?: number;
+  color?: string;
+  tracking?: number;
+  style?: StyleProp<TextStyle>;
+}
+
+export function Wordmark({ children, size = 14, color = "#F5F0E8", tracking = 0.4, style }: WordmarkProps) {
+  return (
+    <Text
+      style={[
+        {
+          color,
+          fontFamily: "Cinzel-700",
           fontSize: scaleType(size),
-          lineHeight: scaleType(size) * 1.0,
-          letterSpacing: 1.5,
+          letterSpacing: scaleType(size) * tracking,
           textTransform: "uppercase",
         },
         style,
@@ -38,16 +100,17 @@ interface EyebrowProps {
   children: React.ReactNode;
   color?: string;
   align?: "left" | "center" | "right";
+  size?: number;
 }
 
-export function Eyebrow({ children, color = "#C89858", align = "left" }: EyebrowProps) {
+export function Eyebrow({ children, color = "#C89858", align = "left", size = 10 }: EyebrowProps) {
   return (
     <Text
       style={{
         color,
         fontFamily: "Cinzel-700",
-        fontSize: 10,
-        letterSpacing: 4,
+        fontSize: size,
+        letterSpacing: size * 0.4,
         textTransform: "uppercase",
         textAlign: align,
       }}
@@ -96,11 +159,12 @@ export function DropCap({ children, color = "rgba(245,240,232,0.85)", accent = "
       <Text
         style={{
           color: accent,
-          fontFamily: "BebasNeue-400",
-          fontSize: 64,
-          lineHeight: 56,
-          marginRight: 8,
-          marginTop: 2,
+          fontFamily: "Cinzel-700",
+          fontSize: 56,
+          lineHeight: 48,
+          marginRight: 10,
+          marginTop: 4,
+          letterSpacing: -2,
         }}
       >
         {first}
