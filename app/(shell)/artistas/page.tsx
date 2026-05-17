@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ARTISTS, ARTIST_SLUGS } from "@/lib/artists/registry";
+import { getAllArtists } from "@/lib/cms/artists";
 
 export const metadata = {
   title: "Artistas · 30praum",
@@ -15,7 +15,9 @@ const CARDS: Record<string, { photo: string; aspect: string }> = {
   brandao: { photo: "/figma-home/card-brandao.png", aspect: "229 / 418" },
 };
 
-export default function ArtistasPage() {
+export default async function ArtistasPage() {
+  const artists = await getAllArtists();
+
   return (
     <>
       <section className="mx-auto max-w-screen-2xl px-4 pt-16 pb-10 sm:px-8 sm:pt-20">
@@ -35,8 +37,8 @@ export default function ArtistasPage() {
 
       <section className="mx-auto max-w-screen-2xl px-4 pb-20 sm:px-8 sm:pb-24">
         <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
-          {ARTIST_SLUGS.map((slug) => {
-            const a = ARTISTS[slug];
+          {artists.map((a) => {
+            const slug = a.slug;
             const card = CARDS[slug];
             return (
               <li key={slug}>
