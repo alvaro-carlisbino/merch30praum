@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getUpcomingShows, getPastShows, type Show } from "@/lib/shows/registry";
-import { getArtist } from "@/lib/artists/registry";
+import { getUpcomingShows, getPastShows } from "@/lib/cms/shows";
+import { getAllArtists } from "@/lib/cms/artists";
+import type { Show } from "@/lib/shows/registry";
+import type { ArtistConfig } from "@/lib/artists/types";
 
 export const metadata = {
   title: "Shows · 30praum",
@@ -36,8 +38,7 @@ const CARD_PHOTOS: Record<string, string> = {
   brandao: "/figma-home/card-brandao.png",
 };
 
-function ShowCard({ show }: { show: Show }) {
-  const artist = getArtist(show.artistSlug)!;
+function ShowCard({ show, artist }: { show: Show; artist: ArtistConfig }) {
   const status = STATUS_COPY[show.status];
   const date = formatDate(show.date);
   const photo = CARD_PHOTOS[artist.slug];
@@ -135,9 +136,13 @@ function ShowCard({ show }: { show: Show }) {
   );
 }
 
-export default function ShowsPage() {
-  const upcoming = getUpcomingShows();
-  const past = getPastShows();
+export default async function ShowsPage() {
+  const [upcoming, past, artists] = await Promise.all([
+    getUpcomingShows(),
+    getPastShows(),
+    getAllArtists(),
+  ]);
+  const artistMap = new Map(artists.map((a) => [a.slug, a]));
 
   const grouped = new Map<string, Show[]>();
   for (const show of upcoming) {
@@ -188,7 +193,7 @@ export default function ShowsPage() {
               <ul className="space-y-3">
                 {shows.map((show) => (
                   <li key={show.id}>
-                    <ShowCard show={show} />
+                    <ShowCard show={show} artist={artistMap.get(show.artistSlug)!} />
                   </li>
                 ))}
               </ul>
@@ -215,7 +220,7 @@ export default function ShowsPage() {
             <ul className="space-y-3 opacity-65">
               {past.map((show) => (
                 <li key={show.id}>
-                  <ShowCard show={show} />
+                  <ShowCard show={show} artist={artistMap.get(show.artistSlug)!} />
                 </li>
               ))}
             </ul>

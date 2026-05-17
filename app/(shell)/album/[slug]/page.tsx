@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ALBUM_SLUGS, ALBUMS, isAlbumSlug } from "@/lib/albums/registry";
-import { ARTISTS } from "@/lib/artists/registry";
+import { getAllAlbums, getAlbum } from "@/lib/cms/albums";
+import { getArtist } from "@/lib/cms/artists";
 import { Marquee } from "@/components/motion/Marquee";
 import { PhysicalMedia } from "@/components/ui/PhysicalMedia";
 
@@ -10,8 +10,9 @@ interface Params {
   slug: string;
 }
 
-export function generateStaticParams() {
-  return ALBUM_SLUGS.map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  const all = await getAllAlbums();
+  return all.map((a) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({
@@ -20,8 +21,8 @@ export async function generateMetadata({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  if (!isAlbumSlug(slug)) return {};
-  const album = ALBUMS[slug];
+  const album = await getAlbum(slug);
+  if (!album) return {};
   return { title: album.title, description: album.tagline };
 }
 
@@ -31,9 +32,10 @@ export default async function AlbumPage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  if (!isAlbumSlug(slug)) notFound();
-  const album = ALBUMS[slug];
-  const dropArtist = ARTISTS[album.dropArtistSlug];
+  const album = await getAlbum(slug);
+  if (!album) notFound();
+  const dropArtist = await getArtist(album.dropArtistSlug);
+  if (!dropArtist) notFound();
 
   return (
     <article style={{ background: album.bgHex, color: "#f5f5f5" }}>

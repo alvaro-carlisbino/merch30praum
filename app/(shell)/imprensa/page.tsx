@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Download } from "lucide-react";
-import { PRESS_KIT_ASSETS, PRESS_CONTACTS, type PressAssetType } from "@/lib/press/registry";
+import { getPressKit } from "@/lib/cms/press";
+import { type PressAssetType } from "@/lib/press/registry";
 
 export const metadata = {
   title: "Imprensa · 30praum",
@@ -17,7 +18,8 @@ const TYPE_LABEL: Record<PressAssetType, string> = {
 
 const TYPE_ORDER: PressAssetType[] = ["logo", "photo", "bio", "document"];
 
-export default function ImprensaPage() {
+export default async function ImprensaPage() {
+  const { contacts: PRESS_CONTACTS, assets: PRESS_KIT_ASSETS } = await getPressKit();
   const grouped = TYPE_ORDER.map((type) => ({
     type,
     label: TYPE_LABEL[type],
