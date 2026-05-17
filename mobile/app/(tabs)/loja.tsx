@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ShoppingBag } from "lucide-react-native";
 
 import { CATEGORIES, type CategorySlug } from "@/lib/shop/categories";
-import { PRODUCTS } from "@/lib/shop/products";
+import { useProducts } from "@/lib/cms/queries";
 import { ARTIST_THEMES, useTheme } from "@/lib/theme";
 import type { ArtistSlug } from "@/lib/artists/types";
 
@@ -19,12 +19,14 @@ export default function LojaScreen() {
   const [cat, setCat] = useState<CategoryFilter>("all");
   const [artist, setArtist] = useState<ArtistFilter>("all");
 
+  const { data: products = [] } = useProducts();
+
   const filtered = useMemo(
     () =>
-      PRODUCTS.filter(
+      products.filter(
         (p) => (cat === "all" || p.category === cat) && (artist === "all" || p.artistSlug === artist)
       ),
-    [cat, artist]
+    [cat, artist, products]
   );
 
   return (

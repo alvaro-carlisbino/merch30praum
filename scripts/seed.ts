@@ -9,26 +9,30 @@ import { SHOWS } from "../lib/shows/registry";
 import { ALBUMS, ALBUM_SLUGS } from "../lib/albums/registry";
 import { INCUBADORA } from "../lib/incubadora/registry";
 import { PRESS_CONTACTS, PRESS_KIT_ASSETS } from "../lib/press/registry";
+import { STATIC_PRODUCTS } from "../lib/shop/static-products";
 
 const log = (msg: string) => console.log(`[seed] ${msg}`);
 
 type AnyPayload = Awaited<ReturnType<typeof getPayload>>;
 
 async function upsert(payload: AnyPayload, collection: string, slugField: string, slug: string, data: Record<string, unknown>) {
-  const find = payload.find as unknown as (args: Record<string, unknown>) => Promise<{ docs: Array<{ id: string }> }>;
-  const update = payload.update as unknown as (args: Record<string, unknown>) => Promise<unknown>;
-  const create = payload.create as unknown as (args: Record<string, unknown>) => Promise<unknown>;
-
-  const existing = await find({
-    collection,
+  const existing = await payload.find({
+    collection: collection as never,
     where: { [slugField]: { equals: slug } },
     limit: 1,
   });
   if (existing.docs[0]) {
-    await update({ collection, id: existing.docs[0].id, data });
+    await payload.update({
+      collection: collection as never,
+      id: (existing.docs[0] as { id: string }).id,
+      data: data as never,
+    });
     return "updated";
   }
-  await create({ collection, data });
+  await payload.create({
+    collection: collection as never,
+    data: data as never,
+  });
   return "created";
 }
 
@@ -228,6 +232,30 @@ async function main() {
     },
   });
   log("  ok");
+
+  log(`semeando ${STATIC_PRODUCTS.length} produtos...`);
+  for (const p of STATIC_PRODUCTS) {
+    const r = await upsert(payload, "products", "handle", p.handle, {
+      handle: p.handle,
+      title: p.title,
+      shortDescription: p.shortDescription,
+      priceBRL: p.priceBRL,
+      compareAtPriceBRL: p.compareAtPriceBRL,
+      image: p.image,
+      galleryImages: (p.galleryImages ?? []).map((url) => ({ url })),
+      artistSlug: p.artistSlug,
+      category: p.category,
+      tags: (p.tags ?? []).map((value) => ({ value })),
+      isDropLive: p.isDropLive ?? false,
+      isSoldOut: p.isSoldOut ?? false,
+      isPreOrder: p.isPreOrder ?? false,
+      sizes: p.sizes ?? [],
+      stockNote: p.stockNote,
+      shopifyVariantId: p.shopifyVariantId,
+      shopifyCollectionHandle: p.shopifyCollectionHandle,
+    });
+    log(`  ${p.handle}: ${r}`);
+  }
 
   log("semeando Press Kit (global)...");
   await payload.updateGlobal({
