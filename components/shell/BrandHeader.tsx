@@ -58,7 +58,7 @@ export function BrandHeader({ cartCount }: BrandHeaderProps) {
           borderBottom: "1px solid var(--border)",
         }}
       >
-        <div className="mx-auto grid h-14 max-w-screen-2xl grid-cols-[1fr_auto_1fr] items-center gap-6 px-4 sm:px-8">
+        <div className="mx-auto flex h-14 max-w-screen-2xl items-center gap-4 px-4 sm:px-8 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-6">
           <nav className="hidden items-center gap-6 text-[11px] uppercase tracking-[0.22em] md:flex">
             {LEFT_NAV.map((item) => (
               <Link
@@ -86,13 +86,13 @@ export function BrandHeader({ cartCount }: BrandHeaderProps) {
           <Link
             href="/"
             data-cursor="Home"
-            className="justify-self-center text-xl transition-opacity hover:opacity-80"
+            className="text-xl transition-opacity hover:opacity-80 md:justify-self-center"
             aria-label="Home 30praum"
           >
             <BrandLogo />
           </Link>
 
-          <div className="flex items-center justify-end gap-5 text-[11px] uppercase tracking-[0.22em]">
+          <div className="ml-auto flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] md:ml-0 md:justify-end md:gap-5">
             <Link
               href="/plantao"
               data-cursor="Plantão"
@@ -103,7 +103,7 @@ export function BrandHeader({ cartCount }: BrandHeaderProps) {
             <Link
               href="/loja"
               data-cursor="Loja"
-              className="inline-flex items-center rounded-full border px-5 py-2 transition-colors hover:bg-white hover:text-black"
+              className="inline-flex items-center rounded-full border px-4 py-1.5 text-[10px] transition-colors hover:bg-white hover:text-black md:px-5 md:py-2 md:text-[11px]"
               style={{
                 borderColor: "var(--accent)",
                 color: "var(--accent)",
@@ -111,6 +111,7 @@ export function BrandHeader({ cartCount }: BrandHeaderProps) {
             >
               Loja
             </Link>
+            {cartCount > 0 && <CartButton initialCount={cartCount} />}
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
@@ -118,12 +119,11 @@ export function BrandHeader({ cartCount }: BrandHeaderProps) {
               aria-haspopup="dialog"
               aria-expanded={menuOpen}
               aria-controls="brand-menu-overlay"
-              className="inline-flex items-center md:hidden"
+              className="-mr-1 inline-flex h-10 w-10 items-center justify-center md:hidden"
               aria-label="Abrir menu"
             >
               <span aria-hidden className="text-2xl leading-none">≡</span>
             </button>
-            {cartCount > 0 && <CartButton initialCount={cartCount} />}
           </div>
         </div>
       </header>

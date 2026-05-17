@@ -111,24 +111,19 @@ export default function PlantaoInfoPage() {
               Não encontrou? <br /> Fala com a produção.
             </h2>
             <p className="mt-4 text-fg/80 max-w-md">
-              Atendimento via ST Ingressos para questões de compra. Para imprensa, parcerias e
-              produção do festival, escreve direto para o time da 30praum.
+              Atendimento direto pelo time Plantão para questões de compra, troca e nominal. Para
+              imprensa, parcerias e produção, escreve direto para a 30praum.
             </p>
           </div>
           <div className="grid gap-3 text-sm">
+            <a href="mailto:ingressos@30praum.com" className="opacity-80 hover:opacity-100">
+              ingressos@30praum.com
+            </a>
             <a href="mailto:plantao@30praum.com" className="opacity-80 hover:opacity-100">
               plantao@30praum.com
             </a>
             <a href="mailto:imprensa@30praum.com" className="opacity-80 hover:opacity-100">
               imprensa@30praum.com
-            </a>
-            <a
-              href="https://stingressos.com.br/suporte"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="opacity-80 hover:opacity-100"
-            >
-              Suporte ST Ingressos →
             </a>
           </div>
         </div>

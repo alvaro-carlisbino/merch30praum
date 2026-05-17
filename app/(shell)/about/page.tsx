@@ -34,8 +34,8 @@ const MARCOS = [
   },
   {
     year: "2025",
-    title: "XTRANHO + independência total",
-    body: "Matuê lança XTRANHO (capítulo final da trilogia). 30praum se torna independente em distribuição e direitos autorais.",
+    title: "Independência total · liderada pela Clara",
+    body: "Sob direção da CEO Clara Mendes, a 30praum corta intermediários: passa a operar com distribuição própria, direitos autorais sem terceiros e gestão de marketing in-house. Matuê lança XTRANHO no mesmo ano.",
   },
   {
     year: "2026",
@@ -97,7 +97,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* FOUNDERS */}
+      {/* FOUNDERS — Clara primeiro */}
       <section className="mx-auto max-w-screen-2xl px-4 py-16 sm:px-8 sm:py-20">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <h2
@@ -117,6 +117,17 @@ export default function AboutPage() {
 
         <ul className="grid gap-6 sm:gap-8 lg:grid-cols-2">
           <FounderCard
+            photo={IMG.founderClara}
+            role="Cofundadora · CEO"
+            name="Clara Mendes"
+            realName="Clara Mendes"
+            origin="Alemanha → Fortaleza · CE"
+            paragraphs={[
+              "Veio da Alemanha pra aprender português em Fortaleza em 2014, ficou e virou sócia. CEO da 30praum desde o dia 1, comanda a operação que hoje tem ~50 pessoas entre Fortaleza e São Paulo.",
+              "Tocou a virada pra independência total em 2024 (distribuição própria, direitos autorais sem intermediário) e estrutura o festival Plantão como receita estratégica do selo.",
+            ]}
+          />
+          <FounderCard
             photo={IMG.founderMatue}
             role="Cofundador · artista"
             name="Matuê"
@@ -125,17 +136,6 @@ export default function AboutPage() {
             paragraphs={[
               "Cofundador e principal voz da casa. Viveu na Califórnia entre os 8 e os 11 anos, voltou pra Fortaleza com inglês fluente e ouvido pra um trap que ninguém aqui fazia ainda.",
               "Estreou em álbum em 2020 com Máquina do Tempo, bateu recorde do Spotify BR com 333 (2024) e fechou a trilogia com XTRANHO (2025).",
-            ]}
-          />
-          <FounderCard
-            photo={IMG.founderClara}
-            role="Cofundadora · CEO"
-            name="Clara Mendes"
-            realName="Clara Mendes"
-            origin="Alemanha → Fortaleza"
-            paragraphs={[
-              "Veio da Alemanha pra aprender português em Fortaleza, ficou e virou sócia. CEO da 30praum desde o dia 1, comanda a operação que hoje tem ~50 pessoas entre Fortaleza e São Paulo.",
-              "Tocou a virada pra independência total em 2024 (distribuição própria, direitos autorais sem intermediário) e estrutura o festival Plantão como receita estratégica do selo.",
             ]}
           />
         </ul>
