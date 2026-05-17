@@ -12,27 +12,23 @@ import { PRESS_CONTACTS, PRESS_KIT_ASSETS } from "../lib/press/registry";
 
 const log = (msg: string) => console.log(`[seed] ${msg}`);
 
-async function upsert(payload: Awaited<ReturnType<typeof getPayload>>, collection: string, slugField: string, slug: string, data: Record<string, unknown>) {
-  const existing = await payload.find({
-    // @ts-expect-error dynamic collection
+type AnyPayload = Awaited<ReturnType<typeof getPayload>>;
+
+async function upsert(payload: AnyPayload, collection: string, slugField: string, slug: string, data: Record<string, unknown>) {
+  const find = payload.find as unknown as (args: Record<string, unknown>) => Promise<{ docs: Array<{ id: string }> }>;
+  const update = payload.update as unknown as (args: Record<string, unknown>) => Promise<unknown>;
+  const create = payload.create as unknown as (args: Record<string, unknown>) => Promise<unknown>;
+
+  const existing = await find({
     collection,
     where: { [slugField]: { equals: slug } },
     limit: 1,
   });
   if (existing.docs[0]) {
-    await payload.update({
-      // @ts-expect-error dynamic collection
-      collection,
-      id: existing.docs[0].id,
-      data,
-    });
+    await update({ collection, id: existing.docs[0].id, data });
     return "updated";
   }
-  await payload.create({
-    // @ts-expect-error dynamic collection
-    collection,
-    data,
-  });
+  await create({ collection, data });
   return "created";
 }
 
