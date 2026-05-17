@@ -51,7 +51,6 @@ const nextConfig: NextConfig = {
     return [
       { source: "/(.*)", headers: securityHeaders },
       { source: "/admin/:path*", headers: [...securityHeaders, ...noIndexHeaders] },
-      { source: "/cms/:path*", headers: [...securityHeaders, ...noIndexHeaders] },
       { source: "/api/:path*", headers: [...securityHeaders, ...noIndexHeaders] },
     ];
   },
