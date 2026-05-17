@@ -1,274 +1,422 @@
 import { useEffect, useState } from "react";
-import { ScrollView, Text, View, FlatList } from "react-native";
+import { Dimensions, ScrollView, Text, View } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Calendar, MapPin } from "lucide-react-native";
+import Animated, { FadeIn, FadeInDown } from "react-native-reanimated";
 
 import { useTheme } from "@/lib/theme";
 import { useCurrentPlantao } from "@/lib/cms/queries";
+import { Display, Eyebrow, Divider, scaleType } from "@/components/editorial/Display";
+import { MarqueeText } from "@/components/editorial/MarqueeText";
+
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+
+function useCountdown(iso: string) {
+  const [now, setNow] = useState(Date.now());
+  useEffect(() => {
+    const t = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, []);
+  const diff = Math.max(0, new Date(iso).getTime() - now);
+  return {
+    d: Math.floor(diff / 86400000),
+    h: Math.floor((diff % 86400000) / 3600000),
+    m: Math.floor((diff % 3600000) / 60000),
+    s: Math.floor((diff % 60000) / 1000),
+  };
+}
+
+function formatDateBR(iso: string) {
+  return new Date(iso).toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
+}
 
 export default function PlantaoScreen() {
   const insets = useSafeAreaInsets();
   const setActive = useTheme((s) => s.setActive);
-  const tokens = useTheme((s) => s.tokens);
   const { data: edition } = useCurrentPlantao();
 
   useEffect(() => {
     setActive("house");
   }, [setActive]);
 
-  if (!edition) return null;
+  if (!edition) return <View style={{ flex: 1, backgroundColor: "#0a0a0a" }} />;
+
+  const accent = "#C89858";
+  const heroHeight = Math.max(620, SCREEN_HEIGHT * 0.86);
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#0a0a0a" }} showsVerticalScrollIndicator={false}>
-      <View style={{ height: 540, position: "relative" }}>
-        <Image source={{ uri: edition.heroImage }} style={{ ...StyleAbsoluteFill }} contentFit="cover" />
-        <LinearGradient
-          colors={["rgba(0,0,0,0.2)", "rgba(0,0,0,0.85)"]}
-          style={{ ...StyleAbsoluteFill, top: "30%" }}
-        />
-        <View
-          style={{
-            position: "absolute",
-            top: insets.top + 12,
-            left: 20,
-            right: 20,
-          }}
-        >
-          <Text style={{ color: tokens.fg, fontFamily: "Cinzel-700", fontSize: 12, letterSpacing: 3 }}>
-            PLANTÃO · 30PRAUM
-          </Text>
-        </View>
-        <View style={{ position: "absolute", bottom: 24, left: 20, right: 20 }}>
-          <Text
-            style={{
-              color: tokens.fg,
-              fontFamily: "BebasNeue-400",
-              fontSize: 88,
-              lineHeight: 88,
-              letterSpacing: 2,
-            }}
-          >
-            {edition.year}
-          </Text>
-          <Text style={{ color: tokens.fg, fontFamily: "Inter-600", fontSize: 16, marginTop: -4 }}>
-            {edition.tagline}
-          </Text>
-          <View style={{ flexDirection: "row", gap: 16, marginTop: 12 }}>
-            <Pill icon={<Calendar size={12} color={tokens.fg} />} text={formatDate(edition.date)} />
-            <Pill icon={<MapPin size={12} color={tokens.fg} />} text={`${edition.venue} · ${edition.city}`} />
-          </View>
-        </View>
-      </View>
+    <View style={{ flex: 1, backgroundColor: "#0a0a0a" }}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
+        {/* CINEMATIC HERO */}
+        <View style={{ height: heroHeight, position: "relative" }}>
+          <Image
+            source={{ uri: edition.heroImage }}
+            style={{ position: "absolute", left: 0, right: 0, top: 0, bottom: 0 }}
+            contentFit="cover"
+          />
+          <LinearGradient
+            colors={["rgba(0,0,0,0.55)", "rgba(0,0,0,0.0)", "rgba(0,0,0,0.65)", "#0a0a0a"]}
+            locations={[0, 0.3, 0.75, 1]}
+            style={{ position: "absolute", left: 0, right: 0, top: 0, bottom: 0 }}
+          />
 
-      <Countdown isoDate={edition.date} accent={tokens.accent} />
-
-      <SectionTitle>LINEUP</SectionTitle>
-      <FlatList
-        data={edition.lineup}
-        scrollEnabled={false}
-        keyExtractor={(item, idx) => `${item.displayName}-${idx}`}
-        numColumns={2}
-        columnWrapperStyle={{ gap: 10, paddingHorizontal: 16 }}
-        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-        renderItem={({ item }) => (
-          <View
-            style={{
-              flex: 1,
-              aspectRatio: item.isHeadliner ? 2 : 1,
-              borderRadius: 14,
-              overflow: "hidden",
-              backgroundColor: "#0f0f0f",
-            }}
-          >
-            <Image source={{ uri: item.imageUrl }} style={{ flex: 1 }} contentFit="cover" />
-            <LinearGradient
-              colors={["transparent", "rgba(0,0,0,0.85)"]}
-              style={{ ...StyleAbsoluteFill, top: "40%" }}
-            />
-            <View style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: 12 }}>
-              <Text style={{ color: tokens.fg, fontFamily: "BebasNeue-400", fontSize: 22, letterSpacing: 0.5 }}>
-                {item.displayName}
-              </Text>
-              {item.highlightLabel ? (
-                <Text style={{ color: "rgba(245,240,232,0.7)", fontFamily: "Inter-400", fontSize: 10, marginTop: 2 }}>
-                  {item.highlightLabel}
-                </Text>
-              ) : null}
-            </View>
-          </View>
-        )}
-      />
-
-      <SectionTitle>INGRESSOS</SectionTitle>
-      <View style={{ paddingHorizontal: 16, gap: 10 }}>
-        {edition.sectors.map((s, i) => (
-          <View
-            key={`${s.name}-${i}`}
-            style={{
-              padding: 16,
-              borderRadius: 12,
-              borderWidth: 1,
-              borderColor: "rgba(245,240,232,0.1)",
-              backgroundColor: "#0f0f0f",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              opacity: s.status === "soldout" ? 0.55 : 1,
-            }}
-          >
-            <View style={{ flex: 1, paddingRight: 12 }}>
-              <Text style={{ color: tokens.fg, fontFamily: "Cinzel-700", fontSize: 14, letterSpacing: 1.5 }}>
-                {s.name.toUpperCase()}
-              </Text>
-              {s.perks ? (
-                <Text style={{ color: "rgba(245,240,232,0.6)", fontFamily: "Inter-400", fontSize: 11, marginTop: 4 }}>
-                  {s.perks}
-                </Text>
-              ) : null}
-            </View>
-            <View style={{ alignItems: "flex-end" }}>
-              {s.status === "soldout" ? (
-                <Text style={{ color: "#ff3b1f", fontFamily: "Cinzel-700", fontSize: 10, letterSpacing: 2 }}>
-                  ESGOTADO
-                </Text>
-              ) : s.status === "upcoming" ? (
-                <Text style={{ color: tokens.accent, fontFamily: "Cinzel-700", fontSize: 10, letterSpacing: 2 }}>
-                  EM BREVE
-                </Text>
-              ) : (
-                <Text style={{ color: tokens.fg, fontFamily: "BebasNeue-400", fontSize: 22 }}>
-                  R$ {s.priceFrom}
-                </Text>
-              )}
-            </View>
-          </View>
-        ))}
-      </View>
-
-      <SectionTitle>FAQ</SectionTitle>
-      <View style={{ paddingHorizontal: 16, gap: 10, marginBottom: 32 }}>
-        {edition.infoFAQ.slice(0, 4).map((q, i) => (
-          <View
-            key={i}
-            style={{
-              padding: 14,
-              borderRadius: 12,
-              borderWidth: 1,
-              borderColor: "rgba(245,240,232,0.08)",
-              backgroundColor: "#0d0d0d",
-            }}
-          >
-            <Text style={{ color: tokens.fg, fontFamily: "Cinzel-500", fontSize: 12, letterSpacing: 1.5 }}>
-              {q.question.toUpperCase()}
-            </Text>
+          <View style={{ position: "absolute", top: insets.top + 16, left: 24, right: 24 }}>
+            <Eyebrow color="#F5F0E8">PLANTÃO · 30PRAUM</Eyebrow>
             <Text
-              style={{ color: "rgba(245,240,232,0.7)", fontFamily: "Inter-400", fontSize: 12, marginTop: 6, lineHeight: 18 }}
+              style={{
+                color: "rgba(245,240,232,0.55)",
+                fontFamily: "Cinzel-500",
+                fontSize: 9,
+                letterSpacing: 2,
+                marginTop: 4,
+              }}
             >
-              {q.answer}
+              {edition.venue.toUpperCase()} · {edition.city.toUpperCase()} · {edition.state}
             </Text>
           </View>
-        ))}
-      </View>
-    </ScrollView>
-  );
-}
 
-const StyleAbsoluteFill = {
-  position: "absolute" as const,
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-};
+          <View style={{ position: "absolute", bottom: 30, left: 24, right: 24 }}>
+            <Animated.View entering={FadeIn.duration(700)}>
+              <Text
+                style={{
+                  color: accent,
+                  fontFamily: "BebasNeue-400",
+                  fontSize: 22,
+                  letterSpacing: 2,
+                }}
+              >
+                {formatDateBR(edition.date).toUpperCase()}
+              </Text>
+            </Animated.View>
+            <Animated.View entering={FadeInDown.duration(900).delay(150)}>
+              <Text
+                style={{
+                  color: "#F5F0E8",
+                  fontFamily: "BebasNeue-400",
+                  fontSize: scaleType(180),
+                  lineHeight: scaleType(180) * 0.95,
+                  letterSpacing: 4,
+                  marginTop: 4,
+                }}
+              >
+                {edition.year}
+              </Text>
+            </Animated.View>
+            <Animated.View entering={FadeInDown.duration(900).delay(280)} style={{ maxWidth: 320 }}>
+              <Text
+                style={{
+                  color: "rgba(245,240,232,0.75)",
+                  fontFamily: "CormorantGaramond-500-Italic",
+                  fontSize: 20,
+                  marginTop: 12,
+                  lineHeight: 26,
+                }}
+              >
+                {edition.tagline}
+              </Text>
+            </Animated.View>
+          </View>
+        </View>
 
-function Pill({ icon, text }: { icon: React.ReactNode; text: string }) {
-  return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 6,
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        borderRadius: 999,
-        borderWidth: 1,
-        borderColor: "rgba(245,240,232,0.25)",
-      }}
-    >
-      {icon}
-      <Text style={{ color: "#f5f0e8", fontFamily: "Inter-400", fontSize: 11 }}>{text}</Text>
+        {/* COUNTDOWN HUGE */}
+        <Countdown date={edition.date} />
+
+        {/* HEADLINER MARQUEE */}
+        {edition.lineup[0] ? (
+          <View style={{ marginTop: 40 }}>
+            <View style={{ paddingHorizontal: 24, marginBottom: 16 }}>
+              <Eyebrow color={accent}>HEADLINER</Eyebrow>
+            </View>
+            <MarqueeText
+              text={`${edition.lineup[0].displayName.toUpperCase()}  ·  `}
+              durationMs={18000}
+              style={{
+                color: "#F5F0E8",
+                fontFamily: "BebasNeue-400",
+                fontSize: 76,
+                letterSpacing: 4,
+                lineHeight: 76,
+              }}
+            />
+            {edition.lineup[0].highlightLabel ? (
+              <View style={{ paddingHorizontal: 24, marginTop: 10 }}>
+                <Text
+                  style={{
+                    color: "rgba(245,240,232,0.55)",
+                    fontFamily: "CormorantGaramond-500-Italic",
+                    fontSize: 16,
+                  }}
+                >
+                  {edition.lineup[0].highlightLabel}
+                </Text>
+              </View>
+            ) : null}
+          </View>
+        ) : null}
+
+        <Divider margin={40} />
+
+        {/* LINEUP REST */}
+        <View style={{ paddingHorizontal: 24 }}>
+          <Eyebrow color={accent}>LINEUP</Eyebrow>
+          <View style={{ marginTop: 18 }}>
+            {edition.lineup.slice(1).map((l, i) => (
+              <View
+                key={`${l.displayName}-${i}`}
+                style={{
+                  paddingVertical: 14,
+                  borderBottomColor: "rgba(245,240,232,0.1)",
+                  borderBottomWidth: 1,
+                }}
+              >
+                <Text
+                  style={{
+                    color: "#F5F0E8",
+                    fontFamily: "BebasNeue-400",
+                    fontSize: 30,
+                    letterSpacing: 1,
+                    lineHeight: 32,
+                  }}
+                >
+                  {l.displayName}
+                </Text>
+                {l.highlightLabel ? (
+                  <Text
+                    style={{
+                      color: "rgba(245,240,232,0.5)",
+                      fontFamily: "Inter-400",
+                      fontSize: 11,
+                      letterSpacing: 1,
+                      marginTop: 2,
+                    }}
+                  >
+                    {l.highlightLabel}
+                  </Text>
+                ) : null}
+              </View>
+            ))}
+          </View>
+        </View>
+
+        <Divider margin={40} />
+
+        {/* SECTORS — ticket stubs */}
+        <View style={{ paddingHorizontal: 24 }}>
+          <Eyebrow color={accent}>INGRESSOS</Eyebrow>
+          <View style={{ marginTop: 18, gap: 12 }}>
+            {edition.sectors.map((s, i) => {
+              const soldout = s.status === "soldout";
+              return (
+                <View
+                  key={`${s.name}-${i}`}
+                  style={{
+                    flexDirection: "row",
+                    backgroundColor: soldout ? "rgba(20,20,20,0.6)" : "rgba(20,20,20,1)",
+                    borderColor: soldout ? "rgba(245,240,232,0.08)" : "rgba(200,152,88,0.25)",
+                    borderWidth: 1,
+                    padding: 18,
+                    opacity: soldout ? 0.55 : 1,
+                  }}
+                >
+                  <View style={{ flex: 1, paddingRight: 14 }}>
+                    <Text
+                      style={{
+                        color: "#F5F0E8",
+                        fontFamily: "BebasNeue-400",
+                        fontSize: 24,
+                        letterSpacing: 1,
+                      }}
+                    >
+                      {s.name}
+                    </Text>
+                    {s.perks ? (
+                      <Text
+                        style={{
+                          color: "rgba(245,240,232,0.55)",
+                          fontFamily: "Inter-400",
+                          fontSize: 10,
+                          marginTop: 4,
+                          lineHeight: 14,
+                        }}
+                      >
+                        {s.perks}
+                      </Text>
+                    ) : null}
+                  </View>
+                  <View
+                    style={{
+                      width: 1,
+                      backgroundColor: "rgba(245,240,232,0.12)",
+                      marginRight: 16,
+                    }}
+                  />
+                  <View style={{ minWidth: 80, alignItems: "flex-end", justifyContent: "center" }}>
+                    {soldout ? (
+                      <Text style={{ color: "#FF3B1F", fontFamily: "Cinzel-700", fontSize: 10, letterSpacing: 2 }}>
+                        ESGOTADO
+                      </Text>
+                    ) : s.status === "upcoming" ? (
+                      <Text style={{ color: accent, fontFamily: "Cinzel-700", fontSize: 10, letterSpacing: 2 }}>
+                        EM BREVE
+                      </Text>
+                    ) : (
+                      <>
+                        <Text
+                          style={{
+                            color: "rgba(245,240,232,0.45)",
+                            fontFamily: "Cinzel-500",
+                            fontSize: 9,
+                            letterSpacing: 2,
+                            marginBottom: 2,
+                          }}
+                        >
+                          A PARTIR DE
+                        </Text>
+                        <Text
+                          style={{
+                            color: "#F5F0E8",
+                            fontFamily: "BebasNeue-400",
+                            fontSize: 28,
+                            letterSpacing: 0.5,
+                            lineHeight: 28,
+                          }}
+                        >
+                          R$ {s.priceFrom}
+                        </Text>
+                      </>
+                    )}
+                  </View>
+                </View>
+              );
+            })}
+          </View>
+        </View>
+
+        <Divider margin={40} />
+
+        {/* FAQ */}
+        <View style={{ paddingHorizontal: 24 }}>
+          <Eyebrow color={accent}>TIRA-DÚVIDAS</Eyebrow>
+          <View style={{ marginTop: 18 }}>
+            {edition.infoFAQ.slice(0, 4).map((q, i) => (
+              <View
+                key={i}
+                style={{
+                  paddingVertical: 16,
+                  borderBottomColor: "rgba(245,240,232,0.1)",
+                  borderBottomWidth: 1,
+                }}
+              >
+                <View style={{ flexDirection: "row", gap: 12, marginBottom: 8 }}>
+                  <Text
+                    style={{
+                      color: accent,
+                      fontFamily: "Cinzel-700",
+                      fontSize: 11,
+                      letterSpacing: 2,
+                    }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </Text>
+                  <Text
+                    style={{
+                      flex: 1,
+                      color: "#F5F0E8",
+                      fontFamily: "BebasNeue-400",
+                      fontSize: 18,
+                      letterSpacing: 0.5,
+                      lineHeight: 22,
+                    }}
+                  >
+                    {q.question}
+                  </Text>
+                </View>
+                <Text
+                  style={{
+                    color: "rgba(245,240,232,0.65)",
+                    fontFamily: "Inter-400",
+                    fontSize: 13,
+                    lineHeight: 19,
+                    paddingLeft: 26,
+                  }}
+                >
+                  {q.answer}
+                </Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        <View style={{ alignItems: "center", marginTop: 50 }}>
+          <Text style={{ color: "rgba(245,240,232,0.3)", fontFamily: "Cinzel-500", fontSize: 9, letterSpacing: 4 }}>
+            PLANTÃO {edition.year} · 30PRAUM
+          </Text>
+        </View>
+      </ScrollView>
     </View>
   );
 }
 
-function SectionTitle({ children }: { children: string }) {
+function Countdown({ date }: { date: string }) {
+  const c = useCountdown(date);
   return (
-    <Text
-      style={{
-        color: "#f5f0e8",
-        fontFamily: "Cinzel-700",
-        fontSize: 13,
-        letterSpacing: 3,
-        marginTop: 28,
-        marginBottom: 12,
-        paddingHorizontal: 20,
-      }}
-    >
-      {children}
-    </Text>
-  );
-}
-
-function formatDate(iso: string): string {
-  const d = new Date(iso);
-  const months = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
-  return `${d.getUTCDate()} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
-}
-
-function Countdown({ isoDate, accent }: { isoDate: string; accent: string }) {
-  const [now, setNow] = useState(Date.now());
-  useEffect(() => {
-    const t = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(t);
-  }, []);
-  const target = new Date(isoDate).getTime();
-  const diff = Math.max(0, target - now);
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff % 86400000) / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
-  return (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-around",
-        marginHorizontal: 16,
-        marginTop: -36,
-        padding: 18,
-        borderRadius: 16,
-        backgroundColor: "rgba(15,15,15,0.95)",
-        borderWidth: 1,
-        borderColor: "rgba(245,240,232,0.08)",
-        zIndex: 5,
-      }}
-    >
-      {[
-        { v: d, l: "DIAS" },
-        { v: h, l: "HORAS" },
-        { v: m, l: "MIN" },
-        { v: s, l: "SEG" },
-      ].map((it) => (
-        <View key={it.l} style={{ alignItems: "center" }}>
-          <Text style={{ color: accent, fontFamily: "BebasNeue-400", fontSize: 32, lineHeight: 34 }}>
-            {String(it.v).padStart(2, "0")}
-          </Text>
-          <Text style={{ color: "rgba(245,240,232,0.55)", fontFamily: "Cinzel-500", fontSize: 9, letterSpacing: 2 }}>
-            {it.l}
-          </Text>
+    <View style={{ paddingHorizontal: 24, marginTop: 32 }}>
+      <View
+        style={{
+          paddingVertical: 20,
+          borderTopColor: "rgba(245,240,232,0.12)",
+          borderBottomColor: "rgba(245,240,232,0.12)",
+          borderTopWidth: 1,
+          borderBottomWidth: 1,
+        }}
+      >
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          {[
+            { v: c.d, l: "DIAS" },
+            { v: c.h, l: "HORAS" },
+            { v: c.m, l: "MIN" },
+            { v: c.s, l: "SEG" },
+          ].map((it, i) => (
+            <View key={it.l} style={{ alignItems: "center", flex: 1, position: "relative" }}>
+              <Text
+                style={{
+                  color: "#F5F0E8",
+                  fontFamily: "BebasNeue-400",
+                  fontSize: scaleType(56),
+                  lineHeight: scaleType(56),
+                  letterSpacing: 2,
+                }}
+              >
+                {String(it.v).padStart(2, "0")}
+              </Text>
+              <Text
+                style={{
+                  color: "rgba(245,240,232,0.45)",
+                  fontFamily: "Cinzel-500",
+                  fontSize: 9,
+                  letterSpacing: 3,
+                  marginTop: 4,
+                }}
+              >
+                {it.l}
+              </Text>
+              {i < 3 ? (
+                <View
+                  style={{
+                    position: "absolute",
+                    right: -1,
+                    top: "20%",
+                    bottom: "20%",
+                    width: 1,
+                    backgroundColor: "rgba(245,240,232,0.1)",
+                  }}
+                />
+              ) : null}
+            </View>
+          ))}
         </View>
-      ))}
+      </View>
     </View>
   );
 }

@@ -1,16 +1,24 @@
 import { useEffect } from "react";
-import { Pressable, ScrollView, Text, View, ActivityIndicator } from "react-native";
+import { ActivityIndicator, Dimensions, Pressable, ScrollView, Text, View } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { X, Play, Music, AtSign } from "lucide-react-native";
+import { X, Play } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
+import Animated, { FadeIn, FadeInDown, FadeInUp } from "react-native-reanimated";
 
 import { ARTISTS } from "@/lib/artists/registry";
 import type { ArtistSlug } from "@/lib/artists/types";
 import { ARTIST_THEMES, useTheme } from "@/lib/theme";
 import { useArtist } from "@/lib/cms/queries";
+
+import { Lettering } from "@/components/editorial/Lettering";
+import { Display, Eyebrow, PullQuote, DropCap, Divider, scaleType } from "@/components/editorial/Display";
+import { MarqueeText } from "@/components/editorial/MarqueeText";
+
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 export default function EleitosScreen() {
   const { artist } = useLocalSearchParams<{ artist: string }>();
@@ -34,268 +42,354 @@ export default function EleitosScreen() {
     );
   }
 
+  const heroHeight = Math.max(580, SCREEN_HEIGHT * 0.82);
+  const letteringWidth = Math.min(SCREEN_WIDTH * 0.78, 360);
+
   return (
     <View style={{ flex: 1, backgroundColor: tokens.bg }}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 60 }}>
-        <View style={{ height: 560, position: "relative" }}>
-          <Image
-            source={{ uri: config.heroImage }}
-            style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
-            contentFit="cover"
-          />
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
+        {/* CINEMATIC HERO */}
+        <View style={{ height: heroHeight, width: "100%", position: "relative", backgroundColor: tokens.bg }}>
+          <Image source={{ uri: config.heroImage }} style={{ position: "absolute", inset: 0 } as never} contentFit="cover" />
           <LinearGradient
-            colors={["rgba(0,0,0,0.1)", "transparent", tokens.bg]}
-            style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
-            locations={[0, 0.45, 1]}
+            colors={["rgba(0,0,0,0.4)", "rgba(0,0,0,0.0)", "rgba(0,0,0,0.55)", tokens.bg]}
+            locations={[0, 0.35, 0.78, 1]}
+            style={{ position: "absolute", left: 0, right: 0, top: 0, bottom: 0 }}
           />
+
           <Pressable
             onPress={() => router.back()}
-            hitSlop={12}
+            hitSlop={14}
             style={{
               position: "absolute",
-              top: insets.top + 12,
+              top: insets.top + 16,
               right: 18,
-              width: 40,
-              height: 40,
-              borderRadius: 20,
-              backgroundColor: "rgba(0,0,0,0.5)",
+              width: 38,
+              height: 38,
               borderWidth: 1,
-              borderColor: "rgba(245,240,232,0.2)",
+              borderColor: "rgba(245,240,232,0.4)",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <X size={18} color={tokens.fg} strokeWidth={1.6} />
+            <X size={16} color="#F5F0E8" strokeWidth={1.5} />
           </Pressable>
 
-          <View style={{ position: "absolute", bottom: 24, left: 20, right: 20 }}>
-            <Text style={{ color: tokens.accent, fontFamily: "Cinzel-700", fontSize: 11, letterSpacing: 3 }}>
-              ELEITOS DA CASA · {config.origin.toUpperCase()}
-            </Text>
-            <Text
-              style={{
-                color: tokens.fg,
-                fontFamily: tokens.displayFont,
-                fontSize: 88,
-                lineHeight: 90,
-                marginTop: 6,
-                letterSpacing: -1,
-              }}
-            >
-              {config.displayName}
-            </Text>
-            <Text
-              style={{
-                color: "rgba(255,255,255,0.85)",
-                fontFamily: "CormorantGaramond-500-Italic",
-                fontSize: 16,
-                marginTop: 8,
-                lineHeight: 22,
-              }}
-            >
-              “{config.signatureLyric}”
-            </Text>
-          </View>
-        </View>
-
-        <View style={{ paddingHorizontal: 20, marginTop: -20 }}>
           <View
             style={{
-              padding: 20,
-              borderRadius: 18,
-              backgroundColor: "rgba(0,0,0,0.4)",
-              borderWidth: 1,
-              borderColor: tokens.border,
+              position: "absolute",
+              top: insets.top + 16,
+              left: 24,
             }}
           >
-            <Text style={{ color: tokens.accent, fontFamily: "Cinzel-700", fontSize: 10, letterSpacing: 2.5 }}>
-              {config.drop.statusLabel.toUpperCase()}
-            </Text>
-            <Text
+            <Eyebrow color="#F5F0E8">ELEITOS DA CASA</Eyebrow>
+          </View>
+
+          <View
+            style={{
+              position: "absolute",
+              bottom: 80,
+              left: 24,
+              right: 24,
+            }}
+          >
+            <Animated.View entering={FadeIn.duration(900)}>
+              <Eyebrow color={tokens.accent}>{config.origin.toUpperCase()}</Eyebrow>
+            </Animated.View>
+
+            <Animated.View entering={FadeInDown.duration(1100).delay(200)} style={{ marginTop: 16 }}>
+              <Lettering artist={slug} width={letteringWidth} tint="#F5F0E8" />
+            </Animated.View>
+
+            <Animated.View entering={FadeInDown.duration(1100).delay(450)} style={{ marginTop: 18, maxWidth: 320 }}>
+              <Text
+                style={{
+                  color: "rgba(245,240,232,0.85)",
+                  fontFamily: "CormorantGaramond-500-Italic",
+                  fontSize: scaleType(20),
+                  lineHeight: scaleType(20) * 1.3,
+                }}
+              >
+                “{config.signatureLyric}”
+              </Text>
+            </Animated.View>
+          </View>
+
+          <View
+            style={{
+              position: "absolute",
+              bottom: 24,
+              left: 0,
+              right: 0,
+            }}
+          >
+            <MarqueeText
+              text={`${config.universeName} ·  ${config.universeName} ·  `}
+              durationMs={22000}
               style={{
-                color: tokens.fg,
+                color: tokens.accent,
                 fontFamily: "BebasNeue-400",
-                fontSize: 36,
-                marginTop: 4,
-                letterSpacing: 1,
+                fontSize: 24,
+                letterSpacing: 3,
               }}
-            >
-              {config.universeName}
-            </Text>
-            <Text
-              style={{
-                color: "rgba(245,240,232,0.7)",
-                fontFamily: "Inter-400",
-                fontSize: 13,
-                lineHeight: 19,
-                marginTop: 8,
-              }}
-            >
-              {config.manifesto}
-            </Text>
+            />
           </View>
         </View>
 
-        <SectionTitle accent={tokens.accent}>ÁLBUM · {config.album.year}</SectionTitle>
-        <View style={{ paddingHorizontal: 20 }}>
-          <View style={{ flexDirection: "row", gap: 14 }}>
-            <Image
-              source={{ uri: config.album.coverImage }}
-              style={{ width: 110, height: 110, borderRadius: 8, backgroundColor: "#111" }}
-              contentFit="cover"
-            />
-            <View style={{ flex: 1, justifyContent: "center" }}>
-              <Text
-                style={{
-                  color: tokens.fg,
-                  fontFamily: "BebasNeue-400",
-                  fontSize: 30,
-                  letterSpacing: 1,
-                }}
-              >
-                {config.album.title}
-              </Text>
-              <Text
-                style={{ color: "rgba(245,240,232,0.65)", fontFamily: "Inter-400", fontSize: 12, marginTop: 4 }}
-                numberOfLines={3}
-              >
-                {config.album.tagline}
-              </Text>
-            </View>
+        {/* DROP MANIFESTO */}
+        <Animated.View entering={FadeInUp.duration(700)} style={{ paddingHorizontal: 24, paddingTop: 8 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 12,
+              marginBottom: 14,
+            }}
+          >
+            <View style={{ height: 1, width: 32, backgroundColor: tokens.accent }} />
+            <Text style={{ color: tokens.accent, fontFamily: "Cinzel-700", fontSize: 10, letterSpacing: 3 }}>
+              {config.drop.statusLabel.toUpperCase()}
+            </Text>
+          </View>
+          <Display size={48}>{config.universeName}</Display>
+          {config.drop.chapterName ? (
+            <Text
+              style={{
+                color: "rgba(245,240,232,0.55)",
+                fontFamily: "CormorantGaramond-500-Italic",
+                fontSize: 17,
+                marginTop: 6,
+              }}
+            >
+              {config.drop.chapterName}
+            </Text>
+          ) : null}
+          <Text
+            style={{
+              color: "rgba(245,240,232,0.78)",
+              fontFamily: "Inter-400",
+              fontSize: scaleType(14),
+              lineHeight: scaleType(14) * 1.55,
+              marginTop: 18,
+            }}
+          >
+            {config.manifesto}
+          </Text>
+        </Animated.View>
+
+        <Divider color={tokens.border} margin={36} />
+
+        {/* BIO COM DROP CAP */}
+        <View style={{ paddingHorizontal: 24 }}>
+          <Eyebrow color={tokens.accent}>BIO</Eyebrow>
+          <View style={{ marginTop: 14 }}>
+            {config.bioParagraphs.map((p, i) => (
+              <View key={i} style={{ marginBottom: i < config.bioParagraphs.length - 1 ? 16 : 0 }}>
+                {i === 0 ? (
+                  <DropCap accent={tokens.accent2}>{p}</DropCap>
+                ) : (
+                  <Text
+                    style={{
+                      color: "rgba(245,240,232,0.78)",
+                      fontFamily: "Inter-400",
+                      fontSize: scaleType(14),
+                      lineHeight: scaleType(14) * 1.55,
+                    }}
+                  >
+                    {p}
+                  </Text>
+                )}
+              </View>
+            ))}
+          </View>
+        </View>
+
+        <Divider color={tokens.border} margin={36} />
+
+        {/* ALBUM */}
+        <View style={{ paddingHorizontal: 24 }}>
+          <Eyebrow color={tokens.accent}>ÁLBUM · {config.album.year}</Eyebrow>
+          <Display size={42} style={{ marginTop: 6 }}>
+            {config.album.title}
+          </Display>
+          {config.album.tagline ? (
+            <Text
+              style={{
+                color: "rgba(245,240,232,0.6)",
+                fontFamily: "CormorantGaramond-500-Italic",
+                fontSize: 17,
+                marginTop: 6,
+                lineHeight: 24,
+              }}
+            >
+              {config.album.tagline}
+            </Text>
+          ) : null}
+
+          <View style={{ marginTop: 20, aspectRatio: 1, position: "relative", overflow: "hidden" }}>
+            <Image source={{ uri: config.album.coverImage }} style={{ flex: 1 }} contentFit="cover" />
           </View>
 
-          <View style={{ marginTop: 18, gap: 8 }}>
-            {config.album.highlightedTracks.slice(0, 5).map((track, i) => (
+          <View style={{ marginTop: 22 }}>
+            {config.album.highlightedTracks.slice(0, 6).map((track, i) => (
               <View
                 key={track}
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
-                  gap: 12,
-                  padding: 10,
-                  borderRadius: 10,
-                  backgroundColor: "rgba(255,255,255,0.04)",
+                  paddingVertical: 14,
+                  borderBottomColor: tokens.border,
+                  borderBottomWidth: 1,
                 }}
               >
                 <Text
                   style={{
                     color: "rgba(245,240,232,0.4)",
                     fontFamily: "Cinzel-500",
-                    fontSize: 12,
-                    width: 22,
+                    fontSize: 11,
+                    width: 32,
+                    letterSpacing: 1.5,
                   }}
                 >
                   {String(i + 1).padStart(2, "0")}
                 </Text>
-                <Text style={{ flex: 1, color: tokens.fg, fontFamily: "Inter-600", fontSize: 13 }}>
+                <Text
+                  style={{
+                    flex: 1,
+                    color: "#F5F0E8",
+                    fontFamily: "Inter-600",
+                    fontSize: scaleType(15),
+                  }}
+                >
                   {track}
                 </Text>
                 <Pressable
-                  onPress={() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {})}
+                  hitSlop={10}
+                  onPress={() => Haptics.selectionAsync().catch(() => {})}
                   style={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: 16,
+                    width: 28,
+                    height: 28,
+                    borderRadius: 14,
                     backgroundColor: tokens.accent,
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
-                  <Play size={14} color="#0a0a0a" fill="#0a0a0a" />
+                  <Play size={11} color="#0a0a0a" fill="#0a0a0a" />
                 </Pressable>
               </View>
             ))}
           </View>
         </View>
 
-        <SectionTitle accent={tokens.accent}>BIO</SectionTitle>
-        <View style={{ paddingHorizontal: 20, gap: 12 }}>
-          {config.bioParagraphs.map((p, i) => (
-            <Text
-              key={i}
-              style={{ color: "rgba(245,240,232,0.78)", fontFamily: "Inter-400", fontSize: 13, lineHeight: 20 }}
-            >
-              {p}
-            </Text>
-          ))}
-        </View>
+        <Divider color={tokens.border} margin={36} />
 
-        <View style={{ paddingHorizontal: 20, marginTop: 24 }}>
+        {/* VOICE / PROCESS */}
+        {config.voice?.process?.length ? (
+          <View style={{ paddingHorizontal: 24 }}>
+            <Eyebrow color={tokens.accent}>O PROCESSO</Eyebrow>
+            {config.voice.epigraph ? (
+              <View style={{ marginTop: 12 }}>
+                <PullQuote color="#F5F0E8" size={22}>
+                  {config.voice.epigraph}
+                </PullQuote>
+              </View>
+            ) : null}
+            <View style={{ flexDirection: "row", gap: 8, marginTop: 18 }}>
+              {config.voice.process.filter(Boolean).map((step, i) => (
+                <View
+                  key={i}
+                  style={{
+                    flex: 1,
+                    padding: 14,
+                    backgroundColor: "rgba(245,240,232,0.04)",
+                    borderColor: tokens.border,
+                    borderWidth: 1,
+                    minHeight: 110,
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: tokens.accent,
+                      fontFamily: "BebasNeue-400",
+                      fontSize: 24,
+                      lineHeight: 24,
+                      marginBottom: 8,
+                    }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </Text>
+                  <Text
+                    style={{
+                      color: "rgba(245,240,232,0.78)",
+                      fontFamily: "Inter-400",
+                      fontSize: 11,
+                      lineHeight: 16,
+                    }}
+                  >
+                    {step}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        ) : null}
+
+        <Divider color={tokens.border} margin={40} />
+
+        {/* CTA */}
+        <View style={{ paddingHorizontal: 24 }}>
           <Pressable
             onPress={() => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+              Haptics.selectionAsync().catch(() => {});
               router.back();
-              setTimeout(() => router.push("/loja" as never), 250);
-            }}
-            style={{
-              padding: 18,
-              borderRadius: 12,
-              backgroundColor: tokens.accent,
-              alignItems: "center",
+              setTimeout(() => router.push("/loja" as never), 220);
             }}
           >
-            <Text
+            <View
               style={{
-                color: "#0a0a0a",
-                fontFamily: "Cinzel-700",
-                fontSize: 12,
-                letterSpacing: 2.5,
+                flexDirection: "row",
+                alignItems: "center",
+                paddingVertical: 22,
+                borderTopColor: tokens.border,
+                borderBottomColor: tokens.border,
+                borderTopWidth: 1,
+                borderBottomWidth: 1,
               }}
             >
-              VER COLEÇÃO {config.universeName.toUpperCase()} →
-            </Text>
+              <View style={{ flex: 1 }}>
+                <Text
+                  style={{
+                    color: tokens.accent,
+                    fontFamily: "Cinzel-700",
+                    fontSize: 10,
+                    letterSpacing: 3,
+                    marginBottom: 6,
+                  }}
+                >
+                  COLEÇÃO OFICIAL
+                </Text>
+                <Display size={32}>VER {config.universeName}</Display>
+              </View>
+              <Text
+                style={{
+                  color: tokens.accent,
+                  fontFamily: "BebasNeue-400",
+                  fontSize: 42,
+                }}
+              >
+                →
+              </Text>
+            </View>
           </Pressable>
+        </View>
 
-          <View style={{ flexDirection: "row", justifyContent: "center", gap: 18, marginTop: 22 }}>
-            <Pressable
-              hitSlop={10}
-              style={{
-                width: 42,
-                height: 42,
-                borderRadius: 21,
-                borderWidth: 1,
-                borderColor: tokens.border,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Music size={16} color={tokens.fg} strokeWidth={1.6} />
-            </Pressable>
-            <Pressable
-              hitSlop={10}
-              style={{
-                width: 42,
-                height: 42,
-                borderRadius: 21,
-                borderWidth: 1,
-                borderColor: tokens.border,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <AtSign size={16} color={tokens.fg} strokeWidth={1.6} />
-            </Pressable>
-          </View>
+        <View style={{ alignItems: "center", marginTop: 50 }}>
+          <Text style={{ color: "rgba(245,240,232,0.3)", fontFamily: "Cinzel-500", fontSize: 9, letterSpacing: 4 }}>
+            {config.displayName.toUpperCase()} · 30PRAUM
+          </Text>
         </View>
       </ScrollView>
     </View>
-  );
-}
-
-function SectionTitle({ children, accent }: { children: React.ReactNode; accent: string }) {
-  return (
-    <Text
-      style={{
-        color: accent,
-        fontFamily: "Cinzel-700",
-        fontSize: 11,
-        letterSpacing: 3,
-        marginTop: 32,
-        marginBottom: 14,
-        paddingHorizontal: 20,
-      }}
-    >
-      {children}
-    </Text>
   );
 }
