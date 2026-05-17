@@ -11,10 +11,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Cinzel_500Medium,
   Cinzel_700Bold,
+  Cinzel_800ExtraBold,
+  Cinzel_900Black,
 } from "@expo-google-fonts/cinzel";
 import {
   Inter_400Regular,
+  Inter_500Medium,
   Inter_600SemiBold,
+  Inter_700Bold,
 } from "@expo-google-fonts/inter";
 import { BebasNeue_400Regular } from "@expo-google-fonts/bebas-neue";
 import { PermanentMarker_400Regular } from "@expo-google-fonts/permanent-marker";
@@ -50,8 +54,12 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     "Cinzel-500": Cinzel_500Medium,
     "Cinzel-700": Cinzel_700Bold,
+    "Cinzel-800": Cinzel_800ExtraBold,
+    "Cinzel-900": Cinzel_900Black,
     "Inter-400": Inter_400Regular,
+    "Inter-500": Inter_500Medium,
     "Inter-600": Inter_600SemiBold,
+    "Inter-700": Inter_700Bold,
     "BebasNeue-400": BebasNeue_400Regular,
     "PermanentMarker-400": PermanentMarker_400Regular,
     "UnifrakturCook-700": UnifrakturCook_700Bold,

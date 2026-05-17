@@ -85,10 +85,10 @@ export function EditorialFeed({ artists, plantao }: Props) {
               <Text
                 style={{
                   color: "#F5F0E8",
-                  fontFamily: "BebasNeue-400",
-                  fontSize: 56,
-                  letterSpacing: 2,
-                  lineHeight: 56,
+                  fontFamily: "Cinzel-700",
+                  fontSize: 48,
+                  letterSpacing: -1.8,
+                  lineHeight: 50,
                 }}
               >
                 {String(countdown.d).padStart(2, "0")}
@@ -99,10 +99,10 @@ export function EditorialFeed({ artists, plantao }: Props) {
               <Text
                 style={{
                   color: "#F5F0E8",
-                  fontFamily: "BebasNeue-400",
-                  fontSize: 56,
-                  letterSpacing: 2,
-                  lineHeight: 56,
+                  fontFamily: "Cinzel-700",
+                  fontSize: 48,
+                  letterSpacing: -1.8,
+                  lineHeight: 50,
                   marginLeft: 16,
                 }}
               >
@@ -160,7 +160,7 @@ export function EditorialFeed({ artists, plantao }: Props) {
                 style={{ position: "absolute", left: 0, right: 0, bottom: 0, top: "50%" }}
               />
               <View style={{ position: "absolute", bottom: 10, left: 10 }}>
-                <Text style={{ color: "#F5F0E8", fontFamily: "BebasNeue-400", fontSize: 22, letterSpacing: 1 }}>
+                <Text style={{ color: "#F5F0E8", fontFamily: "Cinzel-700", fontSize: 18, letterSpacing: -0.3 }}>
                   WIU
                 </Text>
               </View>
@@ -172,7 +172,7 @@ export function EditorialFeed({ artists, plantao }: Props) {
                 style={{ position: "absolute", left: 0, right: 0, bottom: 0, top: "50%" }}
               />
               <View style={{ position: "absolute", bottom: 10, left: 10 }}>
-                <Text style={{ color: "#F5F0E8", fontFamily: "BebasNeue-400", fontSize: 22, letterSpacing: 1 }}>
+                <Text style={{ color: "#F5F0E8", fontFamily: "Cinzel-700", fontSize: 18, letterSpacing: -0.3 }}>
                   TETO
                 </Text>
               </View>

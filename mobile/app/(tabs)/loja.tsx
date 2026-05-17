@@ -158,10 +158,10 @@ export default function LojaScreen() {
                 <Text
                   style={{
                     color: tokens.fg,
-                    fontFamily: "BebasNeue-400",
-                    fontSize: 22,
+                    fontFamily: "Cinzel-700",
+                    fontSize: 18,
                     marginTop: 6,
-                    letterSpacing: 0.5,
+                    letterSpacing: -0.3,
                   }}
                 >
                   R$ {item.priceBRL}
