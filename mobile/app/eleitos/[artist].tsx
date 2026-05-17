@@ -128,9 +128,9 @@ export default function EleitosScreen() {
               durationMs={22000}
               style={{
                 color: tokens.accent,
-                fontFamily: "Cinzel-700",
-                fontSize: 22,
-                letterSpacing: 4,
+                fontFamily: "BebasNeue-400",
+                fontSize: 28,
+                letterSpacing: 3,
               }}
             />
           </View>
@@ -311,10 +311,9 @@ export default function EleitosScreen() {
                   <Text
                     style={{
                       color: tokens.accent,
-                      fontFamily: "Cinzel-700",
-                      fontSize: 18,
-                      lineHeight: 20,
-                      letterSpacing: -0.3,
+                      fontFamily: "BebasNeue-400",
+                      fontSize: 24,
+                      lineHeight: 24,
                       marginBottom: 8,
                     }}
                   >

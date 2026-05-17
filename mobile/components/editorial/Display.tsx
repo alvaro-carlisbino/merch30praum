@@ -1,16 +1,17 @@
 import { Dimensions, Text, View, type TextStyle, type StyleProp } from "react-native";
 
-const SHORT = Dimensions.get("window").width < 380;
+const WINDOW_WIDTH = Dimensions.get("window").width;
+const SHORT = WINDOW_WIDTH < 380;
 
 export function scaleType(base: number, opts?: { minScale?: number }): number {
   const minScale = opts?.minScale ?? 0.82;
   return SHORT ? base * minScale : base;
 }
 
-type DisplayFont = "default" | "matue" | "wiu" | "teto" | "brandao" | "cinzel";
+type DisplayFont = "display" | "matue" | "wiu" | "teto" | "brandao" | "cinzel";
 
 const FONT_MAP: Record<DisplayFont, string> = {
-  default: "Cinzel-700",
+  display: "BebasNeue-400",
   matue: "SpaceGrotesk-500",
   wiu: "CormorantGaramond-500-Italic",
   teto: "Archivo-700",
@@ -40,9 +41,9 @@ interface DisplayProps {
 export function Display({
   children,
   size = 56,
-  color = "#F5F0E8",
-  font = "default",
-  lineHeight = 0.9,
+  color = "#F5F5F5",
+  font = "display",
+  lineHeight = 0.92,
   align = "left",
   italic = false,
   style,
@@ -77,7 +78,7 @@ interface WordmarkProps {
   style?: StyleProp<TextStyle>;
 }
 
-export function Wordmark({ children, size = 14, color = "#F5F0E8", tracking = 0.4, style }: WordmarkProps) {
+export function Wordmark({ children, size = 14, color = "#F5F5F5", tracking = 0.4, style }: WordmarkProps) {
   return (
     <Text
       style={[
@@ -103,7 +104,7 @@ interface EyebrowProps {
   size?: number;
 }
 
-export function Eyebrow({ children, color = "#C89858", align = "left", size = 10 }: EyebrowProps) {
+export function Eyebrow({ children, color = "#FFFFFF", align = "left", size = 10 }: EyebrowProps) {
   return (
     <Text
       style={{
@@ -126,7 +127,7 @@ interface PullQuoteProps {
   size?: number;
 }
 
-export function PullQuote({ children, color = "#F5F0E8", size = 22 }: PullQuoteProps) {
+export function PullQuote({ children, color = "#F5F5F5", size = 22 }: PullQuoteProps) {
   return (
     <View style={{ paddingVertical: 12 }}>
       <Text
@@ -150,7 +151,7 @@ interface DropCapProps {
   accent?: string;
 }
 
-export function DropCap({ children, color = "rgba(245,240,232,0.85)", accent = "#F5F0E8" }: DropCapProps) {
+export function DropCap({ children, color = "rgba(245,245,245,0.85)", accent = "#FFFFFF" }: DropCapProps) {
   if (!children) return null;
   const first = children.charAt(0);
   const rest = children.slice(1);
@@ -159,11 +160,11 @@ export function DropCap({ children, color = "rgba(245,240,232,0.85)", accent = "
       <Text
         style={{
           color: accent,
-          fontFamily: "Cinzel-700",
-          fontSize: 56,
-          lineHeight: 48,
+          fontFamily: "BebasNeue-400",
+          fontSize: 64,
+          lineHeight: 56,
           marginRight: 10,
-          marginTop: 4,
+          marginTop: 2,
           letterSpacing: -2,
         }}
       >
@@ -189,6 +190,6 @@ interface DividerProps {
   margin?: number;
 }
 
-export function Divider({ color = "rgba(245,240,232,0.12)", margin = 24 }: DividerProps) {
+export function Divider({ color = "rgba(255,255,255,0.12)", margin = 24 }: DividerProps) {
   return <View style={{ height: 1, backgroundColor: color, marginVertical: margin }} />;
 }
