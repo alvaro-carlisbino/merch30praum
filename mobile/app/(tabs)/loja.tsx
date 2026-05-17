@@ -39,7 +39,7 @@ export default function LojaScreen() {
           paddingBottom: 14,
         }}
       >
-        <Text style={{ color: tokens.fg, fontFamily: "Cinzel-700", fontSize: 22, letterSpacing: 4 }}>
+        <Text style={{ color: tokens.fg, fontFamily: "BebasNeue-400", fontSize: 36, letterSpacing: -0.5 }}>
           LOJA
         </Text>
         <View
@@ -158,8 +158,8 @@ export default function LojaScreen() {
                 <Text
                   style={{
                     color: tokens.fg,
-                    fontFamily: "Cinzel-700",
-                    fontSize: 18,
+                    fontFamily: "BebasNeue-400",
+                    fontSize: 22,
                     marginTop: 6,
                     letterSpacing: -0.3,
                   }}

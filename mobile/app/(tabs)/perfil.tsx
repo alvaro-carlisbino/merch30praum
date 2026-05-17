@@ -26,9 +26,9 @@ export default function PerfilScreen() {
       <Text
         style={{
           color: tokens.fg,
-          fontFamily: "Cinzel-700",
-          fontSize: 22,
-          letterSpacing: 4,
+          fontFamily: "BebasNeue-400",
+          fontSize: 36,
+          letterSpacing: -0.5,
           paddingHorizontal: 20,
           marginBottom: 24,
         }}
@@ -59,10 +59,10 @@ export default function PerfilScreen() {
             justifyContent: "center",
           }}
         >
-          <Text style={{ color: "#0a0a0a", fontFamily: "Cinzel-700", fontSize: 22 }}>V</Text>
+          <Text style={{ color: "#0a0a0a", fontFamily: "BebasNeue-400", fontSize: 28, letterSpacing: -1 }}>V</Text>
         </View>
         <View>
-          <Text style={{ color: tokens.fg, fontFamily: "Cinzel-700", fontSize: 22, letterSpacing: -0.5 }}>
+          <Text style={{ color: tokens.fg, fontFamily: "BebasNeue-400", fontSize: 28, letterSpacing: -0.5 }}>
             Visitante 30praum
           </Text>
           <Text style={{ color: "rgba(245,240,232,0.55)", fontFamily: "Inter-400", fontSize: 12 }}>

@@ -37,18 +37,20 @@ export default function PlantaoScreen() {
   const { data: edition } = useCurrentPlantao();
 
   useEffect(() => {
-    setActive("house");
+    setActive("plantao");
   }, [setActive]);
 
-  if (!edition) return <View style={{ flex: 1, backgroundColor: "#0a0a0a" }} />;
+  if (!edition) return <View style={{ flex: 1, backgroundColor: "#06030a" }} />;
 
-  const accent = "#C89858";
+  const accent = "#ff2d2d";
+  const bg = "#06030a";
+  const fg = "#fff5ec";
   const heroHeight = Math.max(620, SCREEN_HEIGHT * 0.86);
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#0a0a0a" }}>
+    <View style={{ flex: 1, backgroundColor: bg }}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
-        {/* CINEMATIC HERO */}
+        {/* CINEMATIC HERO — bloodglow */}
         <View style={{ height: heroHeight, position: "relative" }}>
           <Image
             source={{ uri: edition.heroImage }}
@@ -56,13 +58,13 @@ export default function PlantaoScreen() {
             contentFit="cover"
           />
           <LinearGradient
-            colors={["rgba(0,0,0,0.55)", "rgba(0,0,0,0.0)", "rgba(0,0,0,0.65)", "#0a0a0a"]}
+            colors={["rgba(255,45,45,0.15)", "rgba(0,0,0,0.0)", "rgba(255,45,45,0.25)", bg]}
             locations={[0, 0.3, 0.75, 1]}
             style={{ position: "absolute", left: 0, right: 0, top: 0, bottom: 0 }}
           />
 
           <View style={{ position: "absolute", top: insets.top + 16, left: 24, right: 24 }}>
-            <Eyebrow color="#F5F0E8">PLANTÃO · 30PRAUM</Eyebrow>
+            <Eyebrow color="#fff5ec">PLANTÃO · 30PRAUM</Eyebrow>
             <Text
               style={{
                 color: "rgba(245,240,232,0.55)",
@@ -92,8 +94,8 @@ export default function PlantaoScreen() {
             <Animated.View entering={FadeInDown.duration(900).delay(150)}>
               <Text
                 style={{
-                  color: "#F5F0E8",
-                  fontFamily: "Cinzel-900",
+                  color: "#fff5ec",
+                  fontFamily: "BebasNeue-400",
                   fontSize: scaleType(150),
                   lineHeight: scaleType(150) * 0.92,
                   letterSpacing: scaleType(150) * -0.045,
@@ -132,11 +134,11 @@ export default function PlantaoScreen() {
               text={`${edition.lineup[0].displayName.toUpperCase()}  ·  `}
               durationMs={18000}
               style={{
-                color: "#F5F0E8",
-                fontFamily: "Cinzel-700",
-                fontSize: 72,
-                letterSpacing: -3,
-                lineHeight: 72,
+                color: "#fff5ec",
+                fontFamily: "BebasNeue-400",
+                fontSize: 84,
+                letterSpacing: -2,
+                lineHeight: 84,
               }}
             />
             {edition.lineup[0].highlightLabel ? (
@@ -172,11 +174,11 @@ export default function PlantaoScreen() {
               >
                 <Text
                   style={{
-                    color: "#F5F0E8",
-                    fontFamily: "Cinzel-700",
-                    fontSize: 26,
-                    letterSpacing: -0.5,
-                    lineHeight: 28,
+                    color: "#fff5ec",
+                    fontFamily: "BebasNeue-400",
+                    fontSize: 30,
+                    letterSpacing: -0.3,
+                    lineHeight: 32,
                   }}
                 >
                   {l.displayName}
@@ -222,10 +224,10 @@ export default function PlantaoScreen() {
                   <View style={{ flex: 1, paddingRight: 14 }}>
                     <Text
                       style={{
-                        color: "#F5F0E8",
-                        fontFamily: "Cinzel-700",
-                        fontSize: 20,
-                        letterSpacing: -0.3,
+                        color: "#fff5ec",
+                        fontFamily: "BebasNeue-400",
+                        fontSize: 24,
+                        letterSpacing: -0.2,
                       }}
                     >
                       {s.name}
@@ -275,11 +277,11 @@ export default function PlantaoScreen() {
                         </Text>
                         <Text
                           style={{
-                            color: "#F5F0E8",
-                            fontFamily: "Cinzel-700",
-                            fontSize: 22,
-                            letterSpacing: -0.4,
-                            lineHeight: 24,
+                            color: "#fff5ec",
+                            fontFamily: "BebasNeue-400",
+                            fontSize: 28,
+                            letterSpacing: -0.3,
+                            lineHeight: 28,
                           }}
                         >
                           R$ {s.priceFrom}
@@ -322,11 +324,11 @@ export default function PlantaoScreen() {
                   <Text
                     style={{
                       flex: 1,
-                      color: "#F5F0E8",
-                      fontFamily: "Cinzel-700",
-                      fontSize: 15,
-                      letterSpacing: -0.2,
-                      lineHeight: 20,
+                      color: "#fff5ec",
+                      fontFamily: "BebasNeue-400",
+                      fontSize: 18,
+                      letterSpacing: -0.1,
+                      lineHeight: 22,
                     }}
                   >
                     {q.question}
@@ -381,11 +383,11 @@ function Countdown({ date }: { date: string }) {
             <View key={it.l} style={{ alignItems: "center", flex: 1, position: "relative" }}>
               <Text
                 style={{
-                  color: "#F5F0E8",
-                  fontFamily: "Cinzel-700",
-                  fontSize: scaleType(48),
-                  lineHeight: scaleType(48),
-                  letterSpacing: scaleType(48) * -0.04,
+                  color: "#fff5ec",
+                  fontFamily: "BebasNeue-400",
+                  fontSize: scaleType(56),
+                  lineHeight: scaleType(56),
+                  letterSpacing: scaleType(56) * -0.025,
                 }}
               >
                 {String(it.v).padStart(2, "0")}
