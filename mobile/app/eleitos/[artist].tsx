@@ -1,15 +1,16 @@
-import { useEffect, useMemo } from "react";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { useEffect } from "react";
+import { Pressable, ScrollView, Text, View, ActivityIndicator } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { X, Play, Music, Instagram } from "lucide-react-native";
+import { X, Play, Music, AtSign } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
 
 import { ARTISTS } from "@/lib/artists/registry";
 import type { ArtistSlug } from "@/lib/artists/types";
 import { ARTIST_THEMES, useTheme } from "@/lib/theme";
+import { useArtist } from "@/lib/cms/queries";
 
 export default function EleitosScreen() {
   const { artist } = useLocalSearchParams<{ artist: string }>();
@@ -17,12 +18,21 @@ export default function EleitosScreen() {
   const setActive = useTheme((s) => s.setActive);
 
   const slug = (artist as ArtistSlug) || "matue";
-  const config = useMemo(() => ARTISTS[slug] ?? ARTISTS.matue, [slug]);
+  const { data: fetched, isPending } = useArtist(slug);
+  const config = fetched ?? ARTISTS[slug] ?? ARTISTS.matue;
   const tokens = ARTIST_THEMES[slug] ?? ARTIST_THEMES.matue;
 
   useEffect(() => {
     setActive(slug);
   }, [slug, setActive]);
+
+  if (isPending && !fetched) {
+    return (
+      <View style={{ flex: 1, backgroundColor: tokens.bg, alignItems: "center", justifyContent: "center" }}>
+        <ActivityIndicator size="small" color={tokens.accent} />
+      </View>
+    );
+  }
 
   return (
     <View style={{ flex: 1, backgroundColor: tokens.bg }}>
@@ -263,7 +273,7 @@ export default function EleitosScreen() {
                 justifyContent: "center",
               }}
             >
-              <Instagram size={16} color={tokens.fg} strokeWidth={1.6} />
+              <AtSign size={16} color={tokens.fg} strokeWidth={1.6} />
             </Pressable>
           </View>
         </View>
@@ -272,7 +282,7 @@ export default function EleitosScreen() {
   );
 }
 
-function SectionTitle({ children, accent }: { children: string; accent: string }) {
+function SectionTitle({ children, accent }: { children: React.ReactNode; accent: string }) {
   return (
     <Text
       style={{

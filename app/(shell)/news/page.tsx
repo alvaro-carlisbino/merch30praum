@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { NEWS_POSTS, type NewsTag } from "@/lib/news/registry";
+import { getAllNews } from "@/lib/cms/news";
+import { type NewsTag } from "@/lib/news/registry";
 
 export const metadata = {
   title: "Notícias · 30praum",
@@ -26,8 +27,9 @@ function formatDate(iso: string) {
   });
 }
 
-export default function NewsPage() {
-  const sorted = [...NEWS_POSTS].sort(
+export default async function NewsPage() {
+  const all = await getAllNews();
+  const sorted = [...all].sort(
     (a, b) =>
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );

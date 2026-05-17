@@ -3,9 +3,10 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import {
   Cinzel_500Medium,
@@ -33,6 +34,19 @@ export const unstable_settings = {
 };
 
 export default function RootLayout() {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 1000 * 60 * 10,
+            gcTime: 1000 * 60 * 60,
+            retry: 1,
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
+  );
   const [loaded] = useFonts({
     "Cinzel-500": Cinzel_500Medium,
     "Cinzel-700": Cinzel_700Bold,
@@ -55,18 +69,20 @@ export default function RootLayout() {
   if (!loaded) return null;
 
   return (
-    <GestureHandlerRootView style={{ flex: 1, backgroundColor: "#0a0a0a" }}>
-      <SafeAreaProvider>
-        <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: "#0a0a0a" } }}>
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen
-            name="eleitos/[artist]"
-            options={{ presentation: "fullScreenModal", animation: "slide_from_bottom" }}
-          />
-        </Stack>
-        <PushNotificationOverlay />
-        <StatusBar style="light" />
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+    <QueryClientProvider client={queryClient}>
+      <GestureHandlerRootView style={{ flex: 1, backgroundColor: "#0a0a0a" }}>
+        <SafeAreaProvider>
+          <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: "#0a0a0a" } }}>
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen
+              name="eleitos/[artist]"
+              options={{ presentation: "fullScreenModal", animation: "slide_from_bottom" }}
+            />
+          </Stack>
+          <PushNotificationOverlay />
+          <StatusBar style="light" />
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
+    </QueryClientProvider>
   );
 }

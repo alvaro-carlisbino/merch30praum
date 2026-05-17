@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { SubmissionForm } from "@/components/incubadora/SubmissionForm";
-import { INCUBADORA } from "@/lib/incubadora/registry";
+import { getIncubadora } from "@/lib/cms/incubadora";
 
 export const metadata = {
   title: "Submeter demo · Incubadora 30praum",
@@ -9,7 +9,8 @@ export const metadata = {
     "Formulário oficial de submissão da Incubadora 30praum. Spotify, SoundCloud, história curta.",
 };
 
-export default function SubmeterPage() {
+export default async function SubmeterPage() {
+  const INCUBADORA = await getIncubadora();
   return (
     <article className="mx-auto max-w-3xl px-4 sm:px-8 py-20">
       <Link

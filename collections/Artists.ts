@@ -1,5 +1,8 @@
 import type { CollectionConfig } from "payload";
-import { revalidatePath, revalidateTag } from "next/cache";
+import {
+  safeRevalidatePath as revalidatePath,
+  safeRevalidateTag as revalidateTag,
+} from "@/lib/cms/revalidate";
 
 export const Artists: CollectionConfig = {
   slug: "artists",

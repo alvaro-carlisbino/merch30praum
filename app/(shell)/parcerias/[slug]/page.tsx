@@ -2,16 +2,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
-import { getPartner, PARTNERS, PARTNER_SLUGS } from "@/lib/partners/registry";
-import { getArtist } from "@/lib/artists/registry";
+import { getAllPartners, getPartner } from "@/lib/cms/partners";
+import { getArtist } from "@/lib/cms/artists";
+import type { ArtistSlug } from "@/lib/artists/types";
 
-export function generateStaticParams() {
-  return PARTNER_SLUGS.map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  const all = await getAllPartners();
+  return all.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const partner = getPartner(slug);
+  const partner = await getPartner(slug);
   if (!partner) return {};
   return {
     title: `${partner.name} × 30praum`,
@@ -32,12 +34,12 @@ export default async function PartnerCasePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const partner = getPartner(slug);
+  const partner = await getPartner(slug);
   if (!partner) notFound();
 
-  const artists = (partner.artistsInvolved ?? [])
-    .map((s) => getArtist(s))
-    .filter((a) => a !== undefined);
+  const artists = (
+    await Promise.all((partner.artistsInvolved ?? []).map((s) => getArtist(s as ArtistSlug)))
+  ).filter((a): a is NonNullable<typeof a> => a !== null);
 
   return (
     <article style={{ background: partner.bgColor, color: "#f5f5f5" }}>
@@ -210,10 +212,11 @@ export default async function PartnerCasePage({
             A holding tem mais.
           </h2>
           <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {PARTNER_SLUGS.filter((s) => s !== partner.slug && PARTNERS[s].status !== "past")
+            {(await getAllPartners())
+              .filter((p) => p.slug !== partner.slug && p.status !== "past")
               .slice(0, 6)
-              .map((s) => {
-                const p = PARTNERS[s];
+              .map((p) => {
+                const s = p.slug;
                 return (
                   <Link
                     key={s}

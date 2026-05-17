@@ -1,4 +1,4 @@
-import { getCurrentPlantao } from "@/lib/plantao/registry";
+import { getCurrentPlantao } from "@/lib/cms/plantao";
 import { LineupCinema } from "@/components/plantao/LineupCinema";
 import Link from "next/link";
 
@@ -8,8 +8,8 @@ export const metadata = {
     "Todos os artistas confirmados — apresentação cinematográfica do line-up do Plantão Festival 2026.",
 };
 
-export default function PlantaoLineupPage() {
-  const current = getCurrentPlantao();
+export default async function PlantaoLineupPage() {
+  const current = await getCurrentPlantao();
 
   return (
     <article>

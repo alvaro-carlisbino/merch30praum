@@ -2,16 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { getNewsPost, NEWS_POSTS } from "@/lib/news/registry";
-import { getArtist } from "@/lib/artists/registry";
+import { getAllNews, getNewsPost } from "@/lib/cms/news";
+import { getArtist } from "@/lib/cms/artists";
+import type { ArtistSlug } from "@/lib/artists/types";
 
-export function generateStaticParams() {
-  return NEWS_POSTS.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  const all = await getAllNews();
+  return all.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getNewsPost(slug);
+  const post = await getNewsPost(slug);
   if (!post) return {};
   return {
     title: `${post.title} · 30praum`,
@@ -22,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function NewsPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getNewsPost(slug);
+  const post = await getNewsPost(slug);
   if (!post) notFound();
 
   const dateBr = new Date(post.publishedAt).toLocaleDateString("pt-BR", {
@@ -31,9 +33,9 @@ export default async function NewsPostPage({ params }: { params: Promise<{ slug:
     year: "numeric",
   });
 
-  const relatedArtists = (post.relatedArtists ?? [])
-    .map((s) => getArtist(s))
-    .filter((a) => a !== undefined);
+  const relatedArtists = (
+    await Promise.all((post.relatedArtists ?? []).map((s) => getArtist(s as ArtistSlug)))
+  ).filter((a): a is NonNullable<typeof a> => a !== null);
 
   return (
     <article className="mx-auto max-w-4xl px-4 sm:px-8 py-16">
@@ -85,12 +87,12 @@ export default async function NewsPostPage({ params }: { params: Promise<{ slug:
           <div className="flex flex-wrap gap-3">
             {relatedArtists.map((a) => (
               <Link
-                key={a!.slug}
-                href={`/${a!.slug}`}
+                key={a.slug}
+                href={`/${a.slug}`}
                 className="inline-flex items-center gap-2 border px-4 py-2 text-sm hover:bg-fg/5"
                 style={{ borderColor: "var(--border)" }}
               >
-                {a!.displayName}
+                {a.displayName}
                 <ArrowRight size={14} strokeWidth={1.5} />
               </Link>
             ))}

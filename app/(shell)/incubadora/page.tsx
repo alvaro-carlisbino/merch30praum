@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { INCUBADORA } from "@/lib/incubadora/registry";
+import { getIncubadora } from "@/lib/cms/incubadora";
 
 export const metadata = {
   title: "Incubadora · 30praum",
@@ -8,7 +8,8 @@ export const metadata = {
     "O canal de candidatura à 30praum. Para artistas com som autoral que querem ser ouvidos por quem escuta direito.",
 };
 
-export default function IncubadoraPage() {
+export default async function IncubadoraPage() {
+  const INCUBADORA = await getIncubadora();
   return (
     <article>
       {/* HERO — limpo, sem chip de label */}

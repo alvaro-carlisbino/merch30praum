@@ -1,13 +1,19 @@
 import type { MetadataRoute } from "next";
-import { ARTIST_SLUGS } from "@/lib/artists/registry";
-import { ALBUM_SLUGS } from "@/lib/albums/registry";
-import { NEWS_POSTS } from "@/lib/news/registry";
-import { PARTNER_SLUGS } from "@/lib/partners/registry";
+import { getAllArtists } from "@/lib/cms/artists";
+import { getAllAlbums } from "@/lib/cms/albums";
+import { getAllNews } from "@/lib/cms/news";
+import { getAllPartners } from "@/lib/cms/partners";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://30praum.com";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const [artists, albums, news, partners] = await Promise.all([
+    getAllArtists(),
+    getAllAlbums(),
+    getAllNews(),
+    getAllPartners(),
+  ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${BASE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
@@ -29,39 +35,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/loja`, lastModified: now, changeFrequency: "daily", priority: 0.8 },
   ];
 
-  const artistRoutes: MetadataRoute.Sitemap = ARTIST_SLUGS.map((slug) => ({
-    url: `${BASE_URL}/${slug}`,
+  const artistRoutes: MetadataRoute.Sitemap = artists.map((a) => ({
+    url: `${BASE_URL}/${a.slug}`,
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.9,
   }));
 
-  const albumRoutes: MetadataRoute.Sitemap = ALBUM_SLUGS.map((slug) => ({
-    url: `${BASE_URL}/album/${slug}`,
+  const albumRoutes: MetadataRoute.Sitemap = albums.map((a) => ({
+    url: `${BASE_URL}/album/${a.slug}`,
     lastModified: now,
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  const newsRoutes: MetadataRoute.Sitemap = NEWS_POSTS.map((post) => ({
+  const newsRoutes: MetadataRoute.Sitemap = news.map((post) => ({
     url: `${BASE_URL}/news/${post.slug}`,
     lastModified: new Date(post.publishedAt),
     changeFrequency: "yearly",
     priority: 0.6,
   }));
 
-  const partnerRoutes: MetadataRoute.Sitemap = PARTNER_SLUGS.map((slug) => ({
-    url: `${BASE_URL}/parcerias/${slug}`,
+  const partnerRoutes: MetadataRoute.Sitemap = partners.map((p) => ({
+    url: `${BASE_URL}/parcerias/${p.slug}`,
     lastModified: now,
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
-  return [
-    ...staticRoutes,
-    ...artistRoutes,
-    ...albumRoutes,
-    ...newsRoutes,
-    ...partnerRoutes,
-  ];
+  return [...staticRoutes, ...artistRoutes, ...albumRoutes, ...newsRoutes, ...partnerRoutes];
 }

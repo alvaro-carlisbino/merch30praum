@@ -2,15 +2,16 @@ import { FlatList, Pressable, Text, View } from "react-native";
 import { Image } from "expo-image";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
-import { STORIES } from "@/lib/feed/stories";
+import { useStories } from "@/lib/feed/stories";
 import { ARTIST_THEMES, useTheme } from "@/lib/theme";
 
 export function StoriesRow() {
   const setActive = useTheme((s) => s.setActive);
+  const stories = useStories();
 
   return (
     <FlatList
-      data={STORIES}
+      data={stories}
       keyExtractor={(s) => s.slug}
       horizontal
       showsHorizontalScrollIndicator={false}

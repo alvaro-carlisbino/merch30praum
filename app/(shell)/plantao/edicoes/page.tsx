@@ -1,14 +1,14 @@
 import Image from "next/image";
-import { getPastPlantao, getCurrentPlantao } from "@/lib/plantao/registry";
+import { getPastPlantao, getCurrentPlantao } from "@/lib/cms/plantao";
 
 export const metadata = {
   title: "Edições anteriores · Plantão Festival",
   description: "Histórico do Plantão Festival — 2024, 2025 e 2026. Aftermovies, fotos e dados de cada noite.",
 };
 
-export default function PlantaoEdicoesPage() {
-  const current = getCurrentPlantao();
-  const past = getPastPlantao();
+export default async function PlantaoEdicoesPage() {
+  const current = await getCurrentPlantao();
+  const past = await getPastPlantao();
   const all = [current, ...past];
 
   return (

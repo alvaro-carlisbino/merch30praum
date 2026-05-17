@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ALBUMS, ALBUM_SLUGS, STATUS_LABEL } from "@/lib/albums/registry";
+import { getAllAlbums } from "@/lib/cms/albums";
+import { STATUS_LABEL } from "@/lib/albums/registry";
 
 export const metadata = {
   title: "Lançamentos · 30praum",
@@ -8,8 +9,9 @@ export const metadata = {
     "Catálogo de releases da 30praum — XTRANHO, Colapso Global, Isso é Trap Vol.02 e mais.",
 };
 
-export default function ReleasesPage() {
-  const albums = ALBUM_SLUGS.map((s) => ALBUMS[s]).sort(
+export default async function ReleasesPage() {
+  const all = await getAllAlbums();
+  const albums = [...all].sort(
     (a, b) =>
       new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime(),
   );

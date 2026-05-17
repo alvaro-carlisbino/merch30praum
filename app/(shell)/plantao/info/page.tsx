@@ -1,4 +1,4 @@
-import { getCurrentPlantao } from "@/lib/plantao/registry";
+import { getCurrentPlantao } from "@/lib/cms/plantao";
 
 export const metadata = {
   title: "Info · Plantão 2026",
@@ -6,8 +6,8 @@ export const metadata = {
     "Local, regras de entrada, acessibilidade, faixa etária, política de meia e tudo o que você precisa saber antes de ir.",
 };
 
-export default function PlantaoInfoPage() {
-  const current = getCurrentPlantao();
+export default async function PlantaoInfoPage() {
+  const current = await getCurrentPlantao();
 
   return (
     <article>

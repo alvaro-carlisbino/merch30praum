@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PARTNERS, PARTNER_SLUGS } from "@/lib/partners/registry";
+import { getAllPartners } from "@/lib/cms/partners";
 
 export const metadata = {
   title: "Parcerias",
@@ -8,7 +8,8 @@ export const metadata = {
     "30praum × RAW · Renner · Kenner — colaborações oficiais que carimbaram a marca em três continentes da cultura.",
 };
 
-export default function ParceriasPage() {
+export default async function ParceriasPage() {
+  const partners = await getAllPartners();
   return (
     <>
       <section className="mx-auto max-w-screen-2xl px-4 pt-16 pb-10 sm:px-8 sm:pt-20">
@@ -30,8 +31,8 @@ export default function ParceriasPage() {
 
       <section className="mx-auto max-w-screen-2xl px-4 pb-20 sm:px-8 sm:pb-24">
         <ul className="grid gap-6 sm:gap-8">
-          {PARTNER_SLUGS.map((slug, idx) => {
-            const partner = PARTNERS[slug];
+          {partners.map((partner, idx) => {
+            const slug = partner.slug;
             const reverse = idx % 2 === 1;
             const href = partner.internalLink ?? `/parcerias/${partner.slug}`;
             return (

@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { FeedHeader } from "@/components/home/FeedHeader";
 import { StoriesRow } from "@/components/home/StoriesRow";
 import { FeedCard } from "@/components/home/FeedCard";
-import { FEED_ITEMS } from "@/lib/feed/feed-items";
+import { useFeedItems } from "@/lib/feed/feed-items";
 import { MOCK_PUSHES, useNotificationQueue } from "@/lib/notifications/mock-queue";
 import { useTheme } from "@/lib/theme";
 
@@ -15,6 +15,7 @@ export default function HomeScreen() {
   const setActive = useTheme((s) => s.setActive);
   const tokens = useTheme((s) => s.tokens);
   const [refreshing, setRefreshing] = useState(false);
+  const feedItems = useFeedItems();
 
   useEffect(() => {
     setActive("house");
@@ -33,7 +34,7 @@ export default function HomeScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: "#0a0a0a", paddingTop: insets.top }}>
       <FlatList
-        data={FEED_ITEMS}
+        data={feedItems}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <FeedCard item={item} />}
         ItemSeparatorComponent={() => <View style={{ height: 18 }} />}
