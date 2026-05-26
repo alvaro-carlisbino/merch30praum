@@ -15,7 +15,7 @@ const ROUTES = [
 ];
 
 export const metadata = {
-  title: "Página não encontrada · 30praum",
+  title: { absolute: "Página não encontrada" },
   description: "A rota que você buscou não existe.",
 };
 
