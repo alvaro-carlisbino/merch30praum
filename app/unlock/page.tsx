@@ -45,24 +45,6 @@ export default async function UnlockPage({
 
         <UnlockForm from={safeFrom} />
 
-        <div className="flex flex-col gap-2">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-white/30 text-center">
-            prova
-          </span>
-          <iframe
-            data-testid="embed-iframe"
-            src="https://open.spotify.com/embed/track/35df5zF0HOKz9bfNjOA7tZ?utm_source=generator"
-            width="100%"
-            height={152}
-            frameBorder={0}
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            allowFullScreen
-            loading="lazy"
-            style={{ borderRadius: 12 }}
-            title="Somos os Melhores — Matuê"
-          />
-        </div>
-
         <footer className="flex flex-col items-center gap-3 text-center">
           <a
             href="https://limitless.app.br"
