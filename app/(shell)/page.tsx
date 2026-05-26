@@ -1,8 +1,4 @@
-import { HomeHero } from "@/components/home/HomeHero";
-import { ArtistsRow } from "@/components/home/ArtistsRow";
-import { EleitosDaCasa } from "@/components/home/EleitosDaCasa";
-import { VistaAgora } from "@/components/home/VistaAgora";
-import { NewsletterCapture } from "@/components/shell/NewsletterCapture";
+import { Desktop } from "@/components/home/Desktop";
 
 export const metadata = {
   title: "30praum — Site oficial",
@@ -11,13 +7,5 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  return (
-    <>
-      <HomeHero />
-      <ArtistsRow />
-      <EleitosDaCasa />
-      <VistaAgora />
-      <NewsletterCapture />
-    </>
-  );
+  return <Desktop />;
 }

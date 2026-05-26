@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { ShopifyVariant } from "@/lib/shopify/types";
-import { cn } from "@/lib/utils/cn";
 
 interface VariantSelectorProps {
   options: Array<{ name: string; values: string[] }>;
@@ -10,6 +9,10 @@ interface VariantSelectorProps {
   onSelect: (variant: ShopifyVariant | null) => void;
 }
 
+/**
+ * Variantes como combobox clássico de Windows (select estilizado).
+ * Sem chip torto, sem mono "switch".
+ */
 export function VariantSelector({ options, variants, onSelect }: VariantSelectorProps) {
   const [selected, setSelected] = useState<Record<string, string>>(() => {
     const initial: Record<string, string> = {};
@@ -31,51 +34,32 @@ export function VariantSelector({ options, variants, onSelect }: VariantSelector
     onSelect(matched);
   }, [matched, onSelect]);
 
-  function pick(name: string, value: string) {
-    setSelected((prev) => ({ ...prev, [name]: value }));
-  }
-
   return (
-    <div className="space-y-5">
+    <div className="space-y-2">
       {options.map((option) => (
-        <div key={option.name}>
-          <div className="mb-2 flex items-baseline justify-between">
-            <span className="text-[10px] uppercase tracking-[0.25em] text-muted">
-              {option.name}
-            </span>
-            <span className="text-xs">{selected[option.name]}</span>
-          </div>
-          <div className="flex flex-wrap gap-2">
+        <label key={option.name} className="flex items-center gap-2">
+          <span className="w-[80px] text-right font-mono text-[11px] text-black">
+            {option.name.toLowerCase()}:
+          </span>
+          <select
+            value={selected[option.name] ?? ""}
+            onChange={(e) => setSelected((s) => ({ ...s, [option.name]: e.target.value }))}
+            className="win-select flex-1 font-mono text-[11px]"
+          >
             {option.values.map((value) => {
-              const isActive = selected[option.name] === value;
               const variantForValue = variants.find(
-                (v) =>
-                  v.selectedOptions.find((o) => o.name === option.name)?.value === value,
+                (v) => v.selectedOptions.find((o) => o.name === option.name)?.value === value,
               );
               const isAvailable = variantForValue?.availableForSale ?? true;
               return (
-                <button
-                  key={value}
-                  type="button"
-                  onClick={() => pick(option.name, value)}
-                  disabled={!isAvailable}
-                  className={cn(
-                    "px-4 py-2 text-xs uppercase tracking-widest border transition-colors",
-                    isActive ? "border-transparent" : "border-border hover:border-accent",
-                    !isAvailable && "opacity-40 line-through cursor-not-allowed",
-                  )}
-                  style={
-                    isActive
-                      ? { background: "var(--accent)", color: "var(--bg)" }
-                      : undefined
-                  }
-                >
+                <option key={value} value={value} disabled={!isAvailable}>
                   {value}
-                </button>
+                  {!isAvailable ? "  (esgotado)" : ""}
+                </option>
               );
             })}
-          </div>
-        </div>
+          </select>
+        </label>
       ))}
     </div>
   );

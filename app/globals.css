@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+@import "../styles/lanhouse.css";
 @import "../styles/themes/house.css";
 @import "../styles/themes/matue.css";
 @import "../styles/themes/wiu.css";
@@ -19,10 +20,7 @@
 
   --font-display: var(--font-display);
   --font-body: var(--font-body);
-  --font-tag-matue: var(--font-tag-matue);
-  --font-tag-teto: var(--font-tag-teto);
-  --font-tag-wiu: var(--font-tag-wiu);
-  --font-tag-brandao: var(--font-tag-brandao);
+  --font-mono: var(--font-mono);
 
   --ease-universe: cubic-bezier(0.7, 0, 0.3, 1);
 }
@@ -31,9 +29,14 @@ html {
   scroll-behavior: smooth;
 }
 
-html,
-body {
+html {
   background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body, system-ui, sans-serif);
+}
+
+body {
+  background: transparent;
   color: var(--fg);
   font-family: var(--font-body, system-ui, sans-serif);
 }
@@ -53,6 +56,10 @@ body {
 ::selection {
   background: var(--accent);
   color: var(--bg);
+}
+
+.font-mono {
+  font-family: var(--font-mono, ui-monospace, monospace);
 }
 
 @media (prefers-reduced-motion: reduce) {

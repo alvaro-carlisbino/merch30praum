@@ -9,6 +9,9 @@ import {
   Cormorant_Garamond,
   Archivo,
   Anton,
+  Instrument_Serif,
+  JetBrains_Mono,
+  Special_Elite,
 } from "next/font/google";
 
 export const houseBody = Inter({
@@ -91,6 +94,40 @@ export const tetoDisplay = Archivo({
 
 export const brandaoDisplay = Anton({
   variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+});
+
+/**
+ * Acento editorial — itálico humano para quotes, "lado A / lado B",
+ * manchetes serifadas. Carregada globalmente em todos os temas.
+ */
+export const houseSerifItalic = Instrument_Serif({
+  variable: "--font-serif-italic",
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["italic"],
+  display: "swap",
+});
+
+/**
+ * Metadados técnicos — BPM, key, SKU, número de catálogo, LCD do console,
+ * texto datilografado de ficha técnica. Carregada globalmente.
+ */
+export const houseMono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
+});
+
+/**
+ * Máquina de escrever — pra fichas datilografadas, ficha técnica do
+ * produto, etiquetas de fita cassete. Mais "humana" que mono limpa.
+ */
+export const houseTypewriter = Special_Elite({
+  variable: "--font-typewriter",
   subsets: ["latin"],
   weight: ["400"],
   display: "swap",

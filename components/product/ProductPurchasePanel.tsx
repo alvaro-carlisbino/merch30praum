@@ -2,12 +2,8 @@
 
 import { useCallback, useState } from "react";
 import type { DomainProduct, ShopifyVariant } from "@/lib/shopify/types";
-import { PriceTag } from "./PriceTag";
 import { VariantSelector } from "./VariantSelector";
 import { AddToCartButton } from "./AddToCartButton";
-import { PixHighlight } from "./PixHighlight";
-import { PdpTrustRow } from "./PdpTrustRow";
-import { SizeGuide } from "./SizeGuide";
 
 interface ProductPurchasePanelProps {
   product: DomainProduct;
@@ -23,48 +19,48 @@ export function ProductPurchasePanel({ product }: ProductPurchasePanelProps) {
   }, []);
 
   const activePrice = variant?.price ?? product.priceMin;
-  const hasSize = product.options.some((o) =>
-    o.name.toLowerCase().includes("tamanho"),
-  );
 
   return (
-    <div className="space-y-7">
-      <div>
-        <h1 className="font-display text-3xl sm:text-4xl leading-tight">
-          {product.title}
-        </h1>
-        <PriceTag
-          min={activePrice}
-          max={product.priceMax}
-          className="mt-3 text-xl"
-        />
+    <div className="font-mono text-[11px] text-black">
+      <div className="border border-[#aca899] bg-white p-3">
+        <div className="grid grid-cols-[80px_1fr] gap-y-1">
+          <span className="text-right text-[#666]">nome:</span>
+          <span className="font-bold">{product.title}</span>
+
+          <span className="text-right text-[#666]">arquivo:</span>
+          <span>{product.handle}.jpg</span>
+
+          <span className="text-right text-[#666]">tamanho:</span>
+          <span>R$ {parseFloat(activePrice.amount).toFixed(2).replace(".", ",")}</span>
+
+          <span className="text-right text-[#666]">tipo:</span>
+          <span>peça oficial 30praum</span>
+        </div>
       </div>
 
-      <PixHighlight price={activePrice} />
+      {product.description ? (
+        <div className="mt-3 border border-[#aca899] bg-white p-3">
+          <p className="mb-1 text-[#666]">descrição:</p>
+          <p className="text-black">{product.description}</p>
+        </div>
+      ) : null}
 
-      {product.description && (
-        <p className="text-sm text-muted leading-relaxed max-w-prose">
-          {product.description}
-        </p>
-      )}
-
-      {product.options.length > 0 && (
-        <div className="space-y-3">
+      {product.options.length > 0 ? (
+        <div className="mt-3 border border-[#aca899] bg-white p-3">
           <VariantSelector
             options={product.options}
             variants={product.variants}
             onSelect={handleSelect}
           />
-          {hasSize && <SizeGuide />}
         </div>
-      )}
+      ) : null}
 
-      <AddToCartButton
-        variantId={variant?.id ?? null}
-        available={variant?.availableForSale ?? false}
-      />
-
-      <PdpTrustRow />
+      <div className="mt-4">
+        <AddToCartButton
+          variantId={variant?.id ?? null}
+          available={variant?.availableForSale ?? false}
+        />
+      </div>
     </div>
   );
 }

@@ -7,6 +7,9 @@ import {
   tagTeto,
   tagWiu,
   tagBrandao,
+  houseSerifItalic,
+  houseMono,
+  houseTypewriter,
 } from "@/styles/fonts";
 import { CustomCursor } from "@/components/effects/CustomCursor";
 import "./globals.css";
@@ -64,7 +67,7 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       data-theme="house"
-      className={`${houseBody.variable} ${houseDisplay.variable} ${brandSerif.variable} ${tagMatue.variable} ${tagTeto.variable} ${tagWiu.variable} ${tagBrandao.variable} h-full antialiased`}
+      className={`${houseBody.variable} ${houseDisplay.variable} ${brandSerif.variable} ${tagMatue.variable} ${tagTeto.variable} ${tagWiu.variable} ${tagBrandao.variable} ${houseSerifItalic.variable} ${houseMono.variable} ${houseTypewriter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <CustomCursor />

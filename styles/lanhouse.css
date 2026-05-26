@@ -1,0 +1,466 @@
+/* Lan House aesthetic — Windows XP/2000 reconstruída em CSS.
+ * Cantos quadrados. Borda 3D outset. Cores fixas. Fonte Tahoma. */
+
+:root {
+  --win-face: #ece9d8;
+  --win-face-dark: #d6d2bf;
+  --win-face-darker: #aca899;
+  --win-shadow: #716f64;
+  --win-hilite: #ffffff;
+  --win-title-from: #0a246a;
+  --win-title-to: #a6caf0;
+  --win-title-text: #ffffff;
+  --win-menu-text: #000000;
+  --win-link: #0a246a;
+  --win-link-visited: #5e3a98;
+
+  --taskbar-from: #245edc;
+  --taskbar-to: #3a6ea5;
+  --taskbar-face: #245edc;
+
+  --vhs-bleed-red: rgba(255, 0, 60, 0.16);
+  --vhs-bleed-blue: rgba(0, 120, 255, 0.12);
+}
+
+/* ===== Janela ===== */
+.win-shell {
+  background: var(--win-face);
+  border-top: 1px solid var(--win-hilite);
+  border-left: 1px solid var(--win-hilite);
+  border-right: 1px solid var(--win-shadow);
+  border-bottom: 1px solid var(--win-shadow);
+  box-shadow:
+    2px 2px 0 0 var(--win-face-darker),
+    3px 3px 0 0 rgba(0, 0, 0, 0.25);
+  font-family: Tahoma, Geneva, Verdana, system-ui, sans-serif;
+  font-size: 11px;
+  color: #000;
+}
+
+.win-titlebar {
+  background: linear-gradient(to bottom, var(--win-title-from) 0%, #3a4cb5 50%, var(--win-title-to) 100%);
+  color: var(--win-title-text);
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--win-shadow);
+}
+
+.win-title {
+  font-size: 11px;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.45);
+}
+
+.win-controlbtn {
+  width: 18px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--win-face);
+  border-top: 1px solid var(--win-hilite);
+  border-left: 1px solid var(--win-hilite);
+  border-right: 1px solid var(--win-shadow);
+  border-bottom: 1px solid var(--win-shadow);
+  color: #000;
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  cursor: default;
+}
+
+.win-controlbtn:active {
+  border-top-color: var(--win-shadow);
+  border-left-color: var(--win-shadow);
+  border-right-color: var(--win-hilite);
+  border-bottom-color: var(--win-hilite);
+}
+
+.win-close {
+  background: linear-gradient(to bottom, #ff6a6a, #c70000);
+  color: #fff;
+  font-weight: bold;
+}
+
+.win-close:hover {
+  background: linear-gradient(to bottom, #ff8a8a, #d62020);
+}
+
+.win-menubar {
+  background: var(--win-face);
+  border-bottom: 1px solid var(--win-face-dark);
+  font-size: 11px;
+  color: #000;
+}
+
+.win-menu-item {
+  cursor: default;
+  padding: 1px 4px;
+}
+
+.win-menu-item:hover {
+  background: var(--win-title-from);
+  color: #fff;
+}
+
+.win-body {
+  background: var(--win-face);
+  color: #000;
+  padding: 8px;
+}
+
+.win-statusbar {
+  background: var(--win-face);
+  border-top: 1px solid var(--win-hilite);
+  padding: 2px 8px;
+  font-size: 10px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Variante: WMP — frame escuro */
+.win-shell.win-wmp {
+  background: #1c1c1c;
+  border-top-color: #4a4a4a;
+  border-left-color: #4a4a4a;
+}
+.win-wmp .win-body {
+  background: #0c0c0c;
+  color: #d0d0d0;
+}
+
+/* ===== Botão clássico ===== */
+.win-btn {
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  color: #000;
+  background: var(--win-face);
+  border-top: 1px solid var(--win-hilite);
+  border-left: 1px solid var(--win-hilite);
+  border-right: 1px solid var(--win-shadow);
+  border-bottom: 1px solid var(--win-shadow);
+  outline: 1px solid #000;
+  cursor: default;
+  text-align: center;
+  height: 23px;
+  line-height: 1;
+}
+
+.win-btn:hover {
+  background: #e3dfc8;
+}
+
+.win-btn:active,
+.win-btn.win-btn-pressed {
+  border-top-color: var(--win-shadow);
+  border-left-color: var(--win-shadow);
+  border-right-color: var(--win-hilite);
+  border-bottom-color: var(--win-hilite);
+}
+
+.win-btn-primary {
+  outline: 2px solid #000;
+  font-weight: bold;
+}
+
+/* ===== Ícone de área de trabalho ===== */
+.desktop-icon {
+  font-family: Tahoma, Geneva, Verdana, system-ui, sans-serif;
+  color: #fff;
+  cursor: default;
+  background: transparent;
+  border: 1px dashed transparent;
+}
+
+.desktop-icon-art {
+  display: inline-block;
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.6));
+}
+
+.desktop-icon-label {
+  font-size: 11px;
+  line-height: 1.15;
+  display: inline-block;
+  padding: 1px 3px;
+  text-shadow: 1px 1px 0 #000;
+  word-break: break-word;
+}
+
+.desktop-icon:hover .desktop-icon-label {
+  background: #1f3fa3;
+  color: #fff;
+  text-shadow: none;
+}
+
+.desktop-icon:focus {
+  outline: none;
+}
+
+.desktop-icon:focus-visible {
+  border-color: #ffe782;
+}
+
+.desktop-icon:focus-visible .desktop-icon-label {
+  background: #1f3fa3;
+  color: #fff;
+  text-shadow: none;
+  border: 1px dotted #ffe782;
+}
+
+/* ===== Taskbar ===== */
+.taskbar {
+  background: linear-gradient(to bottom, var(--taskbar-from), var(--taskbar-to));
+  border-top: 1px solid #5a8ed1;
+  height: 34px;
+  color: #fff;
+  font-family: Tahoma, Geneva, Verdana, system-ui, sans-serif;
+  font-size: 11px;
+}
+
+.start-button {
+  background: linear-gradient(to bottom, #46af49 0%, #2c8431 50%, #1f6b2a 100%);
+  color: #fff;
+  border-top: 1px solid #66cf66;
+  border-left: 1px solid #66cf66;
+  border-right: 1px solid #1a5f23;
+  border-bottom: 1px solid #1a5f23;
+  border-radius: 0 9px 9px 0;
+  font-size: 13px;
+  font-style: italic;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.45);
+  cursor: default;
+}
+
+.start-button:hover {
+  background: linear-gradient(to bottom, #56bf59 0%, #3c9441 50%, #2f7b3a 100%);
+}
+
+.taskbar-divider {
+  width: 2px;
+  margin: 2px 0;
+  background: rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.taskbar-task {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  min-width: 140px;
+  max-width: 200px;
+  background: linear-gradient(to bottom, #5a8ed1, #3a6ea5);
+  color: #fff;
+  font-size: 11px;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.35);
+  border-top: 1px solid #7baddc;
+  border-left: 1px solid #7baddc;
+  border-right: 1px solid #1f4275;
+  border-bottom: 1px solid #1f4275;
+  cursor: default;
+}
+
+.taskbar-task-active {
+  background: linear-gradient(to bottom, #1c4889, #1d4f99);
+  border-top-color: #103569;
+  border-left-color: #103569;
+  border-right-color: #5a8ed1;
+  border-bottom-color: #5a8ed1;
+}
+
+.tray-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 6px;
+  background: rgba(0, 0, 0, 0.18);
+  color: #fff;
+  font-size: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.tray-clock {
+  background: rgba(0, 0, 0, 0.22);
+  color: #fff;
+  font-size: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+/* ===== Menu Iniciar ===== */
+.start-menu {
+  width: 260px;
+  background: #fff;
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  border-top: 1px solid #2c8431;
+  border-left: 1px solid #2c8431;
+  border-right: 1px solid #1a5f23;
+  border-bottom: 1px solid #1a5f23;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
+  color: #000;
+}
+
+.start-menu-strip {
+  height: 28px;
+  background: linear-gradient(to right, #1f6b2a, #46af49);
+  color: #fff;
+  border-bottom: 1px solid #1a5f23;
+}
+
+.start-menu-body {
+  padding: 2px 0;
+}
+
+.start-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  color: #000;
+  cursor: default;
+}
+
+.start-item:hover {
+  background: #1f3fa3;
+  color: #fff;
+}
+
+.start-divider {
+  height: 1px;
+  background: #c0c0c0;
+  margin: 4px 8px;
+}
+
+/* ===== Wallpaper ===== */
+.wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-color: #2a1f1a;
+  background-image: url("/textures/wall-tag.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.wallpaper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+/* ===== WMP transport buttons ===== */
+.wmp-btn {
+  width: 28px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, #3a3a3a 0%, #1c1c1c 100%);
+  color: #d0d0d0;
+  font-family: Tahoma, sans-serif;
+  font-size: 10px;
+  border-top: 1px solid #4a4a4a;
+  border-left: 1px solid #4a4a4a;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  cursor: default;
+}
+
+.wmp-btn:hover {
+  background: linear-gradient(to bottom, #4a4a4a 0%, #2c2c2c 100%);
+  color: #ffffff;
+}
+
+.wmp-btn:active {
+  border-top-color: #000;
+  border-left-color: #000;
+  border-right-color: #4a4a4a;
+  border-bottom-color: #4a4a4a;
+}
+
+/* ===== VHS ===== */
+.vhs-frame {
+  background: #000;
+  border: 2px solid #000;
+}
+
+.vhs-bleed {
+  background:
+    radial-gradient(60% 80% at 30% 50%, var(--vhs-bleed-red), transparent 60%),
+    radial-gradient(60% 80% at 70% 50%, var(--vhs-bleed-blue), transparent 60%);
+  mix-blend-mode: screen;
+  filter: blur(2px);
+}
+
+.vhs-tracking {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 36px,
+      rgba(255, 255, 255, 0.06) 36px,
+      rgba(255, 255, 255, 0.06) 40px
+    );
+}
+
+.vhs-scan {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.18) 0px,
+    rgba(0, 0, 0, 0.18) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* ===== Combobox / Select ===== */
+.win-select {
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  color: #000;
+  background: #fff;
+  border-top: 1px solid var(--win-shadow);
+  border-left: 1px solid var(--win-shadow);
+  border-right: 1px solid var(--win-hilite);
+  border-bottom: 1px solid var(--win-hilite);
+  outline: 1px solid #7f7f7f;
+  height: 22px;
+  padding: 0 4px;
+  cursor: default;
+}
+
+.win-input {
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  color: #000;
+  background: #fff;
+  border-top: 1px solid var(--win-shadow);
+  border-left: 1px solid var(--win-shadow);
+  border-right: 1px solid var(--win-hilite);
+  border-bottom: 1px solid var(--win-hilite);
+  outline: 1px solid #7f7f7f;
+  height: 22px;
+  padding: 0 4px;
+}
+
+/* ===== Explorer item (pasta/arquivo) ===== */
+.explorer-item {
+  cursor: default;
+  border: 1px dotted transparent;
+  user-select: none;
+}
+
+.explorer-item:hover {
+  background: #d9e8fb;
+  border-color: #7f9fcb;
+}
+
+.explorer-item:hover .desktop-icon-label {
+  background: transparent;
+  color: #000;
+  text-shadow: none;
+}

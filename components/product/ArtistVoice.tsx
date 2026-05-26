@@ -4,49 +4,22 @@ interface ArtistVoiceProps {
   artist: ArtistConfig;
 }
 
+/**
+ * Bloco "leia-me.txt" do artista — texto puro em fonte mono, sem decoração.
+ */
 export function ArtistVoice({ artist }: ArtistVoiceProps) {
   return (
     <section
       aria-label={`Voz do artista — ${artist.displayName}`}
-      className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-16 grid gap-10 lg:grid-cols-[1fr_1.4fr]"
-      style={{ borderTop: "1px solid var(--border)" }}
+      className="mx-auto max-w-[760px] px-4 pt-6 pb-2 sm:px-6"
     >
-      <div>
-        <p className="text-[10px] uppercase tracking-[0.3em] text-muted">
-          Voz do artista
-        </p>
-        <p className="mt-3 text-sm uppercase tracking-[0.2em]">
-          — {artist.displayName}
-        </p>
-      </div>
-      <div>
-        <blockquote
-          className="font-display leading-[1.05]"
-          style={{
-            fontSize: "clamp(1.5rem, 3.4vw, 2.6rem)",
-            letterSpacing: "-0.01em",
-          }}
-        >
-          “{artist.voice.epigraph}”
-        </blockquote>
-        <ol className="mt-10 grid gap-4 sm:grid-cols-3">
+      <div className="border border-[#aca899] bg-white p-4 font-mono text-[12px] leading-snug text-black">
+        <p className="text-[#666]">{`> ${artist.displayName.toLowerCase()}.txt`}</p>
+        <p className="mt-2">{artist.voice.epigraph}</p>
+        <p className="mt-3 text-[#666]">{`> processo:`}</p>
+        <ol className="mt-1 list-decimal list-inside space-y-0.5">
           {artist.voice.process.map((step, i) => (
-            <li
-              key={i}
-              className="p-4"
-              style={{
-                border: "1px solid var(--border)",
-                background: "color-mix(in srgb, var(--fg) 3%, transparent)",
-              }}
-            >
-              <span
-                className="text-[10px] uppercase tracking-[0.3em]"
-                style={{ color: "var(--accent)" }}
-              >
-                {String(i + 1).padStart(2, "0")} · etapa
-              </span>
-              <p className="mt-2 text-sm leading-snug">{step}</p>
-            </li>
+            <li key={i}>{step}</li>
           ))}
         </ol>
       </div>

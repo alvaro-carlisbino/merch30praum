@@ -1,5 +1,4 @@
-import { BrandHeader } from "@/components/shell/BrandHeader";
-import { BrandFooter } from "@/components/shell/BrandFooter";
+import { Taskbar } from "@/components/lanhouse/Taskbar";
 import { CartDrawer } from "@/components/shell/CartDrawer";
 import { getCart } from "@/lib/cart/actions";
 
@@ -13,9 +12,9 @@ export default async function ShellLayout({
 
   return (
     <>
-      <BrandHeader cartCount={cartCount} />
-      <main className="flex-1">{children}</main>
-      <BrandFooter />
+      <div className="wallpaper" aria-hidden />
+      <main className="relative z-[1] flex-1 pb-12">{children}</main>
+      <Taskbar cartCount={cartCount} />
       <CartDrawer />
     </>
   );

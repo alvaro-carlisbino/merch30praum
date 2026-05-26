@@ -11,6 +11,9 @@ interface AddToCartButtonProps {
   className?: string;
 }
 
+/**
+ * Botão clássico de Windows. Sem rotate, sem accent, sem motion.
+ */
 export function AddToCartButton({ variantId, available, className }: AddToCartButtonProps) {
   const [pending, startTransition] = useTransition();
   const [feedback, setFeedback] = useState<"idle" | "added">("idle");
@@ -40,20 +43,15 @@ export function AddToCartButton({ variantId, available, className }: AddToCartBu
       type="button"
       onClick={handleClick}
       disabled={disabled}
-      className={cn(
-        "w-full py-4 text-xs uppercase tracking-[0.3em] font-medium transition-opacity",
-        disabled ? "opacity-50 cursor-not-allowed" : "hover:opacity-90",
-        className,
-      )}
-      style={{ background: "var(--accent)", color: "var(--bg)" }}
+      className={cn("win-btn win-btn-primary w-full h-[28px]", className)}
     >
       {!available
-        ? "Esgotado"
+        ? "esgotado"
         : pending
-          ? "Adicionando..."
+          ? "adicionando..."
           : feedback === "added"
-            ? "Adicionado ✓"
-            : "Adicionar ao carrinho"}
+            ? "adicionado"
+            : "&Adicionar à sacola"}
     </button>
   );
 }

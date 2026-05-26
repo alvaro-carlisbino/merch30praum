@@ -9,7 +9,8 @@ import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductPurchasePanel } from "@/components/product/ProductPurchasePanel";
 import { ProductCardBase } from "@/components/product/ProductCardBase";
 import { ArtistVoice } from "@/components/product/ArtistVoice";
-import { CrossUniverses } from "@/components/product/CrossUniverses";
+import { Window } from "@/components/lanhouse/Window";
+import { ImageIcon, FolderOpenIcon } from "@/components/lanhouse/PixelIcons";
 
 interface Params {
   artist: string;
@@ -56,53 +57,53 @@ export default async function ProductPage({
     .slice(0, 4);
 
   return (
-    <article>
-      <nav
-        aria-label="Caminho"
-        className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-4 text-[10px] uppercase tracking-[0.25em] text-muted"
+    <article className="mx-auto max-w-[1100px] px-3 py-6 sm:px-6 sm:py-10">
+      <Window
+        title={`${product.handle}.jpg — Visualizador de Imagem`}
+        icon={<ImageIcon size={14} />}
+        menubar={["Arquivo", "Editar", "Exibir", "Ferramentas", "Ajuda"]}
+        bodyClassName="p-0"
+        statusBar={
+          <>
+            <span>
+              C:\30praum\loja\{cfg.slug}\{product.handle}.jpg
+            </span>
+            <span>{(product.images?.length ?? 1)} imagens</span>
+          </>
+        }
       >
-        <Link href="/" className="hover:text-accent">30praum</Link>
-        <span className="mx-2">/</span>
-        <Link href={`/${cfg.slug}`} className="hover:text-accent">
-          {cfg.universeName}
-        </Link>
-        <span className="mx-2">/</span>
-        <span className="text-fg">{product.title}</span>
-      </nav>
+        {/* address bar */}
+        <div className="flex items-center gap-2 border-b border-[#aca899] bg-[#ece9d8] px-2 py-1">
+          <span className="font-mono text-[11px] text-black">Endereço:</span>
+          <div className="flex h-[20px] flex-1 items-center gap-1 border border-[#7f7f7f] bg-white px-2 font-mono text-[11px] text-black">
+            <FolderOpenIcon size={14} />
+            <Link href="/loja" className="text-[#0a246a] underline">C:\30praum\loja\</Link>
+            <Link href={`/${cfg.slug}`} className="text-[#0a246a] underline">{cfg.slug}\</Link>
+            <span>{product.handle}.jpg</span>
+          </div>
+        </div>
 
-      <section className="mx-auto max-w-screen-2xl px-4 sm:px-8 grid gap-10 lg:grid-cols-2 lg:gap-16 pb-16">
-        <ProductGallery images={product.images} productHandle={product.handle} />
-        <ProductPurchasePanel product={product} />
-      </section>
+        <div className="grid grid-cols-1 gap-0 lg:grid-cols-[1.4fr_0.9fr]">
+          <div className="border-r border-[#aca899] bg-[#0a0a0a] p-4">
+            <ProductGallery images={product.images} productHandle={product.handle} />
+          </div>
+          <div className="bg-[#ece9d8] p-4">
+            <ProductPurchasePanel product={product} />
+          </div>
+        </div>
+      </Window>
 
       <ArtistVoice artist={cfg} />
 
-      {related.length > 0 && (
-        <section
-          className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-16"
-          style={{ borderTop: "1px solid var(--border)" }}
-        >
-          <header className="mb-8 flex items-end justify-between gap-4">
-            <h2
-              className="font-display leading-[0.95]"
-              style={{
-                fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              Mais do universo {cfg.displayName}
-            </h2>
-            <Link
-              href={`/${cfg.slug}`}
-              className="text-[10px] uppercase tracking-[0.3em] hover:text-accent"
-            >
-              Ver tudo →
+      {related.length > 0 ? (
+        <section className="mt-6 border border-[#aca899] bg-white p-4">
+          <header className="mb-3 flex items-center justify-between gap-2 border-b border-[#aca899] pb-2 font-mono text-[11px] uppercase text-black">
+            <span>mais arquivos em {cfg.slug}\</span>
+            <Link href={`/${cfg.slug}`} className="text-[#0a246a] underline normal-case">
+              abrir pasta →
             </Link>
           </header>
-          <ul
-            className="grid grid-cols-2 lg:grid-cols-4"
-            style={{ gap: "var(--grid-gap)" }}
-          >
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {related.map((p) => (
               <li key={p.id}>
                 <ProductCardBase product={p} artistSlug={cfg.slug} />
@@ -110,9 +111,7 @@ export default async function ProductPage({
             ))}
           </ul>
         </section>
-      )}
-
-      <CrossUniverses current={cfg.slug} />
+      ) : null}
     </article>
   );
 }
