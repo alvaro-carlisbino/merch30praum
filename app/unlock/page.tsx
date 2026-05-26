@@ -2,8 +2,15 @@ import type { Metadata } from "next";
 import { UnlockForm } from "./UnlockForm";
 
 export const metadata: Metadata = {
-  title: "Acesso restrito",
-  robots: { index: false, follow: false },
+  title: { absolute: "Acesso restrito" },
+  description: "Acesso restrito.",
+  robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
+  openGraph: { title: "Acesso restrito", description: "Acesso restrito.", siteName: "", url: undefined, images: [] },
+  twitter: { card: "summary", title: "Acesso restrito", description: "Acesso restrito.", creator: undefined },
+  authors: [],
+  keywords: [],
+  alternates: { canonical: undefined },
+  category: undefined,
 };
 
 export default async function UnlockPage({
@@ -18,20 +25,21 @@ export default async function UnlockPage({
     <div className="min-h-dvh flex flex-col items-center justify-center px-6 py-16 bg-black text-white">
       <div className="w-full max-w-xl flex flex-col gap-10">
         <header className="flex flex-col gap-4 text-center">
-          <p className="text-[11px] tracking-[0.4em] uppercase text-white/40">30praum · acesso</p>
+          <p className="text-[11px] tracking-[0.4em] uppercase text-white/40">
+            um hub de uma gravadora ai
+          </p>
           <h1
             className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-[1.05]"
             style={{ fontFamily: "var(--font-display, serif)" }}
           >
-            Nenhuma I.A. foi utilizada
+            Nenhuma I.A. foi ferida
             <br />
-            no design deste site.
+            no desenvolvimento
+            <br />
+            desta plataforma.
           </h1>
           <p className="text-white/60 text-sm sm:text-base">
-            É que <span className="italic">somos os melhores</span>.
-            <span className="block mt-1 text-white/35 text-xs sm:text-sm">
-              (com licença, Matuê.)
-            </span>
+            Até porque <span className="italic">somos os melhores</span>.
           </p>
         </header>
 
