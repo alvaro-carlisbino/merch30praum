@@ -8,9 +8,8 @@ import {
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductPurchasePanel } from "@/components/product/ProductPurchasePanel";
 import { ProductCardBase } from "@/components/product/ProductCardBase";
-import { ArtistVoice } from "@/components/product/ArtistVoice";
 import { Window } from "@/components/lanhouse/Window";
-import { ImageIcon, FolderOpenIcon } from "@/components/lanhouse/PixelIcons";
+import { FolderOpenIcon } from "@/components/lanhouse/PixelIcons";
 
 interface Params {
   artist: string;
@@ -57,10 +56,16 @@ export default async function ProductPage({
     .slice(0, 4);
 
   return (
-    <article className="mx-auto max-w-[1100px] px-3 py-6 sm:px-6 sm:py-10">
+    <article>
       <Window
+        id={`product-${cfg.slug}-${product.handle}`}
         title={`${product.handle}.jpg — Visualizador de Imagem`}
-        icon={<ImageIcon size={14} />}
+        iconKey="image"
+        x={140}
+        y={28}
+        width={1080}
+        rootOfRoute
+        closeHref="/loja"
         menubar={["Arquivo", "Editar", "Exibir", "Ferramentas", "Ajuda"]}
         bodyClassName="p-0"
         statusBar={
@@ -93,10 +98,15 @@ export default async function ProductPage({
         </div>
       </Window>
 
-      <ArtistVoice artist={cfg} />
-
       {related.length > 0 ? (
-        <section className="mt-6 border border-[#aca899] bg-white p-4">
+        <Window
+          id={`product-${cfg.slug}-${product.handle}-related`}
+          title={`mais em ${cfg.slug}\\ — Meu Computador`}
+          iconKey="folderOpen"
+          x={220}
+          y={680}
+          width={680}
+        >
           <header className="mb-3 flex items-center justify-between gap-2 border-b border-[#aca899] pb-2 font-mono text-[11px] uppercase text-black">
             <span>mais arquivos em {cfg.slug}\</span>
             <Link href={`/${cfg.slug}`} className="text-[#0a246a] underline normal-case">
@@ -110,7 +120,7 @@ export default async function ProductPage({
               </li>
             ))}
           </ul>
-        </section>
+        </Window>
       ) : null}
     </article>
   );

@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useWindowStore } from "@/lib/lanhouse/window-store";
+import { renderIcon } from "./iconRegistry";
 import {
   StartFlagIcon,
-  MyComputerIcon,
   FolderIcon,
   CalendarIcon,
   CartIcon,
+  MyComputerIcon,
 } from "./PixelIcons";
 
 interface TaskbarProps {
@@ -15,13 +17,17 @@ interface TaskbarProps {
 }
 
 /**
- * Barra inferior fixa estilo Windows. Botão "Iniciar" abre/fecha menu
- * com links pras outras seções. Relógio à direita. Botões abertos no meio.
- * Sem emoji — ícones em pixel art SVG.
+ * Barra inferior fixa. Botão Iniciar abre menu. Lista de tasks
+ * abertas reflete o WindowStore — clica restaura/foca, segundo
+ * click minimiza (igual Win XP).
  */
 export function Taskbar({ cartCount = 0 }: TaskbarProps) {
   const [open, setOpen] = useState(false);
   const [clock, setClock] = useState("");
+  const windows = useWindowStore((s) => s.windows);
+  const focused = useWindowStore((s) => s.focusedId);
+  const focus = useWindowStore((s) => s.focus);
+  const toggleMin = useWindowStore((s) => s.toggleMinimize);
 
   useEffect(() => {
     const tick = () => {
@@ -32,6 +38,20 @@ export function Taskbar({ cartCount = 0 }: TaskbarProps) {
     const id = setInterval(tick, 30000);
     return () => clearInterval(id);
   }, []);
+
+  const openWindows = Object.values(windows).filter((w) => !w.closed);
+
+  function handleTaskClick(id: string) {
+    const w = windows[id];
+    if (!w) return;
+    if (w.minimized) {
+      focus(id);
+    } else if (focused === id) {
+      toggleMin(id);
+    } else {
+      focus(id);
+    }
+  }
 
   return (
     <>
@@ -89,10 +109,29 @@ export function Taskbar({ cartCount = 0 }: TaskbarProps) {
 
         <div className="taskbar-divider" />
 
-        <Link href="/" className="taskbar-task taskbar-task-active">
-          <MyComputerIcon size={14} />
-          <span className="truncate">30praum</span>
-        </Link>
+        {openWindows.length === 0 ? (
+          <span className="taskbar-task taskbar-task-active">
+            <MyComputerIcon size={14} />
+            <span className="truncate">área de trabalho</span>
+          </span>
+        ) : (
+          openWindows.map((w) => {
+            const isActive = focused === w.id && !w.minimized;
+            return (
+              <button
+                key={w.id}
+                type="button"
+                onClick={() => handleTaskClick(w.id)}
+                className={
+                  isActive ? "taskbar-task taskbar-task-active" : "taskbar-task"
+                }
+              >
+                {renderIcon(w.iconKey, 14)}
+                <span className="truncate">{w.title}</span>
+              </button>
+            );
+          })
+        )}
 
         <div className="ml-auto flex items-stretch gap-1 px-2">
           {cartCount > 0 ? (

@@ -6,11 +6,7 @@ import type { ArtistSlug } from "@/lib/artists/types";
 import { Window } from "@/components/lanhouse/Window";
 import { WindowsButton } from "@/components/lanhouse/WindowsButton";
 import { VHSPlayer } from "@/components/lanhouse/VHSPlayer";
-import {
-  MediaIcon,
-  FolderOpenIcon,
-  CassetteIcon,
-} from "@/components/lanhouse/PixelIcons";
+import { FolderOpenIcon, CassetteIcon } from "@/components/lanhouse/PixelIcons";
 
 interface Params {
   artist: string;
@@ -99,11 +95,17 @@ export default async function ArtistLanding({ params }: { params: Promise<Params
   const tracks = cfg.album.highlightedTracks.slice(0, 8);
 
   return (
-    <article className="mx-auto max-w-[1100px] px-3 py-6 sm:px-6 sm:py-10">
+    <article>
       <Window
+        id={`artist-${cfg.slug}-wmp`}
         title={`${cfg.slug}.mp4 — Windows Media Player`}
-        icon={<MediaIcon size={14} />}
-        className="win-wmp"
+        iconKey="media"
+        variant="wmp"
+        x={140}
+        y={28}
+        width={1080}
+        rootOfRoute
+        closeHref="/"
         menubar={["Arquivo", "Exibir", "Reproduzir", "Ferramentas", "Ajuda"]}
         bodyClassName="p-0"
         statusBar={
@@ -204,31 +206,30 @@ export default async function ArtistLanding({ params }: { params: Promise<Params
         </div>
       </Window>
 
-      {/* Bio em janelinha properties.txt */}
-      <div className="mt-6">
-        <Window
-          title={`${cfg.slug}_bio.txt — Bloco de Notas`}
-          icon={<MediaIcon size={14} />}
-          className="max-w-[760px]"
-        >
-          <div className="font-mono text-[12px] leading-snug text-black">
-            <p style={{ color: "#666" }}>{`> ${cfg.slug}_bio.txt`}</p>
-            <p className="mt-2"><strong>nome:</strong> {cfg.realName}</p>
-            <p><strong>origem:</strong> {cfg.origin}</p>
-            <p><strong>estreia 30praum:</strong> {a.estreia}</p>
-            <p><strong>marcos:</strong> {a.marcos}</p>
-            <p className="mt-3">{a.description}</p>
-            <p className="mt-3" style={{ color: "#666" }}>{`— ${a.quote.text}`}</p>
-            <p style={{ color: "#888" }}>{`  ${a.quote.attribution}`}</p>
-          </div>
-        </Window>
-      </div>
-
-      <div className="mt-6 flex justify-center">
-        <WindowsButton href="/loja" className="min-w-[160px]">
-          ver merch de {cfg.slug}\
-        </WindowsButton>
-      </div>
+      <Window
+        id={`artist-${cfg.slug}-bio`}
+        title={`${cfg.slug}_bio.txt — Bloco de Notas`}
+        iconKey="exe"
+        x={220}
+        y={680}
+        width={640}
+      >
+        <div className="font-mono text-[12px] leading-snug text-black">
+          <p style={{ color: "#666" }}>{`> ${cfg.slug}_bio.txt`}</p>
+          <p className="mt-2"><strong>nome:</strong> {cfg.realName}</p>
+          <p><strong>origem:</strong> {cfg.origin}</p>
+          <p><strong>estreia 30praum:</strong> {a.estreia}</p>
+          <p><strong>marcos:</strong> {a.marcos}</p>
+          <p className="mt-3">{a.description}</p>
+          <p className="mt-3" style={{ color: "#666" }}>{`— ${a.quote.text}`}</p>
+          <p style={{ color: "#888" }}>{`  ${a.quote.attribution}`}</p>
+          <p className="mt-4">
+            <WindowsButton href="/loja" className="min-w-[160px]">
+              ver merch de {cfg.slug}\
+            </WindowsButton>
+          </p>
+        </div>
+      </Window>
     </article>
   );
 }

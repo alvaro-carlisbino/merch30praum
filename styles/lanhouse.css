@@ -43,6 +43,34 @@
   font-weight: bold;
   letter-spacing: 0.02em;
   border-bottom: 1px solid var(--win-shadow);
+  cursor: default;
+  user-select: none;
+}
+
+.win-titlebar-blur {
+  background: linear-gradient(to bottom, #7d8db7 0%, #95a4c8 50%, #b6c1da 100%);
+  color: #d8dceb;
+}
+
+.win-titlebar-blur .win-title {
+  text-shadow: none;
+}
+
+.win-root {
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.25));
+}
+
+.win-root .win-shell {
+  box-shadow: none;
+}
+
+@media (max-width: 720px) {
+  .win-root {
+    left: 4px !important;
+    top: 4px !important;
+    width: calc(100vw - 8px) !important;
+    height: auto !important;
+  }
 }
 
 .win-title {

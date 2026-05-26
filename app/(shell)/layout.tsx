@@ -13,7 +13,7 @@ export default async function ShellLayout({
   return (
     <>
       <div className="wallpaper" aria-hidden />
-      <main className="relative z-[1] flex-1 pb-12">{children}</main>
+      <main className="relative z-[1] min-h-[calc(100svh-34px)]">{children}</main>
       <Taskbar cartCount={cartCount} />
       <CartDrawer />
     </>
