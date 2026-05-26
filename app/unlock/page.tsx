@@ -31,9 +31,6 @@ export default async function UnlockPage({
           </h1>
           <p className="text-white/60 text-sm sm:text-base">
             Até porque <span className="italic">somos os melhores</span>.
-            <span className="block mt-1 text-white/35 text-xs sm:text-sm">
-              (com licença, Matuê.)
-            </span>
           </p>
         </header>
 
