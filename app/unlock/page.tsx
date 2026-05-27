@@ -54,6 +54,18 @@ export default async function UnlockPage({
         </header>
 
         <UnlockForm from={safeFrom} />
+
+        <footer className="flex flex-col items-center gap-3 text-center">
+          <a
+            href="https://limitless.app.br"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-full border border-white/20 px-5 py-2.5 text-xs tracking-[0.2em] uppercase text-white/80 transition hover:border-white hover:text-white"
+          >
+            limitless.app.br ↗
+          </a>
+          <p className="text-[10px] tracking-[0.3em] uppercase text-white/25">feito com carinho por humanos</p>
+        </footer>
       </div>
     </div>
   );
