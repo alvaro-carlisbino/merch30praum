@@ -1,0 +1,13 @@
+[data-theme="brandao"] {
+  --bg: #0c0c0c;
+  --fg: #ededed;
+  --muted: #6a6a6a;
+  --accent: #ff3b1f;
+  --accent-2: #2a2a2a;
+  --border: rgba(237, 237, 237, 0.18);
+  --overlay: rgba(12, 12, 12, 0.88);
+  --noise-opacity: 0.22;
+  --grid-gap: 0.25rem;
+  --motion-duration: 200ms;
+  --motion-easing: steps(4, end);
+}

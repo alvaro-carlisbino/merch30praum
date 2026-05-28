@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="bp-xerox">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="3"/>
+      <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.3 0"/>
+    </filter>
+    <pattern id="bp-scan" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse">
+      <rect width="5" height="2.5" fill="rgba(0,0,0,0.4)"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="1000" fill="#0c0c0c"/>
+
+  <!-- silhouette with cap and chain -->
+  <g transform="translate(400 540)" fill="#1a1a1a" stroke="#ff3b1f" stroke-width="1.4" opacity="0.95">
+    <path d="M -260 380 Q -200 220 -100 180 L 100 180 Q 200 220 260 380 Z"/>
+    <rect x="-50" y="100" width="100" height="100" rx="14"/>
+    <!-- chain -->
+    <g stroke="#ededed" stroke-width="1.2" fill="none" opacity="0.8">
+      <ellipse cx="-30" cy="180" rx="6" ry="3"/>
+      <ellipse cx="-15" cy="195" rx="6" ry="3"/>
+      <ellipse cx="0" cy="208" rx="6" ry="3"/>
+      <ellipse cx="15" cy="195" rx="6" ry="3"/>
+      <ellipse cx="30" cy="180" rx="6" ry="3"/>
+    </g>
+    <!-- head + cap -->
+    <path d="M -150 110 Q -180 -20 -110 -150 Q -50 -230 0 -240 Q 50 -230 110 -150 Q 180 -20 150 110 Q 120 140 80 125 L -80 125 Q -120 140 -150 110 Z" fill="#0c0c0c"/>
+    <!-- snapback flat brim -->
+    <path d="M -220 -130 Q -120 -160 0 -160 Q 120 -160 220 -130 L 220 -100 L -220 -100 Z" fill="#0c0c0c"/>
+    <path d="M -130 -130 L -130 -230 L 130 -230 L 130 -130 Z" fill="#0c0c0c"/>
+    <!-- 85 patch -->
+    <rect x="-30" y="-210" width="60" height="42" fill="#ff3b1f"/>
+    <text x="0" y="-180" text-anchor="middle" font-family="Anton, Impact" font-size="32" fill="#0c0c0c">85</text>
+  </g>
+
+  <!-- xerox grain -->
+  <rect width="800" height="1000" filter="url(#bp-xerox)" opacity="0.7" style="mix-blend-mode:screen"/>
+
+  <!-- scanlines -->
+  <rect width="800" height="1000" fill="url(#bp-scan)" opacity="0.45"/>
+
+  <!-- text -->
+  <g font-family="Anton, Impact, system-ui" fill="#ededed">
+    <text x="40" y="975" font-size="78" letter-spacing="-1">BRANDÃO</text>
+  </g>
+  <g font-family="ui-monospace, Menlo, monospace" fill="#ededed">
+    <text x="40" y="60" font-size="14" letter-spacing="5">CE · FORTALEZA</text>
+    <text x="760" y="60" text-anchor="end" font-size="14" letter-spacing="5" fill="#ff3b1f">85 · TRAP PURO</text>
+    <text x="40" y="1010" font-size="11" letter-spacing="4" opacity="0.7">VOL. 02 · ESTREIA NO MERCH</text>
+  </g>
+</svg>

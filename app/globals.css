@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@import "../styles/themes/house.css";
+@import "../styles/themes/matue.css";
+@import "../styles/themes/wiu.css";
+@import "../styles/themes/teto.css";
+@import "../styles/themes/brandao.css";
+@import "../styles/themes/plantao.css";
+@import "../styles/themes/incubadora.css";
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-border: var(--border);
+  --color-overlay: var(--overlay);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-tag-matue: var(--font-tag-matue);
+  --font-tag-teto: var(--font-tag-teto);
+  --font-tag-wiu: var(--font-tag-wiu);
+  --font-tag-brandao: var(--font-tag-brandao);
+
+  --ease-universe: cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body, system-ui, sans-serif);
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
