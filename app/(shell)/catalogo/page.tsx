@@ -4,7 +4,7 @@ import { CatalogGrid, type CatalogItem } from "@/components/loja/CatalogGrid";
 import { getAllProducts } from "@/lib/cms/products";
 import { formatBRL } from "@/lib/shop/static-products";
 export const metadata = {
-  title: "Catálogo · Loja 30praum",
+  title: "Catálogo",
   description: "Catálogo completo da loja 30praum: filtra por categoria, tamanho, cor e artista.",
 };
 export default async function CatalogoPage() {

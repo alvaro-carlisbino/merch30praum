@@ -11,6 +11,8 @@ streaming (Spotify, Apple Music). Uso editorial pra referenciar os álbuns.
 - **xtranho.jpg** (640×640) — XTRANHO · Matuê · 2025 · Spotify CDN
 - **colapso_global.jpg** (640×640) — Colapso Global · Wiu × Teto · 2026 · Spotify CDN
 - **japones_warzone.jpg** (1500×1500) — JAPONÊS / WARZONE single · Brandão85 · era Vol.02 · Apple Music
+- **333.jpg** (1000×1000) — 333 · Matuê · 2024 · Apple Music/iTunes
+- **maquina_do_tempo.jpg** (1000×1000) — Máquina do Tempo · Matuê · 2020 · Apple Music/iTunes
 
 ## /logos/ — Logotipos parceiros (Wikimedia Commons, CC)
 - **sony.svg** — Sony Music Entertainment Logo 2023
