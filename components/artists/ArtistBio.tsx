@@ -5,7 +5,7 @@ interface ArtistBioProps {
 export function ArtistBio({ artist }: ArtistBioProps) {
   return (
     <section
-      aria-label={`Bio — ${artist.displayName}`}
+      aria-label={`Bio · ${artist.displayName}`}
       className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-20 grid gap-12 lg:grid-cols-[1fr_1.6fr]"
       style={{ borderTop: "1px solid var(--border)" }}
     >

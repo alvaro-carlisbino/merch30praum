@@ -108,7 +108,7 @@ export function MatueHero({ artist }: { artist: ArtistConfig }) {
           >
             “{artist.signatureLyric}”
             <cite className="block mt-2 not-italic text-[10px] uppercase tracking-[0.3em] text-muted">
-              — {artist.album.title}, {artist.album.year}
+              · {artist.album.title}, {artist.album.year}
             </cite>
           </motion.blockquote>
           <dl className="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 max-w-2xl text-[10px] uppercase tracking-[0.3em]">

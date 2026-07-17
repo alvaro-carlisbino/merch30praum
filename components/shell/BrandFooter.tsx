@@ -8,7 +8,7 @@ export function BrandFooter() {
         <div>
           <BrandLogo className="text-2xl" />
           <p className="mt-5 max-w-sm text-xs leading-relaxed text-muted">
-            Site oficial da holding 30praum — gravadora · festival · incubadora.
+            Site oficial da holding 30praum: gravadora · festival · incubadora.
             Sede em Fortaleza desde 2016.
           </p>
         </div>
@@ -23,7 +23,7 @@ export function BrandFooter() {
               className="block transition-colors hover:text-accent"
             >
               {a.displayName}{" "}
-              <span className="text-muted">— {a.universeName}</span>
+              <span className="text-muted">· {a.universeName}</span>
             </Link>
           ))}
         </nav>

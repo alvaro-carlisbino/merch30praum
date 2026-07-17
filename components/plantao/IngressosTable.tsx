@@ -6,7 +6,7 @@ const STATUS_LABEL: Record<PlantaoSector["status"], string> = {
 };
 function formatPrice(s: PlantaoSector) {
   if (s.priceFrom && s.priceTo && s.priceFrom !== s.priceTo) {
-    return `R$ ${s.priceFrom} — R$ ${s.priceTo}`;
+    return `R$ ${s.priceFrom} a R$ ${s.priceTo}`;
   }
   if (s.priceFrom) return `R$ ${s.priceFrom}`;
   return "a confirmar";

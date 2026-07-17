@@ -14,7 +14,7 @@ export function AlbumShowcase({ artist }: { artist: ArtistConfig }) {
         <div className="relative aspect-square w-full max-w-[640px] mx-auto">
           <PhysicalMedia
             src={album.coverImage}
-            alt={`Capa ${album.title} — ${artist.displayName}`}
+            alt={`Capa ${album.title} · ${artist.displayName}`}
           />
         </div>
         <div>

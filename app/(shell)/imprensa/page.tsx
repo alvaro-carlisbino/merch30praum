@@ -3,9 +3,9 @@ import { Download } from "lucide-react";
 import { getPressKit } from "@/lib/cms/press";
 import { type PressAssetType } from "@/lib/press/registry";
 export const metadata = {
-  title: "Imprensa · 30praum",
+  title: "Imprensa",
   description:
-    "Kit de imprensa oficial da 30praum — logos, fotos, bios e dados. Contatos diretos para A&R, booking, parcerias.",
+    "Kit de imprensa oficial da 30praum: logos, fotos, bios e dados. Contatos diretos para A&R, booking, parcerias.",
 };
 const TYPE_LABEL: Record<PressAssetType, string> = {
   logo: "Logos",
@@ -127,7 +127,7 @@ export default async function ImprensaPage() {
       <section className="border-t" style={{ borderColor: "var(--border)" }}>
         <div className="mx-auto max-w-3xl px-4 sm:px-8 py-16 text-sm text-fg/65 leading-relaxed">
           <p>
-            <span className="font-medium text-fg/85">Termos de uso —</span> os materiais deste
+            <span className="font-medium text-fg/85">Termos de uso:</span> os materiais deste
             kit podem ser usados livremente em matérias editoriais, reportagens e divulgações de
             imprensa, desde que com crédito à 30praum. Não é permitido alterar logos, recortes
             ou aplicar filtros que descaracterizem a identidade. Para uso comercial ou parceria,

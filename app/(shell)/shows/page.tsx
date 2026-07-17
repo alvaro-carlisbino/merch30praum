@@ -5,9 +5,9 @@ import { getAllArtists } from "@/lib/cms/artists";
 import type { Show } from "@/lib/shows/registry";
 import type { ArtistConfig } from "@/lib/artists/types";
 export const metadata = {
-  title: "Shows · 30praum",
+  title: "Shows",
   description:
-    "Agenda oficial dos shows do roster — Matuê, Teto, Wiu, Brandão85. Plantão Festival e tour pelo Brasil.",
+    "Agenda oficial dos shows do roster: Matuê, Teto, Wiu, Brandão85. Plantão Festival e tour pelo Brasil.",
 };
 function formatDate(iso: string) {
   const d = new Date(iso);
@@ -152,7 +152,7 @@ export default async function ShowsPage() {
           Shows
         </h1>
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/80 sm:text-base">
-          Agenda oficial do roster — Plantão Festival, tours por capital,
+          Agenda oficial do roster: Plantão Festival, tours por capital,
           festivais convidados. {upcoming.length} datas confirmadas.
         </p>
       </section>
@@ -227,7 +227,7 @@ export default async function ShowsPage() {
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-fg/80 sm:text-base">
               O festival próprio da 30praum acontece em Fortaleza. Em 2026 marca
-              os 10 anos da gravadora — line-up, ingressos, edições anteriores e
+              os 10 anos da gravadora: line-up, ingressos, edições anteriores e
               tudo o que precisa saber.
             </p>
           </div>

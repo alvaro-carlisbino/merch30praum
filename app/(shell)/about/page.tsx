@@ -269,7 +269,7 @@ export default function AboutPage() {
               Quer falar com a casa?
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-fg/80 sm:text-base">
-              Press kit, parcerias, candidatura artística — cada porta tem
+              Press kit, parcerias, candidatura artística: cada porta tem
               endereço próprio.
             </p>
           </div>

@@ -5,12 +5,12 @@ import { BrandFooter } from "@/components/shell/BrandFooter";
 import { CartDrawer } from "@/components/shell/CartDrawer";
 import { getCart } from "@/lib/cart/actions";
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://ohubdeumagravadoraai.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://30praum.vercel.app";
 const SITE_DESCRIPTION =
-  "Site oficial da holding 30praum — gravadora, Plantão Festival, parcerias e incubadora. Casa de Matuê, Wiu, Teto e Brandão85.";
+  "Site oficial da holding 30praum: gravadora, Plantão Festival, parcerias e incubadora. Casa de Matuê, Wiu, Teto e Brandão85.";
 export const metadata: Metadata = {
   title: {
-    default: "30praum — Site oficial",
+    default: "30praum · Site oficial",
     template: "%s · 30praum",
   },
   description: SITE_DESCRIPTION,
@@ -31,13 +31,13 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "30praum",
     locale: "pt_BR",
-    title: "30praum — Site oficial",
+    title: "30praum · Site oficial",
     description: SITE_DESCRIPTION,
     url: SITE_URL,
   },
   twitter: {
     card: "summary_large_image",
-    title: "30praum — Site oficial",
+    title: "30praum · Site oficial",
     description: SITE_DESCRIPTION,
     creator: "@30praum",
   },

@@ -15,11 +15,11 @@ const PRODUCTS: VistaProduct[] = [
     price: "R$ 189,00",
   },
   {
-    id: "azul-eletrico",
+    id: "green-puffer",
     href: "/loja",
     image: "/figma-home/produto-green-puffer.png",
-    title: "Camiseta 333 Azul Elétrico",
-    price: "R$ 189,00",
+    title: "Puffer Verde Musgo",
+    price: "R$ 489,00",
   },
   {
     id: "black-puffer",

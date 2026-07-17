@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Line-up · Plantão 2026",
   description:
-    "Todos os artistas confirmados — apresentação cinematográfica do line-up do Plantão Festival 2026.",
+    "Todos os artistas confirmados: apresentação cinematográfica do line-up do Plantão Festival 2026.",
 };
 export default async function PlantaoLineupPage() {
   const current = await getCurrentPlantao();
@@ -31,7 +31,7 @@ export default async function PlantaoLineupPage() {
             Uma noite só.
           </h1>
           <p className="mt-10 max-w-2xl text-base sm:text-xl text-fg/85 leading-relaxed">
-            A ordem aqui é editorial, não alfabética — começa na abertura, termina no headliner.
+            A ordem aqui é editorial, não alfabética: começa na abertura, termina no headliner.
             Scroll pra baixo e percorre a noite.
           </p>
           <p className="mt-3 text-sm opacity-60">Plantão {current.year} · {current.venue}, {current.city}</p>

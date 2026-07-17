@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ARTISTS } from "@/lib/artists/registry";
 import { BrandLogo } from "@/components/shell/BrandLogo";
+import { Reveal } from "@/components/effects/Reveal";
+import { blurFor } from "@/lib/images/blur-data";
 import type { ArtistSlug } from "@/lib/artists/types";
 const ORDER: ArtistSlug[] = ["teto", "wiu", "matue", "brandao"];
 type CardConfig = {
@@ -47,12 +49,18 @@ export function ArtistsRow() {
       className="relative scroll-mt-20 px-4 py-12 sm:px-8 sm:py-16"
     >
       <div className="mx-auto grid max-w-screen-2xl grid-cols-2 items-end gap-3 sm:gap-4 sm:[grid-template-columns:1.18fr_0.9fr_1fr_0.9fr_1.18fr]">
-        {left.map((slug) => (
-          <ArtistCard key={slug} slug={slug} />
+        {left.map((slug, i) => (
+          <Reveal key={slug} delay={i * 70}>
+            <ArtistCard slug={slug} />
+          </Reveal>
         ))}
-        <CenterLogoCard />
-        {right.map((slug) => (
-          <ArtistCard key={slug} slug={slug} />
+        <Reveal delay={140} className="col-span-2 sm:col-span-1">
+          <CenterLogoCard />
+        </Reveal>
+        {right.map((slug, i) => (
+          <Reveal key={slug} delay={210 + i * 70}>
+            <ArtistCard slug={slug} />
+          </Reveal>
         ))}
       </div>
     </section>
@@ -76,6 +84,8 @@ function ArtistCard({ slug }: { slug: ArtistSlug }) {
         alt={artist.displayName}
         fill
         sizes="(min-width: 640px) 20vw, 50vw"
+        placeholder={blurFor(cfg.photo) ? "blur" : "empty"}
+        blurDataURL={blurFor(cfg.photo)}
         className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
       />
       <div
@@ -125,6 +135,8 @@ function CenterLogoCard() {
         aria-hidden
         fill
         sizes="(min-width: 640px) 20vw, 100vw"
+        placeholder="blur"
+        blurDataURL={blurFor("/figma-home/card-30praum.png")}
         className="object-cover opacity-55"
       />
       <div

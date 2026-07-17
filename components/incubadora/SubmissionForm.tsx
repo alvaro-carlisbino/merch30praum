@@ -47,7 +47,7 @@ export function SubmissionForm() {
           Recebemos. <br /> A gente escuta.
         </h2>
         <p className="mt-6 max-w-xl text-fg/80 leading-relaxed">
-          Recebemos teu material. O A&R da casa lê tudo — não vai chegar mensagem automática.
+          Recebemos teu material. O A&R da casa lê tudo. Não vai chegar mensagem automática.
           Se fizer sentido, te procuramos pelo email ou Instagram que você deixou. Sem prazo,
           sem fila por ordem de chegada.
         </p>
@@ -194,7 +194,7 @@ export function SubmissionForm() {
       </div>
       <div className="grid gap-2">
         <label htmlFor="story" className={labelClass}>
-          História curta * (máx 500 caracteres — sem currículo, direto)
+          História curta * (máx 500 caracteres, sem currículo, direto)
         </label>
         <textarea
           id="story"

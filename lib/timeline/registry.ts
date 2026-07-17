@@ -16,7 +16,7 @@ export const TIMELINE: TimelineEntry[] = [
     year: "2019",
     headline: "Wiu chega ao selo",
     detail:
-      "Vinicius William Sales de Lima entra como artista e produtor — assinaria seis das sete faixas de Máquina do Tempo no ano seguinte.",
+      "Vinicius William Sales de Lima entra como artista e produtor. Assinaria seis das sete faixas de Máquina do Tempo no ano seguinte.",
     tag: "Roster",
   },
   {

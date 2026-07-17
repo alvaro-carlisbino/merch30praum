@@ -4,7 +4,7 @@ import { getAllPartners } from "@/lib/cms/partners";
 export const metadata = {
   title: "Parcerias",
   description:
-    "30praum × RAW · Renner · Kenner — colaborações oficiais que carimbaram a marca em três continentes da cultura.",
+    "30praum × RAW · Renner · Kenner. Colaborações oficiais que carimbaram a marca em três continentes da cultura.",
 };
 export default async function ParceriasPage() {
   const partners = await getAllPartners();
@@ -22,7 +22,7 @@ export default async function ParceriasPage() {
         </h1>
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/80 sm:text-base">
           A 30praum não fica em uma só vitrine. Da bandeja de RAW ao shopping da
-          Renner e à sandália Kenner — cada colab vira um capítulo, não um
+          Renner e à sandália Kenner: cada colab vira um capítulo, não um
           licenciamento.
         </p>
       </section>

@@ -44,9 +44,9 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     duration: "36 min",
     coverImage: IMG.coverXtranho,
     manifesto:
-      "XTRANHO é o terceiro capítulo do Matuê — depois de Máquina do Tempo (2020) e 333 (2024). Aqui o sinal não vem de fora: ele se estabiliza. Trap underground com sonoridade inédita no mainstream brasileiro, gravado entre Fortaleza, São Paulo e Los Angeles.",
+      "XTRANHO é o terceiro capítulo do Matuê, depois de Máquina do Tempo (2020) e 333 (2024). Aqui o sinal não vem de fora: ele se estabiliza. Trap underground com sonoridade inédita no mainstream brasileiro, gravado entre Fortaleza, São Paulo e Los Angeles.",
     tagline: "Sinal estável da terra de quem nunca foi daqui.",
-    editorialPitch: "Sinal alien em transmissão estável. Trap que veio de fora — e ficou.",
+    editorialPitch: "Sinal alien em transmissão estável. Trap que veio de fora e ficou.",
     status: "em-alta",
     accentHex: "#1f6bff",
     bgHex: "#03050a",
@@ -80,7 +80,7 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     duration: "33 min",
     coverImage: IMG.coverColapsoGlobal,
     manifesto:
-      "Wiu e Teto se encontram pra um disco a duas mãos que mistura house, jazz, bossa nova, funk carioca e trap no mesmo espaço. Manifesto sonoro de liberdade criativa — o trap saindo da caixinha sem perder o peso.",
+      "Wiu e Teto se encontram pra um disco a duas mãos que mistura house, jazz, bossa nova, funk carioca e trap no mesmo espaço. Manifesto sonoro de liberdade criativa: o trap saindo da caixinha sem perder o peso.",
     tagline: "Quando o mundo cai, ainda dá pra dançar uma última.",
     editorialPitch: "Duas vozes, um colapso. Trap se rendendo a tudo o que ele nunca foi.",
     status: "tour-ativa",

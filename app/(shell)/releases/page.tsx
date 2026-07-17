@@ -3,9 +3,9 @@ import Image from "next/image";
 import { getAllAlbums } from "@/lib/cms/albums";
 import { STATUS_LABEL } from "@/lib/albums/registry";
 export const metadata = {
-  title: "Lançamentos · 30praum",
+  title: "Lançamentos",
   description:
-    "Catálogo de releases da 30praum — XTRANHO, Colapso Global, Isso é Trap Vol.02 e mais.",
+    "Catálogo de releases da 30praum: XTRANHO, Colapso Global, Isso é Trap Vol.02 e mais.",
 };
 export default async function ReleasesPage() {
   const all = await getAllAlbums();

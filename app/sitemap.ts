@@ -4,7 +4,7 @@ import { getAllAlbums } from "@/lib/cms/albums";
 import { getAllNews } from "@/lib/cms/news";
 import { getAllPartners } from "@/lib/cms/partners";
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://ohubdeumagravadoraai.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://30praum.vercel.app";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const [artists, albums, news, partners] = await Promise.all([

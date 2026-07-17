@@ -27,7 +27,7 @@ export default function PlantaoIngressosPage() {
         </h1>
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/85 sm:text-base">
           Marina Park · Fortaleza/CE · portões abrem 16h. Venda oficial só pela
-          30praum — não compre em revendedor não autorizado.
+          30praum. Não compre em revendedor não autorizado.
         </p>
       </section>
       <section className="mx-auto max-w-screen-2xl px-4 pb-16 sm:px-8 sm:pb-20">

@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { getAllArtists } from "@/lib/cms/artists";
 export const metadata = {
-  title: "Artistas · 30praum",
+  title: "Artistas",
   description:
-    "Roster oficial da 30praum — Matuê, Wiu, Teto, Brandão85. Cada artista, um universo.",
+    "Roster oficial da 30praum: Matuê, Wiu, Teto, Brandão85. Cada artista, um universo.",
 };
 const CARDS: Record<string, { photo: string; aspect: string }> = {
   teto: { photo: "/figma-home/card-teto.png", aspect: "229 / 418" },

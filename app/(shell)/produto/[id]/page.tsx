@@ -16,9 +16,9 @@ type Product = {
   sizes: string[];
 };
 const PRODUCTS: Record<string, Product> = {
-  "camiseta-333-azul-eletrico": {
-    id: "camiseta-333-azul-eletrico",
-    title: "Camiseta 333 Azul Elétrico",
+  "camiseta-sabotage": {
+    id: "camiseta-sabotage",
+    title: "Camiseta Sabotage",
     price: "R$ 189,00",
     images: [
       "/figma-produto/main.png",
@@ -35,10 +35,10 @@ const PRODUCTS: Record<string, Product> = {
   },
 };
 const RELATED = [
-  { id: "rel-1", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-produto/rel-1.png", alt: "Camiseta Sabotage" },
-  { id: "rel-2", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-produto/rel-2.png", alt: "Camiseta 2PAC" },
-  { id: "rel-3", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-produto/rel-3.png", alt: "Camiseta TUPAC" },
-  { id: "rel-4", href: "/produto/camiseta-333-azul-eletrico", image: "/figma-produto/rel-4.png", alt: "Camiseta Snoop" },
+  { id: "rel-1", href: "/produto/camiseta-sabotage", image: "/figma-produto/rel-1.png", alt: "Camiseta Sabotage" },
+  { id: "rel-2", href: "/produto/camiseta-sabotage", image: "/figma-produto/rel-2.png", alt: "Camiseta 2PAC" },
+  { id: "rel-3", href: "/produto/camiseta-sabotage", image: "/figma-produto/rel-3.png", alt: "Camiseta TUPAC" },
+  { id: "rel-4", href: "/produto/camiseta-sabotage", image: "/figma-produto/rel-4.png", alt: "Camiseta Snoop" },
 ];
 export async function generateMetadata({
   params,
@@ -50,7 +50,7 @@ export async function generateMetadata({
   if (!product) return {};
   return {
     title: product.title,
-    description: `${product.title} — ${product.price} · Loja oficial 30praum.`,
+    description: `${product.title} · ${product.price} · Loja oficial 30praum.`,
   };
 }
 export default async function ProductPage({
@@ -59,7 +59,7 @@ export default async function ProductPage({
   params: Promise<Params>;
 }) {
   const { id } = await params;
-  const product = PRODUCTS[id] ?? PRODUCTS["camiseta-333-azul-eletrico"];
+  const product = PRODUCTS[id] ?? PRODUCTS["camiseta-sabotage"];
   return (
     <>
       <section className="mx-auto max-w-screen-2xl px-4 pb-10 pt-10 sm:px-8 sm:pt-14">

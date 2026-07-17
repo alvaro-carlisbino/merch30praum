@@ -352,7 +352,7 @@ export function IngressosCheckout() {
             <p className="mx-auto max-w-md text-sm text-fg/85 sm:text-base">
               Seu ingresso vai pro e-mail{" "}
               <span style={{ color: "var(--accent)" }}>{email || "seu e-mail"}</span>{" "}
-              em até 5 minutos. Confere o spam também — se não chegar, fala com a
+              em até 5 minutos. Confere o spam também. Se não chegar, fala com a
               gente no @plantaofestival.
             </p>
             <p className="mx-auto max-w-md text-[10px] uppercase tracking-[0.3em] text-muted">

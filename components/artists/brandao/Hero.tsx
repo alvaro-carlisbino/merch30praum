@@ -58,7 +58,7 @@ export function BrandaoHero({ artist }: { artist: ArtistConfig }) {
           >
             "{artist.signatureLyric}"
             <cite className="block mt-3 not-italic text-[10px] uppercase tracking-[0.3em] opacity-55">
-              — {artist.album.title} · {artist.album.year}
+              · {artist.album.title} · {artist.album.year}
             </cite>
           </blockquote>
         </div>

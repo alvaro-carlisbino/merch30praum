@@ -79,7 +79,7 @@ export function ShopGrid({ products }: ShopGridProps) {
               <option value="novidades">Novidades</option>
               <option value="preco-asc">Preço · menor</option>
               <option value="preco-desc">Preço · maior</option>
-              <option value="a-z">A — Z</option>
+              <option value="a-z">A a Z</option>
             </select>
             <span className="hidden sm:inline tabular-nums">
               {filtered.length} peças

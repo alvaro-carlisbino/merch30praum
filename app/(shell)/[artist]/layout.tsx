@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
   if (!isArtistSlug(artist)) return {};
   const cfg = ARTISTS[artist];
   return {
-    title: `${cfg.universeName} — ${cfg.displayName}`,
+    title: `${cfg.universeName} · ${cfg.displayName}`,
     description: cfg.tagline,
   };
 }

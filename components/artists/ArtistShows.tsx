@@ -56,7 +56,7 @@ export function ArtistShows({ artist }: { artist: ArtistConfig }) {
               </p>
               <p className="text-sm text-fg/70">
                 {show.city} · {show.state}
-                {show.event && <span className="opacity-65"> — {show.event}</span>}
+                {show.event && <span className="opacity-65"> · {show.event}</span>}
               </p>
               {show.note && (
                 <p className="mt-1 text-xs italic opacity-55">{show.note}</p>

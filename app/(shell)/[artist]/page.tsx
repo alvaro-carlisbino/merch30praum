@@ -90,7 +90,7 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
     },
     motto: "Somos os melhores",
     description:
-      "Cearense, contemporâneo de Matuê. Antes de ser artista da 30praum era beatmaker — produziu seis das sete faixas de Máquina do Tempo (2020) e ajudou a desenhar o som do selo. Estreou cantando em 2019 com Sucrilhos. Viralizou Felina e Vampira em 2022, fechou o ano com Manual de Como Amar Errado e se autodeclarou 'último romântico' do trap. Em 2026, dividiu o palco e a tracklist com Teto em Colapso Global.",
+      "Cearense, contemporâneo de Matuê. Antes de ser artista da 30praum era beatmaker: produziu seis das sete faixas de Máquina do Tempo (2020) e ajudou a desenhar o som do selo. Estreou cantando em 2019 com Sucrilhos. Viralizou Felina e Vampira em 2022, fechou o ano com Manual de Como Amar Errado e se autodeclarou 'último romântico' do trap. Em 2026, dividiu o palco e a tracklist com Teto em Colapso Global.",
     estreia: "2019",
     marcos: "Manual de Como Amar Errado · Colapso Global · Felina · Vampira",
     albumStats: {
@@ -112,9 +112,9 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
       text: "Cresci copiando. Agora os outros copiam errado.",
       attribution: "Brandão85 · 85 · 2026",
     },
-    motto: "Da quebrada pro mundo — sem perder o xerox.",
+    motto: "Da quebrada pro mundo, sem perder o xerox.",
     description:
-      "Cearense da Caponga, Brandão85 entrou oficialmente na 30PRAUM em setembro de 2024 depois de saída amigável da Hash Produções. Cocriou faixas do 333 do Matuê (Crack com Mussilon, Isso é Sério) e estreou solo no selo com CEO (2024). Isso é Trap Vol.2 é a confirmação — WARZONE e JAPONÊS chegaram virais antes do disco sair.",
+      "Cearense da Caponga, Brandão85 entrou oficialmente na 30PRAUM em setembro de 2024 depois de saída amigável da Hash Produções. Cocriou faixas do 333 do Matuê (Crack com Mussilon, Isso é Sério) e estreou solo no selo com CEO (2024). Isso é Trap Vol.2 é a confirmação: WARZONE e JAPONÊS chegaram virais antes do disco sair.",
     estreia: "Setembro 2024",
     marcos: "Hash 2018–2024 · Isso é Trap Vol. 02",
     albumStats: {
@@ -139,7 +139,7 @@ export default async function ArtistLanding({
         <h1 className="font-display text-4xl uppercase">{cfg.displayName}</h1>
         <p className="mt-6 max-w-prose text-fg/80">{cfg.bioParagraphs[0]}</p>
         <p className="mt-8 text-sm text-muted">
-          Página em redesign — assets em breve.
+          Página em redesign. Assets em breve.
         </p>
       </section>
     );

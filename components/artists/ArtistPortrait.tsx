@@ -26,7 +26,7 @@ export function ArtistPortrait({
   return (
     <Image
       src={src}
-      alt={`Retrato — ${artist.displayName}`}
+      alt={`Retrato · ${artist.displayName}`}
       fill={fill}
       sizes={sizes}
       priority={priority}

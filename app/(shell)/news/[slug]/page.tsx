@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = await getNewsPost(slug);
   if (!post) return {};
   return {
-    title: `${post.title} · 30praum`,
+    title: post.title,
     description: post.excerpt,
     openGraph: { images: [post.heroImage] },
   };

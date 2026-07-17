@@ -10,8 +10,8 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
     bornYear: 1993,
     joinedYear: 2016,
     bioParagraphs: [
-      "Nasceu em Fortaleza em 11 de outubro de 1993. Aos 8 anos mudou para Oakland, Califórnia, onde viveu até os 11 — quando voltou pro Brasil já com inglês fluente e ouvido pra um trap que ninguém aqui fazia ainda.",
-      "Em 2016 cofundou a 30praum com Clara Mendes — selo cearense montado pra descentralizar o trap brasileiro do eixo Rio-SP. Estreou em álbum em 2020 com Máquina do Tempo. 333 (2024) bateu o recorde de maior estreia do Spotify Brasil e ultrapassou 950 milhões de reproduções. XTRANHO (2025) é o terceiro capítulo.",
+      "Nasceu em Fortaleza em 11 de outubro de 1993. Aos 8 anos mudou para Oakland, Califórnia, onde viveu até os 11, quando voltou pro Brasil já com inglês fluente e ouvido pra um trap que ninguém aqui fazia ainda.",
+      "Em 2016 cofundou a 30praum com Clara Mendes, selo cearense montado pra descentralizar o trap brasileiro do eixo Rio-SP. Estreou em álbum em 2020 com Máquina do Tempo. 333 (2024) bateu o recorde de maior estreia do Spotify Brasil e ultrapassou 950 milhões de reproduções. XTRANHO (2025) é o terceiro capítulo.",
     ],
     facts: [
       { label: "Nome", value: "Matheus Brasileiro Aguiar" },
@@ -22,9 +22,9 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
     ],
     signatureSongs: ["Máquina do Tempo", "Vampiro", "Quer Voar", "REI TUÊ", "ÍCONE FASHION"],
     universeName: "XTRANHO",
-    tagline: "XTRANHO — sinal alien em transmissão estável",
+    tagline: "XTRANHO · sinal alien em transmissão estável",
     manifesto:
-      "Aqui o tempo dobra. O alien não é o outro — é a versão sua que ainda não chegou. Vista o que veio do futuro.",
+      "Aqui o tempo dobra. O alien não é o outro: é a versão sua que ainda não chegou. Vista o que veio do futuro.",
     shopifyCollectionHandle: "merch-matue",
     motionPreset: "glitch",
     portraitImage: IMG.matuePortrait,
@@ -59,10 +59,10 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
       process: [
         "Sample do beat virou estampa.",
         "Tecido pesado pra aguentar o set.",
-        "Cada peça sai com lacre — autêntica até o roteamento.",
+        "Cada peça sai com lacre, autêntica até o roteamento.",
       ],
     },
-    signatureLyric: "Eu vim de outro lugar — esse mundo é só um set.",
+    signatureLyric: "Eu vim de outro lugar. Esse mundo é só um set.",
     socials: {
       spotify: "https://open.spotify.com/artist/2T4FxsAGFAaeWiQfHvfn6V",
       instagram: "https://instagram.com/matue30",
@@ -80,8 +80,8 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
     bornYear: 2001,
     joinedYear: 2019,
     bioParagraphs: [
-      "Cearense, contemporâneo de Matuê. Antes de ser artista da 30praum era beatmaker — produziu seis das sete faixas de Máquina do Tempo (2020) e ajudou a desenhar o som do selo nos primeiros anos.",
-      "Estreou cantando em 2019 com Sucrilhos. Em 2022 viralizou Felina e Vampira (com Matuê e Teto), e fechou o ano com Manual de Como Amar Errado — álbum solo onde se autodeclarou 'último romântico' do trap. Em 2026 dividiu o palco e a tracklist com Teto em Colapso Global.",
+      "Cearense, contemporâneo de Matuê. Antes de ser artista da 30praum era beatmaker: produziu seis das sete faixas de Máquina do Tempo (2020) e ajudou a desenhar o som do selo nos primeiros anos.",
+      "Estreou cantando em 2019 com Sucrilhos. Em 2022 viralizou Felina e Vampira (com Matuê e Teto), e fechou o ano com Manual de Como Amar Errado, álbum solo onde se autodeclarou 'último romântico' do trap. Em 2026 dividiu o palco e a tracklist com Teto em Colapso Global.",
     ],
     facts: [
       { label: "Nome", value: "Vinicius William Sales de Lima" },
@@ -151,7 +151,7 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
     bornYear: 2001,
     joinedYear: 2020,
     bioParagraphs: [
-      "Nasceu em Jacobina, Bahia, em 19 de outubro de 2001. Começou a compor aos doze e até hoje grava no quarto — fez fama no YouTube e no TikTok antes de qualquer selo bater na porta.",
+      "Nasceu em Jacobina, Bahia, em 19 de outubro de 2001. Começou a compor aos doze e até hoje grava no quarto. Fez fama no YouTube e no TikTok antes de qualquer selo bater na porta.",
       "Estreou em 2018 com Fico Famoso e Say Yes. Em 2022 dividiu Vampira com Matuê e Wiu, e desde então virou pilar do trap brasileiro. Colapso Global (2026), feito a duas mãos com Wiu, mistura house, jazz, bossa, funk carioca e trap no mesmo disco.",
     ],
     facts: [
@@ -165,7 +165,7 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
     universeName: "Colapso Global",
     tagline: "Colapso Global · com Wiu",
     manifesto:
-      "Recorte da rua, kraft no peito, marca de carimbo. O que você veste é o que aconteceu — sem filtro.",
+      "Recorte da rua, kraft no peito, marca de carimbo. O que você veste é o que aconteceu, sem filtro.",
     shopifyCollectionHandle: "merch-teto",
     motionPreset: "collage",
     portraitImage: IMG.tetoPortrait,
@@ -181,7 +181,7 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
       year: "2026",
       collaborator: "com Wiu",
       coverImage: IMG.coverColapsoGlobal,
-      tagline: "Roupa de quem aceitou que o mundo já caiu — e segue.",
+      tagline: "Roupa de quem aceitou que o mundo já caiu, e segue.",
       highlightedTracks: [
         "Isso Aqui É Brasil",
         "Ref",
@@ -197,7 +197,7 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
       availabilityNote: "Numerada à mão (1/100 a 100/100)",
     },
     voice: {
-      epigraph: "Roupa de quem aceitou que o mundo já caiu — e segue.",
+      epigraph: "Roupa de quem aceitou que o mundo já caiu, e segue.",
       process: [
         "Colagem de capas antigas vira estampa nova.",
         "Sarja envelhecida no banho, não no Photoshop.",
@@ -222,8 +222,8 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
     bornYear: 2000,
     joinedYear: 2024,
     bioParagraphs: [
-      "Nasceu em 18 de fevereiro de 2000, na Caponga (Cascavel, Ceará). Começou na cena ainda em 2018 e construiu nome com Hash Produções — Zoo (2022) é desse período.",
-      "Em 2024 saiu da Hash em acordo amigável e foi anunciado oficialmente como artista da 30praum em setembro do mesmo ano. Cocriou faixas do 333 do Matuê (Crack com Mussilon, Isso é Sério). CEO (2024) é seu primeiro álbum solo no selo; Isso é Trap Vol.2 (2026) é a confirmação — singles WARZONE e JAPONÊS chegaram virais antes do disco.",
+      "Nasceu em 18 de fevereiro de 2000, na Caponga (Cascavel, Ceará). Começou na cena ainda em 2018 e construiu nome com Hash Produções. Zoo (2022) é desse período.",
+      "Em 2024 saiu da Hash em acordo amigável e foi anunciado oficialmente como artista da 30praum em setembro do mesmo ano. Cocriou faixas do 333 do Matuê (Crack com Mussilon, Isso é Sério). CEO (2024) é seu primeiro álbum solo no selo; Isso é Trap Vol.2 (2026) é a confirmação: singles WARZONE e JAPONÊS chegaram virais antes do disco.",
     ],
     facts: [
       { label: "Nome", value: "Gabriel Brandão da Costa" },
@@ -264,11 +264,11 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
       epigraph: "Cresci copiando. Agora os outros copiam errado.",
       process: [
         "Foto de Fortaleza, scan na fotocópia da esquina.",
-        "Estampa em alta densidade — pra rachar com o uso.",
+        "Estampa em alta densidade, pra rachar com o uso.",
         "Etiqueta interna com CEP da quebrada bordada.",
       ],
     },
-    signatureLyric: "Da quebrada pro mundo — sem perder o xerox.",
+    signatureLyric: "Da quebrada pro mundo, sem perder o xerox.",
     socials: {
       spotify: "https://open.spotify.com/artist/5VTw0YLpHpqz8VRgRVNNRO",
       instagram: "https://instagram.com/brandao85",

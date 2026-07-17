@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getIncubadora } from "@/lib/cms/incubadora";
 export const metadata = {
-  title: "Incubadora · 30praum",
+  title: "Incubadora",
   description:
     "O canal de candidatura à 30praum. Para artistas com som autoral que querem ser ouvidos por quem escuta direito.",
 };
@@ -27,7 +27,7 @@ export default async function IncubadoraPage() {
           {INCUBADORA.shortTagline}
         </p>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-fg/80 sm:text-base">
-          Canal oficial de candidatura à 30praum. Não é talent show — é onde a
+          Canal oficial de candidatura à 30praum. Não é talent show: é onde a
           gravadora escuta quem ainda não está dentro.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">

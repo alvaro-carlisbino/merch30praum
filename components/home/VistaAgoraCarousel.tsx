@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { blurFor } from "@/lib/images/blur-data";
 export type VistaProduct = {
   id: string;
   href: string;
@@ -89,6 +90,8 @@ export function VistaAgoraCarousel({ products }: Props) {
                   alt={product.title}
                   fill
                   sizes={isCenter ? "360px" : "260px"}
+                  placeholder={blurFor(product.image) ? "blur" : "empty"}
+                  blurDataURL={blurFor(product.image)}
                   className="object-cover"
                 />
               </div>

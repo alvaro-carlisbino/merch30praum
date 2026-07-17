@@ -38,7 +38,7 @@ export function NewsletterCapture() {
             style={{ color: "rgba(15,15,14,0.78)" }}
           >
             Anúncio antecipado de lançamento, prévias, peças numeradas e
-            pré-venda só pra quem tá na lista. Sem spam — só drop.
+            pré-venda só pra quem tá na lista. Sem spam, só drop.
           </p>
         </div>
         <form

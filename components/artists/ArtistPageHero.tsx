@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { blurFor } from "@/lib/images/blur-data";
 interface Props {
   bgImage: string;
   bgPosition?: string;
@@ -39,8 +40,10 @@ export function ArtistPageHero({
         aria-hidden
         fill
         priority
-        quality={95}
+        quality={80}
         sizes="100vw"
+        placeholder={blurFor(bgImage) ? "blur" : "empty"}
+        blurDataURL={blurFor(bgImage)}
         className="hero-cover-image object-cover"
         style={{ objectPosition: "var(--hero-pos-mobile)" }}
       />

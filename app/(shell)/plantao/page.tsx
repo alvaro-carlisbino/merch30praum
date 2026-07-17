@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { blurFor } from "@/lib/images/blur-data";
 export const metadata = {
   title: "Plantão Festival · Fortaleza",
   description:
@@ -25,7 +26,9 @@ export default function PlantaoHubPage() {
             alt="Plantão Festival 2026"
             fill
             priority
-            quality={95}
+            quality={80}
+            placeholder="blur"
+            blurDataURL={blurFor("/figma-plantao/hero.png")}
             sizes="100vw"
             className="object-cover"
           />
@@ -67,7 +70,7 @@ export default function PlantaoHubPage() {
             </h2>
             <p className="max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
               A 3ª edição marca os 10 anos da 30praum. Reúne a base, os novos e
-              os convidados — Matuê, Teto, Wiu, Brandão85 e mais 7 nomes — em
+              os convidados: Matuê, Teto, Wiu, Brandão85 e mais 7 nomes, em
               um dia só, frente ao mar. Quem viu sabe: não é um show, é uma
               cena se reconhecendo.
             </p>
@@ -126,7 +129,7 @@ export default function PlantaoHubPage() {
               >
                 <Image
                   src="/figma-plantao/poster-vertical.png"
-                  alt="Plantão Festival — palco e plateia"
+                  alt="Plantão Festival · palco e plateia"
                   fill
                   quality={95}
                   sizes="(min-width: 1024px) 460px, 92vw"
@@ -215,7 +218,7 @@ export default function PlantaoHubPage() {
           </div>
           <div className="relative w-full" style={{ aspectRatio: "2560 / 1278" }}>
             <Image
-              src="/figma-plantao/lineup-grid.png"
+              src="/figma-plantao/lineup-grid-2026.png"
               alt="Line-up Plantão 2026"
               fill
               quality={95}

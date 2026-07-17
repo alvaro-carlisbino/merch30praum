@@ -3,7 +3,7 @@ import Image from "next/image";
 import { getAllNews } from "@/lib/cms/news";
 import { type NewsTag } from "@/lib/news/registry";
 export const metadata = {
-  title: "Notícias · 30praum",
+  title: "Notícias",
   description:
     "Lançamentos, parcerias, plantão e bastidores. A agenda editorial oficial da gravadora.",
 };

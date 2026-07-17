@@ -73,7 +73,7 @@ export function WiuHero({ artist }: { artist: ArtistConfig }) {
           >
             “{artist.signatureLyric}”
             <cite className="block mt-3 not-italic text-[10px] uppercase tracking-[0.3em] text-muted">
-              — {artist.album.title}, {artist.album.year}
+              · {artist.album.title}, {artist.album.year}
               {artist.album.collaborator ? ` · ${artist.album.collaborator}` : ""}
             </cite>
           </motion.blockquote>

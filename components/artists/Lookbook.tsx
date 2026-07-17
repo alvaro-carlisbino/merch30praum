@@ -58,7 +58,7 @@ export function Lookbook({ artist }: { artist: ArtistConfig }) {
           </div>
           <p className="max-w-sm text-sm text-muted leading-relaxed">
             Editorial fotográfico do drop. Tratamento gráfico responde à pegada
-            de {artist.displayName} — não é catálogo, é capa de revista.
+            de {artist.displayName}: não é catálogo, é capa de revista.
           </p>
         </header>
         <div className="grid gap-3 sm:grid-cols-12 sm:grid-rows-[auto_auto] sm:gap-4">

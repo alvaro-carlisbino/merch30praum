@@ -3,17 +3,13 @@ import { houseBody, houseDisplay, brandSerif } from "@/styles/fonts";
 import { CustomCursor } from "@/components/effects/CustomCursor";
 import "./globals.css";
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://ohubdeumagravadoraai.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://30praum.vercel.app";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "Acesso restrito", template: "%s" },
-  description: "Acesso restrito.",
-  robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-    googleBot: { index: false, follow: false },
-  },
+  title: { default: "30praum · Site oficial", template: "%s · 30praum" },
+  description:
+    "Site oficial da holding 30praum: gravadora, Plantão Festival, parcerias e incubadora. Casa de Matuê, Wiu, Teto e Brandão85.",
+  robots: { index: true, follow: true },
 };
 export default function RootLayout({
   children,

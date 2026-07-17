@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import type { ArtistSlug } from "@/lib/artists/types";
 import { useActiveArtist } from "@/lib/home/active-artist";
+import { blurFor } from "@/lib/images/blur-data";
 type HeroSlide = {
   key: ArtistSlug;
   photo: string;
@@ -20,7 +21,7 @@ const SLIDES: HeroSlide[] = [
     nameWidth: 320,
     nameAspect: "1000 / 1000",
     objectPosition: "center 25%",
-    quote: "“Todo mundo quer ser estrela, mas não tem lugar no Sol.” — Matuê",
+    quote: "“Todo mundo quer ser estrela, mas não tem lugar no Sol.” · Matuê",
   },
   {
     key: "wiu",
@@ -29,7 +30,7 @@ const SLIDES: HeroSlide[] = [
     nameWidth: 320,
     nameAspect: "1000 / 1000",
     objectPosition: "center 25%",
-    quote: "“Se a saudade matasse, eu já tinha morrido bonito.” — Wiu",
+    quote: "“Se a saudade matasse, eu já tinha morrido bonito.” · Wiu",
   },
   {
     key: "teto",
@@ -38,7 +39,7 @@ const SLIDES: HeroSlide[] = [
     nameWidth: 320,
     nameAspect: "1000 / 1000",
     objectPosition: "center 30%",
-    quote: "“Não é fim. É trilha.” — Teto",
+    quote: "“Não é fim. É trilha.” · Teto",
   },
   {
     key: "brandao",
@@ -47,22 +48,24 @@ const SLIDES: HeroSlide[] = [
     nameWidth: 460,
     nameAspect: "1292 / 430",
     objectPosition: "center 25%",
-    quote: "“Cresci copiando. Agora os outros copiam errado.” — Brandão85",
+    quote: "“Cresci copiando. Agora os outros copiam errado.” · Brandão85",
   },
 ];
-const ROTATE_MS = 4500;
+const ROTATE_MS = 5200;
 export function HomeHero() {
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
   const setActive = useActiveArtist((s) => s.setActive);
   useEffect(() => {
     setActive(SLIDES[index].key);
   }, [index, setActive]);
   useEffect(() => {
+    if (paused) return;
     const id = setTimeout(() => {
       setIndex((i) => (i + 1) % SLIDES.length);
     }, ROTATE_MS);
     return () => clearTimeout(id);
-  }, [index]);
+  }, [index, paused]);
   const current = SLIDES[index];
   return (
     <section
@@ -73,6 +76,8 @@ export function HomeHero() {
         background: "var(--bg)",
       }}
       aria-label="Universos 30praum"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
     >
       {SLIDES.map((slide, i) => (
         <div
@@ -81,17 +86,24 @@ export function HomeHero() {
           className="absolute inset-0 transition-opacity duration-1000"
           style={{ opacity: i === index ? 1 : 0 }}
         >
-          <Image
-            src={slide.photo}
-            alt=""
-            aria-hidden
-            fill
-            priority={i === 0}
-            quality={95}
-            sizes="100vw"
-            className="object-cover"
-            style={{ objectPosition: slide.objectPosition }}
-          />
+          <div
+            className={i === index ? "hero-kenburns absolute inset-0" : "absolute inset-0"}
+            style={{ animationPlayState: paused ? "paused" : "running" }}
+          >
+            <Image
+              src={slide.photo}
+              alt=""
+              aria-hidden
+              fill
+              priority={i === 0}
+              quality={80}
+              sizes="100vw"
+              placeholder={blurFor(slide.photo) ? "blur" : "empty"}
+              blurDataURL={blurFor(slide.photo)}
+              className="object-cover"
+              style={{ objectPosition: slide.objectPosition }}
+            />
+          </div>
         </div>
       ))}
       <div
@@ -110,11 +122,12 @@ export function HomeHero() {
               <div
                 key={slide.key}
                 aria-hidden={!isActive}
-                className="absolute transition-opacity duration-700"
+                className={isActive ? "hero-name-in absolute" : "absolute"}
                 style={{
                   width: `min(${slide.nameWidth}px, 84vw)`,
                   aspectRatio: slide.nameAspect,
                   opacity: isActive ? 1 : 0,
+                  transition: "opacity 700ms",
                 }}
               >
                 <Image
@@ -155,14 +168,52 @@ export function HomeHero() {
               type="button"
               onClick={() => setIndex(i)}
               aria-label={`Mostrar ${slide.key}`}
-              className="h-1 w-8 rounded-full transition-colors"
-              style={{
-                background: i === index ? "#ffffff" : "rgba(255,255,255,0.3)",
-              }}
-            />
+              className="relative h-1 w-8 overflow-hidden rounded-full"
+              style={{ background: "rgba(255,255,255,0.3)" }}
+            >
+              {i === index && (
+                <span
+                  key={`fill-${index}`}
+                  aria-hidden
+                  className="hero-dot-fill absolute inset-y-0 left-0 rounded-full bg-white"
+                  style={{
+                    animationDuration: `${ROTATE_MS}ms`,
+                    animationPlayState: paused ? "paused" : "running",
+                  }}
+                />
+              )}
+            </button>
           ))}
         </div>
       </div>
+      <style>{`
+        .hero-kenburns {
+          animation: hero-kenburns ${ROTATE_MS + 1200}ms linear both;
+        }
+        @keyframes hero-kenburns {
+          from { transform: scale(1.045); }
+          to { transform: scale(1); }
+        }
+        .hero-name-in {
+          animation: hero-name-in 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        @keyframes hero-name-in {
+          from { opacity: 0; transform: translateY(14px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-dot-fill {
+          animation-name: hero-dot-fill;
+          animation-timing-function: linear;
+          animation-fill-mode: both;
+        }
+        @keyframes hero-dot-fill {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-kenburns, .hero-name-in { animation: none; }
+        }
+      `}</style>
       <span hidden data-active-slide={current.key} />
     </section>
   );

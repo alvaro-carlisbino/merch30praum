@@ -109,7 +109,7 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     status: "past",
     tagline: "A consolidação do plantão como referência nacional",
     manifesto:
-      "A segunda edição confirmou: Fortaleza é capital do trap. 30 mil pessoas na Beira-Mar, R$5 milhões investidos, 17 artistas no palco — o Plantão saiu de projeto independente pra referência do gênero no país.",
+      "A segunda edição confirmou: Fortaleza é capital do trap. 30 mil pessoas na Beira-Mar, R$5 milhões investidos, 17 artistas no palco. O Plantão saiu de projeto independente pra referência do gênero no país.",
     posterImage: IMG.plantaoPoster24,
     heroImage: IMG.plantaoHero24,
     aftermovieUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
@@ -141,7 +141,7 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     city: "Fortaleza",
     state: "CE",
     status: "past",
-    tagline: "A primeira transmissão massiva — 500 mil online",
+    tagline: "A primeira transmissão massiva · 500 mil online",
     manifesto:
       "A terceira edição abriu o jogo pra quem não estava em Fortaleza. Transmissão oficial no YouTube atraiu quase 500 mil espectadores únicos. O Plantão deixa de ser local pra ser nacional sem perder a quebrada.",
     posterImage: IMG.plantaoPoster25,
@@ -175,7 +175,7 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     status: "live",
     tagline: "10 anos de 30praum · uma noite às margens da Beira-Mar",
     manifesto:
-      "A 3ª edição marca os 10 anos da 30praum. Reúne a base, os novos e os convidados — Matuê, Teto, Wiu, Brandão85 e mais 7 nomes — em um dia só, frente ao mar. Quem viu sabe: não é um show, é uma cena se reconhecendo.",
+      "A 3ª edição marca os 10 anos da 30praum. Reúne a base, os novos e os convidados: Matuê, Teto, Wiu, Brandão85 e mais 7 nomes, em um dia só, frente ao mar. Quem viu sabe: não é um show, é uma cena se reconhecendo.",
     posterImage: IMG.plantaoPoster26,
     heroImage: IMG.plantaoHero26,
     heroVideoUrl: "/assets/plantao26-loop.mp4",
@@ -200,7 +200,7 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
       {
         question: "Onde é o Plantão 2026?",
         answer:
-          "Marina Park Hotel · Av. Pres. Castelo Branco, 400 — Praia de Iracema, Fortaleza/CE. Acessível por transporte público, app de mobilidade e estacionamento conveniado.",
+          "Marina Park Hotel · Av. Pres. Castelo Branco, 400 · Praia de Iracema, Fortaleza/CE. Acessível por transporte público, app de mobilidade e estacionamento conveniado.",
       },
       {
         question: "Que horas abrem os portões?",

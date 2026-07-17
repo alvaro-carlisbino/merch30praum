@@ -39,8 +39,8 @@ export default async function SubmeterPage() {
           style={{ color: "var(--accent)" }}
         >
           {INCUBADORA.formFields.contactEmail}
-        </a>{" "}
-        — só para questões sobre o programa, não para envio de música.
+        </a>
+        . Só para questões sobre o programa, não para envio de música.
       </p>
     </article>
   );

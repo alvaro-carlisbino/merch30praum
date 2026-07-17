@@ -11,7 +11,7 @@ export function PriceTag({ min, max, className }: PriceTagProps) {
     <span className={cn("tabular-nums", className)}>
       {showRange ? (
         <>
-          {formatMoney(min)} <span className="opacity-60">—</span> {formatMoney(max)}
+          {formatMoney(min)} <span className="opacity-60">a</span> {formatMoney(max)}
         </>
       ) : (
         formatMoney(min)

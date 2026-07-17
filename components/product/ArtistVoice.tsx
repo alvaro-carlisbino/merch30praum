@@ -5,7 +5,7 @@ interface ArtistVoiceProps {
 export function ArtistVoice({ artist }: ArtistVoiceProps) {
   return (
     <section
-      aria-label={`Voz do artista — ${artist.displayName}`}
+      aria-label={`Voz do artista · ${artist.displayName}`}
       className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-16 grid gap-10 lg:grid-cols-[1fr_1.4fr]"
       style={{ borderTop: "1px solid var(--border)" }}
     >
@@ -14,7 +14,7 @@ export function ArtistVoice({ artist }: ArtistVoiceProps) {
           Voz do artista
         </p>
         <p className="mt-3 text-sm uppercase tracking-[0.2em]">
-          — {artist.displayName}
+          · {artist.displayName}
         </p>
       </div>
       <div>
