@@ -5,7 +5,7 @@ import { BrandFooter } from "@/components/shell/BrandFooter";
 import { CartDrawer } from "@/components/shell/CartDrawer";
 import { getCart } from "@/lib/cart/actions";
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://30praum.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://merch30praum.vercel.app";
 const SITE_DESCRIPTION =
   "Site oficial da holding 30praum: gravadora, Plantão Festival, parcerias e incubadora. Casa de Matuê, Wiu, Teto e Brandão85.";
 export const metadata: Metadata = {

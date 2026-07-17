@@ -3,7 +3,7 @@ import { houseBody, houseDisplay, brandSerif } from "@/styles/fonts";
 import { CustomCursor } from "@/components/effects/CustomCursor";
 import "./globals.css";
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://30praum.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://merch30praum.vercel.app";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: "30praum · Site oficial", template: "%s · 30praum" },
