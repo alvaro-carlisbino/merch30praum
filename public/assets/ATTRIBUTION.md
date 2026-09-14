@@ -14,19 +14,21 @@ streaming (Spotify, Apple Music). Uso editorial pra referenciar os álbuns.
 - **333.jpg** (1000×1000) — 333 · Matuê · 2024 · Apple Music/iTunes
 - **maquina_do_tempo.jpg** (1000×1000) — Máquina do Tempo · Matuê · 2020 · Apple Music/iTunes
 
-## /logos/ — Logotipos parceiros (Wikimedia Commons, CC)
-- **sony.svg** — Sony Music Entertainment Logo 2023
-  https://commons.wikimedia.org/wiki/File:Sony_Music_Entertainment_Logo_2023.svg
-- **renner.svg** — Logotipo das Lojas Renner
-  https://commons.wikimedia.org/wiki/File:Logotipo_das_Lojas_Renner.svg
-
 ## /fortaleza/ — Fotos da cidade (Wikimedia Commons, CC)
 - **fortaleza_skyline.jpg** (1600×1200) — Fortaleza, Brazil - Brasil, Ceará (24129243847)
   https://commons.wikimedia.org/wiki/File:Fortaleza,_Brazil_-_Brasil,_Cear%C3%A1_(24129243847).jpg
-- **praia_meireles.jpg** (4000×2500) — Praia do Meireles
+- **praia_meireles.jpg** (2560×1600, recomprimida) — Praia do Meireles
   https://commons.wikimedia.org/wiki/File:Praia_do_Meireles.jpg
 - **ponte_ingleses.jpg** (2477×1342) — Ponte dos Ingleses em Fortaleza
   https://commons.wikimedia.org/wiki/File:Ponte_dos_Ingleses_em_Fortaleza_37.jpg
 
 ## /wiki/ — Retratos artistas (Wikimedia Commons, CC)
 Veja /wiki/ATTRIBUTION.md
+
+## /products/ — Fotos de produto
+Fotos oficiais da 30praum.store (Shopify), baixadas em set/2026 e normalizadas
+(packshots recortados e centralizados em 4:5 sobre branco; fotos de modelo
+cortadas em 4:5). Uso editorial no site oficial da própria marca.
+
+## /figma-plantao/stage-*, crowd-*, fire-*, art-* — Recortes
+Recortes das fotos e da arte oficial do Plantão Festival já presentes na pasta.
