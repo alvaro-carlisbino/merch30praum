@@ -14,7 +14,7 @@ const PICKS: { big: Pick; topRight: Pick; botRight: Pick } = {
     slug: "xtranho",
     status: "em-alta",
     pitch: "Sinal alien em transmissão estável.",
-    cover: "/figma-home/eleitos-xtranho.png",
+    cover: "/figma-home/eleitos-xtranho.webp",
   },
   topRight: {
     slug: "colapso-global",

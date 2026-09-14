@@ -34,7 +34,7 @@ const SLIDES: HeroSlide[] = [
   },
   {
     key: "teto",
-    photo: "/figma-home/hero-teto.png",
+    photo: "/figma-home/hero-teto.jpg",
     name: "/figma-home/name-teto.svg",
     nameWidth: 320,
     nameAspect: "1000 / 1000",
