@@ -1,33 +1,12 @@
 "use client";
-import { useState } from "react";
-type FormState = "idle" | "submitting" | "success" | "error";
-const SPOTIFY_RE = /^https?:\/\/open\.spotify\.com\/(artist|track|album)\//i;
+import { useActionState } from "react";
+import Link from "next/link";
+import { submitDemo, type SubmitState } from "@/lib/incubadora/actions";
+const INITIAL: SubmitState = { status: "idle" };
 export function SubmissionForm() {
-  const [state, setState] = useState<FormState>("idle");
-  const [error, setError] = useState<string | null>(null);
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setState("submitting");
-    setError(null);
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    if (data.get("website")) {
-      await new Promise((r) => setTimeout(r, 1200));
-      setState("success");
-      return;
-    }
-    const spotifyUrl = String(data.get("spotifyUrl") ?? "");
-    if (!SPOTIFY_RE.test(spotifyUrl)) {
-      setError("URL Spotify inválida. Cola o link completo (open.spotify.com).");
-      setState("error");
-      return;
-    }
-    await new Promise((r) => setTimeout(r, 1600));
-    console.info("[incubadora] submission", Object.fromEntries(data));
-    setState("success");
-    form.reset();
-  }
-  if (state === "success") {
+  const [state, formAction, pending] = useActionState(submitDemo, INITIAL);
+  const error = state.status === "invalid" || state.status === "unavailable" ? state.message ?? null : null;
+  if (state.status === "ok") {
     return (
       <div
         className="border p-8 sm:p-12 incubadora-scan"
@@ -51,14 +30,13 @@ export function SubmissionForm() {
           Se fizer sentido, te procuramos pelo email ou Instagram que você deixou. Sem prazo,
           sem fila por ordem de chegada.
         </p>
-        <button
-          type="button"
-          onClick={() => setState("idle")}
+        <Link
+          href="/incubadora/submeter"
           className="mt-8 inline-flex items-center gap-2 px-5 py-3 text-sm border transition-colors hover:bg-fg/5"
           style={{ borderColor: "var(--border)", color: "var(--fg)" }}
         >
           Submeter outro projeto
-        </button>
+        </Link>
       </div>
     );
   }
@@ -66,7 +44,7 @@ export function SubmissionForm() {
     "w-full bg-transparent border-0 border-b py-3 text-base sm:text-lg outline-none transition-colors focus:border-fg placeholder:text-fg/30";
   const labelClass = "text-sm opacity-65";
   return (
-    <form onSubmit={handleSubmit} className="grid gap-8 sm:gap-10" noValidate>
+    <form action={formAction} className="grid gap-8 sm:gap-10" noValidate>
       <div className="grid gap-2">
         <label htmlFor="artistName" className={labelClass}>
           Nome artístico *
@@ -237,7 +215,7 @@ export function SubmissionForm() {
       <div>
         <button
           type="submit"
-          disabled={state === "submitting"}
+          disabled={pending}
           data-cursor="Enviar"
           className="inline-flex items-center gap-3 px-8 py-5 text-xs uppercase tracking-[0.2em] font-medium transition-transform hover:-translate-y-0.5 disabled:opacity-60"
           style={{
@@ -246,7 +224,7 @@ export function SubmissionForm() {
             boxShadow: "0 0 28px rgba(46,240,124,0.22)",
           }}
         >
-          {state === "submitting" ? "Enviando…" : "Submeter demo →"}
+          {pending ? "Enviando..." : "Submeter demo →"}
         </button>
       </div>
     </form>
