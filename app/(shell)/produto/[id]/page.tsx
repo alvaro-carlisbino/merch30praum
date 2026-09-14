@@ -1,124 +1,130 @@
+import { notFound } from "next/navigation";
+import Link from "next/link";
 import { ProductGallery } from "@/components/produto/ProductGallery";
+import { ProductPurchasePanel, type SiblingColor } from "@/components/produto/ProductPurchasePanel";
+import { ProductRow } from "@/components/loja/ProductRow";
+import { ArtistNote } from "@/components/produto/ArtistNote";
+import { getAllProducts, getProduct } from "@/lib/cms/products";
+import { getProductByHandle } from "@/lib/shopify/client";
+import { STATIC_PRODUCTS, formatBRL, type CMSProduct } from "@/lib/shop/static-products";
 import {
-  ProductPurchasePanel,
-  type ProductColor,
-} from "@/components/produto/ProductPurchasePanel";
-import { TalvezVoceGoste } from "@/components/produto/TalvezVoceGoste";
-import { STATIC_PRODUCTS, formatBRL } from "@/lib/shop/static-products";
+  ARTIST_DROP,
+  ARTIST_LABEL,
+  availableSizes,
+  buildCatalogHref,
+  colorSiblings,
+  isLowStock,
+  isSoldOut,
+  productColor,
+} from "@/lib/shop/catalog";
+import { ARTISTS, isArtistSlug } from "@/lib/artists/registry";
+
 interface Params {
   id: string;
 }
-type Product = {
-  id: string;
-  title: string;
-  price: string;
-  images: string[];
-  colors: ProductColor[];
-  sizes: string[];
-  artistSlug?: string;
-};
-const CURATED: Record<string, Product> = {
-  "camiseta-sabotage": {
-    id: "camiseta-sabotage",
-    title: "Camiseta Sabotage",
-    price: "R$ 189,00",
-    images: [
-      "/figma-produto/main.png",
-      "/figma-produto/thumb-1.png",
-      "/figma-produto/thumb-2.png",
-      "/figma-produto/thumb-3.png",
-    ],
-    colors: [
-      { id: "vermelho", label: "Vermelho", hex: "#a11122" },
-      { id: "branco", label: "Branco", hex: "#ededed" },
-      { id: "preto", label: "Preto", hex: "#171717" },
-    ],
-    sizes: ["XPP", "PP", "P", "M", "G", "GG"],
-  },
-};
-const COLOR_FROM_TITLE: Array<{ match: RegExp; color: ProductColor }> = [
-  { match: /preta|preto/i, color: { id: "preto", label: "Preto", hex: "#171717" } },
-  { match: /off.?white|estonada/i, color: { id: "off-white", label: "Off White", hex: "#ece7dd" } },
-  { match: /branca|branco/i, color: { id: "branco", label: "Branco", hex: "#f2f2f2" } },
-  { match: /amarela|amarelo/i, color: { id: "amarelo", label: "Amarelo", hex: "#e8c22e" } },
-  { match: /azul/i, color: { id: "azul", label: "Azul", hex: "#1f4fd8" } },
-  { match: /vermelha|vermelho/i, color: { id: "vermelho", label: "Vermelho", hex: "#a11122" } },
-  { match: /marrom/i, color: { id: "marrom", label: "Marrom", hex: "#5c4330" } },
-];
-function colorsForTitle(title: string): ProductColor[] {
-  const found = COLOR_FROM_TITLE.filter((c) => c.match.test(title)).map((c) => c.color);
-  if (found.length) return found;
-  return [{ id: "unica", label: "Única", hex: "#171717" }];
+
+const STORE_URL = "https://30praum.store/products";
+
+export function generateStaticParams() {
+  return STATIC_PRODUCTS.map((p) => ({ id: p.handle }));
 }
-function resolveProduct(id: string): Product | null {
-  if (CURATED[id]) return CURATED[id];
-  const p = STATIC_PRODUCTS.find((sp) => sp.handle === id);
-  if (!p) return null;
-  const sizes = p.sizes?.filter((s) => s.available).map((s) => s.label) ?? ["Único"];
-  return {
-    id: p.handle,
-    title: p.title,
-    price: formatBRL(p.priceBRL),
-    images: [p.image, ...(p.galleryImages ?? [])],
-    colors: colorsForTitle(p.title),
-    sizes: sizes.length ? sizes : ["Único"],
-    artistSlug: p.artistSlug,
-  };
-}
-function relatedFor(product: Product) {
-  const pool = STATIC_PRODUCTS.filter(
-    (p) => p.handle !== product.id && (!product.artistSlug || p.artistSlug === product.artistSlug),
-  );
-  const picks = (pool.length >= 4 ? pool : STATIC_PRODUCTS.filter((p) => p.handle !== product.id)).slice(0, 4);
-  if (!picks.length) {
-    return [
-      { id: "rel-1", href: "/produto/camiseta-sabotage", image: "/figma-produto/rel-1.png", alt: "Camiseta Sabotage" },
-      { id: "rel-2", href: "/produto/camiseta-sabotage", image: "/figma-produto/rel-2.png", alt: "Camiseta 2PAC" },
-      { id: "rel-3", href: "/produto/camiseta-sabotage", image: "/figma-produto/rel-3.png", alt: "Camiseta TUPAC" },
-      { id: "rel-4", href: "/produto/camiseta-sabotage", image: "/figma-produto/rel-4.png", alt: "Camiseta Snoop" },
-    ];
-  }
-  return picks.map((p) => ({
-    id: p.handle,
-    href: `/produto/${p.handle}`,
-    image: p.image,
-    alt: p.title,
-  }));
-}
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<Params>;
-}) {
+
+export async function generateMetadata({ params }: { params: Promise<Params> }) {
   const { id } = await params;
-  const product = resolveProduct(id);
+  const product = await getProduct(id);
   if (!product) return {};
+  const status = isSoldOut(product) ? "Esgotado" : formatBRL(product.priceBRL);
   return {
     title: product.title,
-    description: `${product.title} · ${product.price} · Loja oficial 30praum.`,
+    description: `${product.title} · ${status} · Merch oficial ${ARTIST_LABEL[product.artistSlug]} · Enviado em security bag lacrada.`,
   };
 }
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<Params>;
-}) {
+
+function toCms(handle: string, fallback: Awaited<ReturnType<typeof getProductByHandle>>): CMSProduct | null {
+  if (!fallback) return null;
+  return {
+    handle,
+    title: fallback.title,
+    priceBRL: Number(fallback.priceMin.amount),
+    image: fallback.featuredImage?.url ?? fallback.images[0]?.url ?? "",
+    galleryImages: fallback.images.slice(1).map((i) => i.url),
+    artistSlug: fallback.artist ?? "house",
+    category: "camisetas",
+    sizes: fallback.variants.map((v) => ({ label: v.title, available: v.availableForSale })),
+  };
+}
+
+export default async function ProductPage({ params }: { params: Promise<Params> }) {
   const { id } = await params;
-  const product = resolveProduct(id) ?? CURATED["camiseta-sabotage"];
+  const [cmsProduct, domain, all] = await Promise.all([
+    getProduct(id),
+    getProductByHandle(id),
+    getAllProducts(),
+  ]);
+  const product = cmsProduct ?? toCms(id, domain);
+  if (!product) notFound();
+
+  const images = [product.image, ...(product.galleryImages ?? [])].filter(Boolean);
+  const uniqueImages = images.filter((src, i) => images.indexOf(src) === i);
+  const variants = domain?.variants ?? [];
+  const soldOut = isSoldOut(product);
+  const lowStockSizes = isLowStock(product) ? availableSizes(product) : [];
+  const artist = isArtistSlug(product.artistSlug) ? ARTISTS[product.artistSlug] : null;
+  const dropLabel = ARTIST_DROP[product.artistSlug];
+  const artistLabel = artist ? `${ARTIST_LABEL[product.artistSlug]} · ${dropLabel}` : "30praum";
+
+  const siblings: SiblingColor[] = colorSiblings(product, all)
+    .map((s) => ({ handle: s.handle, color: productColor(s) }))
+    .filter((s): s is SiblingColor => Boolean(s.color));
+
+  const related = all
+    .filter((p) => p.handle !== product.handle && p.artistSlug === product.artistSlug)
+    .sort((a, b) => Number(isSoldOut(a)) - Number(isSoldOut(b)))
+    .slice(0, 4);
+  const relatedPool = related.length >= 2 ? related : all.filter((p) => p.handle !== product.handle).slice(0, 4);
+
+  const catalogHref = buildCatalogHref({ artista: product.artistSlug, ordem: "drop" });
+
   return (
     <>
-      <section className="mx-auto max-w-screen-2xl px-4 pb-10 pt-10 sm:px-8 sm:pt-14">
+      <section className="mx-auto max-w-screen-2xl px-4 pb-10 pt-6 sm:px-8 sm:pt-10">
+        <nav aria-label="Caminho" className="mb-6 text-[10px] uppercase tracking-[0.25em] text-muted">
+          <Link href="/loja" className="transition-colors hover:text-fg">Loja</Link>
+          <span className="mx-2">/</span>
+          <Link href={catalogHref} className="transition-colors hover:text-fg">
+            {ARTIST_LABEL[product.artistSlug]}
+          </Link>
+          <span className="mx-2">/</span>
+          <span className="text-fg">{product.title}</span>
+        </nav>
         <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:gap-10">
-          <ProductGallery images={product.images} alt={product.title} />
+          <ProductGallery images={uniqueImages} alt={product.title} />
           <ProductPurchasePanel
             title={product.title.toUpperCase()}
-            price={product.price}
-            colors={product.colors}
-            sizes={product.sizes}
+            priceLabel={formatBRL(product.priceBRL)}
+            compareAtLabel={
+              product.compareAtPriceBRL && product.compareAtPriceBRL > product.priceBRL
+                ? formatBRL(product.compareAtPriceBRL)
+                : undefined
+            }
+            variants={variants}
+            soldOut={soldOut}
+            lowStockSizes={lowStockSizes}
+            stockNote={product.stockNote}
+            artistLabel={artistLabel}
+            currentColor={productColor(product)}
+            siblings={siblings}
+            externalUrl={`${STORE_URL}/${product.handle}`}
           />
         </div>
       </section>
-      <TalvezVoceGoste products={relatedFor(product)} />
+      {artist && <ArtistNote artist={artist} dropLabel={dropLabel} />}
+      <ProductRow
+        title={artist ? `Mais de ${artist.displayName}` : "Mais da casa"}
+        products={relatedPool}
+        href={catalogHref}
+        hrefLabel={`Tudo de ${ARTIST_LABEL[product.artistSlug]}`}
+      />
     </>
   );
 }

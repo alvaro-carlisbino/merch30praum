@@ -1,90 +1,89 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-export type CarouselProduct = {
-  id: string;
-  href: string;
-  image: string;
-  title: string;
-  price: string;
-};
+import type { CMSProduct } from "@/lib/shop/static-products";
+import { ProductCard } from "./ProductCard";
+
 interface Props {
   title: string;
-  products: CarouselProduct[];
+  subtitle?: string;
+  products: CMSProduct[];
+  href?: string;
+  hrefLabel?: string;
   visible?: number;
 }
-export function ProductCarousel({ title, products, visible = 4 }: Props) {
+
+export function ProductCarousel({ title, subtitle, products, href, hrefLabel, visible = 4 }: Props) {
   const [offset, setOffset] = useState(0);
   const total = products.length;
+  const maxOffset = Math.max(0, total - visible);
   const prev = () => setOffset((o) => Math.max(0, o - 1));
-  const next = () => setOffset((o) => Math.min(total - visible, o + 1));
+  const next = () => setOffset((o) => Math.min(maxOffset, o + 1));
   const slice = products.slice(offset, offset + visible);
+  const canPage = total > visible;
+  if (total === 0) return null;
   return (
-    <section className="mx-auto max-w-screen-2xl px-4 pt-10 pb-12 sm:px-8">
-      <div className="mb-6 flex items-center justify-between gap-4">
-        <button
-          type="button"
-          onClick={prev}
-          aria-label="Anterior"
-          disabled={offset === 0}
-          className="flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-30"
-          style={{ borderColor: "var(--border)" }}
-        >
-          <span aria-hidden>‹</span>
-        </button>
-        <h2 className="font-display uppercase text-lg sm:text-xl tracking-[0.06em]">
-          {title}
-        </h2>
-        <button
-          type="button"
-          onClick={next}
-          aria-label="Próximo"
-          disabled={offset + visible >= total}
-          className="flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-30"
-          style={{ borderColor: "var(--border)" }}
-        >
-          <span aria-hidden>›</span>
-        </button>
-      </div>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5">
-        {slice.map((p) => (
-          <Link
-            key={p.id}
-            href={p.href}
-            data-cursor={p.title}
-            className="group block"
+    <section className="mx-auto max-w-screen-2xl px-4 py-10 sm:px-8 sm:py-12">
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2
+            className="font-display uppercase leading-none"
+            style={{ fontSize: "clamp(1.5rem, 2.8vw, 2.4rem)", letterSpacing: "0.02em" }}
           >
-            <div
-              className="relative overflow-hidden rounded-2xl"
-              style={{
-                aspectRatio: "4 / 5",
-                background: "color-mix(in srgb, var(--fg) 6%, var(--bg))",
-              }}
+            {title}
+          </h2>
+          {subtitle && <p className="mt-2 text-sm text-muted">{subtitle}</p>}
+        </div>
+        <div className="flex items-center gap-4">
+          {href && (
+            <Link
+              href={href}
+              data-cursor={hrefLabel ?? "Ver tudo"}
+              className="text-[11px] uppercase tracking-[0.22em] text-muted transition-colors hover:text-fg"
             >
-              <Image
-                src={p.image}
-                alt={p.title}
-                fill
-                sizes="(min-width: 640px) 25vw, 50vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-              />
-            </div>
-            <div className="mt-3 text-center">
-              <p
-                className="font-display uppercase leading-tight"
-                style={{
-                  fontSize: "clamp(0.85rem, 1.1vw, 1.05rem)",
-                  letterSpacing: "0.03em",
-                }}
+              {hrefLabel ?? "Ver tudo"} →
+            </Link>
+          )}
+          {canPage && (
+            <div className="hidden items-center gap-2 sm:flex">
+              <button
+                type="button"
+                onClick={prev}
+                aria-label="Anterior"
+                disabled={offset === 0}
+                className="flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-30"
+                style={{ borderColor: "var(--border)" }}
               >
-                {p.title}
-              </p>
-              <p className="mt-1 text-xs tabular-nums text-muted">{p.price}</p>
+                <span aria-hidden>‹</span>
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                aria-label="Próximo"
+                disabled={offset >= maxOffset}
+                className="flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-30"
+                style={{ borderColor: "var(--border)" }}
+              >
+                <span aria-hidden>›</span>
+              </button>
             </div>
-          </Link>
-        ))}
+          )}
+        </div>
       </div>
+      <ul className="hidden grid-cols-4 gap-5 sm:grid">
+        {slice.map((p) => (
+          <li key={p.handle}>
+            <ProductCard product={p} sizes="(min-width: 640px) 25vw, 50vw" />
+          </li>
+        ))}
+      </ul>
+      <ul className="hide-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 sm:hidden">
+        {products.map((p) => (
+          <li key={p.handle} className="w-[62vw] shrink-0 snap-start">
+            <ProductCard product={p} sizes="62vw" />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

@@ -70,7 +70,7 @@ export function VistaAgoraCarousel({ products }: Props) {
               className="group relative block shrink-0 snap-center"
               style={{
                 width: "min(40vw, 320px)",
-                aspectRatio: "3 / 4",
+                aspectRatio: "4 / 5",
                 transform: isCenter ? "scale(1.15)" : "scale(0.85)",
                 opacity: isCenter ? 1 : 0.55,
                 transition:
@@ -81,9 +81,7 @@ export function VistaAgoraCarousel({ products }: Props) {
             >
               <div
                 className="relative h-full w-full overflow-hidden rounded-2xl"
-                style={{
-                  background: "color-mix(in srgb, var(--fg) 6%, var(--bg))",
-                }}
+                style={{ background: "#ffffff" }}
               >
                 <Image
                   src={product.image}

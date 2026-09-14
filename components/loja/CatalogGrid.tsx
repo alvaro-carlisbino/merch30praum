@@ -1,53 +1,40 @@
-import Image from "next/image";
 import Link from "next/link";
-export type CatalogItem = {
-  id: string;
-  href: string;
-  image: string;
-  title: string;
-  price: string;
-};
+import type { CMSProduct } from "@/lib/shop/static-products";
+import { ProductCard } from "./ProductCard";
+
 interface Props {
-  items: CatalogItem[];
+  items: CMSProduct[];
+  emptyHref?: string;
 }
-export function CatalogGrid({ items }: Props) {
+
+export function CatalogGrid({ items, emptyHref = "/catalogo" }: Props) {
+  if (items.length === 0) {
+    return (
+      <div
+        className="flex flex-col items-start gap-4 rounded-2xl border p-8 sm:p-10"
+        style={{ borderColor: "var(--border)" }}
+      >
+        <p className="font-display text-2xl uppercase leading-none sm:text-3xl">
+          Nada com esse filtro.
+        </p>
+        <p className="max-w-md text-sm text-muted">
+          Ou a peça esgotou, ou a combinação de tamanho e artista não existe nesse drop.
+        </p>
+        <Link
+          href={emptyHref}
+          className="inline-flex items-center rounded-full border px-5 py-2.5 text-[11px] uppercase tracking-[0.22em] transition-colors hover:bg-white hover:text-black"
+          style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+        >
+          Limpar filtros
+        </Link>
+      </div>
+    );
+  }
   return (
     <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6">
-      {items.map((p) => (
-        <li key={p.id}>
-          <Link
-            href={p.href}
-            data-cursor={p.title}
-            className="group block"
-          >
-            <div
-              className="relative overflow-hidden rounded-2xl"
-              style={{
-                aspectRatio: "4 / 5",
-                background: "color-mix(in srgb, var(--fg) 6%, var(--bg))",
-              }}
-            >
-              <Image
-                src={p.image}
-                alt={p.title}
-                fill
-                sizes="(min-width: 640px) 25vw, 50vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-              />
-            </div>
-            <div className="mt-3 text-center">
-              <p
-                className="font-display uppercase leading-tight"
-                style={{
-                  fontSize: "clamp(0.85rem, 1.1vw, 1.05rem)",
-                  letterSpacing: "0.03em",
-                }}
-              >
-                {p.title}
-              </p>
-              <p className="mt-1 text-xs tabular-nums text-muted">{p.price}</p>
-            </div>
-          </Link>
+      {items.map((p, i) => (
+        <li key={p.handle}>
+          <ProductCard product={p} priority={i < 3} />
         </li>
       ))}
     </ul>

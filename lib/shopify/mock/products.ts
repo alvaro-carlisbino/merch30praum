@@ -1,7 +1,7 @@
 import type { ShopifyProduct } from "../types";
 
 // Catálogo real da 30praum.store (Shopify público), capturado em jul/2026.
-// Fotos servidas direto do CDN oficial da loja (cdn.shopify.com, liberado no next.config).
+// Fotos hospedadas em public/products (normalizadas a partir das originais da loja).
 
 const BRL = "BRL";
 
@@ -57,8 +57,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Item oficial do drop, edição corrente da loja. Enviado em security bag lacrada.",
     price: "49.00",
     tags: ["artist:brandao", "acessorio"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/BANDANA_BLACK.png?v=1778613362&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/BANDANA_BLACK.png?v=1778613362&width=1200",
+    imagePrimary: "/products/bandana-isso-e-trap-preta-merch-brandao-oficial/1.webp",
+    imageAlt: "/products/bandana-isso-e-trap-preta-merch-brandao-oficial/1.webp",
     optionName: "Tamanho",
     optionValues: ["tamanho único"],
     variants: [
@@ -71,8 +71,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "129.00",
     tags: ["artist:brandao", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/REGATABLACK_1.png?v=1778614419&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/REGATABLACK_2.png?v=1778614419&width=1200",
+    imagePrimary: "/products/regata-canelada-preta-merch-brandao-oficial/1.webp",
+    imageAlt: "/products/regata-canelada-preta-merch-brandao-oficial/2.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -90,8 +90,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Felpa pesada, modelagem oversized do drop oficial. Enviado em security bag lacrada.",
     price: "299.00",
     tags: ["artist:brandao", "moletom"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/HOODIE_BLACK_1.png?v=1778685273&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/Design_sem_nome_4.jpg?v=1778851289&width=1200",
+    imagePrimary: "/products/blusa-de-moletom-com-ziper-preta-merch-brandao-oficial/1.webp",
+    imageAlt: "/products/moletom-com-ziper-merch-brandao/4.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -109,8 +109,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "129.00",
     tags: ["artist:brandao", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/RAIOX_BLACK_f7f5be3f-2738-4d1e-9e6d-50dc261bd6c6.png?v=1778614597&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/RAIOX_BLACK_f7f5be3f-2738-4d1e-9e6d-50dc261bd6c6.png?v=1778614597&width=1200",
+    imagePrimary: "/products/camiseta-preta-merch-brandao-oficial/1.webp",
+    imageAlt: "/products/camiseta-preta-merch-brandao-oficial/1.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -128,8 +128,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Item oficial do drop, edição corrente da loja. Enviado em security bag lacrada.",
     price: "49.00",
     tags: ["artist:brandao", "acessorio"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/BANDANA_WHITE.png?v=1778613479&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/BANDANA_WHITE.png?v=1778613479&width=1200",
+    imagePrimary: "/products/bandana-merch-brandao/1.webp",
+    imageAlt: "/products/bandana-merch-brandao/1.webp",
     optionName: "Tamanho",
     optionValues: ["Tamanho único"],
     variants: [
@@ -142,8 +142,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "129.00",
     tags: ["artist:brandao", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/REGATAWHITE_1.png?v=1778613955&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/REGATAWHITE_2.png?v=1778613965&width=1200",
+    imagePrimary: "/products/regata-canelada-merch-brandao/1.webp",
+    imageAlt: "/products/regata-canelada-merch-brandao/2.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -161,8 +161,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Felpa pesada, modelagem oversized do drop oficial. Enviado em security bag lacrada.",
     price: "299.00",
     tags: ["artist:brandao", "moletom"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/HOODIE_WHITE_1.png?v=1778685159&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/HOODIE_WHITE_COSTAS.png?v=1778613551&width=1200",
+    imagePrimary: "/products/moletom-com-ziper-merch-brandao/1.webp",
+    imageAlt: "/products/moletom-com-ziper-merch-brandao/2.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -180,8 +180,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "129.00",
     tags: ["artist:brandao", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/SIMBOLOS_FRENTE.png?v=1778614372&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/SIMBOLOS_COSTAS.png?v=1778614372&width=1200",
+    imagePrimary: "/products/camiseta-merch-brandao/1.webp",
+    imageAlt: "/products/camiseta-merch-brandao/2.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -199,8 +199,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "189.00",
     tags: ["artist:brandao", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/LONGSLEEVE_1_0b38e8a8-5e3e-4255-a9b0-7e129419b40a.png?v=1778614117&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/Design_sem_nome_8.jpg?v=1778853009&width=1200",
+    imagePrimary: "/products/camiseta-manga-longa-preta-merch-brandao-oficial/1.webp",
+    imageAlt: "/products/camiseta-off-white-merch-brandao-oficial/2.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -218,8 +218,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "129.00",
     tags: ["artist:brandao", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/RAIOX_WHITE.png?v=1778614753&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/Design_sem_nome_8.jpg?v=1778853009&width=1200",
+    imagePrimary: "/products/camiseta-off-white-merch-brandao-oficial/1.webp",
+    imageAlt: "/products/camiseta-off-white-merch-brandao-oficial/2.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -237,8 +237,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "189.00",
     tags: ["artist:brandao", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/Designsemnome_2.jpg?v=1778673161&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/Design_sem_nome_5.jpg?v=1778851429&width=1200",
+    imagePrimary: "/products/camiseta-manga-longa-preta-merch-brandao-oficial-1/1.webp",
+    imageAlt: "/products/camiseta-manga-longa-preta-merch-brandao-oficial-1/2.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -256,8 +256,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Item oficial do drop, edição corrente da loja. Enviado em security bag lacrada.",
     price: "129.00",
     tags: ["artist:matue", "acessorio"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/BoneX_Preto.png?v=1771935851&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/8cdd20f3-b716-4e2f-9472-ebdef78a62c9_89774b3e-db04-43ae-8d83-bc9ca3aa7c7f.jpg?v=1771943845&width=1200",
+    imagePrimary: "/products/bone-xtranho-preto/1.webp",
+    imageAlt: "/products/bone-xtranho-preto/2.webp",
     optionName: "Tamanho",
     optionValues: ["Tamanho único"],
     variants: [
@@ -270,8 +270,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Item oficial do drop, edição corrente da loja. Enviado em security bag lacrada.",
     price: "129.00",
     tags: ["artist:matue", "acessorio"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/BoneX_Branco.png?v=1771935832&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/8cdd20f3-b716-4e2f-9472-ebdef78a62c9_01c81141-9e85-4831-941b-b074a632a74d.jpg?v=1771943902&width=1200",
+    imagePrimary: "/products/bone-xtranho-branco/1.webp",
+    imageAlt: "/products/bone-xtranho-branco/2.webp",
     optionName: "Tamanho",
     optionValues: ["Tamanho único"],
     variants: [
@@ -284,8 +284,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Item oficial do drop, edição corrente da loja. Enviado em security bag lacrada.",
     price: "99.00",
     tags: ["artist:matue", "acessorio"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/Matue-XTRANHO_19.png?v=1766076500&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/Matue-XTRANHO_19.png?v=1766076500&width=1200",
+    imagePrimary: "/products/protetor-bucal-xtranho-preto/1.webp",
+    imageAlt: "/products/protetor-bucal-xtranho-preto/1.webp",
     optionName: "Tamanho",
     optionValues: ["Tamanho único"],
     variants: [
@@ -298,8 +298,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Felpa pesada, modelagem oversized do drop oficial. Enviado em security bag lacrada.",
     price: "299.00",
     tags: ["artist:matue", "moletom"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/HOODIE-ZIP-COSTAS.png?v=1771938782&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/HOODIE-ZIP-FRENTE_1_1.png?v=1771938792&width=1200",
+    imagePrimary: "/products/moletom-com-ziper-xtranho-preto/1.webp",
+    imageAlt: "/products/moletom-com-ziper-xtranho-preto/2.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -317,8 +317,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "129.00",
     tags: ["artist:matue", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/MOCKUP-X-ESTONADA.png?v=1766075754&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/8cdd20f3-b716-4e2f-9472-ebdef78a62c9.jpg?v=1771944082&width=1200",
+    imagePrimary: "/products/regata-xtranho-estonada/1.webp",
+    imageAlt: "/products/regata-xtranho-estonada/2.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -336,8 +336,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "129.00",
     tags: ["artist:matue", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/MOCKUP-XDISTRESS.png?v=1766075770&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/8cdd20f3-b716-4e2f-9472-ebdef78a62c9_ba8d979c-1da8-47f8-9bf6-07eb4312017b.jpg?v=1771943798&width=1200",
+    imagePrimary: "/products/camiseta-xtranho-preta/1.webp",
+    imageAlt: "/products/camiseta-xtranho-preta/2.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -355,8 +355,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "129.00",
     tags: ["artist:matue", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/MOCKUP-BASEFACE.png?v=1766075781&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/8cdd20f3-b716-4e2f-9472-ebdef78a62c9_0081715d-21ef-4ba0-b7d7-1ca8ceaef181.jpg?v=1771951130&width=1200",
+    imagePrimary: "/products/camiseta-xtranho-off-white/1.webp",
+    imageAlt: "/products/camiseta-xtranho-off-white/2.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG", "G1"],
     variants: [
@@ -374,8 +374,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "149.00",
     tags: ["artist:teto", "artist:wiu", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/tetowiu2.png?v=1769602296&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/tetowiu2.png?v=1769602296&width=1200",
+    imagePrimary: "/products/camiseta-isso-e-brasil-teto-wiu-merch-oficial/1.webp",
+    imageAlt: "/products/camiseta-isso-e-brasil-teto-wiu-merch-oficial/1.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG"],
     variants: [
@@ -392,8 +392,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "149.00",
     tags: ["artist:teto", "artist:wiu", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/tetowiu1.png?v=1769602310&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/tetowiu1.png?v=1769602310&width=1200",
+    imagePrimary: "/products/camiseta-colapso-global-teto-wiu-merch-oficial/1.webp",
+    imageAlt: "/products/camiseta-colapso-global-teto-wiu-merch-oficial/1.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG", "EGG"],
     variants: [
@@ -410,8 +410,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Item oficial do drop, edição corrente da loja. Enviado em security bag lacrada.",
     price: "399.00",
     tags: ["artist:matue", "acessorio"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/e3761e51-2bef-4c71-939a-bfba4310ca3a_ac915b31-101a-48fb-92a8-25270751a592.jpg?v=1732395968&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/matue-toyfeed_59336450-ab1b-4fb4-bf97-d76f81e59979.png?v=1732395982&width=1200",
+    imagePrimary: "/products/boneco-matue-rock-in-rio/1.webp",
+    imageAlt: "/products/boneco-matue-rock-in-rio/2.webp",
     optionName: "Tamanho",
     optionValues: ["Tamanho único"],
     variants: [
@@ -424,8 +424,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "111.00",
     tags: ["artist:matue", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/PORTAL_FRENTE_mockup_atualizado.png?v=1758720964&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/PORTAL_FRENTE_mockup_atualizado.png?v=1758720964&width=1200",
+    imagePrimary: "/products/camiseta-portal-off-white/1.webp",
+    imageAlt: "/products/camiseta-portal-off-white/1.webp",
     optionName: "Tamanho",
     optionValues: ["PP", "P", "M", "G", "GG"],
     variants: [
@@ -442,8 +442,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Item oficial do drop, edição corrente da loja. Enviado em security bag lacrada.",
     price: "111.00",
     tags: ["artist:matue", "acessorio"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/12.png?v=1731082554&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/9.png?v=1731082558&width=1200",
+    imagePrimary: "/products/bone-trucker-333/1.webp",
+    imageAlt: "/products/bone-trucker-333/2.webp",
     optionName: "Tamanho",
     optionValues: ["Tamanho único"],
     variants: [
@@ -456,8 +456,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "111.00",
     tags: ["artist:matue", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/13.png?v=1731083044&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/13.png?v=1731083044&width=1200",
+    imagePrimary: "/products/camiseta-portal-preta/1.webp",
+    imageAlt: "/products/camiseta-portal-preta/1.webp",
     optionName: "Tamanho",
     optionValues: ["PP", "P", "M", "G", "GG"],
     variants: [
@@ -474,8 +474,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Felpa pesada, modelagem oversized do drop oficial. Enviado em security bag lacrada.",
     price: "333.00",
     tags: ["artist:matue", "moletom"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/21.png?v=1731083178&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/2.png?v=1731083182&width=1200",
+    imagePrimary: "/products/hoodie-333-off-white/1.webp",
+    imageAlt: "/products/hoodie-333-off-white/2.webp",
     optionName: "Tamanho",
     optionValues: ["PP", "P", "M", "G", "GG"],
     variants: [
@@ -492,8 +492,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "111.00",
     tags: ["artist:matue", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/19.png?v=1731082689&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/O_SOM_COSTAS_mockup_atualizado.png?v=1758721046&width=1200",
+    imagePrimary: "/products/camiseta-o-som-off-white/1.webp",
+    imageAlt: "/products/camiseta-o-som-off-white/2.webp",
     optionName: "Tamanho",
     optionValues: ["PP", "P", "M", "G", "GG"],
     variants: [
@@ -510,8 +510,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "111.00",
     tags: ["artist:matue", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/18.png?v=1731083010&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/4.png?v=1731083103&width=1200",
+    imagePrimary: "/products/camiseta-o-som-preta/1.webp",
+    imageAlt: "/products/camiseta-o-som-preta/2.webp",
     optionName: "Tamanho",
     optionValues: ["PP", "P", "M", "G", "GG"],
     variants: [
@@ -528,8 +528,8 @@ export const MOCK_PRODUCTS: ShopifyProduct[] = [
     description: "Peça oficial do drop, malha pesada com estampa serigrafada. Enviado em security bag lacrada.",
     price: "111.00",
     tags: ["artist:matue", "camiseta"],
-    imagePrimary: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/10.png?v=1731082539&width=1200",
-    imageAlt: "https://cdn.shopify.com/s/files/1/0445/4980/0093/files/5.png?v=1731082543&width=1200",
+    imagePrimary: "/products/baby-tee-333/1.webp",
+    imageAlt: "/products/baby-tee-333/2.webp",
     optionName: "Tamanho",
     optionValues: ["P", "M", "G", "GG"],
     variants: [
