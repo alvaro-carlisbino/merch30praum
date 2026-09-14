@@ -1,11 +1,17 @@
-import { getCurrentPlantao } from "@/lib/cms/plantao";
-export const metadata = {
-  title: "Info · Plantão 2026",
-  description:
-    "Local, regras de entrada, acessibilidade, faixa etária, política de meia e tudo o que você precisa saber antes de ir.",
-};
-export default async function PlantaoInfoPage() {
+import { getCurrentPlantao, getPastPlantao } from "@/lib/cms/plantao";
+export async function generateMetadata() {
   const current = await getCurrentPlantao();
+  return {
+    title: `Info · Plantão ${current.year}`,
+    description:
+      "Local, regras de entrada, acessibilidade, faixa etária, política de meia e tudo o que você precisa saber antes de ir.",
+  };
+}
+export default async function PlantaoInfoPage() {
+  const [current, past] = await Promise.all([getCurrentPlantao(), getPastPlantao()]);
+  const last = past[0] ?? null;
+  const faqSource = current.infoFAQ.length > 0 ? current : last ?? current;
+  const faqIsReference = faqSource !== current;
   return (
     <article>
       <section className="mx-auto max-w-screen-2xl px-4 sm:px-8 pt-24 pb-16">
@@ -19,6 +25,12 @@ export default async function PlantaoInfoPage() {
           Informação oficial do Plantão {current.year}. Se algo aqui contradiz uma rede social,
           vale o que está aqui.
         </p>
+        {faqIsReference && (
+          <p className="mt-4 max-w-2xl text-sm opacity-60">
+            Data confirmada. Local, portões e regras seguem como referência da edição {faqSource.year} até a
+            organização publicar as de {current.year}.
+          </p>
+        )}
       </section>
       <section
         className="border-t border-b"
@@ -41,7 +53,7 @@ export default async function PlantaoInfoPage() {
           </div>
           <div>
             <p className="text-[10px] uppercase tracking-[0.3em] opacity-60">Local</p>
-            <p className="mt-2 font-display text-2xl">{current.venue}</p>
+            <p className="mt-2 font-display text-2xl">{current.venue === "A confirmar" ? "A confirmar" : current.venue}</p>
             <p className="text-xs opacity-65">
               {current.city} · {current.state}
             </p>
@@ -61,7 +73,7 @@ export default async function PlantaoInfoPage() {
             Tira-dúvidas.
           </h2>
 <div className="mt-12 grid gap-3">
-          {current.infoFAQ.map((q, idx) => (
+          {faqSource.infoFAQ.map((q, idx) => (
             <details
               key={q.question}
               className="border p-6 group"

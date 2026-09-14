@@ -112,7 +112,6 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
       "A segunda edição confirmou: Fortaleza é capital do trap. 30 mil pessoas na Beira-Mar, R$5 milhões investidos, 17 artistas no palco. O Plantão saiu de projeto independente pra referência do gênero no país.",
     posterImage: IMG.plantaoPoster24,
     heroImage: IMG.plantaoHero24,
-    aftermovieUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     lineup: [],
     sectors: [],
     ticketsUrl: "",
@@ -146,7 +145,6 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
       "A terceira edição abriu o jogo pra quem não estava em Fortaleza. Transmissão oficial no YouTube atraiu quase 500 mil espectadores únicos. O Plantão deixa de ser local pra ser nacional sem perder a quebrada.",
     posterImage: IMG.plantaoPoster25,
     heroImage: IMG.plantaoHero25,
-    aftermovieUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     lineup: [],
     sectors: [],
     ticketsUrl: "",
@@ -172,14 +170,12 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     venue: "Marina Park",
     city: "Fortaleza",
     state: "CE",
-    status: "live",
+    status: "past",
     tagline: "10 anos de 30praum · uma noite às margens da Beira-Mar",
     manifesto:
-      "A 3ª edição marca os 10 anos da 30praum. Reúne a base, os novos e os convidados: Matuê, Teto, Wiu, Brandão85 e mais 7 nomes, em um dia só, frente ao mar. Quem viu sabe: não é um show, é uma cena se reconhecendo.",
+      "A edição de 2026 marcou os 10 anos da 30praum. Reuniu a base, os novos e os convidados: Matuê, Teto, Wiu, Brandão85 e mais 7 nomes, em um dia só, frente ao mar. Quem viu sabe: não foi um show, foi uma cena se reconhecendo.",
     posterImage: IMG.plantaoPoster26,
     heroImage: IMG.plantaoHero26,
-    heroVideoUrl: "/assets/plantao26-loop.mp4",
-    aftermovieUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     lineup: lineup2026,
     sectors: [
       { name: "Front Boladão", priceFrom: 650, status: "soldout", perks: "Banheiro exclusivo · brindes oficiais" },
@@ -247,9 +243,9 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     city: "Fortaleza",
     state: "CE",
     status: "upcoming",
-    tagline: "Em breve · prepare-se",
+    tagline: "A próxima edição já está em construção",
     manifesto:
-      "A quinta edição já está em construção. Mais palco. Mais nomes. Mais Brasil. Cadastre-se na lista de espera pra receber lineup e pré-venda antes de qualquer outro lugar.",
+      "Depois de dez anos de casa e quatro edições na Beira-Mar, o Plantão volta em 2027. Line-up, setores e pré-venda saem primeiro pra quem está na lista de espera.",
     posterImage: IMG.plantaoPoster26,
     heroImage: IMG.plantaoHero26,
     lineup: [],
@@ -260,7 +256,7 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     infoFAQ: [],
   },
 };
-export const CURRENT_PLANTAO: PlantaoSlug = "plantao-2026";
+export const CURRENT_PLANTAO: PlantaoSlug = "plantao-2027";
 export function getPlantao(slug: string): PlantaoEdition | undefined {
   return PLANTAO_EDITIONS[slug as PlantaoSlug];
 }

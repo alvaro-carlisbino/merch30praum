@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllAlbums, getAlbum } from "@/lib/cms/albums";
 import { getArtist } from "@/lib/cms/artists";
-import { Marquee } from "@/components/motion/Marquee";
 import { PhysicalMedia } from "@/components/ui/PhysicalMedia";
 interface Params {
   slug: string;
@@ -115,12 +114,21 @@ export default async function AlbumPage({
           </div>
         </div>
       </section>
-      <Marquee
-        items={album.tracks.map((t) => t.title.toUpperCase())}
-        speed={60}
-        className="font-display py-5 tracking-[0.2em] text-2xl sm:text-4xl border-y"
-        separatorColor={album.accentHex}
-      />
+      <div
+        className="border-y px-4 py-6 sm:px-8"
+        style={{ borderColor: "rgba(255,255,255,0.14)" }}
+      >
+        <p className="mx-auto max-w-screen-2xl font-display text-xl uppercase leading-snug tracking-[0.12em] sm:text-3xl">
+          {album.tracks.map((t, i) => (
+            <span key={t.title}>
+              {t.title}
+              {i < album.tracks.length - 1 && (
+                <span aria-hidden className="mx-3" style={{ color: album.accentHex }}>·</span>
+              )}
+            </span>
+          ))}
+        </p>
+      </div>
       <section className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-20 grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-16">
         <p className="text-[10px] uppercase tracking-[0.3em] text-white/55">
             Manifesto

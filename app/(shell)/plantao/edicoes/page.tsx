@@ -2,7 +2,7 @@ import Image from "next/image";
 import { getPastPlantao, getCurrentPlantao } from "@/lib/cms/plantao";
 export const metadata = {
   title: "Edições anteriores · Plantão Festival",
-  description: "Histórico do Plantão Festival: 2024, 2025 e 2026. Aftermovies, fotos e dados de cada noite.",
+  description: "Histórico do Plantão Festival, edição por edição: fotos, números e o que cada noite deixou.",
 };
 export default async function PlantaoEdicoesPage() {
   const current = await getCurrentPlantao();
@@ -18,13 +18,13 @@ export default async function PlantaoEdicoesPage() {
           Cada noite, <br /> uma história.
         </h1>
         <p className="mt-8 max-w-2xl text-base sm:text-xl text-fg/85 leading-relaxed">
-          Três edições. Mais de 50 mil pessoas presenciais. Quase um milhão online. O Plantão saiu
-          de projeto independente pra referência nacional sem sair de Fortaleza.
+          Três edições na Beira-Mar. Mais de 70 mil pessoas presenciais. Quase um milhão online. O
+          Plantão saiu de projeto independente pra referência nacional sem sair de Fortaleza.
         </p>
       </section>
       <div className="space-y-24 sm:space-y-32 pb-24">
-        {all.map((ed, idx) => (
-          <section className="mx-auto max-w-screen-2xl px-4 sm:px-8">
+        {all.map((ed) => (
+          <section key={ed.slug} id={ed.slug} className="mx-auto max-w-screen-2xl px-4 sm:px-8 scroll-mt-20">
               <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end mb-8">
                 <div>
                   <h2
@@ -42,18 +42,18 @@ export default async function PlantaoEdicoesPage() {
                   <div>
                     <dt className="text-[10px] uppercase tracking-[0.3em] opacity-60">Público</dt>
                     <dd className="mt-2 font-display text-2xl">
-                      {ed.stats.attendees ? ed.stats.attendees.toLocaleString("pt-BR") : "—"}
+                      {ed.stats.attendees ? ed.stats.attendees.toLocaleString("pt-BR") : "a definir"}
                     </dd>
                   </div>
                   <div>
                     <dt className="text-[10px] uppercase tracking-[0.3em] opacity-60">Online</dt>
                     <dd className="mt-2 font-display text-2xl">
-                      {ed.stats.onlineViewers ? `${(ed.stats.onlineViewers / 1000).toFixed(0)}K` : "—"}
+                      {ed.stats.onlineViewers ? `${(ed.stats.onlineViewers / 1000).toFixed(0)}K` : "a definir"}
                     </dd>
                   </div>
                   <div>
                     <dt className="text-[10px] uppercase tracking-[0.3em] opacity-60">Investimento</dt>
-                    <dd className="mt-2 font-display text-2xl">{ed.stats.investment ?? "—"}</dd>
+                    <dd className="mt-2 font-display text-2xl">{ed.stats.investment ?? "a definir"}</dd>
                   </div>
                 </dl>
               </div>

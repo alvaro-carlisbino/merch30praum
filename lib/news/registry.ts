@@ -21,6 +21,71 @@ export type NewsPost = {
 };
 export const NEWS_POSTS: NewsPost[] = [
   {
+    slug: "plantao-2027-lista-de-espera",
+    title: "Plantão 2027 abre lista de espera: line-up e pré-venda saem primeiro pra quem se inscrever",
+    excerpt:
+      "A próxima edição do festival próprio da 30praum já tem data: 24 de abril de 2027, em Fortaleza. Setores e nomes chegam antes na lista.",
+    heroImage: "/figma-plantao/stage-2025.jpg",
+    publishedAt: "2026-09-14T10:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["plantao"],
+    body: [
+      "Depois de dez anos de casa e de uma edição de aniversário com vinte mil pessoas na Beira-Mar, o Plantão confirma a volta em 2027. A data é 24 de abril. O local segue em negociação e será anunciado junto com os primeiros nomes.",
+      "A novidade é o formato da comunicação: em vez de soltar tudo no Instagram de uma vez, a 30praum abriu uma lista de espera no site oficial. Quem está na lista recebe line-up, mapa de setores e o link da pré-venda antes de qualquer canal público.",
+      "Vale o aviso de sempre. Venda oficial só pela 30praum. Qualquer ingresso do Plantão 2027 anunciado hoje é golpe.",
+    ],
+  },
+  {
+    slug: "xtranho-tour-europa-lisboa-porto-madrid",
+    title: "XTRANHO Tour atravessa o Atlântico: Matuê faz Lisboa, Porto e Madrid em setembro",
+    excerpt:
+      "A turnê do terceiro álbum sai do Brasil pela primeira vez. Lisboa abre a perna europeia no dia 12, com Porto e Madrid na sequência.",
+    heroImage: "/figma-home/hero-matue.jpg",
+    publishedAt: "2026-08-20T11:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["lancamento"],
+    relatedArtists: ["matue"],
+    relatedReleases: ["xtranho"],
+    body: [
+      "XTRANHO fechou o primeiro semestre com Rio, São Paulo, Belo Horizonte e Brasília. O segundo começa fora do país: Sagres Campo Pequeno, em Lisboa, no dia 12 de setembro, seguido de Coliseu do Porto e La Riviera, em Madrid.",
+      "É a primeira vez que um show completo da 30praum acontece na Europa. A produção leva o mesmo palco da turnê brasileira, com o set do álbum na íntegra e a parte visual desenhada pra arena.",
+      "As datas de Porto e Madrid ainda estão em fase de confirmação de venda. A agenda oficial do site é atualizada assim que cada praça abre.",
+    ],
+  },
+  {
+    slug: "drop-isso-e-trap-brandao85-merch",
+    title: "Isso é Trap chega à loja: o primeiro drop completo do Brandão85 pela 30praum",
+    excerpt:
+      "Onze peças entre camisetas, regatas, moletons e bandanas, com as estampas POMBA, RAIO X e WARZONE. Tudo enviado em security bag lacrada.",
+    heroImage: "/products/regata-canelada-preta-merch-brandao-oficial/3.webp",
+    publishedAt: "2026-07-30T14:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["lancamento", "holding"],
+    relatedArtists: ["brandao"],
+    relatedReleases: ["isso-e-trap-vol-2"],
+    body: [
+      "Brandão85 entrou na 30praum em setembro de 2024 e demorou um ano e meio pra soltar o disco. O merch veio junto com a era: onze peças que traduzem o xerox de Caponga em tecido pesado.",
+      "As estampas seguem o universo do álbum. A pomba armada da capa vira regata e manga longa. RAIO X e WARZONE ganham camiseta e moletom com zíper. As bandanas ISSO É TRAP, em preto e branco, fecham o conjunto.",
+      "Alguns tamanhos já esgotaram nas primeiras semanas. A loja oficial mostra o estoque real por tamanho e avisa quando restam as últimas unidades.",
+    ],
+  },
+  {
+    slug: "plantao-2026-o-que-ficou",
+    title: "Plantão 2026: o que ficou da noite de dez anos",
+    excerpt:
+      "Vinte mil pessoas no Marina Park, meio milhão acompanhando online e onze nomes no palco. Um balanço da edição de aniversário.",
+    heroImage: "/figma-plantao/crowd-2026.jpg",
+    publishedAt: "2026-05-02T09:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["plantao", "bastidores"],
+    relatedArtists: ["matue", "teto", "wiu", "brandao"],
+    body: [
+      "A noite de 25 de abril foi a mais longa da história do festival: dez horas de show, da abertura com DJ Thales ao encerramento com XTRANHO na íntegra. No meio, Teto e Wiu tocaram Colapso Global completo pela primeira vez em Fortaleza e Brandão85 apresentou Isso é Trap Vol.02 em casa.",
+      "Os números confirmam o tamanho da coisa: vinte mil pessoas presenciais, quase quinhentos mil espectadores únicos na transmissão do YouTube e mais de cinco milhões investidos na estrutura.",
+      "As fotos oficiais, o aftermovie e os bastidores estão reunidos na página de edições. A próxima já está em construção.",
+    ],
+  },
+  {
     slug: "30praum-lanca-site-oficial",
     title: "30praum estreia plataforma oficial: gravadora, festival e holding em um só endereço",
     excerpt:

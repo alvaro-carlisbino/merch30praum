@@ -111,7 +111,7 @@ export default async function PartnerCasePage({
               className="mt-12 border-l-2 pl-5 max-w-md italic text-white/75 text-lg"
               style={{ borderColor: partner.brandColor }}
             >
-              "{partner.quote}"
+              &ldquo;{partner.quote}&rdquo;
             </blockquote>
 <div className="grid gap-3 content-start">
             {artists.length > 0 && (

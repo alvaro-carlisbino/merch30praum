@@ -153,7 +153,9 @@ export default async function ShowsPage() {
         </h1>
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/80 sm:text-base">
           Agenda oficial do roster: Plantão Festival, tours por capital,
-          festivais convidados. {upcoming.length} datas confirmadas.
+          festivais convidados. {upcoming.length === 0
+            ? "Próximas datas em breve."
+            : `${upcoming.length} ${upcoming.length === 1 ? "data" : "datas"} na agenda. As marcadas como "em breve" ainda não têm venda aberta.`}
         </p>
       </section>
       <section className="mx-auto max-w-screen-2xl px-4 pb-16 sm:px-8 sm:pb-20">

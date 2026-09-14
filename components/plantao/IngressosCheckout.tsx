@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 type Tier = {
   id: string;
   name: string;
@@ -47,8 +48,14 @@ function fmt(value: number) {
     minimumFractionDigits: 2,
   }).format(value);
 }
-export function IngressosCheckout() {
+interface Props {
+  editionTitle: string;
+  dateLabel: string;
+  year: number;
+}
+export function IngressosCheckout({ editionTitle, dateLabel, year }: Props) {
   const [tierId, setTierId] = useState<string>("front");
+  const [orderId] = useState(() => Math.floor(Math.random() * 10000).toString().padStart(4, "0"));
   const [qty, setQty] = useState(1);
   const [meia, setMeia] = useState(false);
   const [step, setStep] = useState<"choose" | "data" | "payment" | "success">(
@@ -356,16 +363,16 @@ export function IngressosCheckout() {
               gente no @plantaofestival.
             </p>
             <p className="mx-auto max-w-md text-[10px] uppercase tracking-[0.3em] text-muted">
-              #30P-2026-{Math.floor(Math.random() * 10000).toString().padStart(4, "0")}
+              #30P-{year}-{orderId}
             </p>
             <div className="flex flex-wrap justify-center gap-3 pt-4">
-              <a
+              <Link
                 href="/plantao"
                 className="inline-flex items-center rounded-full border px-6 py-3 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-white hover:text-black"
                 style={{ borderColor: "var(--border)" }}
               >
                 Voltar pro festival
-              </a>
+              </Link>
               <button
                 type="button"
                 onClick={reset}
@@ -392,10 +399,10 @@ export function IngressosCheckout() {
           className="mt-3 font-display uppercase leading-tight"
           style={{ fontSize: "1.2rem", letterSpacing: "0.01em" }}
         >
-          Plantão Festival 2026
+          {editionTitle}
         </h4>
         <p className="mt-1 text-xs text-fg/70">
-          25 de Abril · Marina Park · Fortaleza/CE
+          {dateLabel}
         </p>
         <dl className="mt-6 space-y-3 border-t pt-5 text-sm" style={{ borderColor: "var(--border)" }}>
           <Row label="Setor" value={tier.name.split(" · ")[0]} />

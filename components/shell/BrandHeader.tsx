@@ -20,7 +20,7 @@ const MENU_LINKS: Array<{
   { href: "/#roster", label: "Roster", sub: "4 universos, 1 casa" },
   { href: "/shows", label: "Shows", sub: "Agenda oficial" },
   { href: "/releases", label: "Lançamentos", sub: "Catálogo aberto" },
-  { href: "/plantao", label: "Plantão", sub: "Festival próprio · 25 abr" },
+  { href: "/plantao", label: "Plantão", sub: "Festival próprio · 2027" },
   { href: "/loja", label: "Loja", sub: "Merch oficial" },
   { href: "/incubadora", label: "Incubadora", sub: "Canal de candidatura" },
   { href: "/parcerias", label: "Parcerias", sub: "Colabs ativas" },

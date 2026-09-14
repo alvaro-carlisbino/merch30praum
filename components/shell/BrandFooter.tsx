@@ -11,6 +11,10 @@ export function BrandFooter() {
             Site oficial da holding 30praum: gravadora · festival · incubadora.
             Sede em Fortaleza desde 2016.
           </p>
+          <p className="mt-4 max-w-sm text-xs leading-relaxed text-fg/80">
+            Merch oficial só aqui e na 30praum.store. Todo pedido sai da casa em
+            security bag lacrada. Perfil que vende por fora não é a gente.
+          </p>
         </div>
         <nav aria-label="Universos" className="space-y-2 text-sm">
           <h3 className="mb-3 text-[10px] uppercase tracking-[0.3em] text-muted">
@@ -71,7 +75,7 @@ export function BrandFooter() {
       <div style={{ borderTop: "1px solid var(--border)" }}>
         <div className="mx-auto flex max-w-screen-2xl flex-wrap items-center justify-between gap-4 px-4 py-5 text-[10px] uppercase tracking-[0.3em] text-muted sm:px-8">
           <span>© 30praum {new Date().getFullYear()} · Fortaleza, CE</span>
-          <span>Site Oficial</span>
+          <span>Site oficial · Loja oficial</span>
         </div>
       </div>
     </footer>

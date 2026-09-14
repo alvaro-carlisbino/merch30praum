@@ -33,7 +33,7 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
     nameBigAspect: "1000 / 1000",
     nameMedium: "/figma-home/name-matue.svg",
     nameMediumAspect: "1000 / 700",
-    stagePhoto: "/figma-artista/matue-stage.png",
+    stagePhoto: "/figma-artista/matue-stage.webp",
     albumCover: "/figma-artista/matue-album-xtranho.png",
     quote: {
       text: "Todo mundo quer ser estrela, mas não tem lugar no Sol.",
@@ -51,14 +51,14 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
     },
   },
   teto: {
-    heroBg: "/figma-home/hero-teto.png",
+    heroBg: "/figma-home/hero-teto.jpg",
     heroBgPositionMobile: "center 20%",
     nameBig: "/figma-home/name-teto.svg",
     nameBigAspect: "1000 / 320",
     nameMedium: "/figma-home/name-teto.svg",
     nameMediumAspect: "1000 / 320",
-    stagePhoto: "/figma-artista/teto-stage.png",
-    albumCover: "/figma-artista/colapso-global-cover.png",
+    stagePhoto: "/figma-artista/teto-stage.webp",
+    albumCover: "/figma-artista/colapso-global-cover.webp",
     quote: {
       text: "Não é fim. É trilha.",
       attribution: "Teto · Colapso Global · 2026",
@@ -82,8 +82,8 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
     nameBigAspect: "1292 / 430",
     nameMedium: "/figma-home/name-wiu.svg",
     nameMediumAspect: "1292 / 430",
-    stagePhoto: "/figma-artista/wiu-stage.png",
-    albumCover: "/figma-artista/colapso-global-cover.png",
+    stagePhoto: "/figma-artista/wiu-stage.webp",
+    albumCover: "/figma-artista/colapso-global-cover.webp",
     quote: {
       text: "Se a saudade matasse, eu já tinha morrido bonito.",
       attribution: "Wiu · Manual de Como Amar Errado · 2022",
@@ -106,8 +106,8 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
     nameBigAspect: "1000 / 340",
     nameMedium: "/figma-home/name-brandao.svg",
     nameMediumAspect: "1000 / 340",
-    stagePhoto: "/figma-artista/brandao-stage.png",
-    albumCover: "/figma-artista/brandao-album-anjo.png",
+    stagePhoto: "/figma-artista/brandao-stage.webp",
+    albumCover: "/figma-artista/brandao-album-anjo.webp",
     quote: {
       text: "Cresci copiando. Agora os outros copiam errado.",
       attribution: "Brandão85 · 85 · 2026",
@@ -120,7 +120,7 @@ const ASSETS: Partial<Record<ArtistSlug, ArtistPageAssets>> = {
     albumStats: {
       lancamento: "15/04/2026",
       duracao: "37min 46s",
-      ouvintes: "125M",
+      ouvintes: "38M",
     },
   },
 };
@@ -139,7 +139,7 @@ export default async function ArtistLanding({
         <h1 className="font-display text-4xl uppercase">{cfg.displayName}</h1>
         <p className="mt-6 max-w-prose text-fg/80">{cfg.bioParagraphs[0]}</p>
         <p className="mt-8 text-sm text-muted">
-          Página em redesign. Assets em breve.
+          Universo em construção.
         </p>
       </section>
     );
