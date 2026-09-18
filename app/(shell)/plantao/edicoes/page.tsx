@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getPastPlantao, getCurrentPlantao } from "@/lib/cms/plantao";
 export const metadata = {
   title: "Edições anteriores · Plantão Festival",
@@ -38,24 +39,39 @@ export default async function PlantaoEdicoesPage() {
                     {ed.status === "live" ? "Edição atual" : ed.status === "upcoming" ? "Próxima edição" : "Edição encerrada"}
                   </p>
                 </div>
-                <dl className="grid grid-cols-3 gap-6 text-sm">
+                {ed.stats.attendees || ed.stats.onlineViewers || ed.stats.investment ? (
+                  <dl className="grid grid-cols-3 gap-6 text-sm">
+                    {ed.stats.attendees ? (
+                      <div>
+                        <dt className="text-[10px] uppercase tracking-[0.3em] opacity-60">Público</dt>
+                        <dd className="mt-2 font-display text-2xl">{ed.stats.attendees.toLocaleString("pt-BR")}</dd>
+                      </div>
+                    ) : null}
+                    {ed.stats.onlineViewers ? (
+                      <div>
+                        <dt className="text-[10px] uppercase tracking-[0.3em] opacity-60">Online</dt>
+                        <dd className="mt-2 font-display text-2xl">{`${(ed.stats.onlineViewers / 1000).toFixed(0)}K`}</dd>
+                      </div>
+                    ) : null}
+                    {ed.stats.investment ? (
+                      <div>
+                        <dt className="text-[10px] uppercase tracking-[0.3em] opacity-60">Investimento</dt>
+                        <dd className="mt-2 font-display text-2xl">{ed.stats.investment}</dd>
+                      </div>
+                    ) : null}
+                  </dl>
+                ) : (
                   <div>
-                    <dt className="text-[10px] uppercase tracking-[0.3em] opacity-60">Público</dt>
-                    <dd className="mt-2 font-display text-2xl">
-                      {ed.stats.attendees ? ed.stats.attendees.toLocaleString("pt-BR") : "a definir"}
-                    </dd>
+                    <p className="text-[10px] uppercase tracking-[0.3em] opacity-60">Lista de espera</p>
+                    <Link
+                      href="/plantao#lista"
+                      className="mt-3 inline-flex items-center rounded-full border px-5 py-2.5 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-white hover:text-black"
+                      style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+                    >
+                      Receber o line-up primeiro →
+                    </Link>
                   </div>
-                  <div>
-                    <dt className="text-[10px] uppercase tracking-[0.3em] opacity-60">Online</dt>
-                    <dd className="mt-2 font-display text-2xl">
-                      {ed.stats.onlineViewers ? `${(ed.stats.onlineViewers / 1000).toFixed(0)}K` : "a definir"}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-[10px] uppercase tracking-[0.3em] opacity-60">Investimento</dt>
-                    <dd className="mt-2 font-display text-2xl">{ed.stats.investment ?? "a definir"}</dd>
-                  </div>
-                </dl>
+                )}
               </div>
               <div className="relative aspect-[21/9] overflow-hidden border" style={{ borderColor: "var(--border)" }}>
                 <Image

@@ -59,6 +59,14 @@ export const BLUR: Record<string, string> = {
   "/figma-plantao/art-right.jpg": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAQCdASoNABAABABoJagAAxbK2eCJs5AA/vWHtBU/6/BiLwx0e3Vyuzg/2hHOtWXoyqxsDJ+6j3tsztmz6ngq/E4g5U6xAp0p7uvcZLVRUYjHCOFHt18VKKwgrnAA",
   "/lineup/tz-da-coronel.jpg": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoJABAABABoJYwCdH8AFcpHqACoAP6mrKtksmKy/8Z2m4C9rJvIYEs/jlDAz9JVnAL4/ayxKE1Jcpuo0VeTEaVz8EPyuiJtq5LHLIAA",
   "/lineup/ajuliacosta.jpg": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoMABAABABoJbACdLoAEJYWNQ80oAD8Xdc5FRfJNMUs7HAOKUAaHfOg9RWjZSVXbDQNOTVqiu7TUYi1uVYblZRVkqSAxtLMy1EAgImnS0b4n6rk97SNHA5/E8XbwwAA",
+  "/lineup/2026/matue.webp": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwAgCdASoNABAABABoJbACdAEfvpMMzi8agADOMfvJBHHBS1KaMPueEPr9OtH7UDrAp7BP6Fzlym5bPEUTqLyXUhNHvMSgmjZWbdvYy3Xtfsho6OOc6hE0YAA=",
+  "/lineup/2026/teto.webp": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAABwAgCdASoNABAABABoJQBOj+AQThbg61gkAs4AAP7ql/RCRw1kbrgnV7c9E5/D8brvn1ZcrIa4HiQHdqOtOiNa8yOPuwd9j7kF/OcJC6s4O5w/hHnGtySAilubsqNdWH5+jpCiHAA=",
+  "/lineup/2026/wiu.webp": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAwAgCdASoNABAABABoJQBOgMW+z6psOveBpAD+nBBFbBfLUXPjyWdfV5cTO1aV703Tt/p3LjQTw94pzlwNSNrwnJIFypn4wEPITws5Sy7YwSUDOKztBu1y6L7jnoQbnw3No1lCdTSnrAAA",
+  "/lineup/2026/brandao.webp": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAABwAgCdASoNABAABABoJYgCdIExgmSfz4ELHf8AAP6a6gmWL4PJQCBB+KKzN+11kWc5R2x9HtsUXcqUKEzYjSNaKWwboj5kNDlGFqDAAmFZQwUw72cAQONbF9dKFCjjrji4EhwnOwbRDnYAAAA=",
+  "/lineup/2026/tz.webp": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADwAQCdASoNABAABABoJbACdADDlDdnHIAA/gq253UPL4H3bnts1713mjA7pjpSPBdY/Hp+VWP6oGnFo18buUkiykWy0Jh1DHcTG79f6s98GdCFfaTMUUN9LobLwz5wbBLDrIAA",
+  "/lineup/2026/ajulia.webp": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAABwAgCdASoNABAABABoJYgCdH8AGAJHevmxw7EAAP7zUvyKEkyZPdQ+Roam4LGrjXghihFw7fdnlt6rb/QEmzfa81AqnRydekk4/m6b0XdCcQa0iGeyOLif/vW0YAAA",
+  "/lineup/2026/alee.webp": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADQAQCdASoNABAABABoJbACdADXBGAn8AD+9HL3xdOWCz56Tgi5YWOGjIieeyd4v+N6TByywk61vGYxAcxeT13BWImFULhKGEkhWUd7Zu+gkLYLQgXmAAAA",
+  "/lineup/2026/ryu.webp": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoNABAABABoJZwAApzr9QIIh8AA/vOCcBYvDczpjjpH8CCM9y9bgPKM2c3M0RBhiFePrpeVOe04h1FSjdvd7OpP0sg9AAAA",
 };
 
 export function blurFor(src: string): string | undefined {

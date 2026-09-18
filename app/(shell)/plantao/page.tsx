@@ -3,12 +3,15 @@ import Image from "next/image";
 import { blurFor } from "@/lib/images/blur-data";
 import { getCurrentPlantao, getPastPlantao } from "@/lib/cms/plantao";
 import { PlantaoCountdown } from "@/components/plantao/PlantaoCountdown";
+import { LineupPoster } from "@/components/plantao/LineupPoster";
+import { LineupGrid } from "@/components/plantao/LineupGrid";
 import { NewsletterCapture } from "@/components/shell/NewsletterCapture";
+import { Reveal } from "@/components/effects/Reveal";
 
-const PLANTAO_RED = "#ff2d5a";
-const HERO_PHOTO = "/figma-plantao/stage-2025.jpg";
-const ART_2026 = "/figma-plantao/hero.jpg";
-const LINEUP_GRID = "/figma-plantao/lineup-grid-2026.webp";
+const RED = "#ff2d5a";
+const INK = "#080205";
+const HERO = "/figma-plantao/stage-2024.jpg";
+const POSTER_2026 = "/figma-plantao/hero.jpg";
 
 function longDate(iso: string) {
   return new Date(`${iso}T12:00:00-03:00`).toLocaleDateString("pt-BR", {
@@ -17,6 +20,7 @@ function longDate(iso: string) {
     year: "numeric",
   });
 }
+
 
 function compact(n: number) {
   return n >= 1_000_000 ? `${(n / 1_000_000).toFixed(n % 1_000_000 ? 1 : 0)}M` : `${Math.round(n / 1000)}K`;
@@ -38,104 +42,173 @@ export default async function PlantaoHubPage() {
   const online = past.reduce((n, e) => n + (e.stats.onlineViewers ?? 0), 0);
 
   const stats = [
-    { label: "Edições", value: String(past.length), foot: `desde ${past[past.length - 1]?.year ?? 2024}` },
-    { label: "Presencial", value: compact(attendees), foot: "cumulativo · Beira-Mar" },
-    { label: "Online", value: compact(online), foot: "audiência YouTube" },
-    { label: "Investimento", value: last?.stats.investment ?? "R$ 5M", foot: `edição ${last?.year ?? ""}` },
+    { value: String(past.length), label: "Edições", foot: `desde ${past[past.length - 1]?.year ?? 2024}` },
+    { value: compact(attendees), label: "Presencial", foot: "acumulado na Beira-Mar" },
+    { value: compact(online), label: "Online", foot: "audiência no YouTube" },
+    { value: "10h", label: "De palco", foot: `na edição ${last?.year ?? ""}` },
   ];
 
   return (
     <>
+      {/* ---------- HERO ---------- */}
       <section
-        className="relative isolate flex w-full items-end overflow-hidden"
-        style={{ minHeight: "min(92svh, 960px)" }}
-        aria-labelledby="proxima-edicao"
+        className="relative isolate flex items-end overflow-hidden"
+        style={{ minHeight: "min(96svh, 1000px)", background: INK }}
+        aria-labelledby="plantao-title"
       >
         <Image
-          src={HERO_PHOTO}
-          alt={last ? `Palco do Plantão ${last.year}` : "Plantão Festival"}
+          src={HERO}
+          alt=""
+          aria-hidden
           fill
           priority
-          quality={80}
+          quality={82}
           sizes="100vw"
-          placeholder={blurFor(HERO_PHOTO) ? "blur" : "empty"}
-          blurDataURL={blurFor(HERO_PHOTO)}
+          placeholder={blurFor(HERO) ? "blur" : "empty"}
+          blurDataURL={blurFor(HERO)}
           className="-z-20 object-cover"
-          style={{ objectPosition: "center 40%" }}
+          style={{ objectPosition: "center 62%" }}
         />
+        {/* topo e base escurecidos para header e transição; meio preservado para a foto respirar */}
         <div
           aria-hidden
           className="absolute inset-0 -z-10"
           style={{
-            background:
-              "linear-gradient(180deg, rgba(6,3,10,0.35) 0%, rgba(6,3,10,0.1) 35%, rgba(6,3,10,0.72) 70%, rgba(6,3,10,0.98) 100%)",
+            background: `linear-gradient(180deg, rgba(8,2,5,0.78) 0%, rgba(8,2,5,0.12) 18%, rgba(8,2,5,0.1) 46%, rgba(8,2,5,0.72) 80%, ${INK} 100%)`,
           }}
         />
-        <div className="mx-auto grid w-full max-w-screen-2xl gap-10 px-4 pb-14 pt-40 sm:px-8 sm:pb-20 lg:grid-cols-[1.4fr_1fr] lg:items-end">
-          <div className="flex flex-col gap-7">
-            <p className="text-[11px] uppercase tracking-[0.3em] text-white/85">
-              {upcoming ? "Próxima edição" : "Edição atual"} · {longDate(current.date)} · {current.city}/{current.state}
-            </p>
-            <h1
-              id="proxima-edicao"
-              className="font-display uppercase leading-[0.82] text-white plantao-neon-text"
-              style={{ fontSize: "clamp(4rem, 14vw, 12rem)", letterSpacing: "-0.04em" }}
-            >
-              Plantão
-              <br />
-              <span style={{ color: PLANTAO_RED }}>{current.year}</span>
-            </h1>
-            <p className="max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">{current.manifesto}</p>
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href="#lista"
-                data-cursor="Lista de espera"
-                className="inline-flex items-center rounded-full px-6 py-3 text-xs font-semibold uppercase tracking-[0.22em] transition-opacity hover:opacity-90"
-                style={{ background: PLANTAO_RED, color: "#fff", boxShadow: `0 0 32px ${PLANTAO_RED}55` }}
-              >
-                Entrar na lista de espera
-              </a>
-              <Link
-                href="/plantao/edicoes"
-                data-cursor="Edições"
-                className="inline-flex items-center rounded-full border-2 px-6 py-3 text-xs uppercase tracking-[0.22em] text-white transition-colors hover:bg-white hover:text-black"
-                style={{ borderColor: "rgba(255,255,255,0.85)" }}
-              >
-                Edições anteriores
-              </Link>
+        {/* poça escura atrás do bloco de texto, sem cobrir o palco */}
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10"
+          style={{ background: "radial-gradient(85% 65% at 16% 82%, rgba(8,2,5,0.92) 0%, rgba(8,2,5,0.55) 45%, transparent 72%)" }}
+        />
+
+        <div className="mx-auto w-full max-w-screen-2xl px-4 pb-12 pt-32 sm:px-8 sm:pb-16">
+          <p className="text-[10px] uppercase tracking-[0.4em] text-white/70 sm:text-[11px]">
+            {longDate(current.date)} · {current.city}/{current.state} · festival próprio da 30praum
+          </p>
+
+          <h1
+            id="plantao-title"
+            className="font-display uppercase leading-[0.78] text-white"
+            /* margem em em: o espaço para o til do Ã escala junto com o corpo do título */
+            style={{ fontSize: "clamp(3.6rem, 16vw, 14rem)", letterSpacing: "-0.045em", marginTop: "0.16em" }}
+          >
+            Plantão
+          </h1>
+
+          <p
+            className="font-display leading-[0.78] tabular-nums"
+            style={{ fontSize: "clamp(3.6rem, 16vw, 14rem)", letterSpacing: "-0.05em", color: RED }}
+          >
+            {current.year}
+          </p>
+
+          <div className="mt-8 grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-end">
+            <div>
+              <p className="max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">{current.manifesto}</p>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <a
+                  href="#lista"
+                  data-cursor="Lista de espera"
+                  className="inline-flex items-center rounded-full px-7 py-4 text-xs font-semibold uppercase tracking-[0.22em] transition-transform hover:-translate-y-0.5"
+                  style={{ background: RED, color: "#fff", boxShadow: `0 10px 40px ${RED}55` }}
+                >
+                  Entrar na lista de espera
+                </a>
+                <a
+                  href="#lineup"
+                  data-cursor="Line-up"
+                  className="inline-flex items-center rounded-full border px-7 py-4 text-xs uppercase tracking-[0.22em] text-white transition-colors hover:bg-white hover:text-black"
+                  style={{ borderColor: "rgba(255,255,255,0.4)" }}
+                >
+                  Quem já passou por aqui
+                </a>
+              </div>
             </div>
-          </div>
-          <div className="text-white lg:justify-self-end">
             {upcoming && (
-              <PlantaoCountdown
-                targetDate={`${current.date}T${current.doorsAt}:00-03:00`}
-                label={`Falta para o Plantão ${current.year}`}
-              />
+              <div className="lg:justify-self-end">
+                <PlantaoCountdown
+                  targetDate={`${current.date}T${current.doorsAt}:00-03:00`}
+                  label="Contagem para os portões"
+                  tone="accent"
+                />
+                <p className="mt-4 text-xs text-white/50">
+                  {current.venue === "A confirmar" ? "Local a confirmar" : current.venue} · portões {current.doorsAt}
+                </p>
+              </div>
             )}
-            <p className="mt-4 text-xs text-white/60">
-              {current.venue === "A confirmar" ? "Local a confirmar" : current.venue} · portões {current.doorsAt}
-            </p>
           </div>
         </div>
       </section>
 
-      <section className="border-y" style={{ borderColor: PLANTAO_RED, background: "#0a0204" }}>
-        <dl className="mx-auto grid max-w-screen-2xl grid-cols-2 gap-8 px-4 py-12 sm:px-8 lg:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <dt className="text-[10px] uppercase tracking-[0.3em] text-white/55">{s.label}</dt>
-              <dd
-                className="mt-3 font-display tabular-nums"
-                style={{ fontSize: "clamp(2rem, 3.4vw, 2.8rem)", letterSpacing: "-0.01em", color: PLANTAO_RED }}
-              >
-                {s.value}
-              </dd>
-              <p className="mt-1 text-[10px] uppercase tracking-[0.22em] text-white/55">{s.foot}</p>
-            </div>
-          ))}
-        </dl>
+      {/* ---------- NÚMEROS ---------- */}
+      <section style={{ background: INK }} aria-label="Números do festival">
+        <div className="mx-auto max-w-screen-2xl border-t px-4 sm:px-8" style={{ borderColor: "rgba(255,255,255,0.12)" }}>
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-4">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <dd
+                  className="font-display leading-[0.85] tabular-nums text-white"
+                  style={{ fontSize: "clamp(2.6rem, 5vw, 4rem)", letterSpacing: "-0.03em" }}
+                >
+                  {s.value}
+                </dd>
+                <dt className="mt-3 text-[11px] uppercase tracking-[0.28em]" style={{ color: RED }}>
+                  {s.label}
+                </dt>
+                <p className="mt-1 text-xs text-white/45">{s.foot}</p>
+              </div>
+            ))}
+          </dl>
+        </div>
       </section>
 
+      {/* ---------- LINE-UP ---------- */}
+      {last && last.lineup.length > 0 && (
+        <section id="lineup" className="scroll-mt-16" style={{ background: INK }} aria-labelledby="lineup-title">
+          <div className="mx-auto max-w-screen-2xl border-t px-4 py-20 sm:px-8 sm:py-28" style={{ borderColor: "rgba(255,255,255,0.12)" }}>
+            <Reveal>
+              <header className="mb-14 text-center">
+                <p className="text-[10px] uppercase tracking-[0.4em] text-white/50">
+                  Line-up da edição {last.year} · {last.lineup.length} nomes
+                </p>
+                <h2
+                  id="lineup-title"
+                  className="mt-4 font-display uppercase leading-[0.88] text-white"
+                  style={{ fontSize: "clamp(2rem, 5vw, 3.6rem)", letterSpacing: "-0.02em" }}
+                >
+                  Uma noite. A cena inteira.
+                </h2>
+              </header>
+            </Reveal>
+
+            <Reveal delay={80}>
+              <LineupPoster lineup={last.lineup} accent={RED} />
+            </Reveal>
+
+            <Reveal delay={140}>
+              <div className="mt-16 sm:mt-20">
+                <LineupGrid lineup={last.lineup} accent={RED} />
+              </div>
+            </Reveal>
+
+            <div className="mt-12 flex justify-center">
+              <Link
+                href="/plantao/lineup"
+                data-cursor="Line-up completo"
+                className="inline-flex items-center rounded-full border px-7 py-4 text-xs uppercase tracking-[0.22em] text-white transition-colors hover:bg-white hover:text-black"
+                style={{ borderColor: "rgba(255,255,255,0.35)" }}
+              >
+                Percorrer o line-up {last.year} →
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ---------- LISTA DE ESPERA ---------- */}
       <NewsletterCapture
         id="lista"
         source="plantao"
@@ -147,160 +220,124 @@ export default async function PlantaoHubPage() {
             de todo mundo.
           </>
         }
-        body={`Line-up, setores e abertura de vendas do Plantão ${current.year} saem primeiro pra quem está na lista. Venda oficial só pela 30praum.`}
+        body={`Line-up, setores e abertura de vendas do Plantão ${current.year} saem primeiro pra quem está na lista. Venda oficial só pela 30praum: ingresso anunciado fora daqui é golpe.`}
         buttonLabel="Entrar na lista"
       />
 
+      {/* ---------- EDIÇÃO ANTERIOR ---------- */}
       {last && (
-        <section
-          className="border-y"
-          style={{ borderColor: PLANTAO_RED, background: "#0a0204" }}
-          aria-labelledby="ultima-edicao"
-        >
-          <div className="mx-auto max-w-screen-2xl px-4 py-16 sm:px-8 sm:py-20">
-            <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16">
-              <Link
-                href="/plantao/edicoes#plantao-2026"
-                data-cursor={`Plantão ${last.year}`}
-                className="group relative block overflow-hidden rounded-3xl border-2"
-                style={{ aspectRatio: "16 / 9", borderColor: PLANTAO_RED, boxShadow: `0 0 40px ${PLANTAO_RED}33` }}
-              >
-                <Image
-                  src={ART_2026}
-                  alt={`Arte oficial do Plantão ${last.year}`}
-                  fill
-                  quality={80}
-                  placeholder={blurFor(ART_2026) ? "blur" : "empty"}
-                  blurDataURL={blurFor(ART_2026)}
-                  sizes="(min-width: 1024px) 55vw, 100vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-              </Link>
-              <div>
-                <h2
-                  id="ultima-edicao"
-                  className="font-display uppercase leading-[0.92] text-white"
-                  style={{ fontSize: "clamp(2rem, 4.4vw, 3.4rem)", letterSpacing: "-0.01em" }}
+        <section style={{ background: INK }} aria-labelledby="ultima-edicao">
+          <div className="mx-auto max-w-screen-2xl px-4 py-20 sm:px-8 sm:py-28">
+            <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
+              <Reveal>
+                <Link
+                  href="/plantao/edicoes#plantao-2026"
+                  data-cursor={`Plantão ${last.year}`}
+                  className="group relative block overflow-hidden rounded-3xl"
+                  style={{ aspectRatio: "16 / 10" }}
                 >
-                  Plantão {last.year}.
-                  <br />
-                  Dez anos de casa.
-                </h2>
-                <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/80 sm:text-base">{last.manifesto}</p>
-                <dl className="mt-8 grid grid-cols-3 gap-6">
-                  <div>
-                    <dt className="text-[10px] uppercase tracking-[0.3em] text-white/55">Presencial</dt>
-                    <dd className="mt-2 font-display text-2xl text-white">{last.stats.attendees ? compact(last.stats.attendees) : "a definir"}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-[10px] uppercase tracking-[0.3em] text-white/55">Online</dt>
-                    <dd className="mt-2 font-display text-2xl text-white">{last.stats.onlineViewers ? compact(last.stats.onlineViewers) : "a definir"}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-[10px] uppercase tracking-[0.3em] text-white/55">Nomes no palco</dt>
-                    <dd className="mt-2 font-display text-2xl text-white">{last.lineup.length || "a definir"}</dd>
-                  </div>
-                </dl>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Link
-                    href="/plantao/lineup"
-                    data-cursor="Line-up"
-                    className="inline-flex items-center rounded-full border-2 px-6 py-3 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-white hover:text-black"
-                    style={{ borderColor: PLANTAO_RED, color: PLANTAO_RED }}
+                  <Image
+                    src={POSTER_2026}
+                    alt={`Arte oficial do Plantão ${last.year}`}
+                    fill
+                    quality={82}
+                    placeholder={blurFor(POSTER_2026) ? "blur" : "empty"}
+                    blurDataURL={blurFor(POSTER_2026)}
+                    sizes="(min-width: 1024px) 48vw, 100vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                </Link>
+              </Reveal>
+              <Reveal delay={80}>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.4em]" style={{ color: RED }}>
+                    Última edição · {longDate(last.date)}
+                  </p>
+                  <h2
+                    id="ultima-edicao"
+                    className="mt-4 font-display uppercase leading-[0.86] text-white"
+                    style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", letterSpacing: "-0.025em" }}
                   >
-                    Line-up {last.year} →
-                  </Link>
+                    Dez anos
+                    <br />
+                    numa noite só.
+                  </h2>
+                  <p className="mt-6 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">{last.manifesto}</p>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <Link
+                      href="/plantao/edicoes"
+                      data-cursor="Edições"
+                      className="inline-flex items-center rounded-full border px-6 py-3 text-xs uppercase tracking-[0.22em] text-white transition-colors hover:bg-white hover:text-black"
+                      style={{ borderColor: "rgba(255,255,255,0.35)" }}
+                    >
+                      Todas as edições →
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="relative mt-12 w-full" style={{ aspectRatio: "2560 / 1278" }}>
-              <Image
-                src={LINEUP_GRID}
-                alt={`Line-up Plantão ${last.year}`}
-                fill
-                quality={82}
-                sizes="100vw"
-                className="object-contain"
-              />
+              </Reveal>
             </div>
           </div>
         </section>
       )}
 
+      {/* ---------- HISTÓRICO ---------- */}
       {past.length > 0 && (
-        <section className="border-b" style={{ borderColor: PLANTAO_RED, background: "#0a0204" }} aria-labelledby="historia">
-          <div className="mx-auto max-w-screen-2xl px-4 py-16 sm:px-8 sm:py-20">
-            <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+        <section style={{ background: INK }} aria-labelledby="historia">
+          <div className="mx-auto max-w-screen-2xl border-t px-4 py-20 sm:px-8 sm:py-24" style={{ borderColor: "rgba(255,255,255,0.12)" }}>
+            <Reveal>
               <h2
                 id="historia"
-                className="font-display uppercase leading-[0.92] text-white"
-                style={{ fontSize: "clamp(2rem, 4.4vw, 3.4rem)", letterSpacing: "-0.01em" }}
+                className="mb-12 font-display uppercase leading-[0.9] text-white"
+                style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
               >
                 O Plantão tem história.
               </h2>
-              <Link
-                href="/plantao/edicoes"
-                data-cursor="Todas as edições"
-                className="inline-flex items-center rounded-full border-2 px-6 py-3 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-white hover:text-black"
-                style={{ borderColor: PLANTAO_RED, color: PLANTAO_RED }}
-              >
-                Ver todas edições →
-              </Link>
-            </div>
-            <ul className="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
-              {past.map((ed) => (
-                <PastEditionCard
-                  key={ed.slug}
-                  href={`/plantao/edicoes#${ed.slug}`}
-                  image={ed.heroImage}
-                  title={ed.title}
-                  sub={ed.tagline}
-                />
+            </Reveal>
+            <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {past.map((ed, i) => (
+                <Reveal key={ed.slug} delay={i * 70}>
+                  <li>
+                    <Link
+                      href={`/plantao/edicoes#${ed.slug}`}
+                      data-cursor={ed.title}
+                      className="group relative block overflow-hidden rounded-2xl"
+                    >
+                      <div className="relative w-full" style={{ aspectRatio: "4 / 3" }}>
+                        <Image
+                          src={ed.heroImage}
+                          alt={ed.title}
+                          fill
+                          quality={80}
+                          placeholder={blurFor(ed.heroImage) ? "blur" : "empty"}
+                          blurDataURL={blurFor(ed.heroImage)}
+                          sizes="(min-width: 1024px) 32vw, (min-width: 640px) 48vw, 100vw"
+                          className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                        />
+                        <div
+                          aria-hidden
+                          className="absolute inset-0"
+                          style={{ background: "linear-gradient(180deg, transparent 40%, rgba(8,2,5,0.94) 100%)" }}
+                        />
+                        <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                          <p className="font-display uppercase leading-none text-white" style={{ fontSize: "clamp(1.5rem, 2.4vw, 2rem)" }}>
+                            {ed.title}
+                          </p>
+                          <p className="mt-2 text-xs leading-snug text-white/70">{ed.tagline}</p>
+                          {ed.stats.attendees && (
+                            <p className="mt-3 text-[10px] uppercase tracking-[0.28em]" style={{ color: RED }}>
+                              {compact(ed.stats.attendees)} pessoas
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </Link>
+                  </li>
+                </Reveal>
               ))}
             </ul>
           </div>
         </section>
       )}
     </>
-  );
-}
-
-function PastEditionCard({ href, image, title, sub }: { href: string; image: string; title: string; sub: string }) {
-  return (
-    <li>
-      <Link
-        href={href}
-        data-cursor={title}
-        className="group relative block overflow-hidden rounded-3xl border-2"
-        style={{ borderColor: PLANTAO_RED, boxShadow: `0 0 40px ${PLANTAO_RED}33` }}
-      >
-        <div className="relative w-full" style={{ aspectRatio: "1142 / 836" }}>
-          <Image
-            src={image}
-            alt={title}
-            fill
-            quality={82}
-            placeholder={blurFor(image) ? "blur" : "empty"}
-            blurDataURL={blurFor(image)}
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-0 pointer-events-none"
-            style={{ background: "linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.82) 100%)" }}
-          />
-          <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-2 p-6 sm:p-7">
-            <h3
-              className="font-display uppercase leading-tight text-white"
-              style={{ fontSize: "clamp(1.6rem, 2.4vw, 2.2rem)", letterSpacing: "0.01em", textShadow: "0 2px 12px rgba(0,0,0,0.7)" }}
-            >
-              {title}
-            </h3>
-            <p className="text-xs text-white/75">{sub}</p>
-          </div>
-        </div>
-      </Link>
-    </li>
   );
 }

@@ -1,65 +1,75 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
+
 type CountdownProps = {
-  targetDate: string; 
+  targetDate: string;
   label?: string;
+  tone?: "light" | "accent";
 };
+
 function diff(target: Date) {
-  const now = new Date();
-  const ms = target.getTime() - now.getTime();
+  const ms = target.getTime() - new Date().getTime();
   if (ms <= 0) return { d: 0, h: 0, m: 0, s: 0, passed: true };
-  const d = Math.floor(ms / (1000 * 60 * 60 * 24));
-  const h = Math.floor((ms / (1000 * 60 * 60)) % 24);
-  const m = Math.floor((ms / (1000 * 60)) % 60);
-  const s = Math.floor((ms / 1000) % 60);
-  return { d, h, m, s, passed: false };
+  return {
+    d: Math.floor(ms / 86_400_000),
+    h: Math.floor((ms / 3_600_000) % 24),
+    m: Math.floor((ms / 60_000) % 60),
+    s: Math.floor((ms / 1000) % 60),
+    passed: false,
+  };
 }
-export function PlantaoCountdown({ targetDate, label = "Para o Plantão" }: CountdownProps) {
+
+const pad = (n: number) => String(n).padStart(2, "0");
+
+export function PlantaoCountdown({ targetDate, label, tone = "light" }: CountdownProps) {
   const target = useMemo(() => new Date(targetDate), [targetDate]);
   const [t, setT] = useState(() => diff(target));
+
   useEffect(() => {
     const id = setInterval(() => setT(diff(target)), 1000);
     return () => clearInterval(id);
   }, [target]);
-  const cell = "flex flex-col items-center justify-center min-w-[5rem] px-3 py-3 sm:min-w-[7rem] sm:px-5 sm:py-4 border";
-  const num = "font-display text-3xl sm:text-5xl leading-none tabular-nums";
-  const lbl = "mt-2 text-[9px] uppercase tracking-[0.3em] opacity-70";
+
+  const ink = tone === "accent" ? "var(--accent)" : "#ffffff";
+
   if (t.passed) {
     return (
-      <div className="inline-flex flex-col items-start gap-2">
-        <p className="text-[10px] uppercase tracking-[0.3em] opacity-60">{label}</p>
-        <p className="font-display text-3xl plantao-neon-text" style={{ color: "var(--accent)" }}>
-          Acontecendo agora
-        </p>
-      </div>
+      <p className="font-display uppercase leading-none" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)", color: ink }}>
+        Acontecendo agora
+      </p>
     );
   }
+
+  const cells = [
+    { v: String(t.d), l: t.d === 1 ? "dia" : "dias" },
+    { v: pad(t.h), l: "h" },
+    { v: pad(t.m), l: "min" },
+    { v: pad(t.s), l: "seg" },
+  ];
+
   return (
-    <div className="inline-flex flex-col items-start gap-3">
-      <p className="text-[10px] uppercase tracking-[0.3em] opacity-60">{label}</p>
-      <div
-        className="flex flex-wrap gap-1.5"
-        aria-label={`${t.d} dias ${t.h} horas ${t.m} minutos`}
-        suppressHydrationWarning
-      >
-        <div className={cell} style={{ borderColor: "var(--border)" }}>
-          <span className={num} suppressHydrationWarning>{String(t.d).padStart(2, "0")}</span>
-          <span className={lbl}>dias</span>
-        </div>
-        <div className={cell} style={{ borderColor: "var(--border)" }}>
-          <span className={num} suppressHydrationWarning>{String(t.h).padStart(2, "0")}</span>
-          <span className={lbl}>horas</span>
-        </div>
-        <div className={cell} style={{ borderColor: "var(--border)" }}>
-          <span className={num} suppressHydrationWarning>{String(t.m).padStart(2, "0")}</span>
-          <span className={lbl}>min</span>
-        </div>
-        <div className={cell} style={{ borderColor: "var(--border)" }}>
-          <span className={num} style={{ color: "var(--accent)" }} suppressHydrationWarning>
-            {String(t.s).padStart(2, "0")}
-          </span>
-          <span className={lbl}>seg</span>
-        </div>
+    <div className="flex flex-col gap-2" aria-label={`Faltam ${t.d} dias para o evento`}>
+      {label && <p className="text-[10px] uppercase tracking-[0.32em] text-white/55">{label}</p>}
+      <div className="flex items-baseline gap-3 sm:gap-5">
+        {cells.map((c, i) => (
+          <div key={c.l} className="flex items-baseline gap-3 sm:gap-5">
+            {i > 0 && (
+              <span aria-hidden className="font-display leading-none text-white/25" style={{ fontSize: "clamp(1.4rem, 2.6vw, 2.4rem)" }}>
+                /
+              </span>
+            )}
+            <span className="flex items-baseline gap-1.5">
+              <span
+                className="font-display leading-[0.8] tabular-nums"
+                style={{ fontSize: "clamp(2.6rem, 6vw, 4.6rem)", color: i === 0 ? ink : "#ffffff", letterSpacing: "-0.02em" }}
+                suppressHydrationWarning
+              >
+                {c.v}
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-white/55">{c.l}</span>
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );

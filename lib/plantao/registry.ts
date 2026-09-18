@@ -53,9 +53,17 @@ const lineup2026: LineupArtist[] = [
     isHeadliner: true,
   },
   {
-    displayName: "Teto & Wiu",
+    displayName: "Teto",
+    artistSlug: "teto",
     highlightLabel: "Show especial · Colapso Global",
     imageUrl: IMG.lineupTetoWiu,
+    isSpecial: true,
+  },
+  {
+    displayName: "Wiu",
+    artistSlug: "wiu",
+    highlightLabel: "Show especial · Colapso Global",
+    imageUrl: IMG.lineupWiu,
     isSpecial: true,
   },
   {
@@ -66,12 +74,12 @@ const lineup2026: LineupArtist[] = [
   },
   {
     displayName: "BK'",
-    highlightLabel: "convidado especial",
+    highlightLabel: "Convidado especial",
     imageUrl: IMG.lineupBK,
   },
   {
     displayName: "Recayd Mob",
-    highlightLabel: "convidados",
+    highlightLabel: "Convidados",
     imageUrl: IMG.lineupRecayd,
   },
   {
@@ -79,7 +87,7 @@ const lineup2026: LineupArtist[] = [
     imageUrl: IMG.lineupTZ,
   },
   {
-    displayName: "Ajulliacosta",
+    displayName: "Ajuliacosta",
     imageUrl: IMG.lineupAjullia,
   },
   {
@@ -92,7 +100,7 @@ const lineup2026: LineupArtist[] = [
   },
   {
     displayName: "DJ Thales",
-    highlightLabel: "abertura",
+    highlightLabel: "Abertura",
     imageUrl: IMG.lineupDJThales,
   },
 ];
