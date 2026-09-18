@@ -31,6 +31,17 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Bebas Neue coloca til e acento acima da altura de caixa (A = 0.70em, Ã = 0.87em).
+   Com leading apertado a line-box corta o diacrítico e "Plantão" vira "Plantao".
+   O padding abre espaço no topo e a margem negativa devolve o espaço ao layout. */
+.font-display,
+.font-brand {
+  padding-block-start: 0.18em;
+}
+
+/* Tailwind aplica margin-top via classe utilitária; sem a compensação negativa o
+   diacrítico ganha espaço próprio e nunca encosta no texto acima. */
+
 html,
 body {
   background: var(--bg);
