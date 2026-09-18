@@ -66,6 +66,14 @@ const IMAGES = [
   "/figma-plantao/art-right.jpg",
   "/lineup/tz-da-coronel.jpg",
   "/lineup/ajuliacosta.jpg",
+  "/lineup/2026/matue.webp",
+  "/lineup/2026/teto.webp",
+  "/lineup/2026/wiu.webp",
+  "/lineup/2026/brandao.webp",
+  "/lineup/2026/tz.webp",
+  "/lineup/2026/ajulia.webp",
+  "/lineup/2026/alee.webp",
+  "/lineup/2026/ryu.webp",
 ];
 
 const entries = [];
