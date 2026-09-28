@@ -6,8 +6,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        disallow: ["/admin", "/admin/", "/cart", "/checkout-redirect", "/api/"],
+        // Protótipo em apresentação: fora dos buscadores até virar o site oficial.
+        disallow: "/",
       },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,

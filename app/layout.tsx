@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: { default: "30praum · Site oficial", template: "%s · 30praum" },
   description:
     "Site oficial da holding 30praum: gravadora, Plantão Festival, parcerias e incubadora. Casa de Matuê, Wiu, Teto e Brandão85.",
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
 };
 export default function RootLayout({
   children,

@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   category: "music",
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
 };
 export default async function ShellLayout({
   children,
