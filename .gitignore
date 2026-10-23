@@ -49,3 +49,6 @@ next-env.d.ts
 # generated types
 /payload-types.ts
 
+
+# propostas comerciais (fora do repositório)
+/docs/propostas/
