@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BrandLogo } from "./BrandLogo";
 import { CartButton } from "./CartButton";
+import { CONTACT } from "@/lib/contact";
 interface BrandHeaderProps {
   currentArtist?: string;
   cartCount: number;
@@ -17,7 +18,7 @@ const MENU_LINKS: Array<{
   label: string;
   sub: string;
 }> = [
-  { href: "/#roster", label: "Roster", sub: "4 universos, 1 casa" },
+  { href: "/#roster", label: "Roster", sub: "Matuê, Wiu, Teto, Brandão85" },
   { href: "/shows", label: "Shows", sub: "Agenda oficial" },
   { href: "/releases", label: "Lançamentos", sub: "Catálogo aberto" },
   { href: "/plantao", label: "Plantão", sub: "Festival próprio · 2027" },
@@ -192,11 +193,8 @@ export function BrandHeader({ cartCount }: BrandHeaderProps) {
           >
             <div className="mx-auto flex max-w-screen-2xl flex-wrap items-center justify-between gap-3">
               <span>Fortaleza · CE · desde 2016</span>
-              <a
-                href="mailto:contato@30praum.com"
-                className="transition-colors hover:text-accent"
-              >
-                contato@30praum.com
+              <a href={`mailto:${CONTACT.geral}`} className="transition-colors hover:text-accent">
+                {CONTACT.geral}
               </a>
             </div>
           </div>

@@ -8,7 +8,7 @@ export const Albums: CollectionConfig = {
   labels: { singular: "Álbum", plural: "Álbuns · Releases" },
   admin: {
     useAsTitle: "title",
-    defaultColumns: ["title", "year", "dropArtistSlug", "status", "updatedAt"],
+    defaultColumns: ["title", "year", "dropArtistSlug", "updatedAt"],
   },
   access: { read: () => true },
   hooks: {
@@ -58,22 +58,8 @@ export const Albums: CollectionConfig = {
             },
             { name: "year", type: "text", required: true },
             { name: "releaseDate", type: "date", required: true },
-            { name: "totalTracks", type: "number", required: true },
-            { name: "duration", type: "text", required: true },
-            { name: "tagline", type: "text", required: true },
-            { name: "manifesto", type: "textarea", required: true },
-            { name: "editorialPitch", type: "textarea" },
-            {
-              name: "status",
-              type: "select",
-              options: [
-                { label: "Em alta", value: "em-alta" },
-                { label: "Estreia", value: "estreia" },
-                { label: "Edição limitada", value: "limitada" },
-                { label: "Tour ativa", value: "tour-ativa" },
-                { label: "Clássico", value: "classico" },
-              ],
-            },
+            { name: "duration", type: "text" },
+            { name: "about", type: "textarea", required: true },
             {
               name: "dropArtistSlug",
               type: "select",
@@ -104,7 +90,6 @@ export const Albums: CollectionConfig = {
               required: true,
               fields: [
                 { name: "title", type: "text", required: true },
-                { name: "duration", type: "text", required: true },
                 { name: "featured", type: "text" },
               ],
             },

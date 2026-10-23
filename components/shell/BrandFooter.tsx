@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { ARTISTS } from "@/lib/artists/registry";
+import { CONTACT } from "@/lib/contact";
+import { OFFICIAL_STORE, STORE_POLICY } from "@/lib/shop/official-store";
 import { BrandLogo } from "./BrandLogo";
+
+const linkClass = "block transition-colors hover:text-accent";
+
 export function BrandFooter() {
   return (
     <footer style={{ borderTop: "1px solid var(--border)" }}>
@@ -8,74 +13,51 @@ export function BrandFooter() {
         <div>
           <BrandLogo className="text-2xl" />
           <p className="mt-5 max-w-sm text-xs leading-relaxed text-muted">
-            Site oficial da holding 30praum: gravadora · festival · incubadora.
-            Sede em Fortaleza desde 2016.
+            Gravadora independente de Fortaleza, fundada em 2016 por Matuê e Clara Mendes.
           </p>
           <p className="mt-4 max-w-sm text-xs leading-relaxed text-fg/80">
-            Merch oficial só aqui e na 30praum.store. Todo pedido sai da casa em
-            security bag lacrada. Perfil que vende por fora não é a gente.
+            Merch oficial só neste site e na 30praum.store. Pedidos saem em security bag lacrada.
+            Perfil vendendo por fora não é a gente.
           </p>
         </div>
-        <nav aria-label="Universos" className="space-y-2 text-sm">
-          <h3 className="mb-3 text-[10px] uppercase tracking-[0.3em] text-muted">
-            Universos
-          </h3>
+        <nav aria-label="Artistas" className="space-y-2 text-sm">
+          <h3 className="mb-3 text-xs text-muted">Artistas</h3>
           {Object.values(ARTISTS).map((a) => (
-            <Link
-              key={a.slug}
-              href={`/${a.slug}`}
-              className="block transition-colors hover:text-accent"
-            >
-              {a.displayName}{" "}
-              <span className="text-muted">· {a.universeName}</span>
+            <Link key={a.slug} href={`/${a.slug}`} className={linkClass}>
+              {a.displayName}
             </Link>
           ))}
         </nav>
-        <nav aria-label="Holding" className="space-y-2 text-sm">
-          <h3 className="mb-3 text-[10px] uppercase tracking-[0.3em] text-muted">
-            Holding
-          </h3>
-          <Link href="/plantao" className="block transition-colors hover:text-accent">
-            Plantão Festival
-          </Link>
-          <Link href="/parcerias" className="block transition-colors hover:text-accent">
-            Parcerias
-          </Link>
-          <Link href="/incubadora" className="block transition-colors hover:text-accent">
-            Incubadora
-          </Link>
-          <Link href="/loja" className="block transition-colors hover:text-accent">
-            Loja oficial
-          </Link>
+        <nav aria-label="30praum" className="space-y-2 text-sm">
+          <h3 className="mb-3 text-xs text-muted">30praum</h3>
+          <Link href="/about" className={linkClass}>Sobre</Link>
+          <Link href="/plantao" className={linkClass}>Plantão</Link>
+          <Link href="/shows" className={linkClass}>Shows</Link>
+          <Link href="/parcerias" className={linkClass}>Parcerias</Link>
+          <Link href="/incubadora" className={linkClass}>Incubadora</Link>
+          <Link href="/imprensa" className={linkClass}>Imprensa</Link>
         </nav>
-        <nav aria-label="Contato" className="space-y-2 text-sm">
-          <h3 className="mb-3 text-[10px] uppercase tracking-[0.3em] text-muted">
-            Contato
-          </h3>
-          <Link href="/about" className="block transition-colors hover:text-accent">
-            Sobre a 30praum
-          </Link>
-          <Link href="/imprensa" className="block transition-colors hover:text-accent">
-            Imprensa · Press kit
-          </Link>
-          <a
-            href="mailto:contato@30praum.com"
-            className="block transition-colors hover:text-accent"
-          >
-            contato@30praum.com
+        <nav aria-label="Loja" className="space-y-2 text-sm">
+          <h3 className="mb-3 text-xs text-muted">Loja</h3>
+          <Link href="/loja" className={linkClass}>Loja oficial</Link>
+          <a href={`${OFFICIAL_STORE}/policies/refund-policy`} target="_blank" rel="noreferrer" className={linkClass}>
+            Trocas e devoluções
           </a>
-          <a
-            href="mailto:parcerias@30praum.com"
-            className="block transition-colors hover:text-accent"
-          >
-            parcerias@30praum.com
+          <a href={`${OFFICIAL_STORE}/policies/shipping-policy`} target="_blank" rel="noreferrer" className={linkClass}>
+            Envio
+          </a>
+          <a href={`mailto:${STORE_POLICY.support}`} className={linkClass}>
+            Atendimento da loja
+          </a>
+          <a href={`mailto:${CONTACT.geral}`} className={linkClass}>
+            {CONTACT.geral}
           </a>
         </nav>
       </div>
       <div style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="mx-auto flex max-w-screen-2xl flex-wrap items-center justify-between gap-4 px-4 py-5 text-[10px] uppercase tracking-[0.3em] text-muted sm:px-8">
-          <span>© 30praum {new Date().getFullYear()} · Fortaleza, CE</span>
-          <span>Site oficial · Loja oficial</span>
+        <div className="mx-auto flex max-w-screen-2xl flex-wrap items-center justify-between gap-4 px-4 py-5 text-xs text-muted sm:px-8">
+          <span>© {new Date().getFullYear()} 30praum · Fortaleza, CE</span>
+          <span>Loja operada por ODTX Confecções e Comércio Ltda.</span>
         </div>
       </div>
     </footer>

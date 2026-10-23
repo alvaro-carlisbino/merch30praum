@@ -1,4 +1,3 @@
-import { IMG } from "@/lib/images/unsplash";
 export type NewsTag =
   | "lancamento"
   | "plantao"
@@ -11,204 +10,108 @@ export type NewsPost = {
   slug: string;
   title: string;
   excerpt: string;
-  body: string[]; 
+  body: string[];
   heroImage: string;
-  publishedAt: string; 
+  publishedAt: string;
   author: string;
   tags: NewsTag[];
-  relatedArtists?: string[]; 
-  relatedReleases?: string[]; 
+  relatedArtists?: string[];
+  relatedReleases?: string[];
 };
 export const NEWS_POSTS: NewsPost[] = [
   {
-    slug: "plantao-2027-lista-de-espera",
-    title: "Plantão 2027 abre lista de espera: line-up e pré-venda saem primeiro pra quem se inscrever",
+    slug: "brandao85-100-milhoes-isso-e-trap-vol-2",
+    title: "Isso É Trap Vol. 2 passa de 100 milhões de plays",
     excerpt:
-      "A próxima edição do festival próprio da 30praum já tem data: 24 de abril de 2027, em Fortaleza. Setores e nomes chegam antes na lista.",
-    heroImage: "/figma-plantao/stage-2025.jpg",
-    publishedAt: "2026-09-14T10:00:00-03:00",
+      "Menos de seis meses depois do lançamento, a mixtape do Brandão85 cruzou a marca no Spotify.",
+    heroImage: "/assets/covers/japones_warzone.jpg",
+    publishedAt: "2026-09-16T10:00:00-03:00",
     author: "Editorial 30praum",
-    tags: ["plantao"],
+    tags: ["lancamento"],
+    relatedArtists: ["brandao"],
+    relatedReleases: ["isso-e-trap-vol-2"],
     body: [
-      "Depois de dez anos de casa e de uma edição de aniversário com vinte mil pessoas na Beira-Mar, o Plantão confirma a volta em 2027. A data é 24 de abril. O local segue em negociação e será anunciado junto com os primeiros nomes.",
-      "A novidade é o formato da comunicação: em vez de soltar tudo no Instagram de uma vez, a 30praum abriu uma lista de espera no site oficial. Quem está na lista recebe line-up, mapa de setores e o link da pré-venda antes de qualquer canal público.",
-      "Vale o aviso de sempre. Venda oficial só pela 30praum. Qualquer ingresso do Plantão 2027 anunciado hoje é golpe.",
+      "Isso É Trap Vol. 2 saiu em 15 de abril e passou de 100 milhões de plays no Spotify antes de completar seis meses. É o primeiro projeto longo do Brandão85 desde que ele assinou com a 30praum, em setembro de 2024.",
+      "São catorze faixas. JAPONÊS tem participação do Matuê e ROCKSTAR, da Desiree.",
     ],
   },
   {
-    slug: "xtranho-tour-europa-lisboa-porto-madrid",
-    title: "XTRANHO Tour atravessa o Atlântico: Matuê faz Lisboa, Porto e Madrid em setembro",
-    excerpt:
-      "A turnê do terceiro álbum sai do Brasil pela primeira vez. Lisboa abre a perna europeia no dia 12, com Porto e Madrid na sequência.",
+    slug: "matue-palco-mundo-rock-in-rio-lisboa",
+    title: "Matuê é o primeiro rapper brasileiro no Palco Mundo do Rock in Rio Lisboa",
+    excerpt: "O show foi em 28 de junho, no palco principal do festival.",
     heroImage: "/figma-home/hero-matue.jpg",
-    publishedAt: "2026-08-20T11:00:00-03:00",
+    publishedAt: "2026-06-29T09:00:00-03:00",
     author: "Editorial 30praum",
     tags: ["lancamento"],
     relatedArtists: ["matue"],
     relatedReleases: ["xtranho"],
     body: [
-      "XTRANHO fechou o primeiro semestre com Rio, São Paulo, Belo Horizonte e Brasília. O segundo começa fora do país: Sagres Campo Pequeno, em Lisboa, no dia 12 de setembro, seguido de Coliseu do Porto e La Riviera, em Madrid.",
-      "É a primeira vez que um show completo da 30praum acontece na Europa. A produção leva o mesmo palco da turnê brasileira, com o set do álbum na íntegra e a parte visual desenhada pra arena.",
-      "As datas de Porto e Madrid ainda estão em fase de confirmação de venda. A agenda oficial do site é atualizada assim que cada praça abre.",
+      "Em 28 de junho de 2026, Matuê tocou no Palco Mundo do Rock in Rio Lisboa. Foi a primeira vez que um rapper brasileiro se apresentou no palco principal da edição portuguesa do festival.",
+      "Um ano antes, em junho de 2025, ele já tinha levado a turnê do 333 para a MEO Arena, também em Lisboa.",
     ],
   },
   {
-    slug: "drop-isso-e-trap-brandao85-merch",
-    title: "Isso é Trap chega à loja: o primeiro drop completo do Brandão85 pela 30praum",
+    slug: "plantao-2026-dez-anos",
+    title: "Plantão 2026 marca os 10 anos da 30praum",
     excerpt:
-      "Onze peças entre camisetas, regatas, moletons e bandanas, com as estampas POMBA, RAIO X e WARZONE. Tudo enviado em security bag lacrada.",
-    heroImage: "/products/regata-canelada-preta-merch-brandao-oficial/3.webp",
-    publishedAt: "2026-07-30T14:00:00-03:00",
-    author: "Editorial 30praum",
-    tags: ["lancamento", "holding"],
-    relatedArtists: ["brandao"],
-    relatedReleases: ["isso-e-trap-vol-2"],
-    body: [
-      "Brandão85 entrou na 30praum em setembro de 2024 e demorou um ano e meio pra soltar o disco. O merch veio junto com a era: onze peças que traduzem o xerox de Caponga em tecido pesado.",
-      "As estampas seguem o universo do álbum. A pomba armada da capa vira regata e manga longa. RAIO X e WARZONE ganham camiseta e moletom com zíper. As bandanas ISSO É TRAP, em preto e branco, fecham o conjunto.",
-      "Alguns tamanhos já esgotaram nas primeiras semanas. A loja oficial mostra o estoque real por tamanho e avisa quando restam as últimas unidades.",
-    ],
-  },
-  {
-    slug: "plantao-2026-o-que-ficou",
-    title: "Plantão 2026: o que ficou da noite de dez anos",
-    excerpt:
-      "Vinte mil pessoas no Marina Park, meio milhão acompanhando online e onze nomes no palco. Um balanço da edição de aniversário.",
+      "A terceira edição do festival foi em 25 de abril, no Marina Park, em Fortaleza.",
     heroImage: "/figma-plantao/crowd-2026.jpg",
-    publishedAt: "2026-05-02T09:00:00-03:00",
-    author: "Editorial 30praum",
-    tags: ["plantao", "bastidores"],
-    relatedArtists: ["matue", "teto", "wiu", "brandao"],
-    body: [
-      "A noite de 25 de abril foi a mais longa da história do festival: dez horas de show, da abertura com DJ Thales ao encerramento com XTRANHO na íntegra. No meio, Teto e Wiu tocaram Colapso Global completo pela primeira vez em Fortaleza e Brandão85 apresentou Isso é Trap Vol.02 em casa.",
-      "Os números confirmam o tamanho da coisa: vinte mil pessoas presenciais, quase quinhentos mil espectadores únicos na transmissão do YouTube e mais de cinco milhões investidos na estrutura.",
-      "As fotos oficiais, o aftermovie e os bastidores estão reunidos na página de edições. A próxima já está em construção.",
-    ],
-  },
-  {
-    slug: "30praum-lanca-site-oficial",
-    title: "30praum estreia plataforma oficial: gravadora, festival e holding em um só endereço",
-    excerpt:
-      "Depois de 10 anos operando com loja de merch isolada, a gravadora cearense estreia hub digital que reúne roster, Plantão Festival, parcerias e incubadora.",
-    heroImage: IMG.newsSiteLaunch,
-    publishedAt: "2026-05-11T09:00:00-03:00",
-    author: "Editorial 30praum",
-    tags: ["holding", "industria"],
-    body: [
-      "Há uma década a 30praum opera nas sombras: descentralizada, autoral, sem porta de entrada digital. Tinha merch. Tinha festival. Tinha parceria com Renner, Raw, Kenner, Ed Hardy. Tinha um canal no YouTube com meio milhão de espectadores. Não tinha um endereço.",
-      "Agora tem. 30praum.com é a plataforma oficial da holding, onde a gravadora, o Plantão Festival, os negócios e a incubadora se encontram pela primeira vez no mesmo lugar. Aqui dentro: o roster (Matuê, Teto, Wiu, Brandão85), o catálogo de releases, a agenda de shows, os cases de parceria, o press kit aberto pra imprensa, e o canal de submissão de demos da incubadora.",
-      "Não é um portfólio. É uma cena se organizando.",
-    ],
-  },
-  {
-    slug: "plantao-2026-lineup-completo",
-    title: "Plantão 2026 anuncia lineup completo: Matuê, Teto, Wiu, Brandão85, BK', Recayd Mob e mais",
-    excerpt:
-      "A 3ª edição marca os 10 anos da 30praum. Sábado 25 de abril, Marina Park, Fortaleza. Ingressos a partir de R$150.",
-    heroImage: IMG.newsPlantaoLineup,
-    publishedAt: "2026-03-04T10:00:00-03:00",
+    publishedAt: "2026-04-26T09:00:00-03:00",
     author: "Editorial 30praum",
     tags: ["plantao"],
     relatedArtists: ["matue", "teto", "wiu", "brandao"],
     body: [
-      "O Plantão volta. Pelo terceiro ano. Agora marcando os 10 anos da 30praum. Sábado, 25 de abril, na Marina Park, Fortaleza, sob a Beira-Mar.",
-      "Lineup confirmado: Matuê (XTRANHO ao vivo na íntegra), Teto e Wiu (show especial Colapso Global), Brandão85 (Isso é Trap Vol.02), BK' como convidado especial, Recayd Mob, TZ da Coronel, Ajulliacosta, Alee, Ryu The Runner e DJ Thales na abertura.",
-      "Setores: Front Boladão (esgotado), Front (R$150–300), VIP (R$350–655 com banheiro e alimentação inclusos) e Camarote 30praum em breve. Transmissão oficial no YouTube da 30praum. A última edição reuniu quase 500 mil espectadores únicos.",
+      "O Plantão voltou ao Marina Park em 25 de abril para a terceira edição, a dos dez anos da gravadora. Matuê, Teto, Wiu e Brandão85 dividiram a programação com BK', Ajuliacosta, Alee, Ryu, The Runner, Recayd Mob e TZ da Coronel. Brandão convidou Jovem Dex e Leviano.",
+      "Teto e Wiu levaram Colapso Global pro palco. As duas edições anteriores tinham reunido cerca de 20 mil pessoas cada, e a transmissão de 2025 passou de 500 mil espectadores únicos.",
     ],
   },
   {
-    slug: "30praum-anuncia-distribuidora-propria-2026",
-    title: "30praum confirma distribuidora própria em 2026: independência total da cadeia",
-    excerpt:
-      "Depois de anos de operação independente, a gravadora fundada por Matuê e Clara Mendes verticaliza distribuição e fecha o ciclo de autonomia.",
-    heroImage: IMG.newsDistribuidora,
-    publishedAt: "2026-02-10T11:00:00-03:00",
-    author: "Editorial 30praum",
-    tags: ["industria", "holding"],
-    body: [
-      "A 30praum opera de forma 100% independente desde 2024. O EP Sabor Overdose no Yakisoba e o álbum 333 do Matuê (950 milhões de streams) já saíram nesse novo modelo: sem licenciamento, sem intermediário.",
-      "Agora vem o próximo capítulo. A gravadora cearense confirma o lançamento da própria distribuidora em 2026, fechando a cadeia: descoberta, gravação, lançamento, mercado.",
-      "É a primeira vez que uma label independente do Nordeste verticaliza toda a operação. 'A 30praum foi de 30 pra um. Agora controla cada link da rede', resumiu Matuê em comunicado interno.",
-    ],
-  },
-  {
-    slug: "sabor-matue-geladinho-em-breve",
-    title: "Sabor Matuê: a aposta da 30praum em food & beverage começa em 2026",
-    excerpt:
-      "O que começou como referência cultural no EP do Matuê vira a primeira frente FMCG da holding. Linha de geladinhos premium chega ao verão.",
-    heroImage: IMG.newsSabor,
-    publishedAt: "2026-01-22T14:30:00-03:00",
-    author: "Editorial 30praum",
-    tags: ["holding", "parceria"],
-    body: [
-      "Em agosto de 2024 Matuê soltou o EP Sabor Overdose no Yakisoba. Um título que virou meme, virou estampa, virou conceito. Agora vira produto.",
-      "A holding 30praum confirma Sabor Matuê como sua primeira frente FMCG: uma linha de geladinhos premium em parceria com uma indústria food alimentar com sede em Fortaleza. Lançamento previsto pro verão 2026/27, distribuição inicial Norte/Nordeste, expansão Brasil no ano seguinte.",
-      "É o primeiro spin-off da holding fora do entretenimento. Não é o último.",
-    ],
-  },
-  {
-    slug: "30praum-incubadora-aberta",
-    title: "Incubadora 30praum abre submissões públicas pela primeira vez",
-    excerpt:
-      "Programa busca artistas de trap, rap e hip-hop com identidade própria. Submissão é via Spotify/SoundCloud no novo formulário oficial.",
-    heroImage: IMG.newsIncubadora,
-    publishedAt: "2026-05-11T08:00:00-03:00",
-    author: "A&R 30praum",
-    tags: ["incubadora"],
-    body: [
-      "Brandão85 entrou em 2024 e em dois anos tava na capa do Plantão. Antes dele, Wiu (que era beatmaker) virou voz. Teto chegou de Jacobina-BA gravando no quarto.",
-      "A 30praum sempre foi incubadora, só não tinha porta. A partir de hoje tem. O programa abre submissões públicas no site oficial: artista entra em /incubadora/submeter, manda Spotify/SoundCloud, conta uma história curta, e o A&R da casa recebe na hora.",
-      "Não é talent show. Não é prova. Não tem inscrição. É um canal honesto pra quem tem som e quer ser ouvido pelo selo que escolhe artista por visão artística, não por hype.",
-    ],
-  },
-  {
-    slug: "matue-333-950-milhoes-streams",
-    title: "333 ultrapassa 950 milhões de reproduções; Matuê quebra recorde do rap nacional",
-    excerpt:
-      "Lançado de forma independente em 2024, o terceiro álbum do Matuê coloca a 30praum entre os selos mais ouvidos do Spotify Brasil.",
-    heroImage: IMG.news333,
-    publishedAt: "2025-11-08T16:00:00-03:00",
-    author: "Editorial 30praum",
-    tags: ["lancamento", "industria"],
-    relatedArtists: ["matue"],
-    body: [
-      "Quando Matuê lançou 333 em julho de 2024 (primeiro álbum totalmente independente), ninguém apostava 950 milhões. Apostavam meio bilhão, talvez. O número estourou.",
-      "O álbum integra agora a lista seleta de discos de rap brasileiros com maior volume de streaming na história do Spotify BR. E sustenta seis das maiores estreias do rap nacional na plataforma, todas de Matuê.",
-      "É o disco que provou que independência não é teto. É chão.",
-    ],
-  },
-  {
-    slug: "renner-30praum-colecao-confirmada",
-    title: "Renner × 30praum: colaboração permanente é confirmada após sucesso da primeira coleção",
-    excerpt:
-      "Drop com Matuê, Teto e Wiu esgotou em 48h. Varejista assina parceria estendida com a gravadora: peças desenhadas em cocriação com os artistas.",
-    heroImage: IMG.newsRenner,
-    publishedAt: "2025-08-15T10:00:00-03:00",
-    author: "Editorial 30praum",
-    tags: ["parceria", "holding"],
-    body: [
-      "A primeira cápsula Renner × 30praum chegou em 2024: peças desenhadas em conjunto com Matuê, Teto e Wiu, refletindo o DNA de cada um. Esgotou em 48 horas em todas as lojas físicas e e-commerce.",
-      "Agora vira parceria permanente. A Renner confirma colaboração estendida com a 30praum por dois anos, com drops sazonais a cada coleção (verão, outono, inverno, primavera) e edições especiais ligadas a momentos como o Plantão Festival e lançamentos de álbum.",
-      "É a segunda parceria estratégica da holding com varejistas de moda, depois da Ed Hardy by Matuê. Próximas em pipeline: Raw e Kenner.",
-    ],
-  },
-  {
-    slug: "brandao85-isso-e-trap-vol2-warzone",
-    title: "Brandão85 solta WARZONE, primeiro single oficial de Isso é Trap Vol.02",
-    excerpt:
-      "Após cocriar faixas de 333 com Matuê, Brandão85 estreia em formato álbum solo no selo. Single chega antes do disco.",
-    heroImage: IMG.newsWarzone,
-    publishedAt: "2025-12-12T19:00:00-03:00",
+    slug: "isso-e-trap-vol-2-lancamento",
+    title: "Brandão85 lança Isso É Trap Vol. 2",
+    excerpt: "Catorze faixas, com Matuê em JAPONÊS. Continuação da mixtape de 2022.",
+    heroImage: "/assets/covers/japones_warzone.jpg",
+    publishedAt: "2026-04-15T12:00:00-03:00",
     author: "Editorial 30praum",
     tags: ["lancamento"],
     relatedArtists: ["brandao"],
+    relatedReleases: ["isso-e-trap-vol-2"],
     body: [
-      "Quando Brandão85 saiu da Hash em 2024 e foi anunciado oficialmente como artista 30praum, todo mundo esperou o álbum. Demorou um ano e meio.",
-      "Vale a espera: WARZONE é o primeiro single oficial de Isso é Trap Vol.02, segundo álbum solo do cearense desde a estreia com CEO em 2024.",
-      "Co-produção do próprio Brandão e Drakoz. Estreia no Spotify Brasil entre os 10 mais ouvidos do dia. Vol.02 sai completo em 2026.",
+      "Isso É Trap Vol. 2 está nas plataformas. É a continuação da mixtape que o Brandão85 lançou em 2022 e o primeiro projeto longo dele pela 30praum.",
+      "O disco tem catorze faixas e 37 minutos. As participações são de Matuê, em JAPONÊS, e Desiree, em ROCKSTAR.",
+    ],
+  },
+  {
+    slug: "colapso-global-teto-wiu",
+    title: "Teto e Wiu lançam Colapso Global",
+    excerpt: "O disco a quatro mãos estreou no top 10 global do Spotify.",
+    heroImage: "/assets/covers/colapso_global.jpg",
+    publishedAt: "2026-01-27T12:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["lancamento"],
+    relatedArtists: ["teto", "wiu"],
+    relatedReleases: ["colapso-global"],
+    body: [
+      "Colapso Global saiu em 27 de janeiro. São onze faixas e 33 minutos, com participações de Deekapz, Franco, The Sir!, Mirella Costa, Yuri Redicopa, Melissa Hartman, Don L e Lamar.",
+      "O disco é trap na base, mas passa por house, jazz, bossa nova e funk carioca. Na semana de lançamento, entrou no top 10 global do Spotify.",
+    ],
+  },
+  {
+    slug: "xtranho-matue-lancamento",
+    title: "Matuê lança XTRANHO com audição aberta no Anhangabaú",
+    excerpt: "O terceiro álbum do Matuê saiu em 10 de dezembro, com treze faixas.",
+    heroImage: "/assets/covers/xtranho.jpg",
+    publishedAt: "2025-12-10T09:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["lancamento"],
+    relatedArtists: ["matue"],
+    relatedReleases: ["xtranho"],
+    body: [
+      "XTRANHO chegou às plataformas em 10 de dezembro de 2025, com uma audição gratuita no Vale do Anhangabaú, em São Paulo. É o terceiro álbum do Matuê, depois de Máquina do Tempo (2020) e 333 (2024).",
+      "O disco foi feito em cerca de quatro meses, num acampamento criativo com músicos, produtores e designers. Tem participações de kouth, Cashley, N.A.N.A., FAB GODAMN, okie, Phl Notunrboy, LPT Zlatan e Brandão85.",
     ],
   },
 ];
+
 export function getNewsPost(slug: string): NewsPost | undefined {
   return NEWS_POSTS.find((p) => p.slug === slug);
 }

@@ -1,19 +1,18 @@
-interface Track {
-  title: string;
-}
 interface Props {
-  tracks: Track[];
+  title: string;
+  tracks: string[];
 }
-export function Tracklist({ tracks }: Props) {
+
+export function Tracklist({ title, tracks }: Props) {
   return (
     <section
-      aria-label="Tracklist"
+      aria-label={`Faixas de ${title}`}
       className="mx-auto max-w-screen-2xl px-4 py-12 sm:px-8 sm:py-16"
     >
-      <ol className="divide-y" style={{ borderColor: "var(--border)" }}>
-        {tracks.map((t, i) => (
+      <ol>
+        {tracks.map((track, i) => (
           <li
-            key={t.title}
+            key={track}
             className="grid grid-cols-[60px_1fr] items-center gap-6 py-5"
             style={{ borderBottom: "1px solid var(--border)" }}
           >
@@ -22,12 +21,9 @@ export function Tracklist({ tracks }: Props) {
             </span>
             <span
               className="font-display uppercase"
-              style={{
-                fontSize: "clamp(1rem, 1.4vw, 1.4rem)",
-                letterSpacing: "0.04em",
-              }}
+              style={{ fontSize: "clamp(1rem, 1.4vw, 1.4rem)", letterSpacing: "0.04em" }}
             >
-              {t.title}
+              {track}
             </span>
           </li>
         ))}

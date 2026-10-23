@@ -102,17 +102,11 @@ export default async function PartnerCasePage({
               className="font-display uppercase leading-[0.9]"
               style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.03em" }}
             >
-              Como nasceu.
+              Como foi
             </h2>
             <p className="mt-8 text-base sm:text-lg text-white/85 leading-relaxed max-w-prose">
               {partner.story}
             </p>
-            <blockquote
-              className="mt-12 border-l-2 pl-5 max-w-md italic text-white/75 text-lg"
-              style={{ borderColor: partner.brandColor }}
-            >
-              &ldquo;{partner.quote}&rdquo;
-            </blockquote>
 <div className="grid gap-3 content-start">
             {artists.length > 0 && (
               <div
@@ -136,6 +130,7 @@ export default async function PartnerCasePage({
                 </ul>
               </div>
             )}
+            {partner.externalLink && (
             <div
               className="border p-6"
               style={{ borderColor: "rgba(255,255,255,0.15)" }}
@@ -152,6 +147,7 @@ export default async function PartnerCasePage({
                 <ExternalLink size={14} strokeWidth={1.5} />
               </a>
             </div>
+            )}
           </div>
         </div>
       </section>
@@ -191,7 +187,7 @@ export default async function PartnerCasePage({
             className="font-display uppercase leading-[0.9]"
             style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", letterSpacing: "-0.02em" }}
           >
-            A holding tem mais.
+            Outras parcerias
           </h2>
           <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {(await getAllPartners())

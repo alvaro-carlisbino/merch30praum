@@ -7,7 +7,6 @@ import { ProductCard } from "@/components/loja/ProductCard";
 import { NewsletterCapture } from "@/components/shell/NewsletterCapture";
 import { Reveal } from "@/components/effects/Reveal";
 import { getAllProducts } from "@/lib/cms/products";
-import { ARTISTS } from "@/lib/artists/registry";
 import {
   buildCatalogHref,
   byArtist,
@@ -25,10 +24,10 @@ export const metadata = {
 };
 
 const TRUST = [
-  { label: "Loja oficial", detail: "Só aqui e na 30praum.store" },
-  { label: "Security bag", detail: "Pedido lacrado na origem" },
-  { label: "Trocas em 30 dias", detail: "Sem burocracia" },
-  { label: "Pix 5% off", detail: "Ou 4× sem juros" },
+  { label: "Loja oficial", detail: "Checkout na 30praum.store" },
+  { label: "Security bag", detail: "Pedido sai lacrado" },
+  { label: "Envio", detail: "Em até 7 dias úteis após o pagamento" },
+  { label: "Troca", detail: "Até 7 dias após a entrega" },
 ];
 
 export default async function LojaPage() {
@@ -43,7 +42,6 @@ export default async function LojaPage() {
   const colapso = inStockFirst(byArtist(all, "teto"));
   const acessorios = inStockFirst(byCategory(all, "acessorios"));
   const lastUnits = lowStockProducts(all);
-  const brandao = ARTISTS.brandao;
   const dropAvailable = drop.filter((p) => !isSoldOut(p)).length;
 
   const universes = [
@@ -81,7 +79,7 @@ export default async function LojaPage() {
         <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16">
           <div>
             <p className="text-[11px] uppercase tracking-[0.3em]" style={{ color: "var(--accent)" }}>
-              Drop ativo · Brandão85
+              Brandão85
             </p>
             <h1
               id="drop-ativo"
@@ -90,12 +88,11 @@ export default async function LojaPage() {
             >
               Isso é
               <br />
-              Trap.
+              Trap
             </h1>
             <p className="mt-6 max-w-md text-sm leading-relaxed text-fg/80 sm:text-base">
-              {brandao.voice.epigraph} O drop do Isso é Trap Vol.02 chega em
-              {" "}{drop.length} peças, {dropAvailable} ainda em estoque. Cada pedido sai
-              da casa em security bag lacrada.
+              Peças do Isso É Trap Vol. 2, o disco do Brandão85 que saiu em abril. São{" "}
+              {drop.length} itens, {dropAvailable} com estoque hoje. Todo pedido sai em security bag lacrada.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
@@ -112,7 +109,7 @@ export default async function LojaPage() {
                 className="inline-flex items-center rounded-full border px-6 py-3 text-sm transition-colors hover:bg-white hover:text-black"
                 style={{ borderColor: "var(--border)" }}
               >
-                Universo Brandão85
+                Sobre o Brandão85
               </Link>
             </div>
           </div>
@@ -135,7 +132,7 @@ export default async function LojaPage() {
           className="mb-6 font-display uppercase leading-none"
           style={{ fontSize: "clamp(1.5rem, 2.8vw, 2.4rem)", letterSpacing: "0.02em" }}
         >
-          Por universo
+          Por artista
         </h2>
         <div className="grid gap-4 sm:gap-5 lg:grid-cols-3">
           {universes.map((u) => (
@@ -154,7 +151,7 @@ export default async function LojaPage() {
       <Reveal>
         <ProductCarousel
           title="XTRANHO"
-          subtitle="Matuê · o terceiro capítulo"
+          subtitle="Matuê · 2025"
           products={xtranho}
           href={buildCatalogHref({ artista: "matue", ordem: "drop" })}
           hrefLabel="Tudo de Matuê"
@@ -187,7 +184,7 @@ export default async function LojaPage() {
       <Reveal>
         <ProductCarousel
           title="333 e Portal"
-          subtitle="Matuê · o capítulo do recorde"
+          subtitle="Matuê · 2024"
           products={matueRest}
           href={buildCatalogHref({ artista: "matue", ordem: "drop" })}
           hrefLabel="Tudo de Matuê"

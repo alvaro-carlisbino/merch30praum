@@ -2,11 +2,11 @@ import Image from "next/image";
 export type ArtistFact = { label: string; value: string };
 interface Props {
   facts: ArtistFact[];
-  description: string;
+  paragraphs: string[];
   sidePhoto: string;
   sidePhotoAlt: string;
 }
-export function SobreEle({ facts, description, sidePhoto, sidePhotoAlt }: Props) {
+export function SobreEle({ facts, paragraphs, sidePhoto, sidePhotoAlt }: Props) {
   return (
     <section
       aria-labelledby="sobre-ele"
@@ -28,7 +28,7 @@ export function SobreEle({ facts, description, sidePhoto, sidePhotoAlt }: Props)
               letterSpacing: "-0.01em",
             }}
           >
-            Sobre Ele
+            Sobre
           </h2>
           <dl className="mt-8 space-y-3 text-sm">
             {facts.map((f) => (
@@ -44,9 +44,11 @@ export function SobreEle({ facts, description, sidePhoto, sidePhotoAlt }: Props)
               </div>
             ))}
           </dl>
-          <p className="mt-8 max-w-prose text-sm leading-relaxed text-fg/85">
-            {description}
-          </p>
+          <div className="mt-8 max-w-prose space-y-4 text-sm leading-relaxed text-fg/85">
+            {paragraphs.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
+          </div>
         </div>
         <div
           className="relative overflow-hidden rounded-3xl"

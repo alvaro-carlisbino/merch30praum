@@ -34,10 +34,10 @@ export async function ProximosShows() {
               className="font-display uppercase leading-[0.92]"
               style={{ fontSize: "clamp(2rem, 4.6vw, 3.6rem)", letterSpacing: "-0.02em" }}
             >
-              Próximos shows.
+              Próximos shows
             </h2>
             <Link href="/shows" data-cursor="Agenda" className="text-[11px] uppercase tracking-[0.22em] text-muted transition-colors hover:text-fg">
-              Agenda completa →
+              Agenda completa
             </Link>
           </header>
         </Reveal>
@@ -79,7 +79,7 @@ export async function ProximosShows() {
                     </a>
                   ) : (
                     <span className="text-[10px] uppercase tracking-[0.22em] text-muted">
-                      {s.status === "soldout" ? "Esgotado" : "Em breve"}
+                      {s.status === "soldout" ? "Esgotado" : "Venda local"}
                     </span>
                   )}
                 </li>

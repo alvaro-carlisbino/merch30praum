@@ -7,7 +7,7 @@ import type { ArtistConfig } from "@/lib/artists/types";
 export const metadata = {
   title: "Shows",
   description:
-    "Agenda oficial dos shows do roster: Matuê, Teto, Wiu, Brandão85. Plantão Festival e tour pelo Brasil.",
+    "Próximos shows de Matuê, Wiu, Teto e Brandão85, com links de ingresso quando a venda é online.",
 };
 function formatDate(iso: string) {
   const d = new Date(iso);
@@ -24,7 +24,7 @@ const STATUS_COPY: Record<
 > = {
   upcoming: { label: "Ingressos", tone: "accent" },
   soldout: { label: "Esgotado", tone: "muted" },
-  tba: { label: "Em breve", tone: "muted" },
+  tba: { label: "Venda local", tone: "muted" },
   past: { label: "Encerrado", tone: "muted" },
 };
 const CARD_PHOTOS: Record<string, string> = {
@@ -33,11 +33,11 @@ const CARD_PHOTOS: Record<string, string> = {
   teto: "/figma-home/card-teto.png",
   brandao: "/figma-home/card-brandao.png",
 };
-function ShowCard({ show, artist }: { show: Show; artist: ArtistConfig }) {
-  const status = STATUS_COPY[show.status];
+function ShowCard({ show, artist, past = false }: { show: Show; artist: ArtistConfig; past?: boolean }) {
+  const status = STATUS_COPY[past ? "past" : show.status];
   const date = formatDate(show.date);
   const photo = CARD_PHOTOS[artist.slug];
-  const ctaActive = show.status === "upcoming" && show.ticketsUrl;
+  const ctaActive = !past && show.status === "upcoming" && show.ticketsUrl;
   return (
     <article
       className="grid items-center gap-4 rounded-2xl border p-4 sm:grid-cols-[auto_auto_1fr_auto] sm:gap-6 sm:p-5"
@@ -109,7 +109,7 @@ function ShowCard({ show, artist }: { show: Show; artist: ArtistConfig }) {
               color: "var(--accent)",
             }}
           >
-            {status.label} →
+            {status.label}
           </a>
         ) : (
           <span
@@ -152,10 +152,8 @@ export default async function ShowsPage() {
           Shows
         </h1>
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/80 sm:text-base">
-          Agenda oficial do roster: Plantão Festival, tours por capital,
-          festivais convidados. {upcoming.length === 0
-            ? "Próximas datas em breve."
-            : `${upcoming.length} ${upcoming.length === 1 ? "data" : "datas"} na agenda. As marcadas como "em breve" ainda não têm venda aberta.`}
+          Datas anunciadas de Matuê, Wiu, Teto e Brandão85. Quando a venda é feita pela produção
+          local, a data aparece sem link: confira nos perfis oficiais do artista e da casa de show.
         </p>
       </section>
       <section className="mx-auto max-w-screen-2xl px-4 pb-16 sm:px-8 sm:pb-20">
@@ -203,12 +201,12 @@ export default async function ShowsPage() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Já aconteceu.
+              Já aconteceu
             </h2>
             <ul className="space-y-3 opacity-65">
               {past.map((show) => (
                 <li key={show.id}>
-                  <ShowCard show={show} artist={artistMap.get(show.artistSlug)!} />
+                  <ShowCard show={show} artist={artistMap.get(show.artistSlug)!} past />
                 </li>
               ))}
             </ul>
@@ -225,12 +223,11 @@ export default async function ShowsPage() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Plantão é a casa.
+              Plantão
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-fg/80 sm:text-base">
-              O festival próprio da 30praum acontece em Fortaleza. Em 2026 marca
-              os 10 anos da gravadora: line-up, ingressos, edições anteriores e
-              tudo o que precisa saber.
+              O festival da 30praum, em Fortaleza. Teve três edições, de 2024 a 2026. A próxima
+              ainda não foi anunciada.
             </p>
           </div>
           <Link
@@ -242,7 +239,7 @@ export default async function ShowsPage() {
               color: "var(--accent)",
             }}
           >
-            Plantão Festival →
+            Ver o Plantão
           </Link>
         </div>
       </section>

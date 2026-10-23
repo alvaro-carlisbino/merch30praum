@@ -11,7 +11,7 @@ type HeroSlide = {
   nameWidth: number;
   nameAspect: string;
   objectPosition: string;
-  quote: string;
+  caption: string;
 };
 const SLIDES: HeroSlide[] = [
   {
@@ -21,7 +21,7 @@ const SLIDES: HeroSlide[] = [
     nameWidth: 320,
     nameAspect: "1000 / 1000",
     objectPosition: "center 25%",
-    quote: "“Todo mundo quer ser estrela, mas não tem lugar no Sol.” · Matuê",
+    caption: "Matuê · XTRANHO, 2025",
   },
   {
     key: "wiu",
@@ -30,7 +30,7 @@ const SLIDES: HeroSlide[] = [
     nameWidth: 320,
     nameAspect: "1000 / 1000",
     objectPosition: "center 25%",
-    quote: "“Se a saudade matasse, eu já tinha morrido bonito.” · Wiu",
+    caption: "Wiu · Colapso Global, com Teto, 2026",
   },
   {
     key: "teto",
@@ -39,7 +39,7 @@ const SLIDES: HeroSlide[] = [
     nameWidth: 320,
     nameAspect: "1000 / 1000",
     objectPosition: "center 30%",
-    quote: "“Não é fim. É trilha.” · Teto",
+    caption: "Teto · Colapso Global, com Wiu, 2026",
   },
   {
     key: "brandao",
@@ -48,7 +48,7 @@ const SLIDES: HeroSlide[] = [
     nameWidth: 460,
     nameAspect: "1292 / 430",
     objectPosition: "center 25%",
-    quote: "“Cresci copiando. Agora os outros copiam errado.” · Brandão85",
+    caption: "Brandão85 · Isso É Trap Vol. 2, 2026",
   },
 ];
 const ROTATE_MS = 5200;
@@ -66,7 +66,6 @@ export function HomeHero() {
     }, ROTATE_MS);
     return () => clearTimeout(id);
   }, [index, paused]);
-  const current = SLIDES[index];
   return (
     <section
       className="relative w-full overflow-hidden"
@@ -75,7 +74,7 @@ export function HomeHero() {
         minHeight: "640px",
         background: "var(--bg)",
       }}
-      aria-label="Universos 30praum"
+      aria-label="Artistas da 30praum"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -132,7 +131,7 @@ export function HomeHero() {
               >
                 <Image
                   src={slide.name}
-                  alt={slide.key}
+                  alt={slide.caption.split(" · ")[0]}
                   fill
                   sizes="500px"
                   className="object-contain"
@@ -142,14 +141,7 @@ export function HomeHero() {
             );
           })}
         </div>
-        <p className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] uppercase tracking-[0.3em] text-white/75 sm:text-[11px]">
-          <span>04 universos</span>
-          <span aria-hidden className="text-white/40">·</span>
-          <span>03 álbuns vivos</span>
-          <span aria-hidden className="text-white/40">·</span>
-          <span>10 anos de casa</span>
-        </p>
-        <div className="relative mt-5 w-full min-h-[4.5rem]">
+        <div className="relative mt-6 w-full min-h-[2rem]">
           {SLIDES.map((slide, i) => (
             <p
               key={slide.key}
@@ -157,7 +149,7 @@ export function HomeHero() {
               className="absolute left-1/2 top-0 w-[min(640px,92vw)] -translate-x-1/2 transition-opacity duration-700 text-sm leading-relaxed text-white/85 sm:text-base"
               style={{ opacity: i === index ? 1 : 0 }}
             >
-              {slide.quote}
+              {slide.caption}
             </p>
           ))}
         </div>
@@ -167,7 +159,7 @@ export function HomeHero() {
               key={slide.key}
               type="button"
               onClick={() => setIndex(i)}
-              aria-label={`Mostrar ${slide.key}`}
+              aria-label={`Mostrar ${slide.caption.split(" · ")[0]}`}
               className="relative h-1 w-8 overflow-hidden rounded-full"
               style={{ background: "rgba(255,255,255,0.3)" }}
             >
@@ -214,7 +206,6 @@ export function HomeHero() {
           .hero-kenburns, .hero-name-in { animation: none; }
         }
       `}</style>
-      <span hidden data-active-slide={current.key} />
     </section>
   );
 }

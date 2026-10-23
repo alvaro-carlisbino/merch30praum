@@ -52,7 +52,6 @@ export const Partners: CollectionConfig = {
             { name: "headline", type: "text", required: true },
             { name: "shortPitch", type: "textarea", required: true },
             { name: "story", type: "textarea", required: true },
-            { name: "quote", type: "textarea" },
           ],
         },
         {
@@ -67,7 +66,7 @@ export const Partners: CollectionConfig = {
                 { name: "year", type: "text", required: true },
               ],
             },
-            { name: "externalLink", type: "text", required: true },
+            { name: "externalLink", type: "text" },
             { name: "internalLink", type: "text" },
           ],
         },

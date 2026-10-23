@@ -14,6 +14,7 @@ function adapt(doc: Record<string, unknown>): PlantaoEdition {
     year: doc.year as number,
     title: doc.title as string,
     date: typeof doc.date === "string" ? doc.date.slice(0, 10) : new Date(doc.date as string).toISOString().slice(0, 10),
+    dateAnnounced: doc.dateAnnounced !== false,
     doorsAt: doc.doorsAt as string,
     venue: doc.venue as string,
     city: doc.city as string,
@@ -46,8 +47,6 @@ function adapt(doc: Record<string, unknown>): PlantaoEdition {
     stats: {
       attendees: (doc.stats as Record<string, unknown>)?.attendees as number | undefined,
       onlineViewers: (doc.stats as Record<string, unknown>)?.onlineViewers as number | undefined,
-      investment: (doc.stats as Record<string, unknown>)?.investment as string | undefined,
-      hoursOfShow: (doc.stats as Record<string, unknown>)?.hoursOfShow as number | undefined,
     },
     infoFAQ: ((doc.infoFAQ as Array<Record<string, unknown>>) ?? []).map((f) => ({
       question: f.question as string,

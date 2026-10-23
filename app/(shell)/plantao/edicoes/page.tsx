@@ -16,11 +16,10 @@ export default async function PlantaoEdicoesPage() {
           className="font-display uppercase leading-[0.85]"
           style={{ fontSize: "clamp(3rem, 11vw, 9rem)", letterSpacing: "-0.04em" }}
         >
-          Cada noite, <br /> uma história.
+          Edições
         </h1>
         <p className="mt-8 max-w-2xl text-base sm:text-xl text-fg/85 leading-relaxed">
-          Três edições na Beira-Mar. Mais de 70 mil pessoas presenciais. Quase um milhão online. O
-          Plantão saiu de projeto independente pra referência nacional sem sair de Fortaleza.
+          Três edições no Marina Park, em Fortaleza, de 2024 a 2026.
         </p>
       </section>
       <div className="space-y-24 sm:space-y-32 pb-24">
@@ -39,28 +38,22 @@ export default async function PlantaoEdicoesPage() {
                     {ed.status === "live" ? "Edição atual" : ed.status === "upcoming" ? "Próxima edição" : "Edição encerrada"}
                   </p>
                 </div>
-                {ed.stats.attendees || ed.stats.onlineViewers || ed.stats.investment ? (
-                  <dl className="grid grid-cols-3 gap-6 text-sm">
+                {ed.stats.attendees || ed.stats.onlineViewers ? (
+                  <dl className="grid grid-cols-2 gap-6 text-sm">
                     {ed.stats.attendees ? (
                       <div>
                         <dt className="text-[10px] uppercase tracking-[0.3em] opacity-60">Público</dt>
-                        <dd className="mt-2 font-display text-2xl">{ed.stats.attendees.toLocaleString("pt-BR")}</dd>
+                        <dd className="mt-2 font-display text-2xl">{`~${(ed.stats.attendees / 1000).toFixed(0)} mil`}</dd>
                       </div>
                     ) : null}
                     {ed.stats.onlineViewers ? (
                       <div>
                         <dt className="text-[10px] uppercase tracking-[0.3em] opacity-60">Online</dt>
-                        <dd className="mt-2 font-display text-2xl">{`${(ed.stats.onlineViewers / 1000).toFixed(0)}K`}</dd>
-                      </div>
-                    ) : null}
-                    {ed.stats.investment ? (
-                      <div>
-                        <dt className="text-[10px] uppercase tracking-[0.3em] opacity-60">Investimento</dt>
-                        <dd className="mt-2 font-display text-2xl">{ed.stats.investment}</dd>
+                        <dd className="mt-2 font-display text-2xl">{`~${(ed.stats.onlineViewers / 1000).toFixed(0)} mil`}</dd>
                       </div>
                     ) : null}
                   </dl>
-                ) : (
+                ) : ed.status !== "past" ? (
                   <div>
                     <p className="text-[10px] uppercase tracking-[0.3em] opacity-60">Lista de espera</p>
                     <Link
@@ -68,10 +61,10 @@ export default async function PlantaoEdicoesPage() {
                       className="mt-3 inline-flex items-center rounded-full border px-5 py-2.5 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-white hover:text-black"
                       style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
                     >
-                      Receber o line-up primeiro →
+                      Receber o anúncio primeiro
                     </Link>
                   </div>
-                )}
+                ) : null}
               </div>
               <div className="relative aspect-[21/9] overflow-hidden border" style={{ borderColor: "var(--border)" }}>
                 <Image

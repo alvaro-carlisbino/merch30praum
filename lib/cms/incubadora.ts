@@ -19,7 +19,7 @@ function adapt(doc: Record<string, unknown>): Incubadora {
     casesOfSuccess: ((doc.casesOfSuccess as Array<Record<string, unknown>>) ?? []).map((c) => ({
       artistSlug: c.artistSlug as string,
       displayName: c.displayName as string,
-      joinedYear: c.joinedYear as number,
+      joinedYear: (c.joinedYear as number) || undefined,
       excerpt: c.excerpt as string,
       image: c.image as string,
     })),

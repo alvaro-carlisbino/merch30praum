@@ -32,10 +32,10 @@ export async function VistaAgora() {
             className="font-display uppercase leading-[0.92]"
             style={{ fontSize: "clamp(2.2rem, 5.4vw, 4.5rem)", letterSpacing: "-0.02em" }}
           >
-            Vista agora.
+            Na loja agora
           </h2>
           <p className="max-w-md text-sm text-muted sm:text-base">
-            O que está em estoque hoje na loja oficial. Drop ISSO É TRAP, XTRANHO e Colapso Global.
+            Peças com estoque hoje na loja oficial: Isso É Trap, XTRANHO e Colapso Global.
           </p>
         </header>
         <VistaAgoraCarousel products={products} />

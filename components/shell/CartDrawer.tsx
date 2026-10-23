@@ -11,7 +11,6 @@ import {
 } from "@/lib/cart/actions";
 import type { DomainCart } from "@/lib/shopify/types";
 import { formatMoney } from "@/lib/utils/format-money";
-import { CartFreeShipping } from "./CartFreeShipping";
 export function CartDrawer() {
   const { isDrawerOpen, closeDrawer, setOptimisticCount } = useCartUI();
   const [cart, setCart] = useState<DomainCart | null>(null);
@@ -114,7 +113,7 @@ export function CartDrawer() {
                 <div className="px-6 py-12 text-center">
                   <p className="font-display text-2xl mb-2">Vazio por enquanto</p>
                   <p className="text-sm text-muted mb-6">
-                    Escolha um universo e bota algo aqui dentro.
+                    Nada aqui ainda. Dá uma olhada na loja.
                   </p>
                   <button
                     type="button"
@@ -193,10 +192,7 @@ export function CartDrawer() {
             </div>
             {cart && cart.lines.length > 0 && (
               <footer className="border-t border-border px-6 py-5 space-y-4">
-                <CartFreeShipping
-                  subtotal={parseFloat(cart.cost.subtotalAmount.amount)}
-                />
-                <div className="flex items-baseline justify-between pt-2 border-t border-border">
+                <div className="flex items-baseline justify-between">
                   <span className="text-xs uppercase tracking-widest text-muted">
                     Subtotal
                   </span>

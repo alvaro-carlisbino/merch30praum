@@ -7,24 +7,12 @@ import { LineupPoster } from "@/components/plantao/LineupPoster";
 import { LineupGrid } from "@/components/plantao/LineupGrid";
 import { NewsletterCapture } from "@/components/shell/NewsletterCapture";
 import { Reveal } from "@/components/effects/Reveal";
+import { editionDate, longDate } from "@/lib/utils/dates";
 
 const RED = "#ff2d5a";
 const INK = "#080205";
 const HERO = "/figma-plantao/stage-2024.jpg";
 const POSTER_2026 = "/figma-plantao/hero.jpg";
-
-function longDate(iso: string) {
-  return new Date(`${iso}T12:00:00-03:00`).toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  });
-}
-
-
-function compact(n: number) {
-  return n >= 1_000_000 ? `${(n / 1_000_000).toFixed(n % 1_000_000 ? 1 : 0)}M` : `${Math.round(n / 1000)}K`;
-}
 
 export async function generateMetadata() {
   const current = await getCurrentPlantao();
@@ -38,19 +26,16 @@ export default async function PlantaoHubPage() {
   const [current, past] = await Promise.all([getCurrentPlantao(), getPastPlantao()]);
   const last = past[0] ?? null;
   const upcoming = current.status === "upcoming" || current.status === "live";
-  const attendees = past.reduce((n, e) => n + (e.stats.attendees ?? 0), 0);
-  const online = past.reduce((n, e) => n + (e.stats.onlineViewers ?? 0), 0);
+  const dateKnown = current.dateAnnounced !== false;
 
   const stats = [
     { value: String(past.length), label: "Edições", foot: `desde ${past[past.length - 1]?.year ?? 2024}` },
-    { value: compact(attendees), label: "Presencial", foot: "acumulado na Beira-Mar" },
-    { value: compact(online), label: "Online", foot: "audiência no YouTube" },
-    { value: "10h", label: "De palco", foot: `na edição ${last?.year ?? ""}` },
+    { value: "20 mil", label: "Por edição", foot: "público no Marina Park" },
+    { value: "500 mil", label: "Online", foot: "na transmissão de 2025" },
   ];
 
   return (
     <>
-      {/* ---------- HERO ---------- */}
       <section
         className="relative isolate flex items-end overflow-hidden"
         style={{ minHeight: "min(96svh, 1000px)", background: INK }}
@@ -69,7 +54,6 @@ export default async function PlantaoHubPage() {
           className="-z-20 object-cover"
           style={{ objectPosition: "center 62%" }}
         />
-        {/* topo e base escurecidos para header e transição; meio preservado para a foto respirar */}
         <div
           aria-hidden
           className="absolute inset-0 -z-10"
@@ -77,7 +61,6 @@ export default async function PlantaoHubPage() {
             background: `linear-gradient(180deg, rgba(8,2,5,0.78) 0%, rgba(8,2,5,0.12) 18%, rgba(8,2,5,0.1) 46%, rgba(8,2,5,0.72) 80%, ${INK} 100%)`,
           }}
         />
-        {/* poça escura atrás do bloco de texto, sem cobrir o palco */}
         <div
           aria-hidden
           className="absolute inset-0 -z-10"
@@ -86,7 +69,7 @@ export default async function PlantaoHubPage() {
 
         <div className="mx-auto w-full max-w-screen-2xl px-4 pb-12 pt-32 sm:px-8 sm:pb-16">
           <p className="text-[10px] uppercase tracking-[0.4em] text-white/70 sm:text-[11px]">
-            {longDate(current.date)} · {current.city}/{current.state} · festival próprio da 30praum
+            {editionDate(current)} · {current.city}/{current.state} · festival próprio da 30praum
           </p>
 
           <h1
@@ -127,7 +110,7 @@ export default async function PlantaoHubPage() {
                 </a>
               </div>
             </div>
-            {upcoming && (
+            {upcoming && dateKnown && (
               <div className="lg:justify-self-end">
                 <PlantaoCountdown
                   targetDate={`${current.date}T${current.doorsAt}:00-03:00`}
@@ -135,7 +118,7 @@ export default async function PlantaoHubPage() {
                   tone="accent"
                 />
                 <p className="mt-4 text-xs text-white/50">
-                  {current.venue === "A confirmar" ? "Local a confirmar" : current.venue} · portões {current.doorsAt}
+                  {current.venue} · portões {current.doorsAt}
                 </p>
               </div>
             )}
@@ -143,10 +126,9 @@ export default async function PlantaoHubPage() {
         </div>
       </section>
 
-      {/* ---------- NÚMEROS ---------- */}
       <section style={{ background: INK }} aria-label="Números do festival">
         <div className="mx-auto max-w-screen-2xl border-t px-4 sm:px-8" style={{ borderColor: "rgba(255,255,255,0.12)" }}>
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-4">
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-3">
             {stats.map((s) => (
               <div key={s.label}>
                 <dd
@@ -165,21 +147,20 @@ export default async function PlantaoHubPage() {
         </div>
       </section>
 
-      {/* ---------- LINE-UP ---------- */}
       {last && last.lineup.length > 0 && (
         <section id="lineup" className="scroll-mt-16" style={{ background: INK }} aria-labelledby="lineup-title">
           <div className="mx-auto max-w-screen-2xl border-t px-4 py-20 sm:px-8 sm:py-28" style={{ borderColor: "rgba(255,255,255,0.12)" }}>
             <Reveal>
               <header className="mb-14 text-center">
                 <p className="text-[10px] uppercase tracking-[0.4em] text-white/50">
-                  Line-up da edição {last.year} · {last.lineup.length} nomes
+                  {last.lineup.length} nomes no palco
                 </p>
                 <h2
                   id="lineup-title"
                   className="mt-4 font-display uppercase leading-[0.88] text-white"
                   style={{ fontSize: "clamp(2rem, 5vw, 3.6rem)", letterSpacing: "-0.02em" }}
                 >
-                  Uma noite. A cena inteira.
+                  Line-up de {last.year}
                 </h2>
               </header>
             </Reveal>
@@ -201,30 +182,28 @@ export default async function PlantaoHubPage() {
                 className="inline-flex items-center rounded-full border px-7 py-4 text-xs uppercase tracking-[0.22em] text-white transition-colors hover:bg-white hover:text-black"
                 style={{ borderColor: "rgba(255,255,255,0.35)" }}
               >
-                Percorrer o line-up {last.year} →
+                Ver o line-up completo
               </Link>
             </div>
           </div>
         </section>
       )}
 
-      {/* ---------- LISTA DE ESPERA ---------- */}
       <NewsletterCapture
         id="lista"
         source="plantao"
         variant="dark"
         title={
           <>
-            Pré-venda antes
+            Avisamos quando
             <br />
-            de todo mundo.
+            sair a data
           </>
         }
-        body={`Line-up, setores e abertura de vendas do Plantão ${current.year} saem primeiro pra quem está na lista. Venda oficial só pela 30praum: ingresso anunciado fora daqui é golpe.`}
+        body={`Data, line-up e abertura das vendas do Plantão ${current.year} chegam por e-mail pra quem está na lista.`}
         buttonLabel="Entrar na lista"
       />
 
-      {/* ---------- EDIÇÃO ANTERIOR ---------- */}
       {last && (
         <section style={{ background: INK }} aria-labelledby="ultima-edicao">
           <div className="mx-auto max-w-screen-2xl px-4 py-20 sm:px-8 sm:py-28">
@@ -270,7 +249,7 @@ export default async function PlantaoHubPage() {
                       className="inline-flex items-center rounded-full border px-6 py-3 text-xs uppercase tracking-[0.22em] text-white transition-colors hover:bg-white hover:text-black"
                       style={{ borderColor: "rgba(255,255,255,0.35)" }}
                     >
-                      Todas as edições →
+                      Todas as edições
                     </Link>
                   </div>
                 </div>
@@ -280,7 +259,6 @@ export default async function PlantaoHubPage() {
         </section>
       )}
 
-      {/* ---------- HISTÓRICO ---------- */}
       {past.length > 0 && (
         <section style={{ background: INK }} aria-labelledby="historia">
           <div className="mx-auto max-w-screen-2xl border-t px-4 py-20 sm:px-8 sm:py-24" style={{ borderColor: "rgba(255,255,255,0.12)" }}>
@@ -290,7 +268,7 @@ export default async function PlantaoHubPage() {
                 className="mb-12 font-display uppercase leading-[0.9] text-white"
                 style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
               >
-                O Plantão tem história.
+                Edições anteriores
               </h2>
             </Reveal>
             <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -325,7 +303,7 @@ export default async function PlantaoHubPage() {
                           <p className="mt-2 text-xs leading-snug text-white/70">{ed.tagline}</p>
                           {ed.stats.attendees && (
                             <p className="mt-3 text-[10px] uppercase tracking-[0.28em]" style={{ color: RED }}>
-                              {compact(ed.stats.attendees)} pessoas
+                              cerca de {(ed.stats.attendees / 1000).toFixed(0)} mil pessoas
                             </p>
                           )}
                         </div>

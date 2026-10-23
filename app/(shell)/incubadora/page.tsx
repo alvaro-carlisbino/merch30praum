@@ -4,7 +4,7 @@ import { getIncubadora } from "@/lib/cms/incubadora";
 export const metadata = {
   title: "Incubadora",
   description:
-    "O canal de candidatura à 30praum. Para artistas com som autoral que querem ser ouvidos por quem escuta direito.",
+    "Envie seu som para o A&R da 30praum. Para artistas com faixas autorais lançadas.",
 };
 export default async function IncubadoraPage() {
   const INCUBADORA = await getIncubadora();
@@ -27,8 +27,7 @@ export default async function IncubadoraPage() {
           {INCUBADORA.shortTagline}
         </p>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-fg/80 sm:text-base">
-          Canal oficial de candidatura à 30praum. Não é talent show: é onde a
-          gravadora escuta quem ainda não está dentro.
+          Formulário de envio de som para o A&R da 30praum.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <Link
@@ -40,13 +39,13 @@ export default async function IncubadoraPage() {
               color: "var(--accent)",
             }}
           >
-            Mandar demo →
+            Mandar som
           </Link>
           <a
             href="#como-funciona"
             className="inline-flex items-center gap-2 text-sm text-muted hover:text-fg"
           >
-            Como funciona ↓
+            Como funciona
           </a>
         </div>
       </section>
@@ -55,7 +54,7 @@ export default async function IncubadoraPage() {
           className="font-display leading-[0.95] max-w-4xl"
           style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.025em" }}
         >
-          A porta sempre existiu. Agora tem endereço.
+          Por que existe
         </h2>
         <div className="mt-10 grid gap-6 max-w-3xl text-base sm:text-lg text-fg/85 leading-relaxed">
           {INCUBADORA.manifesto.map((p, i) => (
@@ -73,7 +72,7 @@ export default async function IncubadoraPage() {
             className="font-display uppercase leading-[0.9]"
             style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.03em" }}
           >
-            Quatro passos.
+            Como funciona
           </h2>
           <div className="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {INCUBADORA.howItWorks.map((step) => (
@@ -99,7 +98,7 @@ export default async function IncubadoraPage() {
               className="font-display uppercase leading-[0.95]"
               style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", letterSpacing: "-0.02em" }}
             >
-              O que abre porta.
+              O que a gente procura
             </h3>
             <ul className="mt-8 space-y-4 text-fg/85">
               {INCUBADORA.whatWeLookFor.map((item) => (
@@ -119,7 +118,7 @@ export default async function IncubadoraPage() {
               className="font-display uppercase leading-[0.95] text-fg/55"
               style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", letterSpacing: "-0.02em" }}
             >
-              O que não vai funcionar.
+              O que não pesa
             </h3>
             <ul className="mt-8 space-y-4 text-fg/55">
               {INCUBADORA.whatWeDontLookFor.map((item) => (
@@ -138,11 +137,11 @@ export default async function IncubadoraPage() {
             className="font-display uppercase leading-[0.9]"
             style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.03em" }}
           >
-            Quem entrou assim.
+            Como alguns chegaram
           </h2>
           <p className="mt-4 max-w-xl text-fg/75 leading-relaxed">
-            Três casos pra mostrar como funciona. Nenhum dos quatro pilares do roster atual
-            chegou por contrato grande. Foi conversa, processo, tempo.
+            Nenhum deles chegou por um processo seletivo. Ficam aqui como referência do tipo de
+            artista que a casa costuma ouvir.
           </p>
           <div className="mt-12 grid gap-4 lg:grid-cols-3">
             {INCUBADORA.casesOfSuccess.map((c) => (
@@ -175,7 +174,7 @@ export default async function IncubadoraPage() {
                     {c.displayName}
                   </p>
                   <p className="mt-3 text-sm text-fg/80 leading-relaxed">{c.excerpt}</p>
-                  <p className="mt-4 text-xs opacity-55">Entrou em {c.joinedYear}</p>
+                  {c.joinedYear && <p className="mt-4 text-xs opacity-55">Assinou em {c.joinedYear}</p>}
                 </div>
               </Link>
             ))}
@@ -200,7 +199,7 @@ export default async function IncubadoraPage() {
               color: "var(--accent)",
             }}
           >
-            Submeter demo →
+            Mandar som
           </Link>
         </div>
       </section>

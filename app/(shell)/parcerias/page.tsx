@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getAllPartners } from "@/lib/cms/partners";
+import { CONTACT } from "@/lib/contact";
 export const metadata = {
   title: "Parcerias",
   description:
-    "30praum × RAW · Renner · Kenner. Colaborações oficiais que carimbaram a marca em três continentes da cultura.",
+    "Plantão Festival, Renner e Ed Hardy by Matuê: as parcerias da 30praum.",
 };
 export default async function ParceriasPage() {
   const partners = await getAllPartners();
@@ -21,9 +22,7 @@ export default async function ParceriasPage() {
           Parcerias
         </h1>
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/80 sm:text-base">
-          A 30praum não fica em uma só vitrine. Da bandeja de RAW ao shopping da
-          Renner e à sandália Kenner: cada colab vira um capítulo, não um
-          licenciamento.
+          O festival que a casa organiza e as marcas com quem a 30praum já lançou coleção.
         </p>
       </section>
       <section className="mx-auto max-w-screen-2xl px-4 pb-20 sm:px-8 sm:pb-24">
@@ -67,7 +66,7 @@ export default async function ParceriasPage() {
                       className="mt-auto inline-flex items-center gap-2 text-sm transition-transform group-hover:translate-x-1"
                       style={{ color: partner.brandColor }}
                     >
-                      Abrir case →
+                      Abrir case
                     </span>
                   </div>
                   <div className="relative aspect-[4/3] overflow-hidden lg:aspect-auto lg:min-h-[24rem]">
@@ -108,14 +107,14 @@ export default async function ParceriasPage() {
               letterSpacing: "-0.02em",
             }}
           >
-            Sua marca também pode entrar nesse capítulo.
+            Proposta de parceria
           </h2>
           <p className="mt-6 max-w-xl text-sm leading-relaxed text-fg/80 sm:text-base">
-            Coleções cápsula, drops conjuntos, edições limitadas. Se a sua marca
-            entende o que é cultura, manda um e-mail e a gente conversa.
+            Coleção, edição limitada, ativação no Plantão. Manda um e-mail contando a ideia e
+            quem está por trás da marca.
           </p>
-          <Link
-            href="mailto:parcerias@30praum.com"
+          <a
+            href={`mailto:${CONTACT.parcerias}`}
             data-cursor="Email parcerias"
             className="mt-8 inline-flex items-center rounded-full border px-6 py-3 text-sm transition-colors hover:bg-white hover:text-black"
             style={{
@@ -123,8 +122,8 @@ export default async function ParceriasPage() {
               color: "var(--accent)",
             }}
           >
-            parcerias@30praum.com
-          </Link>
+            {CONTACT.parcerias}
+          </a>
         </div>
       </section>
     </>

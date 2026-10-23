@@ -20,18 +20,13 @@ function adapt(doc: Record<string, unknown>): AlbumPageInfo {
       typeof doc.releaseDate === "string"
         ? doc.releaseDate.slice(0, 10)
         : new Date(doc.releaseDate as string).toISOString().slice(0, 10),
-    totalTracks: doc.totalTracks as number,
-    duration: doc.duration as string,
+    duration: (doc.duration as string) || undefined,
     coverImage: doc.coverImage as string,
-    manifesto: doc.manifesto as string,
-    tagline: doc.tagline as string,
-    editorialPitch: (doc.editorialPitch as string) || undefined,
-    status: (doc.status as AlbumPageInfo["status"]) || undefined,
+    about: doc.about as string,
     accentHex: doc.accentHex as string,
     bgHex: doc.bgHex as string,
     tracks: ((doc.tracks as Array<Record<string, unknown>>) ?? []).map((t) => ({
       title: t.title as string,
-      duration: t.duration as string,
       featured: t.featured ? String(t.featured) : undefined,
     })),
     streamingLinks: ((doc.streamingLinks as Array<Record<string, unknown>>) ?? []).map((l) => ({

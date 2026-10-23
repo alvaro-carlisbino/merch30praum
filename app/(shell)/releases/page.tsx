@@ -1,11 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getAllAlbums } from "@/lib/cms/albums";
-import { STATUS_LABEL } from "@/lib/albums/registry";
 export const metadata = {
   title: "Lançamentos",
   description:
-    "Catálogo de releases da 30praum: XTRANHO, Colapso Global, Isso é Trap Vol.02 e mais.",
+    "Os discos mais recentes da 30praum: XTRANHO, Colapso Global e Isso É Trap Vol. 2.",
 };
 export default async function ReleasesPage() {
   const all = await getAllAlbums();
@@ -27,7 +26,7 @@ export default async function ReleasesPage() {
           Lançamentos
         </h1>
         <p className="mt-6 max-w-xl text-sm leading-relaxed text-fg/80 sm:text-base">
-          Três discos, quatro vozes, um selo. Catálogo aberto da 30praum.
+          Os três discos que a casa lançou entre dezembro de 2025 e abril de 2026.
         </p>
       </section>
       {featured && (
@@ -47,29 +46,11 @@ export default async function ReleasesPage() {
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />
-              {featured.status && (
-                <span
-                  className="absolute left-5 top-5 inline-flex items-center rounded-full px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.28em]"
-                  style={{
-                    background: "rgba(0,0,0,0.72)",
-                    color: featured.accentHex,
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  {STATUS_LABEL[featured.status]}
-                </span>
-              )}
             </div>
             <div
               className="flex flex-col justify-end gap-5 p-6 sm:p-10 lg:p-12"
               style={{ color: "#f5f5f5" }}
             >
-              <p
-                className="text-[10px] uppercase tracking-[0.3em]"
-                style={{ color: featured.accentHex }}
-              >
-                Mais recente
-              </p>
               <h2
                 className="font-display uppercase leading-[0.92]"
                 style={{
@@ -80,16 +61,12 @@ export default async function ReleasesPage() {
                 {featured.title}
               </h2>
               <p className="text-sm text-white/80">
-                {featured.artists.map((a) => a.name).join(" · ")} ·{" "}
+                {featured.artists.map((a) => a.name).join(" e ")} ·{" "}
                 {featured.year}
               </p>
-              {featured.editorialPitch && (
-                <p className="max-w-md text-base italic leading-snug text-white/90 sm:text-lg">
-                  &ldquo;{featured.editorialPitch}&rdquo;
-                </p>
-              )}
+              <p className="max-w-md text-sm leading-relaxed text-white/80">{featured.about}</p>
               <p className="text-[10px] uppercase tracking-[0.28em] text-white/65 tabular-nums">
-                {featured.totalTracks} faixas · {featured.duration}
+                {featured.tracks.length} faixas{featured.duration ? ` · ${featured.duration}` : ""}
               </p>
               <span
                 className="mt-2 inline-flex w-fit items-center rounded-full border px-5 py-2.5 text-[11px] uppercase tracking-[0.22em] transition-colors group-hover:bg-white group-hover:text-black"
@@ -98,7 +75,7 @@ export default async function ReleasesPage() {
                   color: featured.accentHex,
                 }}
               >
-                Ouvir agora →
+                Ver o disco
               </span>
             </div>
           </Link>
@@ -106,12 +83,6 @@ export default async function ReleasesPage() {
       )}
       {rest.length > 0 && (
         <section className="mx-auto max-w-screen-2xl px-4 pb-20 sm:px-8 sm:pb-24">
-          <h2
-            className="mb-6 text-[10px] uppercase tracking-[0.4em] text-muted"
-            id="catalogo-anterior"
-          >
-            Catálogo
-          </h2>
           <ul className="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
             {rest.map((alb) => (
               <li key={alb.slug}>
@@ -135,18 +106,6 @@ export default async function ReleasesPage() {
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     />
-                    {alb.status && (
-                      <span
-                        className="absolute left-4 top-4 inline-flex items-center rounded-full px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.28em]"
-                        style={{
-                          background: "rgba(0,0,0,0.72)",
-                          color: alb.accentHex,
-                          backdropFilter: "blur(10px)",
-                        }}
-                      >
-                        {STATUS_LABEL[alb.status]}
-                      </span>
-                    )}
                     <span
                       className="absolute bottom-4 right-4 font-display text-sm tabular-nums text-white/90"
                       style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}
@@ -165,15 +124,10 @@ export default async function ReleasesPage() {
                       {alb.title}
                     </h3>
                     <p className="mt-1 text-sm text-fg/70">
-                      {alb.artists.map((a) => a.name).join(" · ")}
+                      {alb.artists.map((a) => a.name).join(" e ")}
                     </p>
-                    {alb.editorialPitch && (
-                      <p className="mt-3 text-sm italic leading-snug text-fg/85">
-                        &ldquo;{alb.editorialPitch}&rdquo;
-                      </p>
-                    )}
                     <p className="mt-4 text-[10px] uppercase tracking-[0.25em] text-muted tabular-nums">
-                      {alb.totalTracks} faixas · {alb.duration}
+                      {alb.tracks.length} faixas{alb.duration ? ` · ${alb.duration}` : ""}
                     </p>
                   </div>
                 </Link>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ARTISTS } from "@/lib/artists/registry";
-import { IMG } from "@/lib/images/unsplash";
+import { IMG } from "@/lib/images/paths";
 export const metadata = {
   title: "Sobre",
   description:
@@ -10,42 +10,49 @@ export const metadata = {
 const STATS = [
   { label: "Fundação", value: "2016" },
   { label: "Sede", value: "Fortaleza · CE" },
-  { label: "Time", value: "~50 pessoas" },
-  { label: "Artistas", value: "4 universos" },
+  { label: "Distribuição", value: "Independente" },
+  { label: "Artistas", value: "4" },
 ] as const;
+
 const MARCOS = [
   {
     year: "2016",
-    title: "30praum nasce",
-    body: "Matuê e Clara Mendes fundam o selo em Fortaleza. Missão: descentralizar o trap brasileiro do eixo Rio-SP e colocar o Nordeste no centro do mapa.",
+    title: "A 30praum nasce",
+    body: "Matuê e Clara Mendes fundam o selo em Fortaleza, longe do eixo Rio-São Paulo onde o rap brasileiro costumava ser decidido.",
+  },
+  {
+    year: "2019",
+    title: "Acordo com a Sony",
+    body: "A gravadora passa a ter distribuição da Sony Music Brasil. O acordo dura cinco anos.",
   },
   {
     year: "2020",
     title: "Máquina do Tempo",
-    body: "Primeiro álbum solo do Matuê pelo selo. Wiu produz 6 das 7 faixas. A casa começa a virar referência sonora.",
+    body: "Primeiro álbum do Matuê, lançado pela casa.",
   },
   {
     year: "2024",
-    title: "Recorde Spotify BR",
-    body: "333 (Matuê) bate o recorde de maior estreia do Spotify Brasil e ultrapassa 950 milhões de reproduções. Plantão Festival reúne 30 mil pessoas em Fortaleza.",
+    title: "333 e independência",
+    body: "333 tem a maior estreia de um álbum no Spotify Brasil. A 30praum volta a lançar de forma independente, Brandão85 assina com a casa e o Plantão faz a primeira edição.",
   },
   {
     year: "2025",
-    title: "Independência total · liderada pela Clara",
-    body: "Sob direção da CEO Clara Mendes, a 30praum corta intermediários: passa a operar com distribuição própria, direitos autorais sem terceiros e gestão de marketing in-house. Matuê lança XTRANHO no mesmo ano.",
+    title: "XTRANHO",
+    body: "O segundo Plantão reúne cerca de 20 mil pessoas e quase 500 mil na transmissão. Em dezembro sai XTRANHO.",
   },
   {
     year: "2026",
-    title: "Década completa",
-    body: "Colapso Global (Wiu+Teto) e Isso é Trap Vol.02 (Brandão85) abrem o ano. Plantão Festival comemora 10 anos da casa.",
+    title: "Dez anos",
+    body: "Colapso Global, de Teto e Wiu, e Isso É Trap Vol. 2, do Brandão85. O Plantão comemora os 10 anos da gravadora e Matuê toca no Palco Mundo do Rock in Rio Lisboa.",
   },
 ];
+
 export default function AboutPage() {
   return (
     <>
       <section className="mx-auto max-w-screen-2xl px-4 pt-16 pb-12 sm:px-8 sm:pt-20">
         <p className="text-[10px] uppercase tracking-[0.4em] text-muted">
-          A holding · desde 2016
+          Desde 2016
         </p>
         <h1
           className="mt-4 font-display uppercase leading-[0.92]"
@@ -59,10 +66,9 @@ export default function AboutPage() {
         <p
           className="mt-6 max-w-2xl text-base leading-relaxed text-fg/85 sm:text-lg"
         >
-          Gravadora cearense que descentralizou o trap brasileiro. Fundada em
-          2016 por Matuê e Clara Mendes em Fortaleza, hoje é casa de 4 artistas
-          principais (Matuê, Wiu, Teto e Brandão85), de um festival próprio
-          (Plantão) e de uma operação de aproximadamente 50 pessoas.
+          Gravadora independente fundada em 2016 por Matuê e Clara Mendes, em Fortaleza. Hoje
+          lança Matuê, Wiu, Teto e Brandão85 e organiza o Plantão, festival que acontece no
+          Marina Park desde 2024.
         </p>
       </section>
       <section
@@ -101,8 +107,7 @@ export default function AboutPage() {
             Quem fundou a casa
           </h2>
           <p className="max-w-md text-sm leading-relaxed text-fg/75 sm:text-base">
-            Os dois sócios que tocam a 30praum desde o primeiro dia em
-            Fortaleza.
+            Matuê e Clara Mendes estão à frente da 30praum desde 2016.
           </p>
         </div>
         <ul className="grid gap-6 sm:gap-8 lg:grid-cols-2">
@@ -111,10 +116,10 @@ export default function AboutPage() {
             role="Cofundadora · CEO"
             name="Clara Mendes"
             realName="Clara Mendes"
-            origin="Alemanha → Fortaleza · CE"
+            origin="Berlim · Fortaleza"
             paragraphs={[
-              "Veio da Alemanha pra aprender português em Fortaleza em 2014, ficou e virou sócia. CEO da 30praum desde o dia 1, comanda a operação que hoje tem ~50 pessoas entre Fortaleza e São Paulo.",
-              "Tocou a virada pra independência total em 2024 (distribuição própria, direitos autorais sem intermediário) e estrutura o festival Plantão como receita estratégica do selo.",
+              "Nasceu em Berlim e estudou administração. Chegou a Fortaleza num intercâmbio, aprendeu português na cidade e ficou.",
+              "É CEO da 30praum desde a fundação. Conduziu a volta da gravadora à distribuição independente em 2024 e assina, com Matuê, a curadoria do Plantão.",
             ]}
           />
           <FounderCard
@@ -124,8 +129,8 @@ export default function AboutPage() {
             realName="Matheus Brasileiro Aguiar"
             origin="Fortaleza · CE · n. 1993"
             paragraphs={[
-              "Cofundador e principal voz da casa. Viveu na Califórnia entre os 8 e os 11 anos, voltou pra Fortaleza com inglês fluente e ouvido pra um trap que ninguém aqui fazia ainda.",
-              "Estreou em álbum em 2020 com Máquina do Tempo, bateu recorde do Spotify BR com 333 (2024) e fechou a trilogia com XTRANHO (2025).",
+              "Passou parte da infância na Califórnia e voltou pra Fortaleza com o trap americano no ouvido, quando quase ninguém fazia isso por aqui.",
+              "Lançou Máquina do Tempo em 2020, 333 em 2024 e XTRANHO em 2025. 333 teve a maior estreia de um álbum no Spotify Brasil.",
             ]}
           />
         </ul>
@@ -143,10 +148,10 @@ export default function AboutPage() {
                 letterSpacing: "-0.02em",
               }}
             >
-              10 anos em 5 marcos
+              Linha do tempo
             </h2>
             <p className="max-w-sm text-sm leading-relaxed text-fg/75 sm:text-base">
-              Pontos que definiram o que a casa virou hoje.
+              Os anos que mudaram a gravadora.
             </p>
           </div>
           <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -198,18 +203,18 @@ export default function AboutPage() {
                 letterSpacing: "-0.02em",
               }}
             >
-              As quatro almas da casa
+              Artistas
             </h2>
             <Link
-              href="/#roster"
-              data-cursor="Roster"
+              href="/artistas"
+              data-cursor="Artistas"
               className="inline-flex items-center rounded-full border px-5 py-2.5 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-white hover:text-black"
               style={{
                 borderColor: "var(--accent)",
                 color: "var(--accent)",
               }}
             >
-              Ver no home →
+              Ver todos
             </Link>
           </div>
           <ul className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
@@ -243,9 +248,6 @@ export default function AboutPage() {
                     <p className="mt-2 text-xs text-white/65">
                       {a.realName} · {a.origin}
                     </p>
-                    <p className="mt-4 text-xs text-white/55">
-                      Entrou em {a.joinedYear}
-                    </p>
                   </div>
                 </Link>
               </li>
@@ -266,11 +268,10 @@ export default function AboutPage() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Quer falar com a casa?
+              Contato
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-fg/80 sm:text-base">
-              Press kit, parcerias, candidatura artística: cada porta tem
-              endereço próprio.
+              Imprensa, marcas e artistas que querem mandar som.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -283,7 +284,7 @@ export default function AboutPage() {
                 color: "var(--accent)",
               }}
             >
-              Imprensa →
+              Imprensa
             </Link>
             <Link
               href="/parcerias"
@@ -294,7 +295,7 @@ export default function AboutPage() {
                 color: "var(--fg)",
               }}
             >
-              Parcerias →
+              Parcerias
             </Link>
             <Link
               href="/incubadora"
@@ -305,7 +306,7 @@ export default function AboutPage() {
                 color: "var(--fg)",
               }}
             >
-              Incubadora →
+              Incubadora
             </Link>
           </div>
         </div>

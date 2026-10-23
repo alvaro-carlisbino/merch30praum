@@ -6,8 +6,8 @@ interface Props {
   bgPositionMobile?: string;
   nameImage: string;
   nameAspect: string;
-  quote: string;
-  quoteAttribution: string;
+  name: string;
+  intro: string;
 }
 export function ArtistPageHero({
   bgImage,
@@ -15,8 +15,8 @@ export function ArtistPageHero({
   bgPositionMobile,
   nameImage,
   nameAspect,
-  quote,
-  quoteAttribution,
+  name,
+  intro,
 }: Props) {
   const desktopPos = bgPosition ?? "center 25%";
   const mobilePos = bgPositionMobile ?? desktopPos;
@@ -32,7 +32,7 @@ export function ArtistPageHero({
           ["--hero-pos-desktop" as string]: desktopPos,
         } as React.CSSProperties
       }
-      aria-label="Hero do artista"
+      aria-labelledby="artist-name"
     >
       <Image
         src={bgImage}
@@ -61,6 +61,9 @@ export function ArtistPageHero({
         }}
       />
       <div className="relative z-10 mx-auto flex h-full max-w-screen-2xl flex-col justify-start px-4 pt-16 sm:px-8 sm:pt-20">
+        <h1 id="artist-name" className="sr-only">
+          {name}
+        </h1>
         <div
           className="relative"
           style={{
@@ -78,17 +81,12 @@ export function ArtistPageHero({
             style={{ filter: "drop-shadow(0 4px 30px rgba(0,0,0,0.5))" }}
           />
         </div>
-        <blockquote className="mt-6 max-w-md text-white sm:mt-8">
-          <p
-            className="italic leading-relaxed"
-            style={{ fontSize: "clamp(0.9rem, 1.2vw, 1.15rem)" }}
-          >
-            “{quote}”
-          </p>
-          <footer className="mt-2 text-xs italic text-white/70">
-            {quoteAttribution}
-          </footer>
-        </blockquote>
+        <p
+          className="mt-6 max-w-md leading-relaxed text-white/90 sm:mt-8"
+          style={{ fontSize: "clamp(0.9rem, 1.2vw, 1.15rem)" }}
+        >
+          {intro}
+        </p>
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import { IMG } from "@/lib/images/unsplash";
+import { IMG } from "@/lib/images/paths";
 export type PlantaoSlug = "plantao-2024" | "plantao-2025" | "plantao-2026" | "plantao-2027";
 export type LineupArtist = {
   displayName: string;
@@ -19,7 +19,8 @@ export type PlantaoEdition = {
   slug: PlantaoSlug;
   year: number;
   title: string;
-  date: string; 
+  date: string;
+  dateAnnounced?: boolean;
   doorsAt: string; 
   venue: string;
   city: string;
@@ -39,8 +40,6 @@ export type PlantaoEdition = {
   stats: {
     attendees?: number;
     onlineViewers?: number;
-    investment?: string;
-    hoursOfShow?: number;
   };
   infoFAQ: { question: string; answer: string }[];
 };
@@ -69,7 +68,7 @@ const lineup2026: LineupArtist[] = [
   {
     displayName: "Brandão85",
     artistSlug: "brandao",
-    highlightLabel: "Isso é Trap Vol.02",
+    highlightLabel: "Isso É Trap Vol. 2",
     imageUrl: IMG.lineupBrandao,
   },
   {
@@ -115,9 +114,9 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     city: "Fortaleza",
     state: "CE",
     status: "past",
-    tagline: "A consolidação do plantão como referência nacional",
+    tagline: "A primeira edição, no Marina Park",
     manifesto:
-      "A segunda edição confirmou: Fortaleza é capital do trap. 30 mil pessoas na Beira-Mar, R$5 milhões investidos, 17 artistas no palco. O Plantão saiu de projeto independente pra referência do gênero no país.",
+      "A primeira edição do festival da 30praum, no Marina Park, em Fortaleza.",
     posterImage: IMG.plantaoPoster24,
     heroImage: IMG.plantaoHero24,
     lineup: [],
@@ -131,11 +130,7 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
       IMG.plantaoGallery5,
       IMG.plantaoGallery6,
     ],
-    stats: {
-      attendees: 30000,
-      investment: "R$ 5 milhões",
-      hoursOfShow: 9,
-    },
+    stats: {},
     infoFAQ: [],
   },
   "plantao-2025": {
@@ -148,9 +143,9 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     city: "Fortaleza",
     state: "CE",
     status: "past",
-    tagline: "A primeira transmissão massiva · 500 mil online",
+    tagline: "Quase 500 mil pessoas na transmissão",
     manifesto:
-      "A terceira edição abriu o jogo pra quem não estava em Fortaleza. Transmissão oficial no YouTube atraiu quase 500 mil espectadores únicos. O Plantão deixa de ser local pra ser nacional sem perder a quebrada.",
+      "A segunda edição reuniu cerca de 20 mil pessoas no Marina Park e quase 500 mil espectadores únicos na transmissão do YouTube.",
     posterImage: IMG.plantaoPoster25,
     heroImage: IMG.plantaoHero25,
     lineup: [],
@@ -163,9 +158,8 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
       IMG.plantaoGallery6,
     ],
     stats: {
-      attendees: 22000,
+      attendees: 20000,
       onlineViewers: 500000,
-      hoursOfShow: 10,
     },
     infoFAQ: [],
   },
@@ -179,81 +173,33 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     city: "Fortaleza",
     state: "CE",
     status: "past",
-    tagline: "10 anos de 30praum · uma noite às margens da Beira-Mar",
+    tagline: "A edição dos 10 anos da 30praum",
     manifesto:
-      "A edição de 2026 marcou os 10 anos da 30praum. Reuniu a base, os novos e os convidados: Matuê, Teto, Wiu, Brandão85 e mais 7 nomes, em um dia só, frente ao mar. Quem viu sabe: não foi um show, foi uma cena se reconhecendo.",
+      "A terceira edição marcou os 10 anos da 30praum. Matuê, Teto, Wiu e Brandão85 dividiram o palco com BK', Recayd Mob, TZ da Coronel, Ajuliacosta, Alee e Ryu, The Runner.",
     posterImage: IMG.plantaoPoster26,
     heroImage: IMG.plantaoHero26,
     lineup: lineup2026,
-    sectors: [
-      { name: "Front Boladão", priceFrom: 650, status: "soldout", perks: "Banheiro exclusivo · brindes oficiais" },
-      { name: "Front", priceFrom: 150, priceTo: 300, status: "available", perks: "Acesso à grade" },
-      { name: "VIP", priceFrom: 350, priceTo: 655, status: "available", perks: "Banheiro exclusivo · alimentação inclusa" },
-      { name: "Camarote 30praum", priceFrom: 1200, status: "upcoming", perks: "Open bar premium · vista palco" },
-    ],
+    sectors: [],
     ticketsUrl: "https://stingressos.com.br/eventos/plantao-2026",
     embedTicketsUrl: "https://stingressos.com.br/eventos/plantao-2026",
     galleryImages: [IMG.plantaoGallery1, IMG.plantaoGallery3, IMG.plantaoGallery5],
-    stats: {
-      attendees: 20000,
-      onlineViewers: 500000,
-      investment: "R$ 5 milhões+",
-      hoursOfShow: 10,
-    },
-    infoFAQ: [
-      {
-        question: "Onde é o Plantão 2026?",
-        answer:
-          "Marina Park Hotel · Av. Pres. Castelo Branco, 400 · Praia de Iracema, Fortaleza/CE. Acessível por transporte público, app de mobilidade e estacionamento conveniado.",
-      },
-      {
-        question: "Que horas abrem os portões?",
-        answer: "15h00 para o público geral. Recomendamos chegar até 17h para ver os shows de abertura sem fila.",
-      },
-      {
-        question: "Como faço meia-entrada?",
-        answer:
-          "Estudante com carteirinha válida ou meia-solidária mediante doação de 2kg de alimento não-perecível na entrada. Carteirinha digital aceita.",
-      },
-      {
-        question: "Menores de idade podem entrar?",
-        answer:
-          "+16 anos entram desacompanhados. <16 precisam de autorização cartorária dos pais ou estar acompanhados por responsável legal maior de 21.",
-      },
-      {
-        question: "Posso transferir meu ingresso?",
-        answer: "Transferência foi desativada para evitar cambistas. Em caso de força maior, abrir chamado em suporte@stingressos.com.br.",
-      },
-      {
-        question: "O que posso levar?",
-        answer:
-          "Documento original, óculos escuros, carregador portátil, bonés/buckets oficiais e copos oficiais da 30praum. Proibido: cadeiras, vidro, mochilas, bebidas/alimentos externos.",
-      },
-      {
-        question: "Tem acessibilidade PCD?",
-        answer:
-          "Sim. Sinalização direcionada até área PCD com vista preferencial. Acompanhante grátis mediante laudo. Banheiros PCD disponíveis.",
-      },
-      {
-        question: "Vai ter transmissão?",
-        answer:
-          "Sim, transmissão oficial no canal 30praum no YouTube. A última edição reuniu quase 500 mil espectadores únicos.",
-      },
-    ],
+    stats: {},
+    infoFAQ: [],
   },
   "plantao-2027": {
     slug: "plantao-2027",
     year: 2027,
     title: "Plantão 2027",
-    date: "2027-04-24",
+    date: "2027-01-01",
+    dateAnnounced: false,
     doorsAt: "15:00",
-    venue: "A confirmar",
+    venue: "Local a anunciar",
     city: "Fortaleza",
     state: "CE",
     status: "upcoming",
-    tagline: "A próxima edição já está em construção",
+    tagline: "Data e line-up ainda não anunciados",
     manifesto:
-      "Depois de dez anos de casa e quatro edições na Beira-Mar, o Plantão volta em 2027. Line-up, setores e pré-venda saem primeiro pra quem está na lista de espera.",
+      "Data, local e line-up da próxima edição ainda não foram anunciados. Deixa seu e-mail que a gente avisa assim que sair.",
     posterImage: IMG.plantaoPoster26,
     heroImage: IMG.plantaoHero26,
     lineup: [],

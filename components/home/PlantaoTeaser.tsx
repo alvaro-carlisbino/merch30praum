@@ -3,23 +3,14 @@ import Link from "next/link";
 import { getCurrentPlantao } from "@/lib/cms/plantao";
 import { blurFor } from "@/lib/images/blur-data";
 import { Reveal } from "@/components/effects/Reveal";
+import { editionDate } from "@/lib/utils/dates";
 
 const PHOTO = "/figma-plantao/stage-2025.jpg";
 const RED = "#ff2d5a";
 
-function daysUntil(iso: string) {
-  const target = new Date(`${iso}T12:00:00-03:00`).getTime();
-  return Math.max(0, Math.ceil((target - new Date().getTime()) / 86_400_000));
-}
-
-function longDate(iso: string) {
-  return new Date(`${iso}T12:00:00-03:00`).toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
-}
-
 export async function PlantaoTeaser() {
   const current = await getCurrentPlantao();
   const upcoming = current.status === "upcoming" || current.status === "live";
-  const days = daysUntil(current.date);
   return (
     <section aria-labelledby="plantao-teaser" className="border-t" style={{ borderColor: "var(--border)" }}>
       <div className="mx-auto max-w-screen-2xl px-4 py-16 sm:px-8 sm:py-20">
@@ -48,7 +39,7 @@ export async function PlantaoTeaser() {
             <div className="flex h-full min-h-[inherit] flex-col justify-end gap-5 p-6 sm:p-10 lg:flex-row lg:items-end lg:justify-between">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.3em] text-white/80">
-                  Festival próprio · {longDate(current.date)} · {current.city}
+                  O festival da 30praum · {editionDate(current)} · {current.city}
                 </p>
                 <h2
                   id="plantao-teaser"
@@ -59,7 +50,7 @@ export async function PlantaoTeaser() {
                 </h2>
                 <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/80 sm:text-base">
                   {upcoming
-                    ? `Faltam ${days} dias. Line-up, setores e pré-venda saem primeiro pra quem está na lista de espera.`
+                    ? "Data e line-up ainda não saíram. Quem entra na lista recebe o anúncio primeiro."
                     : current.tagline}
                 </p>
               </div>

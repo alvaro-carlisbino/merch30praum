@@ -5,6 +5,7 @@ import type { ShopifyVariant } from "@/lib/shopify/types";
 import { addToCart } from "@/lib/cart/actions";
 import { useCartUI } from "@/lib/cart/store";
 import type { ProductColor } from "@/lib/shop/catalog";
+import { OFFICIAL_STORE, STORE_POLICY } from "@/lib/shop/official-store";
 import { SizeGuide } from "./SizeGuide";
 
 export type SiblingColor = { handle: string; color: ProductColor };
@@ -21,6 +22,7 @@ interface Props {
   currentColor: ProductColor | null;
   siblings: SiblingColor[];
   externalUrl: string;
+  officialVariantIds?: Record<string, number>;
 }
 
 const MAX_QTY = 5;
@@ -37,6 +39,7 @@ export function ProductPurchasePanel({
   currentColor,
   siblings,
   externalUrl,
+  officialVariantIds,
 }: Props) {
   const singleVariant = variants.length === 1;
   const [variantId, setVariantId] = useState<string | null>(
@@ -52,8 +55,15 @@ export function ProductPurchasePanel({
   const hasSizes = variants.length > 0 && !singleVariant;
   const noCartVariant = variants.length === 0;
 
+  const officialCheckout = Boolean(officialVariantIds);
+
   function handleAdd() {
     if (!selected) return;
+    const officialId = officialVariantIds?.[selected.title];
+    if (officialCheckout) {
+      window.location.href = officialId ? `${OFFICIAL_STORE}/cart/${officialId}:${qty}` : externalUrl;
+      return;
+    }
     bumpOptimisticCount(qty);
     startTransition(async () => {
       try {
@@ -78,7 +88,9 @@ export function ProductPurchasePanel({
         ? "Adicionado · ver sacola"
         : !selected
           ? "Selecione o tamanho"
-          : "Adicionar na sacola";
+          : officialCheckout
+            ? "Comprar na loja oficial"
+            : "Adicionar na sacola";
 
   return (
     <div
@@ -104,7 +116,6 @@ export function ProductPurchasePanel({
         <p className="font-display tabular-nums" style={{ fontSize: "clamp(1.5rem, 2vw, 2rem)" }}>
           {priceLabel}
         </p>
-        <p className="text-xs text-muted">ou 4× sem juros · 5% off no Pix</p>
       </div>
 
       {(currentColor || siblings.length > 0) && (
@@ -241,7 +252,7 @@ export function ProductPurchasePanel({
           className="mt-3 inline-flex w-full items-center justify-center rounded-full border px-6 py-3 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-white hover:text-black"
           style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
         >
-          Finalizar compra →
+          Finalizar compra
         </Link>
       )}
       {feedback === "error" && (
@@ -250,11 +261,16 @@ export function ProductPurchasePanel({
         </p>
       )}
 
-      <ul className="mt-6 space-y-2 text-[10px] uppercase tracking-[0.22em] text-muted">
-        <li>· Loja oficial 30praum</li>
-        <li>· {stockNote ?? "Enviado em security bag lacrada"}</li>
-        <li>· Envio em até 5 dias úteis</li>
-        <li>· Trocas grátis em 30 dias</li>
+      <ul className="mt-6 space-y-1.5 text-xs leading-relaxed text-muted">
+        <li>{stockNote ?? "Enviado em security bag lacrada"}</li>
+        <li>{STORE_POLICY.shipping}</li>
+        <li>{STORE_POLICY.exchange}</li>
+        <li>
+          Dúvidas:{" "}
+          <a href={`mailto:${STORE_POLICY.support}`} className="underline underline-offset-2 hover:text-fg">
+            {STORE_POLICY.support}
+          </a>
+        </li>
       </ul>
     </div>
   );

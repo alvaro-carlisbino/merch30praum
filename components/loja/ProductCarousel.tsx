@@ -41,7 +41,7 @@ export function ProductCarousel({ title, subtitle, products, href, hrefLabel, vi
               data-cursor={hrefLabel ?? "Ver tudo"}
               className="text-[11px] uppercase tracking-[0.22em] text-muted transition-colors hover:text-fg"
             >
-              {hrefLabel ?? "Ver tudo"} →
+              {hrefLabel ?? "Ver tudo"}
             </Link>
           )}
           {canPage && (

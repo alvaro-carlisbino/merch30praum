@@ -5,7 +5,7 @@ import { type NewsTag } from "@/lib/news/registry";
 export const metadata = {
   title: "Notícias",
   description:
-    "Lançamentos, parcerias, plantão e bastidores. A agenda editorial oficial da gravadora.",
+    "Lançamentos, shows e Plantão: o que aconteceu na 30praum.",
 };
 const TAG_LABEL: Record<NewsTag, string> = {
   lancamento: "Lançamento",
@@ -43,8 +43,7 @@ export default async function NewsPage() {
           Notícias
         </h1>
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/80 sm:text-base">
-          Lançamentos, agenda do festival, parcerias, indústria. O que a
-          gravadora publica como verdade oficial.
+          Discos, shows e Plantão, por ordem de data.
         </p>
       </section>
       {hero && (

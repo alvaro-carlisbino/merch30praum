@@ -155,14 +155,14 @@ function CenterLogoCard() {
       <div className="absolute inset-x-3 bottom-5 flex justify-center sm:inset-x-4 sm:bottom-7">
         <Link
           href="/about"
-          data-cursor="Descubra mais"
+          data-cursor="Sobre"
           className="inline-flex w-full items-center justify-center rounded-full border bg-black/35 px-4 py-3 text-[13px] backdrop-blur-sm transition-colors hover:bg-white hover:text-black sm:py-3.5 sm:text-[14px]"
           style={{
             borderColor: "rgba(255,255,255,0.85)",
             color: "#ffffff",
           }}
         >
-          Descubra mais
+          Sobre a 30praum
         </Link>
       </div>
     </div>

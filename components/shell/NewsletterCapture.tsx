@@ -58,15 +58,15 @@ export function NewsletterCapture({
           >
             {title ?? (
               <>
-                Drops antes
+                Drop novo
                 <br />
-                de virem.
+                por e-mail
               </>
             )}
           </h2>
           <p className="mt-6 max-w-md text-sm leading-relaxed sm:text-base" style={{ color: c.inkSoft }}>
             {body ??
-              "Anúncio antecipado de lançamento, prévias, peças numeradas e pré-venda só pra quem tá na lista. Sem spam, só drop."}
+              "A gente avisa quando entrar peça nova ou voltar tamanho esgotado. Só isso."}
           </p>
         </div>
         <form action={formAction} className="flex flex-col gap-3">

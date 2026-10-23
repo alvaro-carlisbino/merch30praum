@@ -54,6 +54,7 @@ export const Plantao: CollectionConfig = {
             { name: "year", type: "number", required: true },
             { name: "title", type: "text", required: true },
             { name: "date", type: "date", required: true, admin: { date: { pickerAppearance: "dayOnly" } } },
+            { name: "dateAnnounced", type: "checkbox", defaultValue: true, admin: { description: "Desmarque enquanto a data oficial não tiver sido divulgada." } },
             { name: "doorsAt", type: "text", required: true },
             { name: "venue", type: "text", required: true },
             { name: "city", type: "text", required: true },
@@ -148,8 +149,6 @@ export const Plantao: CollectionConfig = {
               fields: [
                 { name: "attendees", type: "number" },
                 { name: "onlineViewers", type: "number" },
-                { name: "investment", type: "text" },
-                { name: "hoursOfShow", type: "number" },
               ],
             },
             {

@@ -26,7 +26,7 @@ export function SubmissionForm() {
           Recebemos. <br /> A gente escuta.
         </h2>
         <p className="mt-6 max-w-xl text-fg/80 leading-relaxed">
-          Recebemos teu material. O A&R da casa lê tudo. Não vai chegar mensagem automática.
+          Recebemos seu envio. Se fizer sentido, a gente entra em contato pelo e-mail ou Instagram que você deixou.
           Se fizer sentido, te procuramos pelo email ou Instagram que você deixou. Sem prazo,
           sem fila por ordem de chegada.
         </p>
@@ -224,7 +224,7 @@ export function SubmissionForm() {
             boxShadow: "0 0 28px rgba(46,240,124,0.22)",
           }}
         >
-          {pending ? "Enviando..." : "Submeter demo →"}
+          {pending ? "Enviando..." : "Enviar"}
         </button>
       </div>
     </form>

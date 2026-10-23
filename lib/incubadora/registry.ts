@@ -1,37 +1,36 @@
-import { IMG } from "@/lib/images/unsplash";
+import { IMG } from "@/lib/images/paths";
+import { CONTACT } from "@/lib/contact";
 export const INCUBADORA = {
   programName: "Incubadora 30praum",
-  shortTagline: "Uma porta para quem ainda não está dentro.",
+  shortTagline: "Pra quem faz som autoral e quer ser ouvido pela 30praum.",
   manifesto: [
-    "Antes do nome, antes do escritório, antes do Plantão, a 30praum era um grupo pequeno apostando em quem ninguém apostou. Matuê fundou. Wiu chegou como beatmaker e virou voz. Teto veio de Jacobina-BA gravando no quarto. Brandão85 chegou em 2024 e em dois anos estava na capa do Plantão.",
-    "Foi sempre assim: DM, indicação, acaso, conversa demorada. Agora tem um lugar.",
-    "A Incubadora é o canal de candidatura à 30praum. Não é vitrine de novos artistas. Não é talent show. Não é roster paralelo. É uma porta pra quem tem som autoral e quer ser ouvido por quem escuta direito.",
-    "O A&R da casa lê tudo. Sem deadline, sem mensagem automática, sem prazo de retorno. Se interessa, a gente te procura. Se não agora, fica no banco: a cena muda rápido, hoje é não, daqui um ano é talvez.",
+    "Quase todo artista da casa chegou por um caminho informal: indicação, mensagem, alguém que mostrou um som pra alguém. Wiu fazia beat antes de cantar. Teto subia música do interior da Bahia. Brandão85 já tinha nome em Fortaleza quando assinou, em 2024.",
+    "Este formulário é a forma organizada de fazer a mesma coisa. Você manda o link, conta quem é, e o envio vai direto pra quem cuida de A&R na gravadora.",
+    "A gente não responde todo mundo e não tem prazo. Se fizer sentido, entramos em contato pelo e-mail ou Instagram que você deixar.",
   ],
   howItWorks: [
     {
       step: "01",
-      title: "Manda o que você tem",
+      title: "Manda o link",
       description:
-        "Spotify ou SoundCloud com pelo menos 3 faixas autorais. Cover não conta. Quanto mais som no ar, melhor. Não precisa ser produzido em estúdio, precisa ser seu.",
+        "Spotify, SoundCloud ou YouTube com pelo menos três faixas autorais. Não precisa ser gravado em estúdio.",
     },
     {
       step: "02",
-      title: "Conta a história curta",
+      title: "Conta quem você é",
       description:
-        "Em até 500 caracteres: de onde você é, há quanto tempo faz som, e o que você quer que a 30praum entenda sobre seu projeto. Sem currículo. Sem promessas. Direto.",
+        "Até 500 caracteres: de onde você é, há quanto tempo faz som e o que quer que a gente saiba.",
     },
     {
       step: "03",
       title: "A gente escuta",
       description:
-        "O A&R da casa recebe todas as submissões direto no painel. Não tem fila por ordem de chegada. Não tem mensagem automática. Se faz sentido, te procura pelo email ou pelo Instagram que você deixou.",
+        "Os envios chegam num painel interno. Não existe fila nem resposta automática.",
     },
     {
       step: "04",
-      title: "Conversa real",
-      description:
-        "Quem passa pra fase de conversa entra num ciclo de 4–8 semanas de mentoria editorial, sessão de gravação no estúdio da 30praum em Fortaleza e definição de plano de carreira. Não é assinatura imediata: é construção.",
+      title: "Se fizer sentido, a gente chama",
+      description: "O contato vem pelo e-mail ou Instagram informado no formulário.",
     },
   ],
   casesOfSuccess: [
@@ -40,41 +39,37 @@ export const INCUBADORA = {
       displayName: "Brandão85",
       joinedYear: 2024,
       excerpt:
-        "Vinha da Hash Produções. Em setembro/2024 conversou com a casa, em 2025 começou a cocriar faixas do 333. Dois anos depois, dividia palco no Plantão.",
+        "Já tinha lançado Isso É Trap em 2022 quando assinou, em setembro de 2024. Em 2026 saiu o Vol. 2, que passou de 100 milhões de plays.",
       image: IMG.incubBrandao,
     },
     {
       artistSlug: "teto",
       displayName: "Teto",
-      joinedYear: 2020,
       excerpt:
-        "Jacobina-BA. Gravava no quarto. Foi chamado em 2020 depois de Fico Famoso viralizar no YouTube. Em 2022 já dividia Vampira com Matuê e Wiu.",
+        "Saiu de Jacobina, no interior da Bahia, com sons que circulavam no YouTube e no TikTok. Em 2026 lançou Colapso Global com Wiu.",
       image: IMG.incubTeto,
     },
     {
       artistSlug: "wiu",
       displayName: "Wiu",
-      joinedYear: 2019,
       excerpt:
-        "Era beatmaker antes de ser voz. Produziu 6 das 7 faixas de Máquina do Tempo do Matuê. Em 2019 começou a cantar. O resto a gente conhece.",
+        "Começou produzindo beat e foi pro microfone depois. Hoje assina voz e produção nos próprios discos.",
       image: IMG.incubWiu,
     },
   ],
   whatWeLookFor: [
-    "Voz própria: não importa o estilo, importa que ninguém mais soe igual",
-    "Letra com camada: você canta sobre o quê quando ninguém te perguntou?",
-    "Compromisso com a obra: quantas faixas no ar? quantas escritas em pasta?",
-    "Conexão honesta com origem: sem performance de quebrada, sem fake authenticity",
-    "Aceite de processo lento: a 30praum constrói carreira, não vira clipe viral em 30 dias",
+    "Som que não pareça com o de mais ninguém",
+    "Letra que diga alguma coisa",
+    "Faixas lançadas, não só ideias",
+    "Paciência: carreira leva tempo",
   ],
   whatWeDontLookFor: [
-    "Métrica de seguidor: não importa se você tem 5K ou 500K, importa o som",
-    "Vontade de 'ficar famoso': vale mais a vontade de fazer som que ninguém mais faz",
-    "Promessa de exclusividade pré-assinatura: manda o que você tem, no formato que você tem",
-    "Cobrança de retorno em prazo: a gente escuta tudo, mas A&R demora",
+    "Número de seguidores. Tanto faz se são 5 mil ou 500 mil",
+    "Cover ou faixa que não é sua",
+    "Cobrança de resposta em prazo",
   ],
   formFields: {
     submissionUrl: "/incubadora/submeter",
-    contactEmail: "ar@30praum.com",
+    contactEmail: CONTACT.geral,
   },
 };

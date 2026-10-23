@@ -1,38 +1,31 @@
 import type { ArtistSlug } from "@/lib/artists/types";
-import { IMG } from "@/lib/images/unsplash";
+import { IMG } from "@/lib/images/paths";
+
 export type AlbumSlug = "xtranho" | "colapso-global" | "isso-e-trap-vol-2";
-export type AlbumStatus = "em-alta" | "estreia" | "limitada" | "tour-ativa" | "classico";
-export const STATUS_LABEL: Record<AlbumStatus, string> = {
-  "em-alta": "EM ALTA",
-  estreia: "ESTREIA",
-  limitada: "EDIÇÃO LIMITADA",
-  "tour-ativa": "TOUR ATIVA",
-  classico: "CLÁSSICO",
-};
+
+export interface AlbumTrack {
+  title: string;
+  featured?: string;
+}
+
 export interface AlbumPageInfo {
   slug: AlbumSlug;
   title: string;
   artists: { name: string; slug: ArtistSlug }[];
   year: string;
   releaseDate: string;
-  totalTracks: number;
-  duration: string;
+  duration?: string;
   coverImage: string;
-  manifesto: string;
-  tagline: string;
-  editorialPitch?: string;
-  status?: AlbumStatus;
+  about: string;
   accentHex: string;
   bgHex: string;
-  tracks: { title: string; duration: string; featured?: string }[];
+  tracks: AlbumTrack[];
   streamingLinks: { label: string; href: string }[];
   dropArtistSlug: ArtistSlug;
 }
-export const ALBUM_SLUGS: AlbumSlug[] = [
-  "xtranho",
-  "colapso-global",
-  "isso-e-trap-vol-2",
-];
+
+export const ALBUM_SLUGS: AlbumSlug[] = ["xtranho", "colapso-global", "isso-e-trap-vol-2"];
+
 export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
   xtranho: {
     slug: "xtranho",
@@ -40,30 +33,30 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     artists: [{ name: "Matuê", slug: "matue" }],
     year: "2025",
     releaseDate: "2025-12-10",
-    totalTracks: 13,
-    duration: "36 min",
     coverImage: IMG.coverXtranho,
-    manifesto:
-      "XTRANHO é o terceiro capítulo do Matuê, depois de Máquina do Tempo (2020) e 333 (2024). Aqui o sinal não vem de fora: ele se estabiliza. Trap underground com sonoridade inédita no mainstream brasileiro, gravado entre Fortaleza, São Paulo e Los Angeles.",
-    tagline: "Sinal estável da terra de quem nunca foi daqui.",
-    editorialPitch: "Sinal alien em transmissão estável. Trap que veio de fora e ficou.",
-    status: "em-alta",
+    about:
+      "Terceiro álbum do Matuê, depois de Máquina do Tempo (2020) e 333 (2024). Foi feito em quatro meses, num acampamento criativo com músicos, produtores e designers. O lançamento teve audição aberta no Vale do Anhangabaú, em São Paulo.",
     accentHex: "#1f6bff",
     bgHex: "#03050a",
     tracks: [
-      { title: "REI TUÊ", duration: "2:44" },
-      { title: "TALKING BOUT", duration: "2:38" },
-      { title: "MEU CEMITÉRIO", duration: "3:02" },
-      { title: "ÍCONE FASHION", duration: "2:55" },
-      { title: "AUTOBAHN", duration: "3:11", featured: "Cashley" },
-      { title: "NANANANA", duration: "3:24", featured: "OS NANA" },
-      { title: "FACAS e MACHADOS", duration: "3:08", featured: "FAB GODAMN, Okie" },
-      { title: "ALTERADO", duration: "2:42" },
+      { title: "REI TUÊ" },
+      { title: "TALKING BOUT" },
+      { title: "MEU CEMITÉRIO" },
+      { title: "ÍCONE FASHION", featured: "kouth" },
+      { title: "AUTOBAHN", featured: "Cashley" },
+      { title: "NANANANA", featured: "N.A.N.A." },
+      { title: "FACAS E MACHADOS", featured: "FAB GODAMN, okie" },
+      { title: "ALTERADO", featured: "Phl Notunrboy" },
+      { title: "PENSAMENTOS PERIGOSOS", featured: "LPT Zlatan" },
+      { title: "XTRANHO", featured: "Brandão85" },
+      { title: "BACKSTAGE" },
+      { title: "TODAS AS LUZES" },
+      { title: "OS MELHORES" },
     ],
     streamingLinks: [
       { label: "Spotify", href: "https://open.spotify.com/album/5ORsvI5ThmZw7PS1NTvZaB" },
       { label: "Apple Music", href: "https://music.apple.com/br/album/xtranho/1859250096" },
-      { label: "YouTube Music", href: "https://music.youtube.com/" },
+      { label: "YouTube Music", href: "https://music.youtube.com/playlist?list=PLxA687tYuMWjvXl8AjP1Is0wXdYoyC3x_" },
     ],
     dropArtistSlug: "matue",
   },
@@ -71,82 +64,75 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     slug: "colapso-global",
     title: "Colapso Global",
     artists: [
-      { name: "Wiu", slug: "wiu" },
       { name: "Teto", slug: "teto" },
+      { name: "Wiu", slug: "wiu" },
     ],
     year: "2026",
     releaseDate: "2026-01-27",
-    totalTracks: 11,
     duration: "33 min",
     coverImage: IMG.coverColapsoGlobal,
-    manifesto:
-      "Wiu e Teto se encontram pra um disco a duas mãos que mistura house, jazz, bossa nova, funk carioca e trap no mesmo espaço. Manifesto sonoro de liberdade criativa: o trap saindo da caixinha sem perder o peso.",
-    tagline: "Quando o mundo cai, ainda dá pra dançar uma última.",
-    editorialPitch: "Duas vozes, um colapso. Trap se rendendo a tudo o que ele nunca foi.",
-    status: "tour-ativa",
+    about:
+      "Disco a quatro mãos de Teto e Wiu. É trap na base, mas passa por house, jazz, bossa nova e funk carioca. Estreou no top 10 global do Spotify na semana de lançamento. LENTO tem produção inteira do Wiu.",
     accentHex: "#c8506a",
     bgHex: "#1a0a10",
     tracks: [
-      { title: "Isso Aqui É Brasil", duration: "3:20", featured: "Deekapz" },
-      { title: "Medicina", duration: "3:12" },
-      { title: "Ref", duration: "2:48" },
-      { title: "Lento", duration: "3:02" },
-      { title: "Culpa do Fuso", duration: "3:18", featured: "Franco, The Sir!" },
-      { title: "Panela Suja", duration: "2:56", featured: "Mirella Costa" },
-      { title: "O Cara", duration: "2:44" },
-      { title: "Facecard", duration: "3:08", featured: "Yuri Redicopa" },
-      { title: "Amargo & Doce", duration: "3:21", featured: "Melissa Hartman" },
-      { title: "Monalisa", duration: "2:51" },
-      { title: "À Beira", duration: "3:09", featured: "Don L" },
+      { title: "ISSO AQUI É BRASIL", featured: "Deekapz" },
+      { title: "MEDICINA" },
+      { title: "REF" },
+      { title: "LENTO" },
+      { title: "CULPA DO FUSO", featured: "Franco, The Sir!" },
+      { title: "PANELA SUJA", featured: "Mirella Costa" },
+      { title: "O CARA" },
+      { title: "FACECARD", featured: "Yuri Redicopa" },
+      { title: "AMARGO & DOCE", featured: "Melissa Hartman" },
+      { title: "MONALISA" },
+      { title: "À BEIRA", featured: "Don L, Lamar" },
     ],
     streamingLinks: [
-      { label: "Spotify", href: "https://open.spotify.com/" },
+      { label: "Spotify", href: "https://open.spotify.com/album/214OaJv3XycWX4oqydN2Ic" },
       { label: "Apple Music", href: "https://music.apple.com/br/album/colapso-global/1872539052" },
-      { label: "YouTube Music", href: "https://music.youtube.com/" },
     ],
     dropArtistSlug: "wiu",
   },
   "isso-e-trap-vol-2": {
     slug: "isso-e-trap-vol-2",
-    title: "Isso é Trap Vol. 02",
+    title: "Isso É Trap Vol. 2",
     artists: [{ name: "Brandão85", slug: "brandao" }],
     year: "2026",
-    releaseDate: "2026-04-16",
-    totalTracks: 14,
-    duration: "41 min",
+    releaseDate: "2026-04-15",
+    duration: "37 min",
     coverImage: IMG.coverIssoETrap,
-    manifesto:
-      "Vol. 02 é a confirmação. Mixtape lançada pela 30praum continuando a sequência de Isso É Trap (Hash Produções, 2022). WARZONE e JAPONÊS já tinham viralizado antes do disco sair. Da Caponga pro mundo, sem perder o xerox.",
-    tagline: "Cresci copiando. Agora os outros copiam errado.",
-    editorialPitch: "Xerox da quebrada em alta densidade. Estreia oficial no selo.",
-    status: "estreia",
+    about:
+      "Continuação da mixtape de 2022 e primeiro projeto longo do Brandão85 pela 30praum. Catorze faixas, com Matuê em JAPONÊS e Desiree em ROCKSTAR. Passou de 100 milhões de plays no Spotify em menos de seis meses.",
     accentHex: "#ff3b1f",
     bgHex: "#0c0c0c",
     tracks: [
-      { title: "INTRO", duration: "1:42" },
-      { title: "WARZONE", duration: "3:01" },
-      { title: "JAPONÊS", duration: "2:55" },
-      { title: "ROCKSTAR", duration: "2:47" },
-      { title: "85", duration: "3:18" },
-      { title: "QUEBRADA", duration: "3:21" },
-      { title: "PABLO RELOAD", duration: "3:09" },
-      { title: "CEP CAPONGA", duration: "2:51" },
-      { title: "MUSTANG II", duration: "3:33" },
-      { title: "SERTÃO", duration: "3:18" },
-      { title: "ESCULACHO 2", duration: "2:46" },
-      { title: "OUTRO 85", duration: "2:33" },
+      { title: "BENÇA" },
+      { title: "OK" },
+      { title: "PARIS" },
+      { title: "WARZONE" },
+      { title: "BLUNT DE GOIABA" },
+      { title: "JAQUETA BAPE" },
+      { title: "MOOD" },
+      { title: "MILAGRE" },
+      { title: "FÓRMULAS & MIRAGENS" },
+      { title: "BUG NA MATRIX" },
+      { title: "JAPONÊS", featured: "Matuê" },
+      { title: "ROCKSTAR", featured: "Desiree" },
+      { title: "DEPOIS DO SHOW" },
+      { title: "COMIGO MESMO" },
     ],
     streamingLinks: [
       { label: "Spotify", href: "https://open.spotify.com/album/5jiPp1YPjyhcWqU6jYQxlv" },
-      { label: "Apple Music", href: "https://music.apple.com/" },
-      { label: "YouTube Music", href: "https://music.youtube.com/" },
     ],
     dropArtistSlug: "brandao",
   },
 };
+
 export function getAlbum(slug: string): AlbumPageInfo | undefined {
   return ALBUMS[slug as AlbumSlug];
 }
+
 export function isAlbumSlug(slug: string): slug is AlbumSlug {
   return slug in ALBUMS;
 }

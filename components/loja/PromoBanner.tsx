@@ -1,12 +1,10 @@
+import { STORE_POLICY } from "@/lib/shop/official-store";
+
 export function PromoBanner() {
   return (
-    <div
-      className="w-full py-3 text-center"
-      style={{ background: "#ede4d6", color: "#0f0f0e" }}
-    >
-      <p className="text-sm tracking-[0.02em]">
-        10% de desconto usando o cupom{" "}
-        <span className="font-semibold">#ÉTUDODA30</span>
+    <div className="w-full px-4 py-3 text-center" style={{ background: "#ede4d6", color: "#0f0f0e" }}>
+      <p className="text-sm">
+        Loja oficial · {STORE_POLICY.shipping.toLowerCase()} · troca em até 7 dias após a entrega
       </p>
     </div>
   );

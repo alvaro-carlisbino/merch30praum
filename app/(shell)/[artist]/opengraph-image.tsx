@@ -5,7 +5,7 @@ import { OG_FONT_FAMILY, ogFonts } from "@/lib/og/fonts";
 import { OG_SIZE, publicPhoto, publicPng } from "@/lib/og/images";
 import { ARTIST_OG_HERO, ARTIST_OG_NAME } from "@/lib/og/assets";
 
-export const alt = "Universo do artista · 30praum";
+export const alt = "Artista da 30praum";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 

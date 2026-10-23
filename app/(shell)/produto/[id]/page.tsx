@@ -3,9 +3,9 @@ import Link from "next/link";
 import { ProductGallery } from "@/components/produto/ProductGallery";
 import { ProductPurchasePanel, type SiblingColor } from "@/components/produto/ProductPurchasePanel";
 import { ProductRow } from "@/components/loja/ProductRow";
-import { ArtistNote } from "@/components/produto/ArtistNote";
 import { getAllProducts, getProduct } from "@/lib/cms/products";
-import { getProductByHandle } from "@/lib/shopify/client";
+import { getProductByHandle, isShopifyLive } from "@/lib/shopify/client";
+import { OFFICIAL_STORE, storeVariantIds } from "@/lib/shop/official-store";
 import { STATIC_PRODUCTS, formatBRL, type CMSProduct } from "@/lib/shop/static-products";
 import {
   ARTIST_DROP,
@@ -23,7 +23,6 @@ interface Params {
   id: string;
 }
 
-const STORE_URL = "https://30praum.store/products";
 
 export function generateStaticParams() {
   return STATIC_PRODUCTS.map((p) => ({ id: p.handle }));
@@ -114,11 +113,11 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
             artistLabel={artistLabel}
             currentColor={productColor(product)}
             siblings={siblings}
-            externalUrl={`${STORE_URL}/${product.handle}`}
+            externalUrl={`${OFFICIAL_STORE}/products/${product.handle}`}
+            officialVariantIds={isShopifyLive ? undefined : storeVariantIds(product.handle)}
           />
         </div>
       </section>
-      {artist && <ArtistNote artist={artist} dropLabel={dropLabel} />}
       <ProductRow
         title={artist ? `Mais de ${artist.displayName}` : "Mais da casa"}
         products={relatedPool}

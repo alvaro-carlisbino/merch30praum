@@ -1,10 +1,7 @@
 import Link from "next/link";
 import { getCurrentPlantao, getPastPlantao } from "@/lib/cms/plantao";
 import { LineupCinema } from "@/components/plantao/LineupCinema";
-
-function longDate(iso: string) {
-  return new Date(`${iso}T12:00:00-03:00`).toLocaleDateString("pt-BR", { day: "2-digit", month: "long" });
-}
+import { editionDate, longDate } from "@/lib/utils/dates";
 
 export async function generateMetadata() {
   const current = await getCurrentPlantao();
@@ -68,7 +65,7 @@ export default async function PlantaoLineupPage() {
             </h2>
             <p className="mt-4 text-sm opacity-60">
               {retro
-                ? `Plantão ${current.year} · ${longDate(current.date)} · ${current.city}`
+                ? `Plantão ${current.year} · ${editionDate(current)} · ${current.city}`
                 : `${longDate(showing.date)} · ${showing.venue} · ${showing.city}`}
             </p>
           </div>

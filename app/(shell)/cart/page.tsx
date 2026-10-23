@@ -3,8 +3,7 @@ import Image from "next/image";
 import { getCart } from "@/lib/cart/actions";
 import { formatMoney } from "@/lib/utils/format-money";
 import { CartLineControls } from "@/components/shell/CartLineControls";
-import { CartFreeShipping } from "@/components/shell/CartFreeShipping";
-import { pixPrice, installmentValue, INSTALLMENTS_MAX } from "@/lib/shop/shipping";
+import { STORE_POLICY } from "@/lib/shop/official-store";
 export default async function CartPage() {
   const cart = await getCart();
   if (!cart || cart.lines.length === 0) {
@@ -15,7 +14,7 @@ export default async function CartPage() {
           Vazio por enquanto
         </h1>
         <p className="mt-4 text-muted">
-          Escolha um universo e bota algo aqui dentro.
+          Nada aqui ainda. Dá uma olhada na loja.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-2">
           {["matue", "wiu", "teto", "brandao"].map((s) => (
@@ -72,47 +71,16 @@ export default async function CartPage() {
           ))}
         </ul>
         <aside className="lg:sticky lg:top-20 h-fit space-y-6 p-6 border border-border">
-          <CartFreeShipping
-            subtotal={parseFloat(cart.cost.subtotalAmount.amount)}
-          />
           <div
-            className="flex items-baseline justify-between pt-4"
-            style={{ borderTop: "1px solid var(--border)" }}
+            className="flex items-baseline justify-between"
           >
             <span className="text-xs uppercase tracking-widest text-muted">Subtotal</span>
             <span className="text-2xl font-display tabular-nums">
               {formatMoney(cart.cost.subtotalAmount)}
             </span>
           </div>
-          <div
-            className="flex items-baseline justify-between gap-3 px-3 py-2.5"
-            style={{
-              background: "color-mix(in srgb, var(--accent) 14%, transparent)",
-              border: "1px solid color-mix(in srgb, var(--accent) 35%, transparent)",
-            }}
-          >
-            <span
-              className="text-[10px] uppercase tracking-[0.3em]"
-              style={{ color: "var(--accent)" }}
-            >
-              Pix · 5% off
-            </span>
-            <span className="font-display text-lg tabular-nums">
-              {formatMoney({
-                amount: pixPrice(parseFloat(cart.cost.subtotalAmount.amount)).toFixed(2),
-                currencyCode: cart.cost.subtotalAmount.currencyCode,
-              })}
-            </span>
-          </div>
-          <p className="text-[10px] uppercase tracking-widest text-muted">
-            ou {INSTALLMENTS_MAX}× de{" "}
-            <span className="text-fg tabular-nums">
-              {formatMoney({
-                amount: installmentValue(parseFloat(cart.cost.subtotalAmount.amount)).toFixed(2),
-                currencyCode: cart.cost.subtotalAmount.currencyCode,
-              })}
-            </span>{" "}
-            sem juros
+          <p className="text-xs leading-relaxed text-muted">
+            Frete calculado no checkout da loja oficial. {STORE_POLICY.shipping}.
           </p>
           <a
             href={`/checkout-redirect?cartId=${encodeURIComponent(cart.id)}`}

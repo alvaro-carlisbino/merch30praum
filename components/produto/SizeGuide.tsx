@@ -19,7 +19,7 @@ export function SizeGuide() {
         className="text-[10px] uppercase tracking-[0.3em] underline-offset-4 hover:underline"
         style={{ color: "var(--muted)" }}
       >
-        Tabela de medidas →
+        Tabela de medidas
       </button>
       <AnimatePresence>
         {open && (

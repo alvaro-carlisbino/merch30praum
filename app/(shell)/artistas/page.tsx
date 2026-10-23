@@ -4,7 +4,7 @@ import { getAllArtists } from "@/lib/cms/artists";
 export const metadata = {
   title: "Artistas",
   description:
-    "Roster oficial da 30praum: Matuê, Wiu, Teto, Brandão85. Cada artista, um universo.",
+    "Os artistas da 30praum: Matuê, Wiu, Teto e Brandão85.",
 };
 const CARDS: Record<string, { photo: string; aspect: string }> = {
   teto: { photo: "/figma-home/card-teto.png", aspect: "229 / 418" },
@@ -27,7 +27,7 @@ export default async function ArtistasPage() {
           Roster
         </h1>
         <p className="mt-6 max-w-xl text-sm leading-relaxed text-fg/80 sm:text-base">
-          Quatro almas, uma assinatura. Cada artista da casa tem universo próprio.
+          Matuê, Wiu, Teto e Brandão85.
         </p>
       </section>
       <section className="mx-auto max-w-screen-2xl px-4 pb-20 sm:px-8 sm:pb-24">
@@ -111,7 +111,7 @@ export default async function ArtistasPage() {
               color: "var(--accent)",
             }}
           >
-            Incubadora →
+            Incubadora
           </Link>
         </div>
       </section>
