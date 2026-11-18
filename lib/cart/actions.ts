@@ -7,9 +7,19 @@ import {
   cartLinesRemove,
   cartLinesUpdate,
 } from "@/lib/shopify/client";
-import { clearCartId, readCartId, writeCartId } from "./persistence";
+import { clearCartId, readCartId, writeCartId, writeCartQty } from "./persistence";
 import type { DomainCart } from "@/lib/shopify/types";
 const CART_TAG = "cart";
+
+// Mantém o cookie de quantidade igual ao carrinho real. Só funciona dentro de
+// Server Functions; quando chamado durante a renderização (página /cart), o
+// Next não deixa gravar cookie e o erro é ignorado.
+async function syncQty(cart: DomainCart | null): Promise<void> {
+  try {
+    await writeCartQty(cart?.totalQuantity ?? 0);
+  } catch {}
+}
+
 export async function getCart(): Promise<DomainCart | null> {
   const id = await readCartId();
   if (!id) return null;
@@ -20,6 +30,7 @@ export async function getCart(): Promise<DomainCart | null> {
     } catch {}
     return null;
   }
+  await syncQty(cart);
   return cart;
 }
 export async function addToCart(
@@ -39,6 +50,7 @@ export async function addToCart(
     cart = await cartLinesAdd(cart.id, [{ merchandiseId, quantity }]);
     if (!cart) throw new Error("cart: add line failed");
   }
+  await syncQty(cart);
   revalidateTag(CART_TAG, "default");
   return cart;
 }
@@ -49,6 +61,7 @@ export async function updateCartLine(
   const id = await readCartId();
   if (!id) return null;
   const cart = await cartLinesUpdate(id, [{ id: lineId, quantity }]);
+  await syncQty(cart);
   revalidateTag(CART_TAG, "default");
   return cart;
 }
@@ -56,6 +69,7 @@ export async function removeCartLine(lineId: string): Promise<DomainCart | null>
   const id = await readCartId();
   if (!id) return null;
   const cart = await cartLinesRemove(id, [lineId]);
+  await syncQty(cart);
   revalidateTag(CART_TAG, "default");
   return cart;
 }

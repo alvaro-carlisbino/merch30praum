@@ -3,7 +3,6 @@ import { tagMatue, tagTeto, tagWiu, tagBrandao } from "@/styles/fonts";
 import { BrandHeader } from "@/components/shell/BrandHeader";
 import { BrandFooter } from "@/components/shell/BrandFooter";
 import { CartDrawer } from "@/components/shell/CartDrawer";
-import { getCart } from "@/lib/cart/actions";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://merch30praum.vercel.app";
 const SITE_DESCRIPTION =
@@ -47,17 +46,15 @@ export const metadata: Metadata = {
   category: "music",
   robots: { index: false, follow: false },
 };
-export default async function ShellLayout({
+export default function ShellLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cart = await getCart();
-  const cartCount = cart?.totalQuantity ?? 0;
   const artistFontVars = `${tagMatue.variable} ${tagTeto.variable} ${tagWiu.variable} ${tagBrandao.variable}`;
   return (
     <div className={artistFontVars} style={{ display: "contents" }}>
-      <BrandHeader cartCount={cartCount} />
+      <BrandHeader />
       <main className="flex-1">{children}</main>
       <BrandFooter />
       <CartDrawer />

@@ -4,10 +4,6 @@ import { useEffect, useState } from "react";
 import { BrandLogo } from "./BrandLogo";
 import { CartButton } from "./CartButton";
 import { CONTACT } from "@/lib/contact";
-interface BrandHeaderProps {
-  currentArtist?: string;
-  cartCount: number;
-}
 const LEFT_NAV = [
   { href: "/#roster", label: "Roster" },
   { href: "/shows", label: "Shows" },
@@ -29,7 +25,7 @@ const MENU_LINKS: Array<{
   { href: "/imprensa", label: "Imprensa", sub: "Press kit oficial" },
   { href: "/about", label: "Sobre", sub: "A holding em 10 anos" },
 ];
-export function BrandHeader({ cartCount }: BrandHeaderProps) {
+export function BrandHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     if (!menuOpen) return;
@@ -103,7 +99,7 @@ export function BrandHeader({ cartCount }: BrandHeaderProps) {
             >
               Loja
             </Link>
-            {cartCount > 0 && <CartButton initialCount={cartCount} />}
+            <CartButton />
             <button
               type="button"
               onClick={() => setMenuOpen(true)}

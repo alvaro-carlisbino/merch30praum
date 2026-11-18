@@ -1,14 +1,23 @@
 "use client";
 import { useEffect } from "react";
 import { useCartUI } from "@/lib/cart/store";
-interface CartButtonProps {
-  initialCount: number;
+import { CART_QTY_COOKIE } from "@/lib/cart/constants";
+
+// Lê a quantidade do cookie no navegador, sem chamar o servidor.
+function readQtyCookie(): number {
+  const match = document.cookie
+    .split("; ")
+    .find((c) => c.startsWith(`${CART_QTY_COOKIE}=`));
+  const n = match ? Number(match.split("=")[1]) : 0;
+  return Number.isFinite(n) ? n : 0;
 }
-export function CartButton({ initialCount }: CartButtonProps) {
+
+export function CartButton() {
   const { openDrawer, optimisticCount, setOptimisticCount } = useCartUI();
   useEffect(() => {
-    setOptimisticCount(initialCount);
-  }, [initialCount, setOptimisticCount]);
+    setOptimisticCount(readQtyCookie());
+  }, [setOptimisticCount]);
+  if (optimisticCount <= 0) return null;
   return (
     <button
       type="button"

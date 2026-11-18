@@ -4,7 +4,11 @@ import { getPayloadClient } from "@/lib/payload/client";
 import { STATIC_PRODUCTS, type CMSProduct } from "@/lib/shop/static-products";
 import type { ArtistSlug } from "@/lib/artists/types";
 import type { CategorySlug } from "@/lib/shop/categories";
-const TTL = 60 * 60 * 4;
+import { getAllShopifyProducts, getProductByHandle, isShopifyLive } from "@/lib/shopify/client";
+import { fromShopifyOnly, mergeOneWithShopify, mergeWithShopify } from "@/lib/shop/shopify-catalog";
+// Preço e estoque vêm da Shopify, então o cache é curto. O webhook de produto
+// (/api/shopify/webhook) derruba a tag "products" na hora em que algo muda.
+const TTL = 60 * 10;
 function adapt(doc: Record<string, unknown>): CMSProduct {
   return {
     id: doc.id as string,
@@ -32,39 +36,62 @@ function adapt(doc: Record<string, unknown>): CMSProduct {
     shopifyCollectionHandle: (doc.shopifyCollectionHandle as string) || undefined,
   };
 }
+async function getEditorialProducts(): Promise<CMSProduct[]> {
+  try {
+    const payload = await getPayloadClient();
+    const res = await payload.find({
+      collection: "products",
+      limit: 500,
+      depth: 1,
+      pagination: false,
+      sort: "-isDropLive",
+    });
+    if (!res.docs.length) return STATIC_PRODUCTS;
+    return res.docs.map((d) => adapt(d as unknown as Record<string, unknown>));
+  } catch {
+    return STATIC_PRODUCTS;
+  }
+}
+async function getEditorialProduct(handle: string): Promise<CMSProduct | null> {
+  try {
+    const payload = await getPayloadClient();
+    const res = await payload.find({
+      collection: "products",
+      where: { handle: { equals: handle } },
+      limit: 1,
+      depth: 1,
+    });
+    if (res.docs[0]) return adapt(res.docs[0] as unknown as Record<string, unknown>);
+  } catch {}
+  return STATIC_PRODUCTS.find((p) => p.handle === handle) ?? null;
+}
 export const getAllProducts = unstable_cache(
   async (): Promise<CMSProduct[]> => {
-    try {
-      const payload = await getPayloadClient();
-      const res = await payload.find({
-        collection: "products",
-        limit: 500,
-        depth: 1,
-        pagination: false,
-        sort: "-isDropLive",
-      });
-      if (!res.docs.length) return STATIC_PRODUCTS;
-      return res.docs.map((d) => adapt(d as unknown as Record<string, unknown>));
-    } catch {
-      return STATIC_PRODUCTS;
-    }
+    const [editorial, live] = await Promise.all([
+      getEditorialProducts(),
+      getAllShopifyProducts().catch((e) => {
+        console.error("[shopify] catálogo indisponível, usando editorial", e);
+        return [];
+      }),
+    ]);
+    return mergeWithShopify(editorial, live);
   },
   ["products:all"],
   { tags: ["products"], revalidate: TTL }
 );
 export const getProduct = unstable_cache(
   async (handle: string): Promise<CMSProduct | null> => {
+    const editorial = await getEditorialProduct(handle);
+    if (!isShopifyLive) return editorial;
+    let live;
     try {
-      const payload = await getPayloadClient();
-      const res = await payload.find({
-        collection: "products",
-        where: { handle: { equals: handle } },
-        limit: 1,
-        depth: 1,
-      });
-      if (res.docs[0]) return adapt(res.docs[0] as unknown as Record<string, unknown>);
-    } catch {}
-    return STATIC_PRODUCTS.find((p) => p.handle === handle) ?? null;
+      live = await getProductByHandle(handle);
+    } catch (e) {
+      console.error("[shopify] produto indisponível, usando editorial", e);
+      return editorial;
+    }
+    if (editorial) return live ? mergeOneWithShopify(editorial, live) : { ...editorial, isSoldOut: true };
+    return live ? fromShopifyOnly(live) : null;
   },
   ["products:by-handle"],
   { tags: ["products"], revalidate: TTL }

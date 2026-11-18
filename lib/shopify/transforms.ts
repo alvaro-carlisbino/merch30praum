@@ -29,5 +29,8 @@ export function transformProduct(p: ShopifyProduct): DomainProduct {
     variants: p.variants,
     tags: p.tags,
     artist: resolveArtistFromTags(p.tags),
+    productType: p.productType ?? "",
+    availableForSale: p.availableForSale ?? p.variants.some((v) => v.availableForSale),
+    compareAtPriceMin: p.compareAtPriceMin ?? null,
   };
 }

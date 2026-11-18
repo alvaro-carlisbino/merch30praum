@@ -29,6 +29,9 @@ export interface ShopifyProduct {
   variants: ShopifyVariant[];
   images: ShopifyImage[];
   tags: string[];
+  productType?: string;
+  availableForSale?: boolean;
+  compareAtPriceMin?: ShopifyMoney | null;
 }
 export interface ShopifyCollection {
   id: string;
@@ -51,6 +54,7 @@ export interface ShopifyCartLine {
       handle: string;
       title: string;
       tags: string[];
+      featuredImage?: ShopifyImage | null;
     };
   };
   cost: {
@@ -83,6 +87,9 @@ export interface DomainProduct {
   variants: ShopifyVariant[];
   tags: string[];
   artist: ArtistSlug | null;
+  productType: string;
+  availableForSale: boolean;
+  compareAtPriceMin: ShopifyMoney | null;
 }
 export interface DomainCollection {
   id: string;

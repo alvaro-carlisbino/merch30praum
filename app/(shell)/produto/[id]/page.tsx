@@ -6,7 +6,7 @@ import { ProductRow } from "@/components/loja/ProductRow";
 import { getAllProducts, getProduct } from "@/lib/cms/products";
 import { getProductByHandle, isShopifyLive } from "@/lib/shopify/client";
 import { OFFICIAL_STORE, storeVariantIds } from "@/lib/shop/official-store";
-import { STATIC_PRODUCTS, formatBRL, type CMSProduct } from "@/lib/shop/static-products";
+import { formatBRL, type CMSProduct } from "@/lib/shop/static-products";
 import {
   ARTIST_DROP,
   ARTIST_LABEL,
@@ -24,8 +24,9 @@ interface Params {
 }
 
 
-export function generateStaticParams() {
-  return STATIC_PRODUCTS.map((p) => ({ id: p.handle }));
+export async function generateStaticParams() {
+  const all = await getAllProducts();
+  return all.map((p) => ({ id: p.handle }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }) {
