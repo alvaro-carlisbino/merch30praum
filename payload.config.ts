@@ -14,6 +14,7 @@ import { Albums } from "./collections/Albums";
 import { Products } from "./collections/Products";
 import { Subscribers } from "./collections/Subscribers";
 import { Submissions } from "./collections/Submissions";
+import { MuralMessages, MuralPresence } from "./collections/MuralMessages";
 import { Incubadora } from "./globals/Incubadora";
 import { Press } from "./globals/Press";
 const filename = fileURLToPath(import.meta.url);
@@ -37,7 +38,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { titleSuffix: " · 30praum CMS" },
   },
-  collections: [Users, Artists, Plantao, News, Partners, Shows, Albums, Products, Subscribers, Submissions],
+  collections: [Users, Artists, Plantao, News, Partners, Shows, Albums, Products, Subscribers, Submissions, MuralMessages, MuralPresence],
   globals: [Incubadora, Press],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

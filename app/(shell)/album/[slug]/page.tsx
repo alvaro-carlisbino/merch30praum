@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { getAllAlbums, getAlbum } from "@/lib/cms/albums";
+import { Mural } from "@/components/mural/Mural";
 
 interface Params {
   slug: string;
@@ -129,6 +130,8 @@ export default async function AlbumPage({ params }: { params: Promise<Params> })
           ))}
         </ol>
       </section>
+
+      <Mural room={`album-${album.slug}`} title={album.title} accentHex={album.accentHex} bgHex={album.bgHex} />
 
       <section
         className="mx-auto flex max-w-screen-2xl flex-wrap items-end justify-between gap-6 px-4 py-16 sm:px-8"
