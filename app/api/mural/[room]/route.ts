@@ -19,7 +19,7 @@ const VISITOR_RE = /^[a-z0-9]{8,40}$/i;
 type Ctx = { params: Promise<{ room: string }> };
 
 // payload-types.ts não é gerado neste repo, então os docs chegam sem tipo.
-type Doc = { id: number | string; [key: string]: unknown };
+type Doc = { id: number | string; nickname?: unknown; body?: unknown; createdAt?: unknown };
 
 function toMessage(doc: Doc): MuralMessage {
   return {
@@ -96,7 +96,7 @@ export async function GET(req: NextRequest, ctx: Ctx) {
             limit: 100,
             depth: 0,
             overrideAccess: true,
-            select: { id: true },
+            select: { status: true },
           })
         : Promise.resolve({ docs: [] as { id: number }[] }),
       payload.count({
