@@ -5,6 +5,9 @@ import { PlantaoTeaser } from "@/components/home/PlantaoTeaser";
 import { VistaAgora } from "@/components/home/VistaAgora";
 import { ProximosShows } from "@/components/home/ProximosShows";
 import { NewsletterCapture } from "@/components/shell/NewsletterCapture";
+import { getAllProducts } from "@/lib/cms/products";
+import { formatBRL } from "@/lib/shop/static-products";
+import { dropProducts, isSoldOut } from "@/lib/shop/catalog";
 
 export const metadata = {
   title: { absolute: "30praum · Site oficial" },
@@ -12,10 +15,15 @@ export const metadata = {
     "Casa de Matuê, Wiu, Teto e Brandão85. Fundada em 2016 em Fortaleza pra colocar o trap nordestino no centro do mapa.",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const inStock = (await getAllProducts()).filter((p) => !isSoldOut(p));
+  const heroProducts = [...dropProducts(inStock), ...inStock]
+    .filter((p, i, arr) => arr.findIndex((o) => o.handle === p.handle) === i)
+    .slice(0, 6)
+    .map((p) => ({ handle: p.handle, image: p.image, title: p.title, price: formatBRL(p.priceBRL) }));
   return (
     <>
-      <HomeHero />
+      <HomeHero products={heroProducts} />
       <ArtistsRow />
       <EleitosDaCasa />
       <PlantaoTeaser />
