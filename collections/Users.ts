@@ -26,5 +26,22 @@ export const Users: CollectionConfig = {
       name: "name",
       type: "text",
     },
+    {
+      name: "chatName",
+      type: "text",
+      maxLength: 40,
+      label: "Nome no chat",
+      admin: { description: "Como aparece no chat do site quando você está logado. Vazio usa o nome." },
+    },
+    {
+      name: "chatBadge",
+      type: "select",
+      defaultValue: "staff",
+      label: "Selo no chat",
+      options: [
+        { label: "Equipe 30praum", value: "staff" },
+        { label: "Artista", value: "artist" },
+      ],
+    },
   ],
 };

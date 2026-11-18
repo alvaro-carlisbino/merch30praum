@@ -14,7 +14,7 @@ import { Albums } from "./collections/Albums";
 import { Products } from "./collections/Products";
 import { Subscribers } from "./collections/Subscribers";
 import { Submissions } from "./collections/Submissions";
-import { MuralMessages, MuralPresence } from "./collections/MuralMessages";
+import { MuralBans, MuralConfig, MuralMessages, MuralPresence, MuralReactions } from "./collections/MuralMessages";
 import { Incubadora } from "./globals/Incubadora";
 import { Press } from "./globals/Press";
 const filename = fileURLToPath(import.meta.url);
@@ -38,8 +38,8 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { titleSuffix: " · 30praum CMS" },
   },
-  collections: [Users, Artists, Plantao, News, Partners, Shows, Albums, Products, Subscribers, Submissions, MuralMessages, MuralPresence],
-  globals: [Incubadora, Press],
+  collections: [Users, Artists, Plantao, News, Partners, Shows, Albums, Products, Subscribers, Submissions, MuralMessages, MuralBans, MuralPresence, MuralReactions],
+  globals: [Incubadora, Press, MuralConfig],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: { outputFile: path.resolve(dirname, "payload-types.ts") },

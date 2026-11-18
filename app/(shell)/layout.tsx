@@ -3,6 +3,8 @@ import { tagMatue, tagTeto, tagWiu, tagBrandao } from "@/styles/fonts";
 import { BrandHeader } from "@/components/shell/BrandHeader";
 import { BrandFooter } from "@/components/shell/BrandFooter";
 import { CartDrawer } from "@/components/shell/CartDrawer";
+import { ChatEngine } from "@/components/mural/ChatEngine";
+import { ChatDock } from "@/components/mural/ChatDock";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://merch30praum.vercel.app";
 const SITE_DESCRIPTION =
@@ -57,7 +59,11 @@ export default function ShellLayout({
       <BrandHeader />
       <main className="flex-1">{children}</main>
       <BrandFooter />
+      {/* Espaço para a barra do chat não cobrir o rodapé no celular. */}
+      <div aria-hidden className="h-20 lg:h-0" />
       <CartDrawer />
+      <ChatEngine />
+      <ChatDock />
     </div>
   );
 }
