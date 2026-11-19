@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowDown, BadgeCheck, Ban, EyeOff, Flag, Info, Pencil, Pin, SendHorizontal, Trash2 } from "lucide-react";
 import { moderate, react, report, sendMessage } from "@/lib/mural/client";
-import { emptyRoom, useChat } from "@/lib/mural/store";
+import { emptyRoom, useChat, type Burst } from "@/lib/mural/store";
 import { REACTION_EMOJIS, type MuralMessage } from "@/lib/mural/types";
 
 const MAX_BODY = 280;
@@ -56,8 +56,12 @@ function Badge({ type }: { type: MuralMessage["authorType"] }) {
   );
 }
 
+// Array fixo: um [] novo a cada leitura faz o Zustand re-renderizar sem parar (React #185)
+// enquanto a sala ainda nao existe, que e o caso do botao flutuante com o chat fechado.
+const NO_BURSTS: Burst[] = [];
+
 export function BurstLayer({ room }: { room: string }) {
-  const bursts = useChat((s) => s.rooms[room]?.bursts ?? []);
+  const bursts = useChat((s) => s.rooms[room]?.bursts ?? NO_BURSTS);
   const drop = useChat((s) => s.dropBurst);
   return (
     <div className="pointer-events-none absolute inset-0 z-20 overflow-hidden" aria-hidden>
