@@ -59,8 +59,6 @@ export default function ShellLayout({
       <BrandHeader />
       <main className="flex-1">{children}</main>
       <BrandFooter />
-      {/* Espaço para a barra do chat não cobrir o rodapé no celular. */}
-      <div aria-hidden className="h-20 lg:h-0" />
       <CartDrawer />
       <ChatEngine />
       <ChatDock />

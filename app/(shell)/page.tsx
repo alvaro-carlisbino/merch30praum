@@ -1,5 +1,4 @@
 import { HomeHero } from "@/components/home/HomeHero";
-import { HomeLiveChat } from "@/components/mural/HomeLiveChat";
 import { ArtistsRow } from "@/components/home/ArtistsRow";
 import { EleitosDaCasa } from "@/components/home/EleitosDaCasa";
 import { PlantaoTeaser } from "@/components/home/PlantaoTeaser";
@@ -25,7 +24,6 @@ export default async function HomePage() {
   return (
     <>
       <HomeHero products={heroProducts} />
-      <HomeLiveChat />
       <ArtistsRow />
       <EleitosDaCasa />
       <PlantaoTeaser />

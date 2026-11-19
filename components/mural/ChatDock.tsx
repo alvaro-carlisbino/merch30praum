@@ -73,35 +73,44 @@ function ActivePanel({ fill }: { fill?: boolean }) {
   );
 }
 
-function Ticker() {
+// Balão que aparece por alguns segundos quando chega recado novo.
+function PreviewBubble({ onOpen }: { onOpen: () => void }) {
   const context = useChat((s) => s.context);
   const geral = useChat((s) => s.rooms.geral) ?? emptyRoom();
   const ctx = useChat((s) => (context ? s.rooms[context.room] : undefined));
-  // Mostra o recado mais recente entre o geral e a sala da página.
-  const candidates = [geral.messages.at(-1), ctx?.messages.at(-1)].filter(Boolean);
-  const latest = candidates.sort((a, b) => b!.createdAt.localeCompare(a!.createdAt))[0];
+  const [dismissed, setDismissed] = useState<number[]>([]);
+
+  const unreadLatest = [geral, ctx]
+    .filter((r): r is NonNullable<typeof r> => Boolean(r))
+    .map((r) => r.messages.filter((m) => m.id > r.lastReadId && !m.mine).at(-1))
+    .filter((m): m is NonNullable<typeof m> => Boolean(m))
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0];
+  const show = unreadLatest && !dismissed.includes(unreadLatest.id) ? unreadLatest : null;
+
+  useEffect(() => {
+    if (!show) return;
+    const t = setTimeout(() => setDismissed((d) => [...d.slice(-20), show.id]), 4500);
+    return () => clearTimeout(t);
+  }, [show]);
+
   return (
-    <span className="relative block h-5 min-w-0 flex-1 overflow-hidden text-left text-sm">
-      <AnimatePresence mode="popLayout" initial={false}>
-        <motion.span
-          key={latest?.id ?? "empty"}
-          initial={{ y: 18, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -18, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 380, damping: 30 }}
-          className="absolute inset-0 truncate"
+    <AnimatePresence mode="popLayout">
+      {show && (
+        <motion.button
+          key={show.id}
+          type="button"
+          onClick={onOpen}
+          initial={{ opacity: 0, y: 12, scale: 0.9, originX: 1, originY: 1 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 6, scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 380, damping: 28 }}
+          className="max-w-[min(18rem,calc(100vw-6rem))] rounded-2xl rounded-br-md border border-white/15 bg-black/85 px-3.5 py-2.5 text-left text-sm text-white shadow-[0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl"
         >
-          {latest ? (
-            <>
-              <strong className="font-semibold text-white">{latest.nickname}</strong>
-              <span className="text-white/70"> {latest.body}</span>
-            </>
-          ) : (
-            <span className="text-white/70">Entra no chat ao vivo</span>
-          )}
-        </motion.span>
-      </AnimatePresence>
-    </span>
+          <strong className="block truncate text-xs font-semibold text-white/70">{show.nickname}</strong>
+          <span className="line-clamp-2">{show.body}</span>
+        </motion.button>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -137,42 +146,50 @@ export function ChatDock() {
 
   return (
     <>
-      {/* Barra / pílula fechada */}
+      {/* Botão flutuante */}
       <AnimatePresence>
         {!open && (
-          <motion.button
-            type="button"
-            onClick={() => setOpen(true)}
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 80, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 flex items-center gap-3 rounded-2xl border border-white/15 bg-black/80 px-4 py-3 text-white shadow-[0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl lg:inset-x-auto lg:right-6 lg:bottom-6 lg:w-[380px]"
-            aria-label={`Abrir chat ao vivo, ${online} pessoas agora`}
+          <motion.div
+            key="fab"
+            initial={{ scale: 0.6, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.6, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 360, damping: 24 }}
+            className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex flex-col items-end gap-2 lg:bottom-6 lg:right-6"
           >
-            <span className="relative">
-              <MessageCircle aria-hidden size={22} strokeWidth={1.8} />
+            <PreviewBubble onOpen={() => setOpen(true)} />
+            <motion.button
+              type="button"
+              onClick={() => setOpen(true)}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.92 }}
+              className="relative flex size-14 items-center justify-center rounded-full bg-white text-black shadow-[0_10px_40px_rgba(0,0,0,0.55)] lg:size-16"
+              aria-label={`Abrir chat ao vivo, ${online} ${online === 1 ? "pessoa" : "pessoas"} agora${unread ? `, ${unread} novos` : ""}`}
+            >
+              {live && (
+                <span className="absolute inset-0 animate-ping rounded-full bg-white/30 [animation-duration:2.4s]" aria-hidden />
+              )}
+              <MessageCircle aria-hidden size={26} strokeWidth={2} className="relative" />
               {unread > 0 && (
                 <motion.span
                   key={unread}
                   initial={{ scale: 1.6 }}
                   animate={{ scale: 1 }}
-                  className="absolute -right-2 -top-2 min-w-[18px] rounded-full bg-[#ff3b30] px-1 text-center text-[10px] font-bold leading-[18px] tabular-nums"
+                  className="absolute -right-1 -top-1 min-w-[22px] rounded-full border-2 border-black bg-[#ff3b30] px-1 text-center text-[11px] font-bold leading-[18px] tabular-nums text-white"
                 >
                   {unread > 99 ? "99+" : unread}
                 </motion.span>
               )}
-            </span>
-            <Ticker />
-            <span className="flex shrink-0 items-center gap-1.5 rounded-full bg-white/10 px-2 py-1 text-xs tabular-nums">
-              <LiveDot live={live} size={8} />
-              {live ? online : "..."}
-            </span>
-          </motion.button>
+              <span className="absolute -bottom-1.5 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full border border-white/15 bg-black px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-white">
+                <LiveDot live={live} size={6} />
+                {live ? online : "..."}
+              </span>
+            </motion.button>
+          </motion.div>
         )}
       </AnimatePresence>
       {!open && (
-        <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 h-80 lg:left-auto lg:right-6 lg:w-[380px]">
+        <div className="pointer-events-none fixed bottom-0 right-0 z-40 h-96 w-28 lg:w-36">
           <BurstLayer room="geral" />
         </div>
       )}
