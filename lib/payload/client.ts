@@ -10,12 +10,12 @@ export function getPayloadClient(): Promise<Payload> {
 }
 
 /**
- * Cliente usado nas leituras de conteúdo. Na versão ?visual=editado o conteúdo vem
- * dos registries revisados: o erro cai no fallback estático de cada leitor em lib/cms.
+ * Cliente das leituras de conteúdo. O conteúdo revisado vive nos registries; o banco só
+ * volta a ser a fonte com CMS_CONTENT_ENABLED=1, depois de sincronizado.
  */
 export function getContentClient(): Promise<Payload> {
-  if (process.env.VISUAL_EDITADO === "1") {
-    return Promise.reject(new Error("visual editado usa conteúdo estático"));
+  if (process.env.CMS_CONTENT_ENABLED !== "1") {
+    return Promise.reject(new Error("conteúdo servido pelos registries"));
   }
   return getPayloadClient();
 }

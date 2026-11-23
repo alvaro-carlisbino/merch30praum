@@ -45,7 +45,7 @@ export default async function PlantaoLineupPage() {
           </h1>
           <p className="mt-10 max-w-2xl text-base sm:text-xl text-fg/85 leading-relaxed">
             {retro
-              ? `Os nomes de ${current.year} saem primeiro pra lista de espera. Enquanto isso, revê quem passou pelo palco em ${showing.year}. A ordem é editorial, não alfabética: começa na abertura, termina no headliner.`
+              ? `Os nomes de ${current.year} saem primeiro pra lista de espera. Enquanto isso, revê quem passou pelo palco em ${showing.year}.`
               : "A ordem aqui é editorial, não alfabética: começa na abertura, termina no headliner. Scroll pra baixo e percorre a noite."}
           </p>
           <p className="mt-3 text-sm opacity-60">

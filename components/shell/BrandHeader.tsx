@@ -152,7 +152,7 @@ export function BrandHeader() {
           </div>
           <nav
             aria-label="Menu principal"
-            className="mx-auto flex w-full max-w-screen-2xl flex-1 flex-col justify-center gap-1 overflow-y-auto px-4 py-10 sm:gap-2 sm:px-8 sm:py-12"
+            className="mx-auto flex w-full max-w-screen-2xl min-h-0 flex-1 flex-col justify-center-safe overflow-y-auto px-4 py-4 sm:px-8 sm:py-6"
           >
             {MENU_LINKS.map((item, i) => (
               <Link
@@ -160,7 +160,7 @@ export function BrandHeader() {
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
                 data-cursor={item.label}
-                className="group flex items-baseline justify-between gap-6 border-b py-4 transition-colors hover:text-accent sm:py-5"
+                className="group flex items-baseline justify-between gap-6 shrink-0 border-b py-2 transition-colors hover:text-accent"
                 style={{
                   borderColor: "var(--border)",
                   animation: `menu-row-in 600ms cubic-bezier(0.7,0,0.3,1) ${
@@ -171,7 +171,7 @@ export function BrandHeader() {
                 <span
                   className="font-display uppercase leading-none transition-transform group-hover:translate-x-2"
                   style={{
-                    fontSize: "clamp(1.8rem, 5vw, 4rem)",
+                    fontSize: "clamp(1.5rem, min(5vw, 4.4svh), 3.5rem)",
                     letterSpacing: "-0.01em",
                   }}
                 >

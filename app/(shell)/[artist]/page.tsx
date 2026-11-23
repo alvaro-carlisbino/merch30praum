@@ -52,7 +52,7 @@ const ASSETS: Record<ArtistSlug, ArtistPageAssets> = {
     stagePhoto: "/figma-artista/wiu-stage-v2.webp",
     albumCover: "/figma-artista/colapso-global-cover-v2.webp",
     intro:
-      "Começou produzindo beat e passou pro microfone. Lançou Colapso Global com Teto em janeiro de 2026.",
+      "Voz e produção. Lançou Colapso Global com Teto em janeiro de 2026.",
     albumSlug: "colapso-global",
   },
   brandao: {

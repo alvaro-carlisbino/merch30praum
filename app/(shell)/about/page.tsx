@@ -217,41 +217,44 @@ export default function AboutPage() {
               Ver todos
             </Link>
           </div>
-          <ul className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-            {Object.values(ARTISTS).map((a) => (
-              <li key={a.slug}>
-                <Link
-                  href={`/${a.slug}`}
-                  data-cursor={a.displayName}
-                  className="group block overflow-hidden rounded-2xl"
-                  style={{
-                    background: a.panelBackground,
-                    color: "#fff",
-                  }}
-                >
-                  <div className="p-6">
-                    <p
-                      className="text-[10px] uppercase tracking-[0.3em]"
-                      style={{ color: a.panelAccent }}
-                    >
-                      {a.universeName}
-                    </p>
-                    <p
-                      className="mt-3 font-display"
-                      style={{
-                        fontSize: "clamp(1.4rem, 2vw, 1.75rem)",
-                        letterSpacing: "0.01em",
-                      }}
-                    >
-                      {a.displayName}
-                    </p>
-                    <p className="mt-2 text-xs text-white/65">
-                      {a.realName} · {a.origin}
-                    </p>
-                  </div>
-                </Link>
-              </li>
-            ))}
+          <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {Object.values(ARTISTS).map((a) => {
+              const latest =
+                a.facts.find((f) => f.label === "Último lançamento")?.value ?? a.universeName;
+              return (
+                <li key={a.slug}>
+                  <Link
+                    href={`/${a.slug}`}
+                    data-cursor={a.displayName}
+                    className="group relative block aspect-[3/4] overflow-hidden rounded-2xl"
+                    style={{ background: a.panelBackground }}
+                  >
+                    <Image
+                      src={a.portraitImage}
+                      alt={a.displayName}
+                      fill
+                      sizes="(min-width: 1024px) 24vw, 50vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      style={{ objectPosition: "center 20%" }}
+                    />
+                    <div
+                      aria-hidden
+                      className="absolute inset-0"
+                      style={{ background: "linear-gradient(180deg, transparent 48%, rgba(0,0,0,0.88) 100%)" }}
+                    />
+                    <div className="absolute inset-x-0 bottom-0 p-4 text-white sm:p-5">
+                      <h3
+                        className="font-display uppercase leading-none"
+                        style={{ fontSize: "clamp(1.7rem, 3vw, 2.75rem)" }}
+                      >
+                        {a.displayName}
+                      </h3>
+                      <p className="mt-2 text-xs leading-snug text-white/80 sm:text-sm">{latest}</p>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
