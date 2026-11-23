@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { tagMatue, tagTeto, tagWiu, tagBrandao } from "@/styles/fonts";
 import { BrandHeader } from "@/components/shell/BrandHeader";
 import { BrandFooter } from "@/components/shell/BrandFooter";
 import { CartDrawer } from "@/components/shell/CartDrawer";
@@ -53,9 +52,8 @@ export default function ShellLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const artistFontVars = `${tagMatue.variable} ${tagTeto.variable} ${tagWiu.variable} ${tagBrandao.variable}`;
   return (
-    <div className={artistFontVars} style={{ display: "contents" }}>
+    <div style={{ display: "contents" }}>
       <BrandHeader />
       <main className="flex-1">{children}</main>
       <BrandFooter />

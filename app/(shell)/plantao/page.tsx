@@ -30,8 +30,7 @@ export default async function PlantaoHubPage() {
 
   const stats = [
     { value: String(past.length), label: "Edições", foot: `desde ${past[past.length - 1]?.year ?? 2024}` },
-    { value: "20 mil", label: "Por edição", foot: "público no Marina Park" },
-    { value: "500 mil", label: "Online", foot: "na transmissão de 2025" },
+    { value: "500 mil", label: "Online", foot: "na transmissão de 2024" },
   ];
 
   return (
@@ -128,7 +127,7 @@ export default async function PlantaoHubPage() {
 
       <section style={{ background: INK }} aria-label="Números do festival">
         <div className="mx-auto max-w-screen-2xl border-t px-4 sm:px-8" style={{ borderColor: "rgba(255,255,255,0.12)" }}>
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-3">
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-10 py-14">
             {stats.map((s) => (
               <div key={s.label}>
                 <dd

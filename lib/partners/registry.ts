@@ -26,14 +26,14 @@ export const PARTNERS: Record<PartnerSlug, PartnerInfo> = {
     slug: "plantao",
     name: "Plantão Festival",
     category: "Festival próprio · Fortaleza",
-    years: "2024 →",
+    years: "2023 →",
     status: "active",
     brandColor: "#ff3535",
     bgColor: "#0c0407",
     headline: "PLANTÃO\nFESTIVAL",
     shortPitch: "O festival da 30praum no Marina Park, em Fortaleza",
     story:
-      "O Plantão é o festival que a 30praum organiza em Fortaleza, com curadoria de Matuê e Clara Mendes. A primeira edição foi em 2024 no Marina Park. As duas primeiras reuniram cerca de 20 mil pessoas cada, e a transmissão de 2025 passou de 500 mil espectadores únicos. A terceira, em abril de 2026, marcou os 10 anos da gravadora.",
+      "O Plantão é o festival que a 30praum organiza em Fortaleza, com curadoria de Matuê e planejamento dele com Clara Mendes. A primeira edição foi em 2023, no Marina Park. A transmissão de 2024 teve quase 500 mil espectadores únicos. A terceira, em abril de 2026, marcou os 10 anos da gravadora.",
     release: {
       name: "Plantão 2026",
       format: "10 anos da 30praum · Marina Park",
@@ -85,7 +85,7 @@ export const PARTNERS: Record<PartnerSlug, PartnerInfo> = {
     },
     externalLink: "https://30praum.store",
     heroImage: IMG.partnerEdHardy,
-    galleryImages: [IMG.partnerEdHardyGallery1, IMG.partnerEdHardyGallery2, IMG.partnerEdHardyGallery3],
+    galleryImages: [],
     artistsInvolved: ["matue"],
   },
 };

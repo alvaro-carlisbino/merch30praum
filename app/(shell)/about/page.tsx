@@ -33,12 +33,12 @@ const MARCOS = [
   {
     year: "2024",
     title: "333 e independência",
-    body: "333 tem a maior estreia de um álbum no Spotify Brasil. A 30praum volta a lançar de forma independente, Brandão85 assina com a casa e o Plantão faz a primeira edição.",
+    body: "333 tem a maior estreia de um álbum no Spotify Brasil. A 30praum volta a lançar de forma independente, Brandão85 assina com a casa e o Plantão faz a segunda edição, agora em dois dias.",
   },
   {
     year: "2025",
     title: "XTRANHO",
-    body: "O segundo Plantão reúne cerca de 20 mil pessoas e quase 500 mil na transmissão. Em dezembro sai XTRANHO.",
+    body: "Matuê leva a turnê do 333 à MEO Arena, em Lisboa. Em dezembro sai XTRANHO.",
   },
   {
     year: "2026",
@@ -68,7 +68,7 @@ export default function AboutPage() {
         >
           Gravadora independente fundada em 2016 por Matuê e Clara Mendes, em Fortaleza. Hoje
           lança Matuê, Wiu, Teto e Brandão85 e organiza o Plantão, festival que acontece no
-          Marina Park desde 2024.
+          Marina Park desde 2023.
         </p>
       </section>
       <section
@@ -119,7 +119,7 @@ export default function AboutPage() {
             origin="Berlim · Fortaleza"
             paragraphs={[
               "Nasceu em Berlim e estudou administração. Chegou a Fortaleza num intercâmbio, aprendeu português na cidade e ficou.",
-              "É CEO da 30praum desde a fundação. Conduziu a volta da gravadora à distribuição independente em 2024 e assina, com Matuê, a curadoria do Plantão.",
+              "É cofundadora e CEO da 30praum e divide com Matuê o planejamento do Plantão.",
             ]}
           />
           <FounderCard

@@ -65,7 +65,7 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
     signatureLyric: "Eu vim de outro lugar — esse mundo é só um set.",
     socials: {
       spotify: "https://open.spotify.com/artist/2T4FxsAGFAaeWiQfHvfn6V",
-      instagram: "https://instagram.com/matue30",
+      instagram: "https://www.instagram.com/matue/",
       tiktok: "https://www.tiktok.com/@matue30",
       youtube: "https://www.youtube.com/@matue",
       appleMusic: "https://music.apple.com/br/artist/matu%C3%AA/1297773648",
@@ -136,7 +136,7 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
     signatureLyric: "Se a saudade matasse, eu já tinha morrido bonito.",
     socials: {
       spotify: "https://open.spotify.com/artist/4t7taXrnsg5GIptpcg1MO9",
-      instagram: "https://instagram.com/wiu",
+      instagram: "https://www.instagram.com/hotwiu30/",
       tiktok: "https://www.tiktok.com/@wiuoficial",
       youtube: "https://www.youtube.com/@WIU30praum",
       appleMusic: "https://music.apple.com/br/artist/wiu/1531117683",
@@ -207,7 +207,7 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
     signatureLyric: "Não é fim. É trilha.",
     socials: {
       spotify: "https://open.spotify.com/artist/2nhPdg1HKwzKj1FFEdgQ2v",
-      instagram: "https://instagram.com/teto",
+      instagram: "https://www.instagram.com/euteto/",
       tiktok: "https://www.tiktok.com/@teto",
       youtube: "https://www.youtube.com/@TETO",
       appleMusic: "https://music.apple.com/br/artist/teto/1422229829",
@@ -271,7 +271,7 @@ export const ARTISTS: Record<ArtistSlug, ArtistConfig> = {
     signatureLyric: "Da quebrada pro mundo — sem perder o xerox.",
     socials: {
       spotify: "https://open.spotify.com/artist/5VTw0YLpHpqz8VRgRVNNRO",
-      instagram: "https://instagram.com/brandao85",
+      instagram: "https://www.instagram.com/brandao085/",
       tiktok: "https://www.tiktok.com/@brandao85",
       youtube: "https://www.youtube.com/@brandao85",
       appleMusic: "https://music.apple.com/br/artist/brand%C3%A3o-85/1640014459",

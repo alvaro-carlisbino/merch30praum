@@ -20,10 +20,62 @@ export type NewsPost = {
 };
 export const NEWS_POSTS: NewsPost[] = [
   {
+    slug: "wiu-grammy-latino-tropicoqueta",
+    title: "Wiu celebra Grammy Latino com Tropicoqueta, de Karol G",
+    excerpt: "Wiu é coautor de Bandida Entrenada, faixa do álbum premiado.",
+    heroImage: "/figma-home/hero-wiu.jpg",
+    publishedAt: "2026-11-12T12:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["industria"],
+    relatedArtists: ["wiu"],
+    body: [
+      "Tropicoqueta, de Karol G, venceu Melhor Álbum de Música Urbana no Grammy Latino. Wiu assina a composição de Bandida Entrenada, uma das faixas do disco.",
+    ],
+  },
+  {
+    slug: "wiu-piranguera",
+    title: "Wiu lança Piranguera",
+    excerpt: "Primeiro single solo dele desde janeiro de 2025.",
+    heroImage: "/figma-home/hero-wiu.jpg",
+    publishedAt: "2026-11-03T12:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["lancamento"],
+    relatedArtists: ["wiu"],
+    body: [
+      "Piranguera saiu em 3 de novembro. A faixa é inspirada na noite de Fortaleza e é o primeiro single solo do Wiu desde janeiro de 2025.",
+    ],
+  },
+  {
+    slug: "matue-mundo-fashion-tz-da-coronel",
+    title: "Matuê participa de Mundo Fashion, com TZ da Coronel",
+    excerpt: "A faixa antecipa o álbum Lado Mau.",
+    heroImage: "/figma-home/hero-matue.jpg",
+    publishedAt: "2026-10-21T12:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["lancamento"],
+    relatedArtists: ["matue"],
+    body: [
+      "Mundo Fashion, de TZ da Coronel com participação do Matuê, saiu em 21 de outubro e antecipa o álbum Lado Mau.",
+    ],
+  },
+  {
+    slug: "matue-rabanne-1-million-black",
+    title: "Matuê é o novo embaixador de 1 Million Black, da Rabanne",
+    excerpt: "O anúncio veio com apresentação na semana de moda de Paris.",
+    heroImage: "/figma-home/hero-matue.jpg",
+    publishedAt: "2026-10-06T12:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["parceria"],
+    relatedArtists: ["matue"],
+    body: [
+      "A Rabanne anunciou Matuê como embaixador da fragrância 1 Million Black, com apresentação durante a semana de moda de Paris.",
+    ],
+  },
+  {
     slug: "brandao85-100-milhoes-isso-e-trap-vol-2",
     title: "Isso É Trap Vol. 2 passa de 100 milhões de plays",
     excerpt:
-      "Menos de seis meses depois do lançamento, a mixtape do Brandão85 cruzou a marca no Spotify.",
+      "Menos de seis meses depois do lançamento, a mixtape do Brandão85 cruzou a marca no Spotify Brasil.",
     heroImage: "/assets/covers/japones_warzone.jpg",
     publishedAt: "2026-09-16T10:00:00-03:00",
     author: "Editorial 30praum",
@@ -31,7 +83,7 @@ export const NEWS_POSTS: NewsPost[] = [
     relatedArtists: ["brandao"],
     relatedReleases: ["isso-e-trap-vol-2"],
     body: [
-      "Isso É Trap Vol. 2 saiu em 15 de abril e passou de 100 milhões de plays no Spotify antes de completar seis meses. É o primeiro projeto longo do Brandão85 desde que ele assinou com a 30praum, em setembro de 2024.",
+      "Isso É Trap Vol. 2 saiu em 15 de abril e passou de 100 milhões de plays no Spotify Brasil antes de completar seis meses. Veio depois de CEO (2024) e de Isso É Trap (2025).",
       "São catorze faixas. JAPONÊS tem participação do Matuê e ROCKSTAR, da Desiree.",
     ],
   },
@@ -62,13 +114,13 @@ export const NEWS_POSTS: NewsPost[] = [
     relatedArtists: ["matue", "teto", "wiu", "brandao"],
     body: [
       "O Plantão voltou ao Marina Park em 25 de abril para a terceira edição, a dos dez anos da gravadora. Matuê, Teto, Wiu e Brandão85 dividiram a programação com BK', Ajuliacosta, Alee, Ryu, The Runner, Recayd Mob e TZ da Coronel. Brandão convidou Jovem Dex e Leviano.",
-      "Teto e Wiu levaram Colapso Global pro palco. As duas edições anteriores tinham reunido cerca de 20 mil pessoas cada, e a transmissão de 2025 passou de 500 mil espectadores únicos.",
+      "Teto e Wiu levaram Colapso Global pro palco. A edição de 2024 teve quase 500 mil espectadores únicos na transmissão.",
     ],
   },
   {
     slug: "isso-e-trap-vol-2-lancamento",
     title: "Brandão85 lança Isso É Trap Vol. 2",
-    excerpt: "Catorze faixas, com Matuê em JAPONÊS. Continuação da mixtape de 2022.",
+    excerpt: "Catorze faixas, com Matuê em JAPONÊS. Continuação da mixtape de 2025.",
     heroImage: "/assets/covers/japones_warzone.jpg",
     publishedAt: "2026-04-15T12:00:00-03:00",
     author: "Editorial 30praum",
@@ -76,7 +128,7 @@ export const NEWS_POSTS: NewsPost[] = [
     relatedArtists: ["brandao"],
     relatedReleases: ["isso-e-trap-vol-2"],
     body: [
-      "Isso É Trap Vol. 2 está nas plataformas. É a continuação da mixtape que o Brandão85 lançou em 2022 e o primeiro projeto longo dele pela 30praum.",
+      "Isso É Trap Vol. 2 está nas plataformas. É a continuação da mixtape que o Brandão85 lançou em 2025. Antes dela, ele já tinha lançado CEO pela 30praum, em 2024.",
       "O disco tem catorze faixas e 37 minutos. As participações são de Matuê, em JAPONÊS, e Desiree, em ROCKSTAR.",
     ],
   },

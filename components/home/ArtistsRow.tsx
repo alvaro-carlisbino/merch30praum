@@ -15,25 +15,25 @@ type CardConfig = {
 };
 const CARDS: Record<ArtistSlug, CardConfig> = {
   matue: {
-    photo: "/figma-home/card-matue.png",
+    photo: "/artists/matue.webp",
     name: "/figma-home/name-matue-tight.png",
     nameAspect: "1571 / 780",
     nameWidth: "auto",
   },
   wiu: {
-    photo: "/figma-home/card-wiu.png",
+    photo: "/artists/wiu.webp",
     name: "/figma-home/name-wiu-tight.png",
     nameAspect: "1105 / 792",
     nameWidth: "auto",
   },
   teto: {
-    photo: "/figma-home/card-teto.png",
+    photo: "/artists/teto.webp",
     name: "/figma-home/name-teto-tight.png",
     nameAspect: "1588 / 508",
     nameWidth: "auto",
   },
   brandao: {
-    photo: "/figma-home/card-brandao.png",
+    photo: "/artists/brandao.webp",
     name: "/figma-home/name-brandao-tight.png",
     nameAspect: "1857 / 634",
     nameWidth: "auto",
