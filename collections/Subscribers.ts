@@ -9,7 +9,7 @@ export const Subscribers: CollectionConfig = {
     description: "Emails capturados no site (home, loja e lista de espera do Plantão).",
   },
   access: {
-    create: () => true,
+    create: ({ req }) => Boolean(req.user),
     read: ({ req }) => Boolean(req.user),
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),

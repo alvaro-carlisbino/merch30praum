@@ -9,7 +9,7 @@ export const Submissions: CollectionConfig = {
     description: "Demos enviadas pelo formulário público da Incubadora. Painel do A&R.",
   },
   access: {
-    create: () => true,
+    create: ({ req }) => Boolean(req.user),
     read: ({ req }) => Boolean(req.user),
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),

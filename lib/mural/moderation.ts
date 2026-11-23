@@ -1,5 +1,6 @@
 import "server-only";
 import { createHash } from "node:crypto";
+import { normalize } from "./normalize";
 
 export const MAX_BODY = 280;
 export const MAX_NICK = 24;
@@ -37,23 +38,6 @@ const EMAIL_RE = /[a-z0-9._%+-]+\s?@\s?[a-z0-9.-]+\.[a-z]{2,}/i;
 const HANDLE_RE = /(^|\s)@[a-z0-9._]{3,}/i;
 // Telefone, CPF e afins: qualquer sequência longa de dígitos, com ou sem pontuação.
 const DIGITS_RE = /(\d[\s().-]*){8,}/;
-
-export function normalize(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[4@]/g, "a")
-    .replace(/3/g, "e")
-    .replace(/[1!|]/g, "i")
-    .replace(/0/g, "o")
-    .replace(/[5$]/g, "s")
-    .replace(/7/g, "t")
-    .replace(/[^a-z\s]/g, " ")
-    .replace(/(.)\1{2,}/g, "$1$1")
-    .replace(/(.)\1/g, "$1")
-    .replace(/\s+/g, " ");
-}
 
 function contains(text: string, words: string[]): boolean {
   const norm = ` ${normalize(text)} `;

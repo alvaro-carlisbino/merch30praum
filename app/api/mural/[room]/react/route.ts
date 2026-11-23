@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { isSameOrigin } from "@/lib/fans/session";
 import { ROOM_RE } from "@/lib/mural/moderation";
 import { getPayloadClient, getViewer } from "@/lib/mural/server";
 import { REACTION_EMOJIS } from "@/lib/mural/types";
@@ -11,6 +12,7 @@ const BURST = { windowMs: 10_000, max: 12 };
 export async function POST(req: NextRequest, ctx: { params: Promise<{ room: string }> }) {
   const { room } = await ctx.params;
   if (!ROOM_RE.test(room)) return NextResponse.json({ error: "Sala inválida." }, { status: 400 });
+  if (!isSameOrigin(req.headers)) return NextResponse.json({ error: "Origem inválida." }, { status: 403 });
   let emoji = "";
   try {
     emoji = String((await req.json()).emoji ?? "");

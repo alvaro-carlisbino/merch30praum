@@ -118,13 +118,10 @@ export function ChatDock() {
   const open = useChat((s) => s.open);
   const setOpen = useChat((s) => s.setOpen);
   const geral = useChat((s) => s.rooms.geral) ?? emptyRoom();
-  const context = useChat((s) => s.context);
-  const ctxRoom = useChat((s) => (context ? s.rooms[context.room] : undefined));
   const desktop = useIsDesktop();
   const drag = useDragControls();
 
   const live = geral.status === "live";
-  const online = geral.online + (ctxRoom?.online ?? 0);
   const unread = geral.messages.filter((m) => m.id > geral.lastReadId).length;
 
   // No celular o sheet trava a rolagem da página por baixo.
@@ -164,7 +161,7 @@ export function ChatDock() {
               whileHover={{ scale: 1.06 }}
               whileTap={{ scale: 0.92 }}
               className="relative flex size-14 items-center justify-center rounded-full bg-white text-black shadow-[0_10px_40px_rgba(0,0,0,0.55)] lg:size-16"
-              aria-label={`Abrir chat ao vivo, ${online} ${online === 1 ? "pessoa" : "pessoas"} agora${unread ? `, ${unread} novos` : ""}`}
+              aria-label={`Abrir chat ao vivo${unread ? `, ${unread} novos` : ""}`}
             >
               {live && (
                 <span className="absolute inset-0 animate-ping rounded-full bg-white/30 [animation-duration:2.4s]" aria-hidden />
@@ -182,7 +179,7 @@ export function ChatDock() {
               )}
               <span className="absolute -bottom-1.5 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full border border-white/15 bg-black px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-white">
                 <LiveDot live={live} size={6} />
-                {live ? online : "..."}
+                {live ? "AO VIVO" : "..."}
               </span>
             </motion.button>
           </motion.div>

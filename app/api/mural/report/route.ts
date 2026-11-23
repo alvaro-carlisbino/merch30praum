@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { isSameOrigin } from "@/lib/fans/session";
 import { getPayloadClient, getViewer } from "@/lib/mural/server";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +12,7 @@ const DEFAULT_HIDE_AT = 3;
 type Report = { fp: string; reason: string; at: string };
 
 export async function POST(req: NextRequest) {
+  if (!isSameOrigin(req.headers)) return NextResponse.json({ error: "Origem inválida." }, { status: 403 });
   let id: number;
   let reason = "outro";
   try {
@@ -25,6 +27,9 @@ export async function POST(req: NextRequest) {
   try {
     const payload = await getPayloadClient();
     const viewer = await getViewer(payload, req.headers, { checkBan: true });
+    if (!viewer.isMod && (!viewer.fan || viewer.fan.needsProfile)) {
+      return NextResponse.json({ error: "Entre com sua conta para denunciar.", code: "login" }, { status: 401 });
+    }
     if (viewer.banned) return NextResponse.json({ ok: true });
     const doc = await payload.findByID({
       collection: "mural-messages",

@@ -1,134 +1,29 @@
 import { NextResponse, type NextRequest } from "next/server";
-import type { Where } from "payload";
-import { MAX_BODY, MAX_NICK, RATE, ROOM_RE, checkBody, checkNickname, cleanText } from "@/lib/mural/moderation";
-import { getChatConfig, getPayloadClient, getViewer, maybeCleanup, toMessage, type Viewer } from "@/lib/mural/server";
+import { sql } from "@payloadcms/db-postgres";
+import { isSameOrigin } from "@/lib/fans/session";
+import { MAX_BODY, RATE, ROOM_RE, checkBody, cleanText } from "@/lib/mural/moderation";
+import { getChatConfig, getPayloadClient, getViewer, maybeCleanup, readFeed, toMessage } from "@/lib/mural/server";
 import type { MuralFeed } from "@/lib/mural/types";
 
 export const dynamic = "force-dynamic";
 
-const ONLINE_WINDOW_MS = 30_000;
-const VISITOR_RE = /^[a-z0-9]{8,40}$/i;
-
 type Ctx = { params: Promise<{ room: string }> };
-type Payload = Awaited<ReturnType<typeof getPayloadClient>>;
 
-async function touchPresence(payload: Payload, room: string, visitor: string) {
-  const key = `${room}:${visitor}`;
-  const seenAt = new Date().toISOString();
-  const found = await payload.find({
-    collection: "mural-presence",
-    where: { key: { equals: key } },
-    limit: 1,
-    depth: 0,
-    overrideAccess: true,
-  });
-  if (found.docs[0]) {
-    await payload.update({ collection: "mural-presence", id: found.docs[0].id, data: { seenAt }, overrideAccess: true });
-  } else {
-    await payload.create({ collection: "mural-presence", data: { key, room, seenAt }, overrideAccess: true });
-  }
-}
-
-// Recado de banido só aparece para quem escreveu (shadowban).
-function visibleTo(viewer: Viewer): Where {
-  return {
-    or: [
-      { shadow: { equals: false } },
-      { shadow: { exists: false } },
-      { fingerprint: { equals: viewer.fingerprint } },
-    ],
-  };
-}
-
+// Versão da equipe: traz denúncias e nunca passa pelo CDN. Visitante comum
+// é mandado para o feed público.
 export async function GET(req: NextRequest, ctx: Ctx) {
   const { room } = await ctx.params;
   if (!ROOM_RE.test(room)) return NextResponse.json({ error: "sala inválida" }, { status: 400 });
-
-  const params = req.nextUrl.searchParams;
-  const after = params.get("after");
-  const visitor = params.get("v") ?? "";
-  const afterDate = after && !Number.isNaN(Date.parse(after)) ? new Date(after).toISOString() : null;
-  const serverTime = new Date().toISOString();
+  const toPublic = () => NextResponse.redirect(new URL(`/api/mural/${room}/feed`, req.url), 307);
+  if (!req.cookies.has("payload-token")) return toPublic();
 
   try {
     const payload = await getPayloadClient();
-    const [config, viewer] = await Promise.all([getChatConfig(payload), getViewer(payload, req.headers)]);
-
-    if (params.get("p") === "1" && VISITOR_RE.test(visitor)) {
-      // Contador é acessório: se a presença falhar (corrida no create), o feed segue.
-      await touchPresence(payload, room, visitor).catch(() => {});
-    }
-
-    const [fresh, removed, reactions, online] = await Promise.all([
-      payload.find({
-        collection: "mural-messages",
-        where: {
-          and: [
-            { room: { equals: room } },
-            { status: { equals: "visible" } },
-            ...(afterDate ? [{ createdAt: { greater_than: afterDate } }] : []),
-            visibleTo(viewer),
-          ],
-        },
-        sort: "-createdAt",
-        limit: 60,
-        depth: 0,
-        overrideAccess: true,
-      }),
-      afterDate
-        ? payload.find({
-            collection: "mural-messages",
-            where: {
-              room: { equals: room },
-              status: { equals: "hidden" },
-              updatedAt: { greater_than: new Date(Date.parse(afterDate) - 60_000).toISOString() },
-            },
-            limit: 300,
-            depth: 0,
-            overrideAccess: true,
-            select: { status: true },
-          })
-        : Promise.resolve({ docs: [] as { id: number | string }[] }),
-      afterDate
-        ? payload.find({
-            collection: "mural-reactions",
-            where: {
-              room: { equals: room },
-              createdAt: { greater_than: afterDate },
-              fingerprint: { not_equals: viewer.fingerprint },
-            },
-            limit: 200,
-            depth: 0,
-            overrideAccess: true,
-            select: { emoji: true },
-          })
-        : Promise.resolve({ docs: [] as { emoji?: unknown }[] }),
-      payload.count({
-        collection: "mural-presence",
-        where: {
-          room: { equals: room },
-          seenAt: { greater_than: new Date(Date.now() - ONLINE_WINDOW_MS).toISOString() },
-        },
-        overrideAccess: true,
-      }),
-    ]);
-
-    const reactionCounts: Record<string, number> = {};
-    for (const r of reactions.docs) {
-      const e = String((r as { emoji?: unknown }).emoji ?? "");
-      if (e) reactionCounts[e] = (reactionCounts[e] ?? 0) + 1;
-    }
-
+    const viewer = await getViewer(payload, req.headers);
+    if (!viewer.isMod) return toPublic();
     const feed: MuralFeed = {
-      messages: fresh.docs.map((d) => toMessage(d as Parameters<typeof toMessage>[0], viewer)).reverse(),
-      removed: removed.docs.map((d) => Number(d.id)),
-      reactions: reactionCounts,
-      online: Math.max(online.totalDocs, 1),
-      serverTime,
-      enabled: config.enabled,
-      slowModeSeconds: config.slowModeSeconds,
-      pinned: room === "geral" ? config.pinned : null,
-      viewer: { name: viewer.name, badge: viewer.badge, isMod: viewer.isMod },
+      ...(await readFeed(payload, room, viewer)),
+      viewer: { name: viewer.name, badge: viewer.badge, isMod: true },
     };
     return NextResponse.json(feed, { headers: { "Cache-Control": "no-store" } });
   } catch (err) {
@@ -140,6 +35,7 @@ export async function GET(req: NextRequest, ctx: Ctx) {
 export async function POST(req: NextRequest, ctx: Ctx) {
   const { room } = await ctx.params;
   if (!ROOM_RE.test(room)) return NextResponse.json({ error: "Sala inválida." }, { status: 400 });
+  if (!isSameOrigin(req.headers)) return NextResponse.json({ error: "Origem inválida." }, { status: 403 });
 
   let input: Record<string, unknown>;
   try {
@@ -167,9 +63,12 @@ export async function POST(req: NextRequest, ctx: Ctx) {
       nickname = viewer.name;
       if (!body) return NextResponse.json({ error: "Escreve alguma coisa." }, { status: 422 });
     } else {
-      nickname = cleanText(input.nickname, MAX_NICK).replace(/\n/g, " ");
-      const nick = checkNickname(nickname, false);
-      if (!nick.ok) return NextResponse.json({ error: nick.reason, code: nick.code }, { status: 422 });
+      const fan = viewer.fan;
+      if (!fan) return NextResponse.json({ error: "Entre com sua conta para escrever.", code: "login" }, { status: 401 });
+      if (fan.needsProfile || !fan.nickname) {
+        return NextResponse.json({ error: "Complete seu cadastro para escrever.", code: "profile" }, { status: 403 });
+      }
+      nickname = fan.nickname;
       const verdict = checkBody(body, config.blockedWords);
       if (!verdict.ok) return NextResponse.json({ error: verdict.reason, code: verdict.code }, { status: 422 });
 
@@ -182,20 +81,30 @@ export async function POST(req: NextRequest, ctx: Ctx) {
         sort: "-createdAt",
         limit: RATE.perMinute,
         depth: 0,
+        pagination: false,
         overrideAccess: true,
         select: { body: true, createdAt: true },
       });
-      const last = recent.docs[0];
-      const gap = Math.max(config.slowModeSeconds * 1000, RATE.minGapMs);
-      if (last && Date.now() - Date.parse(String(last.createdAt)) < gap) {
-        const wait = Math.ceil((gap - (Date.now() - Date.parse(String(last.createdAt)))) / 1000);
-        return NextResponse.json({ error: `Calma, espera ${wait}s.`, code: "slow", wait }, { status: 429 });
-      }
       if (recent.docs.length >= RATE.perMinute) {
         return NextResponse.json({ error: "Muitos recados seguidos. Respira e volta em um minuto.", code: "rate" }, { status: 429 });
       }
       if (recent.docs.some((d) => String(d.body).trim().toLowerCase() === body.toLowerCase())) {
         return NextResponse.json({ error: "Esse recado você já mandou.", code: "dup" }, { status: 422 });
+      }
+
+      // Reserva o envio numa única operação: pedidos simultâneos não furam o intervalo.
+      const gap = Math.max(config.slowModeSeconds * 1000, RATE.minGapMs);
+      const db = payload.db as unknown as { drizzle: { execute: (q: unknown) => Promise<{ rows: unknown[] }> } };
+      const claim = await db.drizzle.execute(sql`
+        UPDATE fans SET last_message_at = now()
+        WHERE id = ${fan.id}
+          AND (last_message_at IS NULL OR last_message_at < now() - make_interval(secs => ${gap / 1000}::double precision))
+        RETURNING id
+      `);
+      if (!claim.rows.length) {
+        const since = fan.lastMessageAt ? Date.now() - Date.parse(fan.lastMessageAt) : 0;
+        const wait = Math.max(1, Math.ceil((gap - since) / 1000));
+        return NextResponse.json({ error: `Calma, espera ${wait}s.`, code: "slow", wait }, { status: 429 });
       }
     }
 
@@ -206,6 +115,7 @@ export async function POST(req: NextRequest, ctx: Ctx) {
         nickname,
         body,
         fingerprint: viewer.fingerprint,
+        ...(viewer.fan ? { fan: viewer.fan.id } : {}),
         status: "visible",
         authorType: viewer.isMod ? viewer.badge : "fan",
         shadow: viewer.banned,
@@ -215,7 +125,7 @@ export async function POST(req: NextRequest, ctx: Ctx) {
       overrideAccess: true,
     });
     maybeCleanup(payload, config).catch(() => {});
-    return NextResponse.json({ message: toMessage(doc as Parameters<typeof toMessage>[0], viewer) }, { status: 201 });
+    return NextResponse.json({ message: toMessage(doc as unknown as Parameters<typeof toMessage>[0], viewer) }, { status: 201 });
   } catch (err) {
     console.error("[mural] falha ao salvar", err);
     return NextResponse.json({ error: "O chat caiu por um instante. Tenta de novo." }, { status: 503 });

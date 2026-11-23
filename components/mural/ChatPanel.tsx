@@ -3,13 +3,13 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowDown, BadgeCheck, Ban, EyeOff, Flag, Info, Pencil, Pin, SendHorizontal, Trash2 } from "lucide-react";
-import { moderate, react, report, sendMessage } from "@/lib/mural/client";
+import { ArrowDown, BadgeCheck, Ban, EyeOff, Flag, Info, LogIn, Pin, SendHorizontal, Trash2 } from "lucide-react";
+import { FanProfileForm } from "@/components/mural/FanProfileForm";
+import { loginHref, moderate, react, report, sendMessage } from "@/lib/mural/client";
 import { emptyRoom, useChat, type Burst } from "@/lib/mural/store";
 import { REACTION_EMOJIS, type MuralMessage } from "@/lib/mural/types";
 
 const MAX_BODY = 280;
-const MAX_NICK = 24;
 export const LIVE_RED = "#ff3b30";
 
 const REPORT_REASONS = [
@@ -102,14 +102,12 @@ interface PanelProps {
 export function ChatPanel({ room, title, accentHex = "#ffffff", fill, listClassName, focused = true }: PanelProps) {
   const state = useChat((s) => s.rooms[room]) ?? emptyRoom();
   const viewer = useChat((s) => s.viewer);
-  const nickname = useChat((s) => s.nickname);
-  const setNickname = useChat((s) => s.setNickname);
+  const viewerLoaded = useChat((s) => s.viewerLoaded);
+  const authError = useChat((s) => s.authError);
   const watch = useChat((s) => s.watch);
   const markRead = useChat((s) => s.markRead);
 
   const [body, setBody] = useState("");
-  const [nickDraft, setNickDraft] = useState("");
-  const [editingNick, setEditingNick] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [cooldown, setCooldown] = useState(0);
@@ -167,28 +165,18 @@ export function ChatPanel({ room, title, accentHex = "#ffffff", fill, listClassN
   }
 
   const loggedName = viewer.name;
-  const needsNick = !loggedName && (nickname.trim().length < 2 || editingNick);
+  const fan = viewer.fan;
+  const canWrite = viewer.isMod || Boolean(fan && !fan.needsProfile);
 
   async function submit(e?: React.FormEvent<HTMLFormElement>) {
     e?.preventDefault();
-    if (sending || cooldown > 0) return;
-    if (needsNick) {
-      const n = nickDraft.trim();
-      if (n.length < 2) return setError("Escolha um apelido com pelo menos 2 letras.");
-      setNickname(n);
-      setEditingNick(false);
-      setError("");
-      if (!body.trim()) {
-        inputRef.current?.focus();
-        return;
-      }
-    }
+    if (sending || cooldown > 0 || !canWrite) return;
     const text = body.trim();
     if (!text) return;
     setSending(true);
     setError("");
     const website = e ? String(new FormData(e.currentTarget).get("website") ?? "") : "";
-    const result = await sendMessage(room, loggedName ?? (needsNick ? nickDraft.trim() : nickname), text, website);
+    const result = await sendMessage(room, text, website);
     setSending(false);
     if (!result.ok) {
       setError(result.error);
@@ -218,7 +206,7 @@ export function ChatPanel({ room, title, accentHex = "#ffffff", fill, listClassN
           <p className="text-xs tabular-nums text-white/55" aria-live="polite">
             {state.status === "loading" && "Conectando"}
             {state.status === "offline" && "Reconectando"}
-            {live && `${state.online} ${state.online === 1 ? "pessoa" : "pessoas"} agora`}
+            {live && "Ao vivo"}
           </p>
         </div>
         {viewer.isMod && (
@@ -253,7 +241,7 @@ export function ChatPanel({ room, title, accentHex = "#ffffff", fill, listClassN
             <ul className="space-y-1.5 px-4 py-3 text-xs leading-relaxed text-white/70">
               <li>Sem ódio, conteúdo sexual, golpe, link ou divulgação de perfil. A moderação barra na hora.</li>
               <li>Não passe telefone, e-mail, endereço ou documento. O chat bloqueia número longo e e-mail.</li>
-              <li>Não guardamos seu IP. Usamos um código anônimo só para frear spam e aplicar banimentos.</li>
+              <li>Para escrever, você entra com a conta da loja. Guardamos nome, e-mail, nascimento, cidade e celular para identificar a conta e moderar. No chat só aparece seu apelido.</li>
               <li>Recados somem sozinhos depois de alguns dias. Denúncias de várias pessoas tiram um recado do ar.</li>
               <li>Selo branco é a equipe da 30praum. Selo amarelo é artista. Ninguém mais pode usar esses nomes.</li>
             </ul>
@@ -379,6 +367,7 @@ export function ChatPanel({ room, title, accentHex = "#ffffff", fill, listClassN
                               type="button"
                               onClick={() => {
                                 setMenu(null);
+                                if (!fan || fan.needsProfile) return setError("Entre com sua conta para denunciar.");
                                 report(room, m.id, r.value);
                               }}
                               className="rounded-full bg-white/10 px-2.5 py-1 text-xs hover:bg-white/20"
@@ -435,44 +424,43 @@ export function ChatPanel({ room, title, accentHex = "#ffffff", fill, listClassN
         <p className="border-t border-white/10 px-4 py-4 text-center text-sm text-white/60">
           O chat está fechado agora. Volta daqui a pouco.
         </p>
+      ) : !viewerLoaded ? (
+        <p className="border-t border-white/10 px-4 py-4 text-center text-sm text-white/50">Carregando</p>
+      ) : fan?.needsProfile ? (
+        <FanProfileForm fan={fan} />
+      ) : !canWrite ? (
+        <div className="border-t border-white/10 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] text-center">
+          {viewer.loginAvailable ? (
+            <>
+              <a
+                href={loginHref()}
+                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-white px-4 text-sm font-semibold text-black"
+              >
+                <LogIn aria-hidden size={16} /> Entrar para conversar
+              </a>
+              <p className="mt-2 text-xs text-white/50">Use a mesma conta da loja. O código chega no seu e-mail.</p>
+            </>
+          ) : (
+            <p className="text-sm text-white/60">O envio de recados abre em breve.</p>
+          )}
+          {authError && <p className="mt-2 text-xs text-[#ff8a80]" role="alert">Não deu para entrar agora. Tenta de novo.</p>}
+        </div>
       ) : (
         <form onSubmit={submit} className="border-t border-white/10 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
           <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
           <div className="mb-2 flex items-center gap-2 text-xs text-white/55">
-            {loggedName ? (
-              <>
-                Escrevendo como <strong className="text-white">{loggedName}</strong>
-                <Badge type={viewer.badge} />
-              </>
-            ) : needsNick ? (
-              <>
-                <label htmlFor={`nick-${room}`} className="shrink-0">
-                  Seu apelido
-                </label>
-                <input
-                  id={`nick-${room}`}
-                  value={nickDraft}
-                  onChange={(e) => setNickDraft(e.target.value.slice(0, MAX_NICK))}
-                  placeholder="como quer aparecer"
-                  autoComplete="nickname"
-                  className="min-w-0 flex-1 border-b border-white/25 bg-transparent py-1 text-sm text-white outline-none placeholder:text-white/30 focus:border-white"
-                />
-              </>
-            ) : (
-              <>
-                Como <strong className="text-white">{nickname}</strong>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setNickDraft(nickname);
-                    setEditingNick(true);
-                  }}
-                  className="inline-flex items-center gap-1 text-white/45 hover:text-white"
-                  aria-label="Trocar apelido"
-                >
-                  <Pencil aria-hidden size={11} /> trocar
-                </button>
-              </>
+            <span>
+              Escrevendo como <strong className="text-white">{loggedName}</strong>
+            </span>
+            <Badge type={viewer.badge} />
+            {fan && (
+              <button
+                type="submit"
+                form={`logout-${room}`}
+                className="ml-auto text-white/45 hover:text-white"
+              >
+                Sair
+              </button>
             )}
             {!state.enabled && viewer.isMod && <span className="ml-auto text-[#ff8a80]">Chat fechado para o público</span>}
           </div>
@@ -499,7 +487,7 @@ export function ChatPanel({ room, title, accentHex = "#ffffff", fill, listClassN
             <motion.button
               type="submit"
               whileTap={{ scale: 0.92 }}
-              disabled={sending || cooldown > 0 || (!body.trim() && !needsNick)}
+              disabled={sending || cooldown > 0 || !body.trim()}
               className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-white text-black transition-opacity disabled:opacity-35"
               aria-label="Mandar recado"
             >
@@ -518,6 +506,7 @@ export function ChatPanel({ room, title, accentHex = "#ffffff", fill, listClassN
           </div>
         </form>
       )}
+      {fan && <form id={`logout-${room}`} action="/api/auth/shopify/logout" method="post" className="hidden" />}
     </div>
   );
 }

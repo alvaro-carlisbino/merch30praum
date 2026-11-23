@@ -49,7 +49,7 @@ export async function submitDemo(_prev: SubmitState, formData: FormData): Promis
         instagram: instagram || undefined,
         spotifyUrl,
         soundcloudUrl: soundcloudUrl || undefined,
-        genre,
+        genre: genre as never,
         origin: origin || undefined,
         age: age && Number.isFinite(age) ? age : undefined,
         story,

@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { isSameOrigin } from "@/lib/fans/session";
 import { ROOM_RE } from "@/lib/mural/moderation";
 import { getPayloadClient, getViewer } from "@/lib/mural/server";
 
@@ -6,10 +7,7 @@ export const dynamic = "force-dynamic";
 
 // Ações da equipe direto no chat. Só funciona com login do Payload.
 export async function POST(req: NextRequest) {
-  const origin = req.headers.get("origin");
-  if (origin && new URL(origin).host !== req.headers.get("host")) {
-    return NextResponse.json({ error: "Origem inválida." }, { status: 403 });
-  }
+  if (!isSameOrigin(req.headers)) return NextResponse.json({ error: "Origem inválida." }, { status: 403 });
   let input: Record<string, unknown>;
   try {
     input = await req.json();

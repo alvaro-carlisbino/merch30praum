@@ -10,17 +10,27 @@ export interface MuralMessage {
   reports?: number;
 }
 
+export interface FanView {
+  nickname: string | null;
+  needsProfile: boolean;
+  fullName: string;
+  city: string;
+  state: string;
+  phone: string;
+}
+
 export interface MuralViewer {
   name: string | null;
   badge: AuthorType;
   isMod: boolean;
+  fan?: FanView | null;
+  loginAvailable?: boolean;
 }
 
 export interface MuralFeed {
   messages: MuralMessage[];
   removed: number[];
-  reactions: Record<string, number>;
-  online: number;
+  reactions: { id: number; emoji: string }[];
   serverTime: string;
   enabled: boolean;
   slowModeSeconds: number;

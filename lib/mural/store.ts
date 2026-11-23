@@ -11,14 +11,13 @@ export interface Burst {
 
 export interface RoomState {
   messages: MuralMessage[];
-  online: number;
   status: "loading" | "live" | "offline";
-  cursor: string | null;
   pinned: MuralFeed["pinned"];
   enabled: boolean;
   slowModeSeconds: number;
   bursts: Burst[];
   lastReadId: number;
+  lastReactionId: number;
 }
 
 export interface ContextRoom {
@@ -31,7 +30,8 @@ interface ChatState {
   watchers: Record<string, number>;
   focus: Record<string, number>;
   viewer: MuralViewer;
-  nickname: string;
+  viewerLoaded: boolean;
+  authError: boolean;
   open: boolean;
   activeRoom: string;
   context: ContextRoom | null;
@@ -42,9 +42,9 @@ interface ChatState {
   removeMessages: (room: string, ids: number[]) => void;
   clearRoom: (room: string) => void;
   burst: (room: string, emoji: string, count?: number) => void;
+  noteOwnReaction: (emoji: string) => void;
   dropBurst: (room: string, id: string) => void;
   markRead: (room: string) => void;
-  setNickname: (n: string) => void;
   setOpen: (open: boolean) => void;
   setActiveRoom: (room: string) => void;
   setContext: (ctx: ContextRoom | null) => void;
@@ -52,17 +52,18 @@ interface ChatState {
 
 export const emptyRoom = (): RoomState => ({
   messages: [],
-  online: 0,
   status: "loading",
-  cursor: null,
   pinned: null,
   enabled: true,
   slowModeSeconds: 3,
   bursts: [],
   lastReadId: 0,
+  lastReactionId: 0,
 });
 
 let burstSeq = 0;
+// Reação própria já animou no toque: não repete quando volta pelo feed.
+const ownReactions: Record<string, number> = {};
 
 function patch(state: ChatState, room: string, fn: (r: RoomState) => Partial<RoomState>) {
   const current = state.rooms[room] ?? emptyRoom();
@@ -72,7 +73,11 @@ function patch(state: ChatState, room: string, fn: (r: RoomState) => Partial<Roo
 function mergeMessages(prev: MuralMessage[], incoming: MuralMessage[], removed: number[] = []) {
   const gone = new Set(removed);
   const byId = new Map(prev.filter((m) => !gone.has(m.id)).map((m) => [m.id, m]));
-  for (const m of incoming) if (!gone.has(m.id)) byId.set(m.id, m);
+  for (const m of incoming) {
+    if (gone.has(m.id)) continue;
+    // O feed público não sabe quem escreveu: a marca "meu" fica do envio.
+    byId.set(m.id, byId.get(m.id)?.mine ? { ...m, mine: true } : m);
+  }
   return [...byId.values()].sort((a, b) => a.createdAt.localeCompare(b.createdAt) || a.id - b.id).slice(-200);
 }
 
@@ -80,8 +85,9 @@ export const useChat = create<ChatState>((set, get) => ({
   rooms: {},
   watchers: {},
   focus: {},
-  viewer: { name: null, badge: "fan", isMod: false },
-  nickname: "",
+  viewer: { name: null, badge: "fan", isMod: false, fan: null },
+  viewerLoaded: false,
+  authError: false,
   open: false,
   activeRoom: "geral",
   context: null,
@@ -99,18 +105,17 @@ export const useChat = create<ChatState>((set, get) => ({
   },
 
   applyFeed: (room, feed) => {
+    const before = get().rooms[room];
+    const newestReaction = feed.reactions.reduce((max, r) => Math.max(max, r.id), before?.lastReactionId ?? 0);
+    const fresh = before && before.status !== "loading" ? feed.reactions.filter((r) => r.id > before.lastReactionId) : [];
     set((s) => {
       const next = patch(s, room, (r) => {
         const messages = mergeMessages(r.messages, feed.messages, feed.removed);
-        const newest = feed.messages.at(-1)?.createdAt;
-        let cursor = r.cursor ?? feed.serverTime;
-        if (newest && newest > cursor) cursor = newest;
         // Primeira carga conta como lida, para o badge não começar em 60.
         const lastReadId = r.status === "loading" ? (messages.at(-1)?.id ?? 0) : r.lastReadId;
         return {
           messages,
-          cursor,
-          online: feed.online,
+          lastReactionId: newestReaction,
           status: "live",
           pinned: feed.pinned,
           enabled: feed.enabled,
@@ -118,9 +123,14 @@ export const useChat = create<ChatState>((set, get) => ({
           lastReadId,
         };
       });
-      return { ...next, viewer: feed.viewer };
+      return feed.viewer.isMod ? { ...next, viewer: { ...s.viewer, ...feed.viewer } } : next;
     });
-    for (const [emoji, count] of Object.entries(feed.reactions ?? {})) get().burst(room, emoji, count);
+    const counts: Record<string, number> = {};
+    for (const { emoji } of fresh) {
+      if (ownReactions[emoji] > 0) ownReactions[emoji] -= 1;
+      else counts[emoji] = (counts[emoji] ?? 0) + 1;
+    }
+    for (const [emoji, count] of Object.entries(counts)) get().burst(room, emoji, count);
   },
 
   setStatus: (room, status) => set((s) => patch(s, room, () => ({ status }))),
@@ -148,17 +158,15 @@ export const useChat = create<ChatState>((set, get) => ({
     set((s) => patch(s, room, (r) => ({ bursts: [...r.bursts, ...items].slice(-40) })));
   },
 
+  noteOwnReaction: (emoji) => {
+    ownReactions[emoji] = (ownReactions[emoji] ?? 0) + 1;
+  },
+
   dropBurst: (room, id) => set((s) => patch(s, room, (r) => ({ bursts: r.bursts.filter((b) => b.id !== id) }))),
 
   markRead: (room) =>
     set((s) => patch(s, room, (r) => ({ lastReadId: r.messages.at(-1)?.id ?? r.lastReadId }))),
 
-  setNickname: (nickname) => {
-    try {
-      localStorage.setItem("mural:nickname", nickname);
-    } catch {}
-    set({ nickname });
-  },
   setOpen: (open) => set({ open }),
   setActiveRoom: (activeRoom) => set({ activeRoom }),
   setContext: (context) => set({ context }),

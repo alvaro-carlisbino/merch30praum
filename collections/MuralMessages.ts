@@ -48,13 +48,14 @@ export const MuralMessages: CollectionConfig = {
       index: true,
       admin: { description: "Escrito por alguém banido: só a própria pessoa vê." },
     },
+    { name: "fan", type: "relationship", relationTo: "fans", index: true, label: "Conta do fã", admin: { readOnly: true } },
     { name: "reports", type: "number", defaultValue: 0, admin: { readOnly: true } },
     { name: "reportedBy", type: "json", admin: { readOnly: true, description: "Motivos das denúncias." } },
     {
       name: "fingerprint",
       type: "text",
       index: true,
-      admin: { readOnly: true, description: "Hash anônimo de quem escreveu. Não é o IP." },
+      admin: { readOnly: true, description: "Identificador interno de quem escreveu." },
     },
   ],
 };

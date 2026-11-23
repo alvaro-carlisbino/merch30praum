@@ -17,19 +17,20 @@
     "seed": "cross-env NODE_OPTIONS=--no-deprecation tsx --env-file=.env.local scripts/seed.ts"
   },
   "dependencies": {
-    "@payloadcms/db-postgres": "^3.84.1",
-    "@payloadcms/next": "^3.84.1",
-    "@payloadcms/richtext-lexical": "^3.84.1",
-    "@payloadcms/ui": "^3.84.1",
+    "@payloadcms/db-postgres": "3.94.1",
+    "@payloadcms/next": "3.94.1",
+    "@payloadcms/richtext-lexical": "3.94.1",
+    "@payloadcms/ui": "3.94.1",
     "cross-env": "^10.1.0",
     "graphql": "^16.14.0",
+    "jose": "5.10.0",
     "lucide-react": "^0.469.0",
     "motion": "^12.38.0",
-    "next": "16.2.6",
-    "payload": "^3.84.1",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "sharp": "^0.34.5",
+    "next": "16.4.6",
+    "payload": "3.94.1",
+    "react": "19.2.9",
+    "react-dom": "19.2.9",
+    "sharp": "^0.35.5",
     "zustand": "^5.0.13"
   },
   "devDependencies": {
@@ -38,9 +39,12 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.6",
+    "eslint-config-next": "16.4.6",
     "tailwindcss": "^4",
     "tsx": "^4.22.1",
     "typescript": "^5"
+  },
+  "overrides": {
+    "dompurify": "^3.5.0"
   }
 }
