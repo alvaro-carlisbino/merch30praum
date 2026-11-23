@@ -20,14 +20,21 @@ function diff(target: Date) {
 }
 
 const pad = (n: number) => String(n).padStart(2, "0");
+const INITIAL = { d: 0, h: 0, m: 0, s: 0, passed: false };
 
 export function PlantaoCountdown({ targetDate, label, tone = "light" }: CountdownProps) {
   const target = useMemo(() => new Date(targetDate), [targetDate]);
-  const [t, setT] = useState(() => diff(target));
+  // Começa zerado para o HTML do servidor e o do navegador serem iguais na hidratação.
+  const [t, setT] = useState(INITIAL);
 
   useEffect(() => {
-    const id = setInterval(() => setT(diff(target)), 1000);
-    return () => clearInterval(id);
+    const tick = () => setT(diff(target));
+    const first = setTimeout(tick, 0);
+    const id = setInterval(tick, 1000);
+    return () => {
+      clearTimeout(first);
+      clearInterval(id);
+    };
   }, [target]);
 
   const ink = tone === "accent" ? "var(--accent)" : "#ffffff";
