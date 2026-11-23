@@ -1,6 +1,6 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
-import { getPayloadClient } from "@/lib/payload/client";
+import { getContentClient } from "@/lib/payload/client";
 import {
   PLANTAO_EDITIONS as STATIC_EDITIONS,
   CURRENT_PLANTAO,
@@ -60,7 +60,7 @@ function fallbackAll(): PlantaoEdition[] {
 export const getAllPlantao = unstable_cache(
   async (): Promise<PlantaoEdition[]> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const res = await payload.find({ collection: "plantao", limit: 50, depth: 1, pagination: false });
       if (!res.docs.length) return fallbackAll();
       return res.docs.map((d) => adapt(d as unknown as Record<string, unknown>));
@@ -74,7 +74,7 @@ export const getAllPlantao = unstable_cache(
 export const getCurrentPlantao = unstable_cache(
   async (): Promise<PlantaoEdition> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const res = await payload.find({
         collection: "plantao",
         where: { isCurrent: { equals: true } },
@@ -91,7 +91,7 @@ export const getCurrentPlantao = unstable_cache(
 export const getPlantao = unstable_cache(
   async (slug: string): Promise<PlantaoEdition | null> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const res = await payload.find({
         collection: "plantao",
         where: { slug: { equals: slug } },

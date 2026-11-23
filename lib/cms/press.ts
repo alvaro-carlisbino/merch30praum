@@ -1,6 +1,6 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
-import { getPayloadClient } from "@/lib/payload/client";
+import { getContentClient } from "@/lib/payload/client";
 import {
   PRESS_CONTACTS as STATIC_CONTACTS,
   PRESS_KIT_ASSETS as STATIC_ASSETS,
@@ -42,7 +42,7 @@ function adapt(doc: Record<string, unknown>): PressGlobal {
 export const getPressKit = unstable_cache(
   async (): Promise<PressGlobal> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const doc = await payload.findGlobal({ slug: "press", depth: 1 });
       const obj = doc as unknown as Record<string, unknown>;
       if (obj && obj.contacts) return adapt(obj);

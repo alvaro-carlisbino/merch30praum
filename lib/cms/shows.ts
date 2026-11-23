@@ -1,6 +1,6 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
-import { getPayloadClient } from "@/lib/payload/client";
+import { getContentClient } from "@/lib/payload/client";
 import { SHOWS as STATIC_SHOWS, type Show } from "@/lib/shows/registry";
 import type { ArtistSlug } from "@/lib/artists/types";
 const TTL = 60 * 60 * 4;
@@ -24,7 +24,7 @@ function adapt(doc: Record<string, unknown>, idx: number): Show {
 export const getAllShows = unstable_cache(
   async (): Promise<Show[]> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const res = await payload.find({
         collection: "shows",
         limit: 500,

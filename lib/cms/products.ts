@@ -1,6 +1,6 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
-import { getPayloadClient } from "@/lib/payload/client";
+import { getContentClient } from "@/lib/payload/client";
 import { STATIC_PRODUCTS, type CMSProduct } from "@/lib/shop/static-products";
 import type { ArtistSlug } from "@/lib/artists/types";
 import type { CategorySlug } from "@/lib/shop/categories";
@@ -38,7 +38,7 @@ function adapt(doc: Record<string, unknown>): CMSProduct {
 }
 async function getEditorialProducts(): Promise<CMSProduct[]> {
   try {
-    const payload = await getPayloadClient();
+    const payload = await getContentClient();
     const res = await payload.find({
       collection: "products",
       limit: 500,
@@ -54,7 +54,7 @@ async function getEditorialProducts(): Promise<CMSProduct[]> {
 }
 async function getEditorialProduct(handle: string): Promise<CMSProduct | null> {
   try {
-    const payload = await getPayloadClient();
+    const payload = await getContentClient();
     const res = await payload.find({
       collection: "products",
       where: { handle: { equals: handle } },

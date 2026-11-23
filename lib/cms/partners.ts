@@ -1,6 +1,6 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
-import { getPayloadClient } from "@/lib/payload/client";
+import { getContentClient } from "@/lib/payload/client";
 import {
   PARTNERS as STATIC_PARTNERS,
   type PartnerInfo,
@@ -41,7 +41,7 @@ function fallbackAll(): PartnerInfo[] {
 export const getAllPartners = unstable_cache(
   async (): Promise<PartnerInfo[]> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const res = await payload.find({
         collection: "partners",
         limit: 100,
@@ -60,7 +60,7 @@ export const getAllPartners = unstable_cache(
 export const getPartner = unstable_cache(
   async (slug: string): Promise<PartnerInfo | null> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const res = await payload.find({
         collection: "partners",
         where: { slug: { equals: slug } },

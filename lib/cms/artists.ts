@@ -1,6 +1,6 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
-import { getPayloadClient } from "@/lib/payload/client";
+import { getContentClient } from "@/lib/payload/client";
 import type { ArtistConfig, ArtistSlug } from "@/lib/artists/types";
 import { ARTISTS as STATIC_ARTISTS, ARTIST_SLUGS } from "@/lib/artists/registry";
 
@@ -60,7 +60,7 @@ export const getAllArtists = unstable_cache(
   async (): Promise<ArtistConfig[]> => {
     const fallback = ARTIST_SLUGS.map((s) => STATIC_ARTISTS[s]);
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const res = await payload.find({
         collection: "artists",
         limit: 100,
@@ -80,7 +80,7 @@ export const getAllArtists = unstable_cache(
 export const getArtist = unstable_cache(
   async (slug: ArtistSlug): Promise<ArtistConfig | null> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const res = await payload.find({
         collection: "artists",
         where: { slug: { equals: slug } },
