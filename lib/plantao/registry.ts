@@ -1,5 +1,5 @@
 import { IMG } from "@/lib/images/paths";
-export type PlantaoSlug = "plantao-2023" | "plantao-2024" | "plantao-2026" | "plantao-2027";
+export type PlantaoSlug = "plantao-2023" | "plantao-2024" | "plantao-2026" | "plantao-2028";
 export type LineupArtist = {
   displayName: string;
   artistSlug?: "matue" | "wiu" | "teto" | "brandao";
@@ -176,11 +176,11 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     stats: {},
     infoFAQ: [],
   },
-  "plantao-2027": {
-    slug: "plantao-2027",
-    year: 2027,
-    title: "Plantão 2027",
-    date: "2027-01-01",
+  "plantao-2028": {
+    slug: "plantao-2028",
+    year: 2028,
+    title: "Plantão 2028",
+    date: "2028-01-01",
     dateAnnounced: false,
     doorsAt: "A anunciar",
     venue: "Local a anunciar",
@@ -189,7 +189,7 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     status: "upcoming",
     tagline: "Data e line-up ainda não anunciados",
     manifesto:
-      "Data, local e line-up da próxima edição ainda não foram anunciados. Deixa seu e-mail que a gente avisa assim que sair.",
+      "O Plantão acontece de dois em dois anos. A próxima edição é em 2028, com data, local e line-up ainda não anunciados. Deixa seu e-mail que a gente avisa assim que sair.",
     posterImage: IMG.plantaoPoster26,
     heroImage: IMG.plantaoHero26,
     lineup: [],
@@ -200,7 +200,7 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     infoFAQ: [],
   },
 };
-export const CURRENT_PLANTAO: PlantaoSlug = "plantao-2027";
+export const CURRENT_PLANTAO: PlantaoSlug = "plantao-2028";
 export function getPlantao(slug: string): PlantaoEdition | undefined {
   return PLANTAO_EDITIONS[slug as PlantaoSlug];
 }

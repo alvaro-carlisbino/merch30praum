@@ -45,7 +45,7 @@ const ASSETS: Record<ArtistSlug, ArtistPageAssets> = {
   },
   wiu: {
     heroBg: "/figma-home/hero-wiu.jpg",
-    heroBgPosition: "70% 30%",
+    heroBgPosition: "70% 38%",
     heroBgPositionMobile: "30% 25%",
     nameBig: "/figma-home/name-wiu.svg",
     nameBigAspect: "1292 / 430",

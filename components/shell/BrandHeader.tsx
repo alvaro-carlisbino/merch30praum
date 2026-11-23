@@ -17,7 +17,7 @@ const MENU_LINKS: Array<{
   { href: "/#roster", label: "Roster", sub: "Matuê, Wiu, Teto, Brandão85" },
   { href: "/shows", label: "Shows", sub: "Agenda oficial" },
   { href: "/releases", label: "Lançamentos", sub: "Catálogo aberto" },
-  { href: "/plantao", label: "Plantão", sub: "Festival próprio · 2027" },
+  { href: "/plantao", label: "Plantão", sub: "Festival próprio · 2028" },
   { href: "/loja", label: "Loja", sub: "Merch oficial" },
   { href: "/incubadora", label: "Incubadora", sub: "Canal de candidatura" },
   { href: "/parcerias", label: "Parcerias", sub: "Colabs ativas" },

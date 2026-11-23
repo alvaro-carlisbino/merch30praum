@@ -27,6 +27,8 @@ const noIndexHeaders = [{ key: "X-Robots-Tag", value: "noindex, nofollow" }];
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
+  // A versão ?visual=editado é servida pelo domínio de produção via rewrite.
+  experimental: { serverActions: { allowedOrigins: ["merch30praum.vercel.app"] } },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "billboard.com.br", pathname: "/**" },

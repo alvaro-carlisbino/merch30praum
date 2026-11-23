@@ -10,15 +10,15 @@ type Pick = {
 const PICKS: { big: Pick; topRight: Pick; botRight: Pick } = {
   big: {
     slug: "xtranho",
-    cover: "/figma-home/eleitos-xtranho.webp",
+    cover: "/figma-home/discos-xtranho.webp",
   },
   topRight: {
     slug: "colapso-global",
-    cover: "/figma-home/eleitos-colapso.png",
+    cover: "/figma-home/discos-colapso.webp",
   },
   botRight: {
     slug: "isso-e-trap-vol-2",
-    cover: "/figma-home/eleitos-brandao.png",
+    cover: "/figma-home/discos-isso-e-trap.webp",
   },
 };
 export function EleitosDaCasa() {
