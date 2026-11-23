@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getCurrentPlantao, getPastPlantao } from "@/lib/cms/plantao";
-import { LineupCinema } from "@/components/plantao/LineupCinema";
+import { LineupGrid } from "@/components/plantao/LineupGrid";
 import { editionDate, longDate } from "@/lib/utils/dates";
 
 export async function generateMetadata() {
@@ -53,7 +53,9 @@ export default async function PlantaoLineupPage() {
           </p>
         </div>
       </section>
-      <LineupCinema lineup={showing.lineup} />
+      <section className="mx-auto max-w-screen-2xl px-4 pb-20 sm:px-8">
+        <LineupGrid lineup={showing.lineup} accent="var(--accent)" />
+      </section>
       <section className="border-t" style={{ borderColor: "var(--border)" }}>
         <div className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-20 flex flex-wrap items-end justify-between gap-8">
           <div>
