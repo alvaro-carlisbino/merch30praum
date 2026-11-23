@@ -8,6 +8,14 @@ const WEEK = 60 * 60 * 24 * 7;
 
 export function proxy(request: NextRequest) {
   const { nextUrl } = request;
+
+  // O painel roda só no site atual: sair do modo editado mantém os arquivos dele no deploy certo.
+  if (nextUrl.pathname === "/admin" || nextUrl.pathname.startsWith("/admin/")) {
+    const response = NextResponse.next();
+    if (request.cookies.has(COOKIE)) response.cookies.delete(COOKIE);
+    return response;
+  }
+
   const visual = nextUrl.searchParams.get("visual");
 
   if (visual === "original") {
@@ -42,5 +50,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!admin|api).*)"],
+  matcher: ["/((?!api).*)"],
 };
