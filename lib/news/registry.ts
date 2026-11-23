@@ -20,6 +20,45 @@ export type NewsPost = {
 };
 export const NEWS_POSTS: NewsPost[] = [
   {
+    slug: "teto-cada-passo-deixa-o-sol-entrar",
+    title: "Teto lança Cada Passo e Deixa o Sol Entrar",
+    excerpt: "Dois lançamentos na mesma semana, com Kevn_Black, Alee e IZA.",
+    heroImage: "/singles/cada-passo.webp",
+    publishedAt: "2026-11-21T12:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["lancamento"],
+    relatedArtists: ["teto"],
+    body: [
+      "Deixa o Sol Entrar, com IZA, saiu em 19 de novembro. Dois dias depois veio Cada Passo, com Kevn_Black e Alee.",
+    ],
+  },
+  {
+    slug: "brandao85-qual-foi",
+    title: "Brandão85 lança QUAL FOI?!",
+    excerpt: "É o terceiro single dele em novembro.",
+    heroImage: "/singles/qual-foi.webp",
+    publishedAt: "2026-11-19T12:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["lancamento"],
+    relatedArtists: ["brandao"],
+    body: [
+      "QUAL FOI?! saiu em 19 de novembro, depois de HIGH (5) e AINDA SOU O MESMO? (12).",
+    ],
+  },
+  {
+    slug: "wiu-odeio-te-amar-lou-garcia",
+    title: "Wiu e Lou Garcia lançam ODEIO TE AMAR",
+    excerpt: "A faixa chegou dez dias depois de Piranguera.",
+    heroImage: "/singles/odeio-te-amar.webp",
+    publishedAt: "2026-11-13T12:00:00-03:00",
+    author: "Editorial 30praum",
+    tags: ["lancamento"],
+    relatedArtists: ["wiu"],
+    body: [
+      "ODEIO TE AMAR, de Lou Garcia e Wiu, saiu em 13 de novembro.",
+    ],
+  },
+  {
     slug: "wiu-grammy-latino-tropicoqueta",
     title: "Wiu celebra Grammy Latino com Tropicoqueta, de Karol G",
     excerpt: "Wiu é coautor de Bandida Entrenada, faixa do álbum premiado.",

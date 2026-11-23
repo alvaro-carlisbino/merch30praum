@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getAllAlbums } from "@/lib/cms/albums";
+import { SinglesRecentes } from "@/components/home/SinglesRecentes";
 export const metadata = {
   title: "Lançamentos",
   description:
-    "Os discos mais recentes da 30praum: XTRANHO, Colapso Global e Isso É Trap Vol. 2.",
+    "Singles e discos mais recentes de Matuê, Wiu, Teto e Brandão85.",
 };
 export default async function ReleasesPage() {
   const all = await getAllAlbums();
@@ -26,9 +27,10 @@ export default async function ReleasesPage() {
           Lançamentos
         </h1>
         <p className="mt-6 max-w-xl text-sm leading-relaxed text-fg/80 sm:text-base">
-          Os três discos que a casa lançou entre dezembro de 2025 e abril de 2026.
+          Os singles que acabaram de sair e os três discos lançados entre dezembro de 2025 e abril de 2026.
         </p>
       </section>
+      <SinglesRecentes />
       {featured && (
         <section className="mx-auto max-w-screen-2xl px-4 pb-12 sm:px-8">
           <Link
