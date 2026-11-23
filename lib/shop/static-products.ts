@@ -41,7 +41,7 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     artistSlug: "brandao",
     isDropLive: true,
     category: "camisetas",
-    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: true }, { label: "G1", available: true }],
+    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: false }, { label: "G1", available: true }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -53,7 +53,7 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     artistSlug: "brandao",
     isDropLive: true,
     category: "moletons",
-    sizes: [{ label: "P", available: true }, { label: "M", available: true }, { label: "G", available: false }, { label: "GG", available: true }, { label: "EGG", available: true }, { label: "G1", available: false }],
+    sizes: [{ label: "P", available: true }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: true }, { label: "G1", available: false }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -64,7 +64,8 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     artistSlug: "brandao",
     isDropLive: true,
     category: "camisetas",
-    sizes: [{ label: "P", available: true }, { label: "M", available: true }, { label: "G", available: true }, { label: "GG", available: true }, { label: "EGG", available: true }, { label: "G1", available: true }],
+    isSoldOut: true,
+    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: false }, { label: "G1", available: false }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -86,7 +87,7 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     artistSlug: "brandao",
     isDropLive: true,
     category: "camisetas",
-    sizes: [{ label: "P", available: true }, { label: "M", available: true }, { label: "G", available: true }, { label: "GG", available: true }, { label: "EGG", available: true }, { label: "G1", available: true }],
+    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: true }, { label: "EGG", available: true }, { label: "G1", available: true }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -111,7 +112,8 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     artistSlug: "brandao",
     isDropLive: true,
     category: "camisetas",
-    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: true }, { label: "EGG", available: true }, { label: "G1", available: false }],
+    isSoldOut: true,
+    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: false }, { label: "G1", available: false }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -123,7 +125,7 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     artistSlug: "brandao",
     isDropLive: true,
     category: "camisetas",
-    sizes: [{ label: "P", available: true }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: true }, { label: "G1", available: true }],
+    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: true }, { label: "G1", available: false }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -135,7 +137,8 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     artistSlug: "brandao",
     isDropLive: true,
     category: "camisetas",
-    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: true }, { label: "EGG", available: true }, { label: "G1", available: false }],
+    isSoldOut: true,
+    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: false }, { label: "G1", available: false }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -147,7 +150,7 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     artistSlug: "brandao",
     isDropLive: true,
     category: "camisetas",
-    sizes: [{ label: "P", available: true }, { label: "M", available: true }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: true }, { label: "G1", available: false }],
+    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: true }, { label: "G1", available: false }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -188,7 +191,7 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     galleryImages: ["/products/moletom-com-ziper-xtranho-preto/2.webp", "/products/moletom-com-ziper-xtranho-preto/3.webp"],
     artistSlug: "matue",
     category: "moletons",
-    sizes: [{ label: "P", available: true }, { label: "M", available: true }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: false }, { label: "G1", available: false }],
+    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: true }, { label: "G1", available: false }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -199,7 +202,7 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     galleryImages: ["/products/regata-xtranho-estonada/2.webp"],
     artistSlug: "matue",
     category: "camisetas",
-    sizes: [{ label: "P", available: false }, { label: "M", available: true }, { label: "G", available: true }, { label: "GG", available: true }, { label: "EGG", available: true }, { label: "G1", available: true }],
+    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: false }, { label: "G1", available: true }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -210,7 +213,7 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     galleryImages: ["/products/camiseta-xtranho-preta/2.webp"],
     artistSlug: "matue",
     category: "camisetas",
-    sizes: [{ label: "P", available: true }, { label: "M", available: true }, { label: "G", available: true }, { label: "GG", available: true }, { label: "EGG", available: true }, { label: "G1", available: false }],
+    sizes: [{ label: "P", available: true }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: true }, { label: "EGG", available: true }, { label: "G1", available: false }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -231,7 +234,8 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     image: "/products/camiseta-isso-e-brasil-teto-wiu-merch-oficial/1.webp",
     artistSlug: "teto",
     category: "camisetas",
-    sizes: [{ label: "P", available: false }, { label: "M", available: true }, { label: "G", available: true }, { label: "GG", available: true }, { label: "EGG", available: true }],
+    isSoldOut: true,
+    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: false }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -241,7 +245,8 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     image: "/products/camiseta-colapso-global-teto-wiu-merch-oficial/1.webp",
     artistSlug: "teto",
     category: "camisetas",
-    sizes: [{ label: "P", available: true }, { label: "M", available: true }, { label: "G", available: true }, { label: "GG", available: true }, { label: "EGG", available: true }],
+    isSoldOut: true,
+    sizes: [{ label: "P", available: false }, { label: "M", available: false }, { label: "G", available: false }, { label: "GG", available: false }, { label: "EGG", available: false }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -281,7 +286,7 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     image: "/products/camiseta-portal-preta/1.webp",
     artistSlug: "matue",
     category: "camisetas",
-    sizes: [{ label: "PP", available: true }, { label: "P", available: true }, { label: "M", available: true }, { label: "G", available: true }, { label: "GG", available: false }],
+    sizes: [{ label: "PP", available: true }, { label: "P", available: true }, { label: "M", available: true }, { label: "G", available: false }, { label: "GG", available: false }],
     stockNote: "Enviado em security bag lacrada",
   },
   {
@@ -314,7 +319,7 @@ export const STATIC_PRODUCTS: CMSProduct[] = [
     galleryImages: ["/products/camiseta-o-som-preta/2.webp"],
     artistSlug: "matue",
     category: "camisetas",
-    sizes: [{ label: "PP", available: true }, { label: "P", available: true }, { label: "M", available: true }, { label: "G", available: true }, { label: "GG", available: false }],
+    sizes: [{ label: "PP", available: true }, { label: "P", available: true }, { label: "M", available: true }, { label: "G", available: false }, { label: "GG", available: false }],
     stockNote: "Enviado em security bag lacrada",
   },
   {

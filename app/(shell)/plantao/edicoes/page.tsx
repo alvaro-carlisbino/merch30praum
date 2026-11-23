@@ -19,7 +19,7 @@ export default async function PlantaoEdicoesPage() {
           Edições
         </h1>
         <p className="mt-8 max-w-2xl text-base sm:text-xl text-fg/85 leading-relaxed">
-          Três edições no Marina Park, em Fortaleza, de 2024 a 2026.
+          Três edições no Marina Park, em Fortaleza, de 2023 a 2026.
         </p>
       </section>
       <div className="space-y-24 sm:space-y-32 pb-24">

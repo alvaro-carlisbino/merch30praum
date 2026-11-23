@@ -8,3 +8,14 @@ export function getPayloadClient(): Promise<Payload> {
   }
   return cached;
 }
+
+/**
+ * Cliente das leituras de conteúdo. O conteúdo revisado vive nos registries; o banco só
+ * volta a ser a fonte com CMS_CONTENT_ENABLED=1, depois de sincronizado.
+ */
+export function getContentClient(): Promise<Payload> {
+  if (process.env.CMS_CONTENT_ENABLED !== "1") {
+    return Promise.reject(new Error("conteúdo servido pelos registries"));
+  }
+  return getPayloadClient();
+}

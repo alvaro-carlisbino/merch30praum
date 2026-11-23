@@ -29,7 +29,7 @@ const ABUSE = [
 const SCAM = ["pix pra", "chave pix", "ganhe dinheiro", "renda extra", "bet", "blaze", "tigrinho", "fortune tiger"];
 
 const RESERVED_NICKS = [
-  "30praum", "trintapraum", "matue", "wiu", "teto", "brandao", "brandao85",
+  "30praum", "trintapraum", "matue", "wiu", "teto", "brandao", "brandao85", "brandao085", "euteto", "hotwiu30",
   "admin", "adm", "moderador", "moderacao", "mod", "equipe", "oficial", "suporte", "staff",
 ];
 

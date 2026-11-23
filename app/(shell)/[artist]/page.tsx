@@ -22,37 +22,37 @@ type ArtistPageAssets = {
 };
 const ASSETS: Record<ArtistSlug, ArtistPageAssets> = {
   matue: {
-    heroBg: "/figma-home/hero-matue.jpg",
+    heroBg: "/figma-home/hero-matue-v2.jpg",
     heroBgPositionMobile: "75% 30%",
     nameBig: "/figma-home/name-matue.svg",
     nameBigAspect: "1000 / 1000",
-    stagePhoto: "/figma-artista/matue-stage.webp",
-    albumCover: "/figma-artista/matue-album-xtranho.png",
+    stagePhoto: "/figma-artista/matue-stage-v2.webp",
+    albumCover: "/figma-artista/matue-album-xtranho-v2.png",
     intro:
       "Cofundou a 30praum em 2016, em Fortaleza. Lançou XTRANHO em dezembro de 2025.",
     albumSlug: "xtranho",
   },
   teto: {
-    heroBg: "/figma-home/hero-teto.jpg",
+    heroBg: "/figma-home/hero-teto-v2.jpg",
     heroBgPositionMobile: "center 20%",
     nameBig: "/figma-home/name-teto.svg",
     nameBigAspect: "1000 / 320",
-    stagePhoto: "/figma-artista/teto-stage.webp",
-    albumCover: "/figma-artista/colapso-global-cover.webp",
+    stagePhoto: "/figma-artista/teto-stage-v2.webp",
+    albumCover: "/figma-artista/colapso-global-cover-v2.webp",
     intro:
       "De Jacobina, na Bahia. Lançou Colapso Global com Wiu em janeiro de 2026.",
     albumSlug: "colapso-global",
   },
   wiu: {
-    heroBg: "/figma-home/hero-wiu.jpg",
-    heroBgPosition: "70% 30%",
+    heroBg: "/figma-home/hero-wiu-v2.jpg",
+    heroBgPosition: "70% 38%",
     heroBgPositionMobile: "30% 25%",
     nameBig: "/figma-home/name-wiu.svg",
     nameBigAspect: "1292 / 430",
-    stagePhoto: "/figma-artista/wiu-stage.webp",
-    albumCover: "/figma-artista/colapso-global-cover.webp",
+    stagePhoto: "/figma-artista/wiu-stage-v2.webp",
+    albumCover: "/figma-artista/colapso-global-cover-v2.webp",
     intro:
-      "Começou produzindo beat e passou pro microfone. Lançou Colapso Global com Teto em janeiro de 2026.",
+      "Voz e produção. Lançou Colapso Global com Teto em janeiro de 2026.",
     albumSlug: "colapso-global",
   },
   brandao: {
@@ -61,7 +61,7 @@ const ASSETS: Record<ArtistSlug, ArtistPageAssets> = {
     nameBig: "/figma-home/name-brandao.svg",
     nameBigAspect: "1000 / 340",
     stagePhoto: "/figma-artista/brandao-stage.webp",
-    albumCover: "/figma-artista/brandao-album-anjo.webp",
+    albumCover: "/figma-artista/brandao-album-anjo-v2.webp",
     intro:
       "Da Caponga, no Ceará. Assinou com a 30praum em 2024. Isso É Trap Vol. 2 saiu em abril de 2026.",
     albumSlug: "isso-e-trap-vol-2",

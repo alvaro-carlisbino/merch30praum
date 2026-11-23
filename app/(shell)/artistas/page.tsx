@@ -7,10 +7,10 @@ export const metadata = {
     "Os artistas da 30praum: Matuê, Wiu, Teto e Brandão85.",
 };
 const CARDS: Record<string, { photo: string; aspect: string }> = {
-  teto: { photo: "/figma-home/card-teto.png", aspect: "229 / 418" },
-  wiu: { photo: "/figma-home/card-wiu.png", aspect: "230 / 341" },
-  matue: { photo: "/figma-home/card-matue.png", aspect: "230 / 341" },
-  brandao: { photo: "/figma-home/card-brandao.png", aspect: "229 / 418" },
+  teto: { photo: "/artists/teto.webp", aspect: "229 / 418" },
+  wiu: { photo: "/artists/wiu.webp", aspect: "230 / 341" },
+  matue: { photo: "/artists/matue.webp", aspect: "230 / 341" },
+  brandao: { photo: "/artists/brandao.webp", aspect: "229 / 418" },
 };
 export default async function ArtistasPage() {
   const artists = await getAllArtists();

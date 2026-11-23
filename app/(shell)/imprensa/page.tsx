@@ -23,7 +23,7 @@ const FACTS = [
   { label: "Fundadores", value: "Matuê e Clara Mendes, CEO" },
   { label: "Artistas", value: "Matuê, Wiu, Teto e Brandão85" },
   { label: "Distribuição", value: "Independente desde 2024, depois de cinco anos com a Sony Music" },
-  { label: "Festival", value: "Plantão, no Marina Park, em Fortaleza, desde 2024" },
+  { label: "Festival", value: "Plantão, no Marina Park, em Fortaleza, desde 2023" },
   { label: "Lançamentos recentes", value: "XTRANHO (2025), Colapso Global (2026), Isso É Trap Vol. 2 (2026)" },
 ];
 

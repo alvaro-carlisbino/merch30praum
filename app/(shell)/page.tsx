@@ -1,6 +1,7 @@
 import { HomeHero } from "@/components/home/HomeHero";
 import { ArtistsRow } from "@/components/home/ArtistsRow";
 import { EleitosDaCasa } from "@/components/home/EleitosDaCasa";
+import { SinglesRecentes } from "@/components/home/SinglesRecentes";
 import { PlantaoTeaser } from "@/components/home/PlantaoTeaser";
 import { VistaAgora } from "@/components/home/VistaAgora";
 import { ProximosShows } from "@/components/home/ProximosShows";
@@ -25,6 +26,7 @@ export default async function HomePage() {
     <>
       <HomeHero products={heroProducts} />
       <ArtistsRow />
+      <SinglesRecentes limit={6} />
       <EleitosDaCasa />
       <PlantaoTeaser />
       <VistaAgora />

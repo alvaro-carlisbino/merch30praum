@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getCurrentPlantao, getPastPlantao } from "@/lib/cms/plantao";
-import { LineupCinema } from "@/components/plantao/LineupCinema";
+import { LineupGrid } from "@/components/plantao/LineupGrid";
 import { editionDate, longDate } from "@/lib/utils/dates";
 
 export async function generateMetadata() {
@@ -45,7 +45,7 @@ export default async function PlantaoLineupPage() {
           </h1>
           <p className="mt-10 max-w-2xl text-base sm:text-xl text-fg/85 leading-relaxed">
             {retro
-              ? `Os nomes de ${current.year} saem primeiro pra lista de espera. Enquanto isso, revê quem passou pelo palco em ${showing.year}. A ordem é editorial, não alfabética: começa na abertura, termina no headliner.`
+              ? `Os nomes de ${current.year} saem primeiro pra lista de espera. Enquanto isso, revê quem passou pelo palco em ${showing.year}.`
               : "A ordem aqui é editorial, não alfabética: começa na abertura, termina no headliner. Scroll pra baixo e percorre a noite."}
           </p>
           <p className="mt-3 text-sm opacity-60">
@@ -53,7 +53,9 @@ export default async function PlantaoLineupPage() {
           </p>
         </div>
       </section>
-      <LineupCinema lineup={showing.lineup} />
+      <section className="mx-auto max-w-screen-2xl px-4 pb-20 sm:px-8">
+        <LineupGrid lineup={showing.lineup} accent="var(--accent)" />
+      </section>
       <section className="border-t" style={{ borderColor: "var(--border)" }}>
         <div className="mx-auto max-w-screen-2xl px-4 sm:px-8 py-20 flex flex-wrap items-end justify-between gap-8">
           <div>

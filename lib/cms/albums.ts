@@ -1,6 +1,6 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
-import { getPayloadClient } from "@/lib/payload/client";
+import { getContentClient } from "@/lib/payload/client";
 import {
   ALBUMS as STATIC_ALBUMS,
   type AlbumPageInfo,
@@ -42,7 +42,7 @@ function fallbackAll(): AlbumPageInfo[] {
 export const getAllAlbums = unstable_cache(
   async (): Promise<AlbumPageInfo[]> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const res = await payload.find({
         collection: "albums",
         limit: 100,
@@ -61,7 +61,7 @@ export const getAllAlbums = unstable_cache(
 export const getAlbum = unstable_cache(
   async (slug: string): Promise<AlbumPageInfo | null> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const res = await payload.find({
         collection: "albums",
         where: { slug: { equals: slug } },

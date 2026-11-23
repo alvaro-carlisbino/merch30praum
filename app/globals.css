@@ -19,10 +19,6 @@
 
   --font-display: var(--font-display);
   --font-body: var(--font-body);
-  --font-tag-matue: var(--font-tag-matue);
-  --font-tag-teto: var(--font-tag-teto);
-  --font-tag-wiu: var(--font-tag-wiu);
-  --font-tag-brandao: var(--font-tag-brandao);
 
   --ease-universe: cubic-bezier(0.7, 0, 0.3, 1);
 }
@@ -31,16 +27,16 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Bebas Neue coloca til e acento acima da altura de caixa (A = 0.70em, Ã = 0.87em).
-   Com leading apertado a line-box corta o diacrítico e "Plantão" vira "Plantao".
-   O padding abre espaço no topo e a margem negativa devolve o espaço ao layout. */
+/* Com leading apertado, a line-box cortaria til e acento das maiúsculas ("PLANTÃO").
+   O padding reserva esse espaço no topo dos títulos. */
 .font-display,
 .font-brand {
   padding-block-start: 0.18em;
 }
 
-/* Tailwind aplica margin-top via classe utilitária; sem a compensação negativa o
-   diacrítico ganha espaço próprio e nunca encosta no texto acima. */
+.font-display {
+  font-weight: 900;
+}
 
 html,
 body {

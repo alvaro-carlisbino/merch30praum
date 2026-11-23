@@ -49,7 +49,7 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
       { title: "ALTERADO", featured: "Phl Notunrboy" },
       { title: "PENSAMENTOS PERIGOSOS", featured: "LPT Zlatan" },
       { title: "XTRANHO", featured: "Brandão85" },
-      { title: "BACKSTAGE" },
+      { title: "BACKSTAGE", featured: "BNYX, Azul Wynter, Bryan Yepes" },
       { title: "TODAS AS LUZES" },
       { title: "OS MELHORES" },
     ],
@@ -72,7 +72,7 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     duration: "33 min",
     coverImage: IMG.coverColapsoGlobal,
     about:
-      "Disco a quatro mãos de Teto e Wiu. É trap na base, mas passa por house, jazz, bossa nova e funk carioca. Estreou no top 10 global do Spotify na semana de lançamento. LENTO tem produção inteira do Wiu.",
+      "Disco a quatro mãos de Teto e Wiu. É trap na base, mas passa por house, jazz, bossa nova e funk carioca. Ficou entre as dez maiores estreias globais de álbuns no Spotify na semana de lançamento. LENTO tem produção inteira do Wiu.",
     accentHex: "#c8506a",
     bgHex: "#1a0a10",
     tracks: [
@@ -103,7 +103,7 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     duration: "37 min",
     coverImage: IMG.coverIssoETrap,
     about:
-      "Continuação da mixtape de 2022 e primeiro projeto longo do Brandão85 pela 30praum. Catorze faixas, com Matuê em JAPONÊS e Desiree em ROCKSTAR. Passou de 100 milhões de plays no Spotify em menos de seis meses.",
+      "Continuação da mixtape de 2025 e terceiro projeto longo do Brandão85 pela 30praum, depois de CEO (2024) e Isso É Trap (2025). Catorze faixas, com Matuê em JAPONÊS e Desiree em ROCKSTAR. Passou de 100 milhões de plays no Spotify em menos de seis meses.",
     accentHex: "#ff3b1f",
     bgHex: "#0c0c0c",
     tracks: [
@@ -124,6 +124,7 @@ export const ALBUMS: Record<AlbumSlug, AlbumPageInfo> = {
     ],
     streamingLinks: [
       { label: "Spotify", href: "https://open.spotify.com/album/5jiPp1YPjyhcWqU6jYQxlv" },
+      { label: "Apple Music", href: "https://music.apple.com/br/album/1891123236" },
     ],
     dropArtistSlug: "brandao",
   },

@@ -17,7 +17,7 @@ type HeroSlide = {
 const SLIDES: HeroSlide[] = [
   {
     key: "matue",
-    photo: "/figma-home/hero-matue.jpg",
+    photo: "/figma-home/hero-matue-v2.jpg",
     name: "/figma-home/name-matue.svg",
     nameHeight: "clamp(96px, 22svh, 230px)",
     nameAspect: "1000 / 1000",
@@ -26,7 +26,7 @@ const SLIDES: HeroSlide[] = [
   },
   {
     key: "wiu",
-    photo: "/figma-home/hero-wiu.jpg",
+    photo: "/figma-home/hero-wiu-v2.jpg",
     name: "/figma-home/name-wiu.svg",
     nameHeight: "clamp(96px, 22svh, 230px)",
     nameAspect: "1000 / 1000",
@@ -35,7 +35,7 @@ const SLIDES: HeroSlide[] = [
   },
   {
     key: "teto",
-    photo: "/figma-home/hero-teto.jpg",
+    photo: "/figma-home/hero-teto-v2.jpg",
     name: "/figma-home/name-teto.svg",
     nameHeight: "clamp(96px, 22svh, 230px)",
     nameAspect: "1000 / 1000",
@@ -77,23 +77,17 @@ export function HomeHero({ products }: { products: HeroProduct[] }) {
 
 function ArtistHalf() {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   const setActive = useActiveArtist((s) => s.setActive);
   useEffect(() => {
     setActive(SLIDES[index].key);
   }, [index, setActive]);
   useEffect(() => {
-    if (paused) return;
     const id = setTimeout(() => setIndex((i) => (i + 1) % SLIDES.length), ROTATE_MS);
     return () => clearTimeout(id);
-  }, [index, paused]);
+  }, [index]);
   const current = SLIDES[index];
   return (
-    <div
-      className="relative min-h-0 flex-[1.2] overflow-hidden md:flex-1"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
+    <div className="relative min-h-0 flex-[1.2] overflow-hidden md:flex-1">
       {SLIDES.map((slide, i) => (
         <div
           key={slide.key}
@@ -101,10 +95,7 @@ function ArtistHalf() {
           className="absolute inset-0 transition-opacity duration-1000"
           style={{ opacity: i === index ? 1 : 0 }}
         >
-          <div
-            className={i === index ? "hero-kenburns absolute inset-0" : "absolute inset-0"}
-            style={{ animationPlayState: paused ? "paused" : "running" }}
-          >
+          <div className={i === index ? "hero-kenburns absolute inset-0" : "absolute inset-0"}>
             <Image
               src={slide.photo}
               alt=""
@@ -194,10 +185,7 @@ function ArtistHalf() {
                   key={`fill-${index}`}
                   aria-hidden
                   className="hero-dot-fill absolute inset-y-0 left-0 rounded-full bg-white"
-                  style={{
-                    animationDuration: `${ROTATE_MS}ms`,
-                    animationPlayState: paused ? "paused" : "running",
-                  }}
+                  style={{ animationDuration: `${ROTATE_MS}ms` }}
                 />
               )}
             </button>
@@ -219,19 +207,16 @@ function ArtistHalf() {
 
 function ShopHalf({ products }: { products: HeroProduct[] }) {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   useEffect(() => {
-    if (paused || products.length < 2) return;
+    if (products.length < 2) return;
     const id = setTimeout(() => setIndex((i) => (i + 1) % products.length), SHOP_ROTATE_MS);
     return () => clearTimeout(id);
-  }, [index, paused, products.length]);
+  }, [index, products.length]);
   const current = products[index];
   return (
     <div
       className="relative flex min-h-0 flex-1 flex-row items-stretch overflow-hidden md:flex-col"
       style={{ background: "#ffffff", color: "#0f0f0e" }}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
       <Link
         href={`/produto/${current.handle}`}

@@ -1,9 +1,9 @@
 import type { ArtistSlug } from "@/lib/artists/types";
 
 export const ARTIST_OG_HERO: Record<ArtistSlug, string> = {
-  matue: "figma-home/hero-matue.jpg",
-  wiu: "figma-home/hero-wiu.jpg",
-  teto: "figma-home/hero-teto.jpg",
+  matue: "figma-home/hero-matue-v2.jpg",
+  wiu: "figma-home/hero-wiu-v2.jpg",
+  teto: "figma-home/hero-teto-v2.jpg",
   brandao: "figma-home/hero-brandao.jpg",
 };
 

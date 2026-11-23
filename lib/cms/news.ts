@@ -1,6 +1,6 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
-import { getPayloadClient } from "@/lib/payload/client";
+import { getContentClient } from "@/lib/payload/client";
 import { NEWS_POSTS as STATIC_NEWS, type NewsPost, type NewsTag } from "@/lib/news/registry";
 const TTL = 60 * 60 * 4;
 function adapt(doc: Record<string, unknown>): NewsPost {
@@ -26,7 +26,7 @@ function adapt(doc: Record<string, unknown>): NewsPost {
 export const getAllNews = unstable_cache(
   async (): Promise<NewsPost[]> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const res = await payload.find({
         collection: "news",
         limit: 200,
@@ -46,7 +46,7 @@ export const getAllNews = unstable_cache(
 export const getNewsPost = unstable_cache(
   async (slug: string): Promise<NewsPost | null> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const res = await payload.find({
         collection: "news",
         where: { slug: { equals: slug } },

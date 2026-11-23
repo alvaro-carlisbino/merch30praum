@@ -1,6 +1,6 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
-import { getPayloadClient } from "@/lib/payload/client";
+import { getContentClient } from "@/lib/payload/client";
 import { INCUBADORA as STATIC_INCUBADORA } from "@/lib/incubadora/registry";
 const TTL = 60 * 60 * 4;
 type Incubadora = typeof STATIC_INCUBADORA;
@@ -38,7 +38,7 @@ function adapt(doc: Record<string, unknown>): Incubadora {
 export const getIncubadora = unstable_cache(
   async (): Promise<Incubadora> => {
     try {
-      const payload = await getPayloadClient();
+      const payload = await getContentClient();
       const doc = (await payload.findGlobal({ slug: "incubadora", depth: 1 })) as unknown as Record<string, unknown> | null;
       if (doc && doc.programName) {
         return adapt(doc);

@@ -1,5 +1,5 @@
 import { IMG } from "@/lib/images/unsplash";
-export type PlantaoSlug = "plantao-2024" | "plantao-2025" | "plantao-2026" | "plantao-2027";
+export type PlantaoSlug = "plantao-2024" | "plantao-2025" | "plantao-2026" | "plantao-2028";
 export type LineupArtist = {
   displayName: string;
   artistSlug?: "matue" | "wiu" | "teto" | "brandao";
@@ -237,19 +237,19 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
       },
     ],
   },
-  "plantao-2027": {
-    slug: "plantao-2027",
-    year: 2027,
-    title: "Plantão 2027",
-    date: "2027-04-24",
+  "plantao-2028": {
+    slug: "plantao-2028",
+    year: 2028,
+    title: "Plantão 2028",
+    date: "2028-01-01",
     doorsAt: "15:00",
     venue: "A confirmar",
     city: "Fortaleza",
     state: "CE",
     status: "upcoming",
-    tagline: "Em breve · prepare-se",
+    tagline: "Próxima edição em 2028",
     manifesto:
-      "A quinta edição já está em construção. Mais palco. Mais nomes. Mais Brasil. Cadastre-se na lista de espera pra receber lineup e pré-venda antes de qualquer outro lugar.",
+      "O Plantão acontece de dois em dois anos. A próxima edição é em 2028, com data, local e line-up ainda não anunciados.",
     posterImage: IMG.plantaoPoster26,
     heroImage: IMG.plantaoHero26,
     lineup: [],

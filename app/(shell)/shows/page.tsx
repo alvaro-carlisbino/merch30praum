@@ -28,10 +28,10 @@ const STATUS_COPY: Record<
   past: { label: "Encerrado", tone: "muted" },
 };
 const CARD_PHOTOS: Record<string, string> = {
-  matue: "/figma-home/card-matue.png",
-  wiu: "/figma-home/card-wiu.png",
-  teto: "/figma-home/card-teto.png",
-  brandao: "/figma-home/card-brandao.png",
+  matue: "/artists/matue.webp",
+  wiu: "/artists/wiu.webp",
+  teto: "/artists/teto.webp",
+  brandao: "/artists/brandao.webp",
 };
 function ShowCard({ show, artist, past = false }: { show: Show; artist: ArtistConfig; past?: boolean }) {
   const status = STATUS_COPY[past ? "past" : show.status];
@@ -67,7 +67,9 @@ function ShowCard({ show, artist, past = false }: { show: Show; artist: ArtistCo
         <p className="text-[10px] uppercase tracking-[0.28em] text-muted">
           {date.month} · {date.year}
         </p>
-        <p className="text-[10px] tabular-nums text-muted sm:hidden">{date.time}</p>
+        {!show.hideTime && (
+          <p className="text-[10px] tabular-nums text-muted sm:hidden">{date.time}</p>
+        )}
       </div>
       <div className="min-w-0">
         <Link
