@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ARTISTS } from "@/lib/artists/registry";
+import { ARTIST_SLUGS } from "@/lib/artists/registry";
+import { getAllArtists } from "@/lib/cms/artists";
 import { IMG } from "@/lib/images/paths";
 export const metadata = {
   title: "Sobre",
@@ -47,7 +48,11 @@ const MARCOS = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const allArtists = await getAllArtists();
+  const artists = [...allArtists].sort(
+    (a, b) => ARTIST_SLUGS.indexOf(a.slug) - ARTIST_SLUGS.indexOf(b.slug),
+  );
   return (
     <>
       <section className="mx-auto max-w-screen-2xl px-4 pt-16 pb-12 sm:px-8 sm:pt-20">
@@ -218,7 +223,7 @@ export default function AboutPage() {
             </Link>
           </div>
           <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {Object.values(ARTISTS).map((a) => {
+            {artists.map((a) => {
               const latest =
                 a.facts.find((f) => f.label === "Último lançamento")?.value ?? a.universeName;
               return (

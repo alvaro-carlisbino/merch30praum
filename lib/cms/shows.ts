@@ -8,10 +8,7 @@ function adapt(doc: Record<string, unknown>, idx: number): Show {
   return {
     id: (doc.id as string) ?? `show-${idx}`,
     artistSlug: doc.artistSlug as ArtistSlug,
-    date:
-      typeof doc.date === "string"
-        ? doc.date.slice(0, 10)
-        : new Date(doc.date as string).toISOString().slice(0, 10),
+    date: typeof doc.date === "string" ? doc.date : new Date(doc.date as string).toISOString(),
     city: doc.city as string,
     state: doc.state as string,
     venue: doc.venue as string,
@@ -19,6 +16,7 @@ function adapt(doc: Record<string, unknown>, idx: number): Show {
     ticketsUrl: (doc.ticketsUrl as string) || undefined,
     status: doc.status as Show["status"],
     note: (doc.note as string) || undefined,
+    hideTime: Boolean(doc.hideTime),
   };
 }
 export const getAllShows = unstable_cache(

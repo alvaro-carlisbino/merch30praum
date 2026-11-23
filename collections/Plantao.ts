@@ -106,7 +106,7 @@ export const Plantao: CollectionConfig = {
                   ],
                 },
                 { name: "highlightLabel", type: "text" },
-                { name: "imageUrl", type: "text", required: true },
+                { name: "imageUrl", type: "text" },
                 { name: "isHeadliner", type: "checkbox", defaultValue: false },
                 { name: "isSpecial", type: "checkbox", defaultValue: false },
               ],

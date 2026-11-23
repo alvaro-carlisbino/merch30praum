@@ -30,7 +30,7 @@ export const Press: GlobalConfig = {
                 type: "group" as const,
                 fields: [
                   { name: "label", type: "text" as const, required: true },
-                  { name: "email", type: "text" as const, required: true },
+                  { name: "email", type: "text" as const },
                 ],
               })),
             },

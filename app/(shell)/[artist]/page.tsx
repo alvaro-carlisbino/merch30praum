@@ -6,6 +6,8 @@ import { SobreEle } from "@/components/artists/SobreEle";
 import { AlbumPanel } from "@/components/artists/AlbumPanel";
 import { Tracklist } from "@/components/artists/Tracklist";
 import { ALBUMS, type AlbumSlug } from "@/lib/albums/registry";
+import { getArtist } from "@/lib/cms/artists";
+import { getAlbum } from "@/lib/cms/albums";
 interface Params {
   artist: string;
 }
@@ -74,9 +76,9 @@ export default async function ArtistLanding({
 }) {
   const { artist } = await params;
   if (!isArtistSlug(artist)) notFound();
-  const cfg = ARTISTS[artist];
+  const cfg = (await getArtist(artist)) ?? ARTISTS[artist];
   const a = ASSETS[artist];
-  const album = ALBUMS[a.albumSlug];
+  const album = (await getAlbum(a.albumSlug)) ?? ALBUMS[a.albumSlug];
   const socials = cfg.socials ?? {};
   const listenLinks = album.streamingLinks;
   const socialLinks = [

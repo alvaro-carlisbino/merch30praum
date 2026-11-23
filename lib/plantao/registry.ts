@@ -130,7 +130,7 @@ export const PLANTAO_EDITIONS: Record<PlantaoSlug, PlantaoEdition> = {
     year: 2024,
     title: "Plantão 2024",
     date: "2024-04-19",
-    doorsAt: "",
+    doorsAt: "Não informado",
     venue: "Marina Park",
     city: "Fortaleza",
     state: "CE",

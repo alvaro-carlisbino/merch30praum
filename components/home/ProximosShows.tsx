@@ -6,8 +6,8 @@ import { Reveal } from "@/components/effects/Reveal";
 function fmt(iso: string) {
   const d = new Date(iso);
   return {
-    day: d.toLocaleDateString("pt-BR", { day: "2-digit" }),
-    month: d.toLocaleDateString("pt-BR", { month: "short" }).replace(".", "").toUpperCase(),
+    day: d.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo", day: "2-digit" }),
+    month: d.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo", month: "short" }).replace(".", "").toUpperCase(),
   };
 }
 

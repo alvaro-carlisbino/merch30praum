@@ -52,7 +52,7 @@ export const Incubadora: GlobalConfig = {
           ],
         },
         { name: "displayName", type: "text", required: true },
-        { name: "joinedYear", type: "number", required: true },
+        { name: "joinedYear", type: "number" },
         { name: "excerpt", type: "textarea", required: true },
         { name: "image", type: "text", required: true },
       ],

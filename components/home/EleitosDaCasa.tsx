@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/effects/Reveal";
 import { blurFor } from "@/lib/images/blur-data";
-import { ALBUMS, type AlbumSlug } from "@/lib/albums/registry";
+import { ALBUMS, type AlbumPageInfo, type AlbumSlug } from "@/lib/albums/registry";
+import { getAllAlbums } from "@/lib/cms/albums";
 type Pick = {
   slug: AlbumSlug;
   cover: string;
@@ -21,7 +22,9 @@ const PICKS: { big: Pick; topRight: Pick; botRight: Pick } = {
     cover: "/figma-home/discos-isso-e-trap.webp",
   },
 };
-export function EleitosDaCasa() {
+export async function EleitosDaCasa() {
+  const all = await getAllAlbums();
+  const albumFor = (slug: AlbumSlug) => all.find((a) => a.slug === slug) ?? ALBUMS[slug];
   return (
     <section
       aria-labelledby="eleitos-da-casa"
@@ -48,21 +51,20 @@ export function EleitosDaCasa() {
         </Reveal>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 sm:[grid-template-rows:1fr_1fr]">
           <Reveal className="sm:col-start-1 sm:row-span-2">
-            <BigPickCard pick={PICKS.big} />
+            <BigPickCard pick={PICKS.big} album={albumFor(PICKS.big.slug)} />
           </Reveal>
           <Reveal delay={90}>
-            <SmallPickCard pick={PICKS.topRight} />
+            <SmallPickCard pick={PICKS.topRight} album={albumFor(PICKS.topRight.slug)} />
           </Reveal>
           <Reveal delay={180}>
-            <SmallPickCard pick={PICKS.botRight} />
+            <SmallPickCard pick={PICKS.botRight} album={albumFor(PICKS.botRight.slug)} />
           </Reveal>
         </div>
       </div>
     </section>
   );
 }
-function BigPickCard({ pick }: { pick: Pick }) {
-  const album = ALBUMS[pick.slug];
+function BigPickCard({ pick, album }: { pick: Pick; album: AlbumPageInfo }) {
   return (
     <Link
       href={`/album/${pick.slug}`}
@@ -87,8 +89,7 @@ function BigPickCard({ pick }: { pick: Pick }) {
     </Link>
   );
 }
-function SmallPickCard({ pick }: { pick: Pick }) {
-  const album = ALBUMS[pick.slug];
+function SmallPickCard({ pick, album }: { pick: Pick; album: AlbumPageInfo }) {
   return (
     <Link
       href={`/album/${pick.slug}`}
@@ -114,7 +115,7 @@ function PickOverlay({
   album,
   large = false,
 }: {
-  album: (typeof ALBUMS)[AlbumSlug];
+  album: AlbumPageInfo;
   large?: boolean;
 }) {
   return (

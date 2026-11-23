@@ -12,10 +12,10 @@ export const metadata = {
 function formatDate(iso: string) {
   const d = new Date(iso);
   return {
-    day: d.toLocaleDateString("pt-BR", { day: "2-digit" }),
-    month: d.toLocaleDateString("pt-BR", { month: "short" }).replace(".", "").toUpperCase(),
-    year: d.toLocaleDateString("pt-BR", { year: "numeric" }),
-    time: d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
+    day: d.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo", day: "2-digit" }),
+    month: d.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo", month: "short" }).replace(".", "").toUpperCase(),
+    year: d.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo", year: "numeric" }),
+    time: d.toLocaleTimeString("pt-BR", { timeZone: "America/Sao_Paulo", hour: "2-digit", minute: "2-digit" }),
   };
 }
 const STATUS_COPY: Record<

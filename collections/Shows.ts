@@ -57,5 +57,11 @@ export const Shows: CollectionConfig = {
       ],
     },
     { name: "note", type: "text" },
+    {
+      name: "hideTime",
+      type: "checkbox",
+      defaultValue: false,
+      admin: { description: "Marque quando o horário do show ainda não foi divulgado." },
+    },
   ],
 };

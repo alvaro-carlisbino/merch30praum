@@ -24,6 +24,7 @@ export default async function NewsPostPage({ params }: { params: Promise<{ slug:
   const post = await getNewsPost(slug);
   if (!post) notFound();
   const dateBr = new Date(post.publishedAt).toLocaleDateString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
     day: "2-digit",
     month: "long",
     year: "numeric",

@@ -30,7 +30,7 @@ function adapt(doc: Record<string, unknown>): PlantaoEdition {
       displayName: l.displayName as string,
       artistSlug: (l.artistSlug as PlantaoEdition["lineup"][number]["artistSlug"]) || undefined,
       highlightLabel: (l.highlightLabel as string) || undefined,
-      imageUrl: l.imageUrl as string,
+      imageUrl: (l.imageUrl as string) ?? "",
       isHeadliner: Boolean(l.isHeadliner),
       isSpecial: Boolean(l.isSpecial),
     })),

@@ -18,6 +18,7 @@ const TAG_LABEL: Record<NewsTag, string> = {
 };
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
     day: "2-digit",
     month: "long",
     year: "numeric",

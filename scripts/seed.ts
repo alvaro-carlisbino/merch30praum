@@ -34,6 +34,19 @@ async function upsert(payload: AnyPayload, collection: string, slugField: string
 async function main() {
   log("inicializando Payload...");
   const payload = await getPayload({ config });
+  if (process.env.SEED_PRUNE === "1") {
+    log("limpando o conteúdo antigo...");
+    // Recria do zero para campos opcionais removidos não ficarem com o valor antigo.
+    for (const collection of ["artists", "plantao", "news", "partners", "albums", "products"]) {
+      const r = await payload.delete({
+        collection: collection as never,
+        where: { id: { exists: true } },
+      });
+      log(`  ${collection}: ${r.docs.length} removidos`);
+    }
+    const shows = await payload.delete({ collection: "shows", where: { id: { exists: true } } });
+    log(`  shows: ${shows.docs.length} removidos para recriar`);
+  }
   log(`semeando ${ARTIST_SLUGS.length} artistas...`);
   for (const slug of ARTIST_SLUGS) {
     const a = ARTISTS[slug];
@@ -156,6 +169,7 @@ async function main() {
       ticketsUrl: s.ticketsUrl,
       status: s.status,
       note: s.note,
+      hideTime: s.hideTime ?? false,
     };
     if (existing.docs[0]) {
       await payload.update({ collection: "shows", id: existing.docs[0].id, data });
