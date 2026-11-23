@@ -9,13 +9,13 @@ Imagens oficiais dos perfis de artista no Apple Music, sem licença livre. Confi
 
 Sem licença livre. Confirmar autorização da 30praum e crédito dos fotógrafos antes do lançamento.
 
-- /figma-home/hero-matue.jpg: https://www.instagram.com/matue/p/DRQdmGwAfZF/
-- /figma-artista/matue-stage.webp: https://www.instagram.com/matue/p/DRchMYxkWqe/
+- /figma-home/hero-matue-v2.jpg: https://www.instagram.com/matue/p/DRQdmGwAfZF/
+- /figma-artista/matue-stage-v2.webp: https://www.instagram.com/matue/p/DRchMYxkWqe/
 - /artists/matue.webp: https://www.instagram.com/matue/p/DT82GLgATXM/
-- /figma-home/hero-wiu.jpg: https://www.instagram.com/hotwiu30/p/Db3zxzFGgGw/
-- /figma-artista/wiu-stage.webp: https://www.instagram.com/hotwiu30/p/Db_O04-FE-l/
-- /figma-home/hero-teto.jpg: https://www.instagram.com/euteto/p/DZIS4lajlUJ/
-- /figma-artista/teto-stage.webp: https://www.instagram.com/euteto/p/DWwb9GLgI--/
+- /figma-home/hero-wiu-v2.jpg: https://www.instagram.com/hotwiu30/p/Db3zxzFGgGw/
+- /figma-artista/wiu-stage-v2.webp: https://www.instagram.com/hotwiu30/p/Db_O04-FE-l/
+- /figma-home/hero-teto-v2.jpg: https://www.instagram.com/euteto/p/DZIS4lajlUJ/
+- /figma-artista/teto-stage-v2.webp: https://www.instagram.com/euteto/p/DWwb9GLgI--/
 - /artists/teto.webp: https://www.instagram.com/euteto/p/DW9-BaUjzhP/
 
 # Capas

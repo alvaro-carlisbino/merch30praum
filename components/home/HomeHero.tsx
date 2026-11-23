@@ -17,7 +17,7 @@ type HeroSlide = {
 const SLIDES: HeroSlide[] = [
   {
     key: "matue",
-    photo: "/figma-home/hero-matue.jpg",
+    photo: "/figma-home/hero-matue-v2.jpg",
     name: "/figma-home/name-matue.svg",
     nameHeight: "clamp(96px, 22svh, 230px)",
     nameAspect: "1000 / 1000",
@@ -26,7 +26,7 @@ const SLIDES: HeroSlide[] = [
   },
   {
     key: "wiu",
-    photo: "/figma-home/hero-wiu.jpg",
+    photo: "/figma-home/hero-wiu-v2.jpg",
     name: "/figma-home/name-wiu.svg",
     nameHeight: "clamp(96px, 22svh, 230px)",
     nameAspect: "1000 / 1000",
@@ -35,7 +35,7 @@ const SLIDES: HeroSlide[] = [
   },
   {
     key: "teto",
-    photo: "/figma-home/hero-teto.jpg",
+    photo: "/figma-home/hero-teto-v2.jpg",
     name: "/figma-home/name-teto.svg",
     nameHeight: "clamp(96px, 22svh, 230px)",
     nameAspect: "1000 / 1000",

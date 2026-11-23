@@ -56,14 +56,14 @@ export default async function LojaPage() {
       slug: "matue" as const,
       title: "Matuê",
       subtitle: `XTRANHO · 333 · ${matue.length} peças`,
-      image: "/figma-home/hero-matue.jpg",
+      image: "/figma-home/hero-matue-v2.jpg",
       objectPosition: "center 25%",
     },
     {
       slug: "teto" as const,
       title: "Teto & Wiu",
       subtitle: `Colapso Global · ${colapso.length} peças`,
-      image: "/figma-home/hero-teto.jpg",
+      image: "/figma-home/hero-teto-v2.jpg",
       objectPosition: "center 20%",
     },
   ];
