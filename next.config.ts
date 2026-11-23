@@ -27,6 +27,7 @@ const noIndexHeaders = [{ key: "X-Robots-Tag", value: "noindex, nofollow" }];
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
+  experimental: { globalNotFound: true },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "billboard.com.br", pathname: "/**" },

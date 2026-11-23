@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, Compass } from "lucide-react";
 import { BrandLogo } from "@/components/shell/BrandLogo";
-import { houseBody, houseDisplay, brandSerif } from "@/styles/fonts";
 const ROUTES = [
   { label: "Artistas", href: "/#roster" },
   { label: "Shows", href: "/shows" },
@@ -12,22 +11,10 @@ const ROUTES = [
   { label: "Incubadora", href: "/incubadora" },
   { label: "Imprensa", href: "/imprensa" },
 ];
-export const metadata = {
-  title: { absolute: "Página não encontrada" },
-  description: "A rota que você buscou não existe.",
-};
-export default function NotFound() {
+
+export function NotFoundContent() {
   return (
-    <html
-      lang="pt-BR"
-      data-theme="house"
-      className={`${houseBody.variable} ${houseDisplay.variable} ${brandSerif.variable} antialiased`}
-    >
-      <body
-        className="min-h-screen flex flex-col"
-        style={{ background: "var(--bg)", color: "var(--fg)" }}
-      >
-        <main className="flex-1 flex items-center justify-center px-4 sm:px-8 py-24">
+    <div className="flex-1 flex items-center justify-center px-4 sm:px-8 py-24">
           <div className="w-full max-w-4xl">
             <Compass
               size={48}
@@ -90,21 +77,6 @@ export default function NotFound() {
               </ul>
             </div>
           </div>
-        </main>
-        <footer
-          className="border-t py-6"
-          style={{ borderColor: "var(--border)" }}
-        >
-          <div className="mx-auto max-w-4xl px-4 sm:px-8 flex items-center justify-between gap-4">
-            <Link href="/" data-cursor="Home" className="text-lg">
-              <BrandLogo />
-            </Link>
-            <p className="text-[10px] uppercase tracking-[0.3em] opacity-55">
-              Fortaleza · CE
-            </p>
-          </div>
-        </footer>
-      </body>
-    </html>
+        </div>
   );
 }
